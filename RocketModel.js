@@ -7,6 +7,11 @@ class RocketModel {
         this.thirdStage = null;
         this.payload = null;
         this.fairings = [];
+        this.firstStageFlameRemoved = false;
+        this.secondStageFlameRemoved = false;
+
+        // 添加这个数组来存储火箭部件引用
+        this.rocketParts = [];
 
         this.createRocket();
         this.scene.add(this.rocket);
@@ -16,16 +21,19 @@ class RocketModel {
     }
 
     createRocket() {
-        // 创建火箭的分段结构
+        // 创建火箭的分段结构 - 调整顺序
         this.createFirstStage();
         this.createSecondStage();
         this.createThirdStage();
-        this.createPayload();
-        this.createFairings();
+        this.createPayload();    // 先创建卫星
+        this.createFairings();   // 然后创建整流罩覆盖它
 
-        // 设置初始位置 - 将火箭放置在地面上方
-        this.rocket.position.set(0, 25, 0); // 改为25，使火箭底部正好在地面上
-        // 火箭已经是竖直的，不需要旋转
+        // 设置初始位置
+        this.rocket.position.set(0, 25, 0);
+
+        // 确保设置阶段引用
+        this.firstStage = this.rocketParts.find(part => part.name === 'firstStage');
+        this.secondStage = this.rocketParts.find(part => part.name === 'secondStage');
     }
 
     createFirstStage() {
@@ -104,7 +112,9 @@ class RocketModel {
         }
 
         this.firstStage.add(engineGroup);
+        this.firstStage.name = 'firstStage'; // 确保设置名称
         this.rocket.add(this.firstStage);
+        this.rocketParts.push(this.firstStage); // 添加到部件数组
     }
 
     createSecondStage() {
@@ -133,7 +143,9 @@ class RocketModel {
         engine.position.y = -5;
         this.secondStage.add(engine);
 
+        this.secondStage.name = 'secondStage'; // 确保设置名称
         this.rocket.add(this.secondStage);
+        this.rocketParts.push(this.secondStage); // 添加到部件数组
     }
 
     createThirdStage() {
@@ -162,7 +174,9 @@ class RocketModel {
         engine.position.y = -2.5;
         this.thirdStage.add(engine);
 
+        this.thirdStage.name = 'thirdStage'; // 确保设置名称
         this.rocket.add(this.thirdStage);
+        this.rocketParts.push(this.thirdStage); // 添加到部件数组
     }
 
     createPayload() {
@@ -172,15 +186,19 @@ class RocketModel {
             color: 0x4488aa,
             metalness: 0.7,
             roughness: 0.2,
-            emissive: 0x225588, // 添加自发光颜色
-            emissiveIntensity: 0.6 // 发光强度更高
+            emissive: 0x225588,
+            emissiveIntensity: 0.6
         });
 
         this.payload = new THREE.Mesh(geometry, material);
-        this.payload.position.y = 12; // 放在火箭顶部
+        this.payload.position.y = 10; // 与整流罩位置保持一致
 
-        // 添加太阳能电池板
-        const panelGeometry = new THREE.BoxGeometry(4, 0.1, 1);
+        // 创建太阳能电池板组 - 以便后续可以一起操作
+        this.solarPanels = new THREE.Group();
+        this.payload.add(this.solarPanels);
+
+        // 添加太阳能电池板 - 初始状态为折叠
+        const panelGeometry = new THREE.BoxGeometry(0.8, 0.1, 1); // 更窄的电池板（折叠状态）
         const panelMaterial = new THREE.MeshStandardMaterial({
             color: 0x2255aa,
             metalness: 0.2,
@@ -189,58 +207,221 @@ class RocketModel {
             emissiveIntensity: 0.8 // 高强度发光
         });
 
-        const leftPanel = new THREE.Mesh(panelGeometry, panelMaterial);
-        leftPanel.position.set(-2, 0, 0);
+        // 左侧面板
+        this.leftPanel = new THREE.Group();
+        const leftPanelMain = new THREE.Mesh(panelGeometry, panelMaterial);
+        this.leftPanel.add(leftPanelMain);
 
-        const rightPanel = new THREE.Mesh(panelGeometry, panelMaterial);
-        rightPanel.position.set(2, 0, 0);
+        // 为左侧面板添加连接部件
+        const leftConnector = new THREE.Mesh(
+            new THREE.BoxGeometry(0.2, 0.2, 0.2),
+            new THREE.MeshStandardMaterial({ color: 0x888888, metalness: 0.8 })
+        );
+        leftConnector.position.set(-0.5, 0, 0);
+        this.leftPanel.add(leftConnector);
 
-        this.payload.add(leftPanel);
-        this.payload.add(rightPanel);
+        this.leftPanel.position.set(-0.6, 0, 0); // 靠近卫星主体
+        this.leftPanel.rotation.set(0, 0, Math.PI / 2); // 初始是垂直折叠的
+
+        // 右侧面板
+        this.rightPanel = new THREE.Group();
+        const rightPanelMain = new THREE.Mesh(panelGeometry, panelMaterial);
+        this.rightPanel.add(rightPanelMain);
+
+        // 为右侧面板添加连接部件
+        const rightConnector = new THREE.Mesh(
+            new THREE.BoxGeometry(0.2, 0.2, 0.2),
+            new THREE.MeshStandardMaterial({ color: 0x888888, metalness: 0.8 })
+        );
+        rightConnector.position.set(0.5, 0, 0);
+        this.rightPanel.add(rightConnector);
+
+        this.rightPanel.position.set(0.6, 0, 0); // 靠近卫星主体
+        this.rightPanel.rotation.set(0, 0, -Math.PI / 2); // 初始是垂直折叠的
+
+        // 将面板添加到面板组中
+        this.solarPanels.add(this.leftPanel);
+        this.solarPanels.add(this.rightPanel);
+
+        // 添加一些卫星细节（天线、传感器等）
+        this.addSatelliteDetails();
 
         this.rocket.add(this.payload);
     }
 
+    // 添加卫星细节
+    addSatelliteDetails() {
+        // 添加通信天线
+        const antennaGeometry = new THREE.CylinderGeometry(0.03, 0.03, 1.5, 8);
+        const antennaMaterial = new THREE.MeshStandardMaterial({
+            color: 0xcccccc,
+            metalness: 0.8,
+            roughness: 0.2,
+            emissive: 0x666666
+        });
+
+        const antenna = new THREE.Mesh(antennaGeometry, antennaMaterial);
+        antenna.position.set(0, 0.8, 0);
+        antenna.rotation.x = Math.PI / 2; // 向上指向
+
+        // 添加天线末端的接收器
+        const dishGeometry = new THREE.SphereGeometry(0.15, 16, 8, 0, Math.PI * 2, 0, Math.PI / 2);
+        const dish = new THREE.Mesh(dishGeometry, antennaMaterial);
+        dish.position.y = 0.8;
+        dish.rotation.x = Math.PI / 2;
+        antenna.add(dish);
+
+        this.payload.add(antenna);
+
+        // 添加地球传感器
+        const sensorGeometry = new THREE.CylinderGeometry(0.1, 0.15, 0.2, 12);
+        const sensorMaterial = new THREE.MeshStandardMaterial({
+            color: 0x111111,
+            emissive: 0x222222
+        });
+
+        const sensor = new THREE.Mesh(sensorGeometry, sensorMaterial);
+        sensor.position.set(0, -0.6, 0.8);
+        sensor.rotation.x = Math.PI / 2;
+        this.payload.add(sensor);
+
+        // 添加姿态控制推进器
+        const thrusterGeometry = new THREE.CylinderGeometry(0.08, 0.1, 0.2, 8);
+        const thrusterMaterial = new THREE.MeshStandardMaterial({
+            color: 0x333333,
+            metalness: 0.9
+        });
+
+        // 添加4个小型推进器
+        for (let i = 0; i < 4; i++) {
+            const angle = (i / 4) * Math.PI * 2;
+            const thruster = new THREE.Mesh(thrusterGeometry, thrusterMaterial);
+            thruster.position.set(
+                Math.cos(angle) * 0.9,
+                0,
+                Math.sin(angle) * 0.9
+            );
+            thruster.rotation.z = angle;
+            this.payload.add(thruster);
+        }
+    }
+
     createFairings() {
-        // 整流罩 - 使用发光材质
-        const fairingGeometry = new THREE.ConeGeometry(1.8, 4, 24, 1, true);
+        // 整流罩容器 - 用于整体管理整流罩
+        this.fairingContainer = new THREE.Group();
+        this.fairingContainer.position.y = 10; // 与卫星位置一致
+        this.rocket.add(this.fairingContainer);
+
+        // 创建正确的整流罩形状 - 典型的双瓣式设计
+        const fairingHeight = 5;  // 整流罩高度
+        const fairingRadius = 1.8; // 整流罩底部半径
+        const tipHeight = 2;      // 顶部尖锥高度
+
+        // 创建整流罩形状的几何体 (一个圆柱体连接一个圆锥体)
+        const fairingShape = new THREE.Shape();
+        fairingShape.moveTo(0, 0); // 底部中心
+        fairingShape.lineTo(fairingRadius, 0); // 底部右侧
+        fairingShape.lineTo(fairingRadius, fairingHeight - tipHeight); // 圆柱体顶部右侧
+        fairingShape.lineTo(0, fairingHeight); // 圆锥体顶点
+        fairingShape.lineTo(0, 0); // 回到底部中心
+
+        // 使用旋转挤压创建3D形状
+        const extrudeSettings = {
+            steps: 1,
+            depth: 0.1,
+            bevelEnabled: false
+        };
+
+        // 左右两瓣整流罩的材质
         const fairingMaterial = new THREE.MeshStandardMaterial({
             color: 0xeeeeee,
             metalness: 0.6,
             roughness: 0.3,
-            emissive: 0x666666, // 添加自发光颜色
-            emissiveIntensity: 0.3, // 发光强度
-            side: THREE.DoubleSide
+            emissive: 0x666666,
+            emissiveIntensity: 0.3
         });
 
-        // 创建左右两个半圆锥整流罩
-        for (let i = 0; i < 2; i++) {
-            const fairing = new THREE.Mesh(fairingGeometry, fairingMaterial);
-            fairing.position.y = 10; // 放在顶部
-            fairing.rotation.z = i === 0 ? 0 : Math.PI;
-            fairing.scale.z = 0.5;
+        // 创建左侧整流罩
+        const leftFairing = new THREE.Group();
 
-            if (i === 1) {
-                fairing.rotation.x = Math.PI;
-            }
+        // 使用LatheGeometry创建左半部分
+        const leftGeometry = new THREE.LatheGeometry(
+            [
+                new THREE.Vector2(0, 0),
+                new THREE.Vector2(fairingRadius, 0),
+                new THREE.Vector2(fairingRadius, fairingHeight - tipHeight),
+                new THREE.Vector2(0, fairingHeight)
+            ],
+            32,  // 分段数
+            0,   // 起始角度
+            Math.PI  // 仅创建半圆形 (左侧)
+        );
 
-            this.fairings.push(fairing);
-            this.rocket.add(fairing);
-        }
+        const leftFairingMesh = new THREE.Mesh(leftGeometry, fairingMaterial);
+        leftFairingMesh.position.set(0, 0, 0);
+        leftFairing.add(leftFairingMesh);
 
-        // 添加尖顶
-        const tipGeometry = new THREE.ConeGeometry(0.5, 2, 16);
-        const tipMaterial = new THREE.MeshStandardMaterial({
-            color: 0xeeeeee,
+        // 添加内部细节
+        const detailMaterial = new THREE.MeshStandardMaterial({
+            color: 0x999999,
             metalness: 0.7,
-            roughness: 0.3,
-            emissive: 0xbbbbbb, // 添加较亮的自发光
-            emissiveIntensity: 0.5 // 发光强度
+            roughness: 0.5
         });
 
-        const tip = new THREE.Mesh(tipGeometry, tipMaterial);
-        tip.position.y = 13;
-        this.rocket.add(tip);
+        // 添加分离线和内部加强筋
+        const separationLine = new THREE.Mesh(
+            new THREE.BoxGeometry(0.05, fairingHeight, 0.1),
+            detailMaterial
+        );
+        separationLine.position.set(0, fairingHeight / 2 - 0.5, -fairingRadius);
+        leftFairing.add(separationLine);
+
+        this.leftFairing = leftFairing;
+        this.fairingContainer.add(leftFairing);
+        this.fairings.push(leftFairing);
+
+        // 创建右侧整流罩 (镜像左侧)
+        const rightFairing = new THREE.Group();
+
+        // 使用LatheGeometry创建右半部分
+        const rightGeometry = new THREE.LatheGeometry(
+            [
+                new THREE.Vector2(0, 0),
+                new THREE.Vector2(fairingRadius, 0),
+                new THREE.Vector2(fairingRadius, fairingHeight - tipHeight),
+                new THREE.Vector2(0, fairingHeight)
+            ],
+            32,       // 分段数
+            Math.PI,  // 起始角度
+            Math.PI   // 仅创建半圆形 (右侧)
+        );
+
+        const rightFairingMesh = new THREE.Mesh(rightGeometry, fairingMaterial);
+        rightFairingMesh.position.set(0, 0, 0);
+        rightFairing.add(rightFairingMesh);
+
+        // 添加右侧分离线
+        const rightSeparationLine = separationLine.clone();
+        rightSeparationLine.position.set(0, fairingHeight / 2 - 0.5, fairingRadius);
+        rightFairing.add(rightSeparationLine);
+
+        this.rightFairing = rightFairing;
+        this.fairingContainer.add(rightFairing);
+        this.fairings.push(rightFairing);
+
+        // 添加内部圆环作为结构细节
+        for (let i = 0; i < 3; i++) {
+            const ringGeometry = new THREE.RingGeometry(fairingRadius - 0.2, fairingRadius - 0.1, 32);
+            const ringMaterial = new THREE.MeshBasicMaterial({
+                color: 0x333333,
+                side: THREE.DoubleSide
+            });
+
+            const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+            ring.rotation.x = Math.PI / 2;
+            ring.position.y = i * (fairingHeight / 3) - 1.5;
+            this.fairingContainer.add(ring);
+        }
     }
 
     // 添加整体轮廓发光效果
@@ -331,42 +512,98 @@ class RocketModel {
     // 打开整流罩
     openFairings() {
         return new Promise(resolve => {
-            // 左右整流罩分开的动画
-            gsap.to(this.fairings[0].position, {
-                x: -5,
-                duration: 2,
-                ease: "power2.out"
-            });
+            // 获取整流罩在世界坐标系中的位置
+            const fairingWorldPos = new THREE.Vector3();
+            this.fairingContainer.getWorldPosition(fairingWorldPos);
 
-            gsap.to(this.fairings[0].rotation, {
-                z: -0.5,
-                duration: 2
-            });
+            // 左右整流罩分离动画
+            if (this.leftFairing) {
+                gsap.to(this.leftFairing.position, {
+                    x: -5,
+                    z: -1,
+                    duration: 2,
+                    ease: "power2.out"
+                });
 
-            gsap.to(this.fairings[1].position, {
-                x: 5,
-                duration: 2,
-                ease: "power2.out"
-            });
+                gsap.to(this.leftFairing.rotation, {
+                    y: -0.2,
+                    z: -0.1,
+                    duration: 2,
+                    ease: "power2.out"
+                });
+            }
 
-            gsap.to(this.fairings[1].rotation, {
-                z: Math.PI + 0.5,
-                duration: 2,
-                onComplete: () => {
-                    // 整流罩完全打开后，将它们移除
-                    setTimeout(() => {
-                        this.fairings.forEach(fairing => {
-                            this.rocket.remove(fairing);
-                        });
-                        this.fairings = [];
-                        resolve();
-                    }, 1000);
+            if (this.rightFairing) {
+                gsap.to(this.rightFairing.position, {
+                    x: 5,
+                    z: 1,
+                    duration: 2,
+                    ease: "power2.out"
+                });
+
+                gsap.to(this.rightFairing.rotation, {
+                    y: 0.2,
+                    z: 0.1,
+                    duration: 2,
+                    ease: "power2.out"
+                });
+            }
+
+            // 整流罩完全打开后，将其从火箭中移除，并添加到场景中让它们继续漂浮
+            setTimeout(() => {
+                // 创建分离后的整流罩组
+                const detachedFairings = new THREE.Group();
+                detachedFairings.position.copy(fairingWorldPos);
+
+                // 复制整流罩到独立组中
+                if (this.leftFairing && this.rightFairing) {
+                    const leftClone = this.leftFairing.clone();
+                    leftClone.position.copy(this.leftFairing.position);
+                    leftClone.rotation.copy(this.leftFairing.rotation);
+                    detachedFairings.add(leftClone);
+
+                    const rightClone = this.rightFairing.clone();
+                    rightClone.position.copy(this.rightFairing.position);
+                    rightClone.rotation.copy(this.rightFairing.rotation);
+                    detachedFairings.add(rightClone);
                 }
-            });
+
+                // 将分离的整流罩添加到场景
+                this.scene.add(detachedFairings);
+
+                // 从火箭中移除整流罩
+                this.rocket.remove(this.fairingContainer);
+                this.fairings = [];
+                this.leftFairing = null;
+                this.rightFairing = null;
+
+                // 对分离的整流罩添加漂离动画
+                gsap.to(detachedFairings.position, {
+                    x: detachedFairings.position.x + (Math.random() * 20 - 10),
+                    y: detachedFairings.position.y - 15,
+                    z: detachedFairings.position.z + (Math.random() * 20 - 10),
+                    duration: 8,
+                    ease: "power1.in"
+                });
+
+                gsap.to(detachedFairings.rotation, {
+                    x: Math.random() * Math.PI * 2,
+                    y: Math.random() * Math.PI * 2,
+                    z: Math.random() * Math.PI * 2,
+                    duration: 8,
+                    ease: "power1.inOut",
+                    onComplete: () => {
+                        // 从场景中移除
+                        this.scene.remove(detachedFairings);
+                    }
+                });
+
+                resolve();
+            }, 2000);
         });
     }
 
-    // 部署有效载荷（分离顶端卫星）
+    // 部署有效载荷（分离顶端卫星）并展开太阳能电池板
     deployPayload() {
         return new Promise(resolve => {
             const satellite = this.payload.clone();
@@ -377,22 +614,79 @@ class RocketModel {
             this.rocket.remove(this.payload);
             this.payload = null; // 标记为已部署
 
-            // 卫星轻微移动和自转的动画
+            // 存储卫星引用，以便后续跟踪它
+            this.scene.satellite = satellite;
+
+            // 初始轨道参数
+            satellite.userData.orbit = {
+                radius: satellite.position.length(), // 初始轨道半径
+                angle: 0,                           // 初始角度
+                speed: 0.0001,                      // 轨道速度
+                inclination: Math.PI * 0.1,         // 轨道倾角
+                phase: 0                            // 相位
+            };
+
+            // 卫星稍微上升到轨道高度
             gsap.to(satellite.position, {
-                y: satellite.position.y + 10,
-                duration: 10,
-                ease: "power1.out"
+                y: satellite.position.y + 20,
+                duration: 4,
+                ease: "power1.out",
+                onComplete: () => {
+                    // 卫星到达目标轨道高度后更新轨道参数
+                    satellite.userData.orbit.radius = satellite.position.length();
+
+                }
             });
 
+            // 卫星轻微调整姿态
             gsap.to(satellite.rotation, {
-                y: satellite.rotation.y + Math.PI * 2,
-                duration: 20,
-                ease: "none",
-                repeat: -1 // 持续旋转
+                x: 0, // 水平朝向
+                duration: 3,
+                ease: "power1.inOut"
             });
 
-            resolve();
+            // 延迟解析Promise，等待基本动画完成
+            setTimeout(resolve, 3000);
         });
+    }
+
+    // 添加一个更新卫星轨道的方法 - 在RocketModel类中添加
+    updateSatelliteOrbit() {
+        // 如果卫星存在于场景中，更新其轨道位置
+        const satellite = this.scene.satellite;
+        if (!satellite) return;
+
+        const orbit = satellite.userData.orbit;
+        if (!orbit) return;
+
+        // 更新轨道角度
+        orbit.angle += orbit.speed;
+
+        // 使用参数方程计算轨道上的位置
+        const x = Math.cos(orbit.angle) * orbit.radius;
+        const y = Math.sin(orbit.angle) * orbit.radius * Math.sin(orbit.inclination) - 510 + orbit.radius;
+        const z = Math.sin(orbit.angle) * orbit.radius * Math.cos(orbit.inclination);
+
+        // 平滑过渡到新位置
+        gsap.to(satellite.position, {
+            x: x,
+            y: y,
+            z: z,
+            duration: 0.5,
+            ease: "linear",
+            overwrite: true
+        });
+
+        // 平滑过渡到新的朝向
+        gsap.to(satellite.rotation, {
+            x: euler.x,
+            y: euler.y,
+            z: euler.z,
+            duration: 1.0,
+            ease: "power1.out",
+            overwrite: true
+        });
+
     }
 
     // 获取火箭当前位置（用于粒子效果）

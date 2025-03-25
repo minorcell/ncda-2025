@@ -219,4 +219,70 @@ class ParticleSystem {
             onUpdate: expandParticles
         });
     }
+
+    deactivateFlame(stageName) {
+        console.log(`尝试停止 ${stageName} 的火焰效果`);
+
+        let flameIndex = -1;
+        // 根据阶段名找到对应的火焰粒子
+        switch (stageName) {
+            case 'firstStage':
+                // 寻找与一级火箭关联的火焰索引
+                flameIndex = this.flameParticles.findIndex(f =>
+                    f.name === 'firstStageFlame' || f.mesh.name === 'firstStageFlame' ||
+                    f.name === 'mainEngineFlame' || f.mesh.name === 'mainEngineFlame'
+                );
+                break;
+            case 'secondStage':
+                // 寻找与二级火箭关联的火焰索引
+                flameIndex = this.flameParticles.findIndex(f =>
+                    f.name === 'secondStageFlame' || f.mesh.name === 'secondStageFlame'
+                );
+                break;
+            case 'thirdStage':
+                // 寻找与三级火箭关联的火焰索引
+                flameIndex = this.flameParticles.findIndex(f =>
+                    f.name === 'thirdStageFlame' || f.mesh.name === 'thirdStageFlame'
+                );
+                break;
+        }
+
+        // 如果找到了对应的火焰
+        if (flameIndex !== -1) {
+            const flame = this.flameParticles[flameIndex];
+            console.log(`找到 ${stageName} 的火焰，准备停止...`);
+
+            // 创建火焰消失动画
+            gsap.to(flame.mesh.scale, {
+                x: 0,
+                y: 0,
+                z: 0,
+                duration: 0.5,
+                ease: "power2.out",
+                onComplete: () => {
+                    console.log(`${stageName} 火焰移除完成`);
+
+                    // 移除火焰和光源
+                    if (flame.light) {
+                        flame.mesh.remove(flame.light);
+                    }
+                    this.scene.remove(flame.mesh);
+
+                    // 从数组中移除
+                    this.flameParticles.splice(flameIndex, 1);
+                }
+            });
+
+            // 如果火焰有光源，逐渐减弱光源强度
+            if (flame.light) {
+                gsap.to(flame.light, {
+                    intensity: 0,
+                    duration: 0.5,
+                    ease: "power2.out"
+                });
+            }
+        } else {
+            console.warn(`未找到 ${stageName} 的火焰效果`);
+        }
+    }
 } 

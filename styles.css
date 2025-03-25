@@ -42,18 +42,20 @@ body {
 
 .progress-bar {
     width: 100%;
-    height: 5px;
+    height: 8px;
     background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 5px;
+    border-radius: 10px;
     margin-bottom: 15px;
+    overflow: hidden;
 }
 
 .progress {
     height: 100%;
     width: 0%;
-    background-color: #4CAF50;
-    border-radius: 5px;
-    transition: width 0.3s ease;
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.7);
 }
 
 #stage-title {
@@ -123,4 +125,68 @@ body {
 
 .hide {
     opacity: 0;
+}
+
+.launch-control {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.launch-control.launching {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.launch-control.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#launch-button {
+    background-color: #ff3333;
+    color: white;
+    font-size: 1.5rem;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#launch-button:hover {
+    background-color: #ff0000;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+    transform: scale(1.05);
+}
+
+#launch-button:active {
+    transform: scale(0.95);
+}
+
+.countdown {
+    margin-top: 20px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

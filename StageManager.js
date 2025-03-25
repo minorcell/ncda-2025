@@ -75,8 +75,8 @@ class StageManager {
         this.flames.push(mainFlame);
 
         // 外围8个引擎
-        for (let i = 0; i < 8; i++) {
-            const angle = (i / 8) * Math.PI * 2;
+        for (let i = 0; i < 6; i++) {
+            const angle = (i / 5) * Math.PI * 2;
             const distance = 1.8;
             const flamePos = new THREE.Vector3(
                 bottomPos.x + Math.cos(angle) * distance,
@@ -206,6 +206,11 @@ class StageManager {
     executeStageTransition(newStage) {
         switch (newStage) {
             case 1: // 点火与发射
+                // 先触发相机事件
+                if (this.scene.app && this.scene.app.setCameraEvent) {
+                    this.scene.app.setCameraEvent("rocketLaunch", 7);
+                }
+
                 // 清除现有的火焰（如果有）
                 this.clearEngineFlames();
 
@@ -215,9 +220,15 @@ class StageManager {
                 // 创建发射烟雾效果
                 const launchPos = this.rocket.getFirstStageBottomPosition();
                 this.particleSystem.createLaunchEffects(launchPos);
+
                 break;
 
             case 3: // 一级分离
+                if (this.scene.app && this.scene.app.setCameraEvent) {
+                    this.scene.app.setCameraEvent("firstStageSeparation", 7);
+                }
+
+
                 // 执行一级火箭分离
                 this.rocket.separateFirstStage().then(() => {
                     // 创建分离效果
@@ -237,48 +248,68 @@ class StageManager {
                 break;
 
             case 4: // 整流罩分离
-                // 执行整流罩分离
-                this.rocket.openFairings().then(() => {
-                    // 分离效果
-                    const fairingPos = new THREE.Vector3(
-                        this.rocket.rocket.position.x,
-                        this.rocket.rocket.position.y + 10,
-                        this.rocket.rocket.position.z
-                    );
-                    this.particleSystem.createSeparationEffect(fairingPos);
+                // 先触发相机事件，确保相机就位
+                if (this.scene.app && this.scene.app.setCameraEvent) {
+                    this.scene.app.setCameraEvent("fairingSeparation", 7);
+                }
 
-                    // 火焰保持不变，继续使用二级火箭火焰
-                });
+                // 执行整流罩分离
+                setTimeout(() => {
+                    this.rocket.openFairings().then(() => {
+                        // 分离效果
+                        const fairingPos = new THREE.Vector3(
+                            this.rocket.rocket.position.x,
+                            this.rocket.rocket.position.y + 10,
+                            this.rocket.rocket.position.z
+                        );
+                        this.particleSystem.createSeparationEffect(fairingPos);
+
+                        // 火焰保持不变，继续使用二级火箭火焰
+                    });
+                }, 1000); // 延迟1秒，给相机时间切换到合适视角
                 break;
 
             case 5: // 二级分离
-                // 执行二级火箭分离
-                this.rocket.separateSecondStage().then(() => {
-                    // 分离效果
-                    const secondStagePos = new THREE.Vector3(
-                        this.rocket.rocket.position.x,
-                        this.rocket.rocket.position.y,
-                        this.rocket.rocket.position.z
-                    );
-                    this.particleSystem.createSeparationEffect(secondStagePos);
+                if (this.scene.app && this.scene.app.setCameraEvent) {
+                    this.scene.app.setCameraEvent("secondStageSeparation", 7);
+                }
 
-                    // 清除二级火箭的火焰
-                    this.clearEngineFlames();
+                setTimeout(() => {
+                    this.rocket.separateSecondStage().then(() => {
+                        // 分离效果
+                        const secondStagePos = new THREE.Vector3(
+                            this.rocket.rocket.position.x,
+                            this.rocket.rocket.position.y,
+                            this.rocket.rocket.position.z
+                        );
+                        this.particleSystem.createSeparationEffect(secondStagePos);
 
-                    // 创建三级火箭引擎火焰（较小的火焰）
-                    this.createThirdStageFlame();
-                });
+                        // 清除二级火箭的火焰
+                        this.clearEngineFlames();
+
+                        // 创建三级火箭引擎火焰（较小的火焰）
+                        this.createThirdStageFlame();
+                    });
+                }, 1000);
                 break;
 
-            case 6: // 进入轨道
-                // 部署卫星
-                this.rocket.deployPayload().then(() => {
-                    // 清除现有火焰
-                    this.clearEngineFlames();
+            case 6: // 进入轨道和卫星部署
+                if (this.scene.app && this.scene.app.setCameraEvent) {
+                    this.scene.app.setCameraEvent("satelliteDeployment", 15); // 更长时间观察
+                }
 
-                    // 最终可以添加一些微型推进器的小火焰效果
-                    this.createPayloadThrusters();
-                });
+                setTimeout(() => {
+                    this.rocket.deployPayload().then(() => {
+                        // 清除现有火焰
+                        this.clearEngineFlames();
+
+                        // 等待电池板展开动画完成后再添加小型推进器
+                        setTimeout(() => {
+                            // 更新数据面板，显示部署成功
+                            document.getElementById('stage-description').textContent += " - 太阳能电池板展开完成";
+                        }, 8000); // 给电池板展开留足时间
+                    });
+                }, 1500);
                 break;
         }
 
@@ -344,19 +375,6 @@ class StageManager {
             0x66ccff // 浅蓝色火焰
         );
         this.flames = [thirdStageFire]; // 新的火焰数组
-    }
-
-    // 创建有效载荷/卫星的小型推进器
-    createPayloadThrusters() {
-        const payloadPos = this.rocket.getPayloadPosition();
-
-        // 卫星姿态调整推进器（非常小）
-        const smallThrusters = this.particleSystem.createEngineFlame(
-            payloadPos,
-            0.5,
-            0xaaddff // 非常浅的蓝色
-        );
-        this.flames = [smallThrusters]; // 新的火焰数组
     }
 
     // 清除所有引擎火焰
