@@ -1,216 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NCDA-2025作品赛</title>
-    <link rel="stylesheet" href="./styles/index.css" />
-  </head>
-  <body>
-    <div class="cursor-follower"></div>
 
-    <header>
-      <div class="logo">NCDA<span>2025</span></div>
-      <nav>
-        <ul>
-          <li><a href="#home" class="nav-link">首页</a></li>
-          <li><a href="#about" class="nav-link">关于</a></li>
-          <li><a href="#works" class="nav-link">作品</a></li>
-          <li><a href="#contact" class="nav-link">联系</a></li>
-        </ul>
-      </nav>
-      <div class="menu-toggle">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-      </div>
-    </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D 火箭发射展示</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
 
-    <main>
-      <section id="home" class="hero">
-        <canvas id="particleCanvas"></canvas>
-        <div class="hero-content">
-          <h1 class="glitch" data-text="NCDA-2025">NCDA-2025</h1>
-          <p class="subtitle">创新设计 · 无限可能</p>
-          <button class="cta-button">参与竞赛</button>
-        </div>
-        <div class="scroll-indicator">
-          <div class="mouse">
-            <div class="wheel"></div>
-          </div>
-          <div class="arrow">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
-      </section>
+<body>
+    <div id="app">
+        <canvas id="rocket-canvas"></canvas>
 
-      <section id="about" class="about">
-        <div class="section-header">
-          <h2>关于竞赛</h2>
-          <div class="underline"></div>
-        </div>
-        <div class="about-content">
-          <div class="about-image parallax-item" data-speed="0.1">
-            <div class="image-container">
-              <div class="image-overlay"></div>
+        <div class="stage-info">
+            <div class="progress-bar">
+                <div class="progress"></div>
             </div>
-          </div>
-          <div class="about-text">
-            <p>
-              NCDA-2025是一个面向全球设计师的创新设计竞赛平台，旨在发掘和展示最具创意和前瞻性的设计作品。
-            </p>
-            <p>
-              我们鼓励参赛者突破传统界限，探索设计与技术的融合，创造出具有社会影响力的作品。
-            </p>
-            <div class="stats-container">
-              <div class="stat-item" data-count="150">
-                <div class="stat-number">0</div>
-                <div class="stat-label">参赛国家</div>
-              </div>
-              <div class="stat-item" data-count="5000">
-                <div class="stat-number">0</div>
-                <div class="stat-label">参赛作品</div>
-              </div>
-              <div class="stat-item" data-count="50">
-                <div class="stat-number">0</div>
-                <div class="stat-label">奖项设置</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+            <h2 id="stage-title">地面准备阶段</h2>
+            <p id="stage-description">火箭正在发射台准备发射</p>
 
-      <section id="works" class="works">
-        <div class="section-header">
-          <h2>精选作品</h2>
-          <div class="underline"></div>
-        </div>
-        <div class="works-grid">
-          <div class="work-item">
-            <div class="work-image">
-              <div class="image-overlay">
-                <div class="overlay-content">
-                  <h3>未来城市</h3>
-                  <p>交互设计 / 2024</p>
+            <div class="data-panel">
+                <div class="data-item">
+                    <span class="label">高度</span>
+                    <span id="altitude" class="value">0 km</span>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="work-item">
-            <div class="work-image">
-              <div class="image-overlay">
-                <div class="overlay-content">
-                  <h3>生态平衡</h3>
-                  <p>产品设计 / 2024</p>
+                <div class="data-item">
+                    <span class="label">速度</span>
+                    <span id="velocity" class="value">0 km/h</span>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="work-item">
-            <div class="work-image">
-              <div class="image-overlay">
-                <div class="overlay-content">
-                  <h3>数字艺术</h3>
-                  <p>视觉设计 / 2024</p>
+                <div class="data-item">
+                    <span class="label">时间</span>
+                    <span id="mission-time" class="value">T-00:00</span>
                 </div>
-              </div>
             </div>
-          </div>
-          <div class="work-item">
-            <div class="work-image">
-              <div class="image-overlay">
-                <div class="overlay-content">
-                  <h3>智能家居</h3>
-                  <p>工业设计 / 2024</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="work-item">
-            <div class="work-image">
-              <div class="image-overlay">
-                <div class="overlay-content">
-                  <h3>虚拟现实</h3>
-                  <p>交互设计 / 2024</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="work-item">
-            <div class="work-image">
-              <div class="image-overlay">
-                <div class="overlay-content">
-                  <h3>可持续设计</h3>
-                  <p>产品设计 / 2024</p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </section>
 
-      <section id="contact" class="contact">
-        <div class="section-header">
-          <h2>联系我们</h2>
-          <div class="underline"></div>
+        <div class="instructions">
+            <p>向下滚动以开始火箭发射过程</p>
         </div>
-        <div class="contact-content">
-          <form class="contact-form">
-            <div class="form-group">
-              <input type="text" id="name" class="form-input" required />
-              <label for="name" class="form-label">姓名</label>
-              <div class="form-line"></div>
-            </div>
-            <div class="form-group">
-              <input type="email" id="email" class="form-input" required />
-              <label for="email" class="form-label">邮箱</label>
-              <div class="form-line"></div>
-            </div>
-            <div class="form-group">
-              <textarea id="message" class="form-input" required></textarea>
-              <label for="message" class="form-label">留言</label>
-              <div class="form-line"></div>
-            </div>
-            <button type="submit" class="submit-button">发送</button>
-          </form>
-          <div class="contact-info">
-            <div class="info-item">
-              <div class="info-icon">📍</div>
-              <div class="info-text">上海市浦东新区创新路100号</div>
-            </div>
-            <div class="info-item">
-              <div class="info-icon">📧</div>
-              <div class="info-text">contact@ncda2025.com</div>
-            </div>
-            <div class="info-item">
-              <div class="info-icon">📱</div>
-              <div class="info-text">+86 123 4567 8910</div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
+    </div>
 
-    <footer>
-      <div class="footer-content">
-        <div class="footer-logo">NCDA<span>2025</span></div>
-        <div class="footer-links">
-          <a href="#">隐私政策</a>
-          <a href="#">条款与条件</a>
-          <a href="#">常见问题</a>
-        </div>
-        <div class="social-links">
-          <a href="#" class="social-link">微博</a>
-          <a href="#" class="social-link">微信</a>
-          <a href="#" class="social-link">Instagram</a>
-        </div>
-      </div>
-      <div class="copyright">&copy; 2025 NCDA设计大赛. 保留所有权利.</div>
-    </footer>
+    <!-- 通过 CDN 引入库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.9.1/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.9.1/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 
-    <script src="./scripts/index.js"></script>
-    <script src="./scripts/hero-background.js"></script>
-  </body>
+    <!-- 项目脚本 -->
+    <script src="ParticleSystem.js"></script>
+    <script src="RocketModel.js"></script>
+    <script src="StageManager.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        window.onerror = function (message, source, lineno, colno, error) {
+            document.body.innerHTML += `<div style="color:red;position:fixed;bottom:0;left:0;right:0;background:black;padding:10px;z-index:9999">
+                错误: ${message}<br>
+                来源: ${source}<br>
+                行号: ${lineno}<br>
+            </div>`;
+            return true;
+        };
+
+        // 检查WebGL支持
+        window.addEventListener('DOMContentLoaded', function () {
+            try {
+                const canvas = document.createElement('canvas');
+                const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+                if (!gl) {
+                    document.body.innerHTML += '<div style="color:red;position:fixed;top:0;left:0;right:0;background:black;padding:10px;z-index:9999">您的浏览器不支持WebGL，请尝试使用更现代的浏览器如Chrome、Firefox或Edge。</div>';
+                }
+            } catch (e) {
+                document.body.innerHTML += `<div style="color:red;position:fixed;top:0;left:0;right:0;background:black;padding:10px;z-index:9999">WebGL初始化错误: ${e.message}</div>`;
+            }
+        });
+    </script>
+</body>
+
 </html>
