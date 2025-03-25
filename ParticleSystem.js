@@ -7,7 +7,7 @@ class ParticleSystem {
     }
 
     createEngineFlame(position, size = 1, color = 0xff6600) {
-        // 创建火箭引擎火焰粒子系统 - 使用传入的颜色
+        // 创建火箭引擎火焰粒子系统
         const flameGeometry = new THREE.ConeGeometry(size * 0.5, size * 2, 20);
         const flameMaterial = new THREE.MeshBasicMaterial({
             color: color, // 使用传入的颜色
@@ -18,22 +18,30 @@ class ParticleSystem {
         const flame = new THREE.Mesh(flameGeometry, flameMaterial);
         flame.position.copy(position);
 
-        // 创建内部更亮的火焰
-        const innerColor = (color === 0xff6600) ? 0xffff00 : 0xffffff;
+        // 创建内部更亮的火焰 - 颜色根据外部火焰自动调整
+        let innerColor;
+        if (color === 0xff6600 || color === 0xff5500) {
+            innerColor = 0xffff00; // 黄色内焰用于红/橙色火焰
+        } else if (color === 0x00aaff) {
+            innerColor = 0xaaffff; // 青白色内焰用于蓝色火焰
+        } else {
+            innerColor = 0xffffff; // 默认白色内焰
+        }
+
         const innerFlameGeometry = new THREE.ConeGeometry(size * 0.3, size * 1.5, 20);
         const innerFlameMaterial = new THREE.MeshBasicMaterial({
             color: innerColor,
             transparent: true,
-            opacity: 1.0, // 完全不透明
-            emissive: innerColor, // 添加自发光
-            emissiveIntensity: 1.0 // 最大强度
+            opacity: 1.0,
+            emissive: innerColor,
+            emissiveIntensity: 1.0
         });
 
         const innerFlame = new THREE.Mesh(innerFlameGeometry, innerFlameMaterial);
         innerFlame.position.y = -size * 0.25;
         flame.add(innerFlame);
 
-        // 添加发光点光源
+        // 添加发光点光源，颜色匹配火焰
         const flameLight = new THREE.PointLight(color, 2, size * 5);
         flameLight.position.set(0, -size * 1, 0);
         flame.add(flameLight);

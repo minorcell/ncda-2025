@@ -23,10 +23,9 @@ class RocketModel {
         this.createPayload();
         this.createFairings();
 
-        // 设置初始位置 - 改为把整个火箭提高一些
-        this.rocket.position.set(0, 10, 0); // 提高火箭初始位置
-        // 火箭已经是竖直的，不再需要旋转
-        // this.rocket.rotation.x = -Math.PI / 2; // 注释掉这行
+        // 设置初始位置 - 将火箭放置在地面上方
+        this.rocket.position.set(0, 25, 0); // 改为25，使火箭底部正好在地面上
+        // 火箭已经是竖直的，不需要旋转
     }
 
     createFirstStage() {
@@ -271,6 +270,7 @@ class RocketModel {
 
             this.scene.add(detachedStage);
             this.rocket.remove(this.firstStage);
+            this.firstStage = null; // 确保标记为已分离
 
             // 一级火箭坠落和旋转的动画
             gsap.to(detachedStage.position, {
@@ -303,6 +303,7 @@ class RocketModel {
 
             this.scene.add(detachedStage);
             this.rocket.remove(this.secondStage);
+            this.secondStage = null; // 标记为已分离
 
             // 二级火箭飘离和旋转的动画
             gsap.to(detachedStage.position, {
@@ -374,6 +375,7 @@ class RocketModel {
 
             this.scene.add(satellite);
             this.rocket.remove(this.payload);
+            this.payload = null; // 标记为已部署
 
             // 卫星轻微移动和自转的动画
             gsap.to(satellite.position, {
@@ -395,8 +397,52 @@ class RocketModel {
 
     // 获取火箭当前位置（用于粒子效果）
     getBottomPosition() {
-        // 调整为获取火箭底部的位置
+        // 获取火箭底部位置
+        const position = new THREE.Vector3(0, -25, 0); // 相对于火箭中心的底部位置
+        return this.rocket.localToWorld(position.clone());
+    }
+
+    // 获取一级火箭底部位置（用于火焰效果）
+    getFirstStageBottomPosition() {
+        if (!this.firstStage) {
+            // 如果一级已分离，返回null或最后已知位置
+            return new THREE.Vector3(0, this.rocket.position.y - 25, 0);
+        }
+
         const position = new THREE.Vector3(0, -25, 0);
+        return this.rocket.localToWorld(position.clone());
+    }
+
+    // 获取二级火箭底部位置
+    getSecondStageBottomPosition() {
+        if (!this.secondStage) {
+            // 如果二级已分离，返回一个估计位置
+            return new THREE.Vector3(0, this.rocket.position.y - 5, 0);
+        }
+
+        const position = new THREE.Vector3(0, -5, 0);
+        return this.rocket.localToWorld(position.clone());
+    }
+
+    // 获取三级火箭底部位置
+    getThirdStageBottomPosition() {
+        if (!this.thirdStage) {
+            // 如果三级已分离，返回一个估计位置
+            return new THREE.Vector3(0, this.rocket.position.y + 5, 0);
+        }
+
+        const position = new THREE.Vector3(0, 5, 0);
+        return this.rocket.localToWorld(position.clone());
+    }
+
+    // 获取有效载荷位置（用于最终阶段的小推进器）
+    getPayloadPosition() {
+        if (!this.payload) {
+            // 如果有效载荷已部署，返回一个估计位置
+            return new THREE.Vector3(0, this.rocket.position.y + 12, 0);
+        }
+
+        const position = new THREE.Vector3(0, 12, 0);
         return this.rocket.localToWorld(position.clone());
     }
 } 

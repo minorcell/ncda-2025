@@ -47,7 +47,11 @@ class RocketLaunchApp {
 
         // 创建相机
         this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 2000);
-        this.camera.position.set(50, 50, 15); // 调整初始相机位置，确保能看到火箭
+        this.camera.position.set(30, 35, 30); // 设置为第一阶段的初始位置
+
+        // 初始化相机目标点
+        this.cameraTarget = new THREE.Vector3(0, 25, 0);
+        this.camera.lookAt(this.cameraTarget);
 
         // 创建渲染器
         this.renderer = new THREE.WebGLRenderer({
@@ -80,10 +84,7 @@ class RocketLaunchApp {
         // 创建阶段管理器
         this.stageManager = new StageManager(this.scene, this.rocket, this.particleSystem);
 
-        // 设置初始相机视角 - 直接看向火箭
-        this.camera.lookAt(50, 50, 15);
-
-
+        this.createCameraTrail();
     }
 
     setupLights() {
@@ -148,7 +149,7 @@ class RocketLaunchApp {
         });
 
         this.earth = new THREE.Mesh(earthGeometry, earthMaterial);
-        this.earth.position.y = -510; // 地球半径 + 一些距离
+        this.earth.position.y = -510; // 地球半径 + 一些距离，确保地面正好是地球的"顶部"
         this.scene.add(this.earth);
 
         // 添加云层
@@ -187,7 +188,7 @@ class RocketLaunchApp {
         });
 
         const base = new THREE.Mesh(baseGeometry, baseMaterial);
-        base.position.y = -0.5;
+        base.position.y = 0; // 将基座放置在y=0的位置（地面）
         base.receiveShadow = true;
         this.scene.add(base);
 
@@ -206,7 +207,7 @@ class RocketLaunchApp {
 
             support.position.set(
                 Math.cos(angle) * 3,
-                5,
+                5, // 从地面向上延伸
                 Math.sin(angle) * 3
             );
 
@@ -221,7 +222,7 @@ class RocketLaunchApp {
             const angle = (i / 4) * Math.PI * 2 + Math.PI / 4;
             const crossSupport = new THREE.Mesh(crossSupportGeometry, supportMaterial);
 
-            crossSupport.position.set(0, 7, 0);
+            crossSupport.position.set(0, 7, 0); // 支架顶部
             crossSupport.rotation.y = angle;
             crossSupport.castShadow = true;
 
@@ -244,46 +245,139 @@ class RocketLaunchApp {
 
     // 更新相机位置
     updateCamera() {
-        // 根据滚动进度调整相机位置，始终保持火箭在视野中
+        // 获取火箭当前位置
         const rocketPos = this.rocket.rocket.position.clone();
 
+        // 根据当前阶段计算理想的相机位置
+        let targetCameraPos = new THREE.Vector3();
+        let targetLookAt = new THREE.Vector3();
+        let transitionDuration = 1.5; // 默认过渡时间
+
+        // 距离系数 - 增加此值以拉远相机
+        const distanceMultiplier = 1.8; // 原来基础上增加80%的距离
+
         if (this.scrollProgress < 0.1) {
-            gsap.to(this.camera.position, {
-                x: 20,
-                y: 20,
-                z: 15,
-                duration: 1
-            });
-
-            this.camera.lookAt(new THREE.Vector3(0, 5, 0));
-        } else if (this.scrollProgress < 0.3) {
-            gsap.to(this.camera.position, {
-                x: 20,
-                y: 20,
-                z: 15,
-                duration: 1
-            });
-
-            this.camera.lookAt(new THREE.Vector3(0, rocketPos.y, 0));
-        } else if (this.scrollProgress < 0.6) {
-            gsap.to(this.camera.position, {
-                x: 20,
-                y: rocketPos.y + 20,
-                z: 10,
-                duration: 1
-            });
-
-            this.camera.lookAt(new THREE.Vector3(0, rocketPos.y, 0));
-        } else {
-            gsap.to(this.camera.position, {
-                x: 20 + Math.sin(this.scrollProgress * Math.PI * 2) * 10,
-                y: rocketPos.y,
-                z: 20 + Math.cos(this.scrollProgress * Math.PI * 2) * 10,
-                duration: 0.5
-            });
-
-            this.camera.lookAt(new THREE.Vector3(0, rocketPos.y, 0));
+            // 阶段1: 发射前准备 - 从侧面45度角观察火箭，更远的距离
+            targetCameraPos.set(50, 45, 50); // 增加了距离
+            targetLookAt.set(0, 25, 0); // 看向火箭底部
+            transitionDuration = 2.0; // 初始阶段过渡更慢一些
         }
+        else if (this.scrollProgress < 0.2) {
+            // 阶段2: 点火和初始升空 - 拉远距离
+            const progress = (this.scrollProgress - 0.1) / 0.1; // 0-1
+            // 相机从侧面逐渐移动到后方位置，但距离更远
+            targetCameraPos.set(
+                (30 * (1 - progress) + 5 * progress) * distanceMultiplier,
+                rocketPos.y - 10 + progress * 30, // 增加高度
+                (30 * (1 - progress) + 40 * progress) * distanceMultiplier
+            );
+            targetLookAt.set(0, rocketPos.y, 0);
+            transitionDuration = 1.2;
+        }
+        else if (this.scrollProgress < 0.35) {
+            // 阶段3: 上升阶段 - 从更远的后方跟随火箭
+            targetCameraPos.set(
+                5 * distanceMultiplier, // 更远的距离
+                rocketPos.y - 25, // 更低的视角
+                65 // 更远的后方
+            );
+            targetLookAt.set(0, rocketPos.y + 20, 0); // 略微向上看
+
+            // 添加微小的摇晃效果模拟震动
+            const shakeAmount = 0.3;
+            targetCameraPos.x += (Math.random() - 0.5) * shakeAmount;
+            targetCameraPos.y += (Math.random() - 0.5) * shakeAmount;
+            targetCameraPos.z += (Math.random() - 0.5) * shakeAmount;
+        }
+        else if (this.scrollProgress < 0.55) {
+            // 阶段4: 一级分离 - 从侧面远距离观察
+            const progress = (this.scrollProgress - 0.35) / 0.2; // 0-1
+
+            // 平滑过渡到侧面视角，更远的距离
+            targetCameraPos.set(
+                (5 + progress * 55) * distanceMultiplier, // 向右侧移动更远
+                rocketPos.y,       // 与火箭同高度
+                (45 - progress * 25) * distanceMultiplier  // 向火箭靠近，但总体更远
+            );
+            targetLookAt.set(0, rocketPos.y, 0);
+        }
+        else if (this.scrollProgress < 0.75) {
+            // 阶段5: 高空飞行和整流罩分离 - 从远距离上方斜角观察
+            const phase = Math.sin(Date.now() * 0.0005) * 0.3; // 缓慢环绕效果
+            const radius = 45 * distanceMultiplier; // 增加环绕半径
+            targetCameraPos.set(
+                radius * Math.cos(this.scrollProgress * 3 + phase),
+                rocketPos.y + 25, // 更高的视角
+                radius * Math.sin(this.scrollProgress * 3 + phase)
+            );
+            targetLookAt.set(0, rocketPos.y, 0);
+        }
+        else if (this.scrollProgress < 0.9) {
+            // 阶段6: 太空中和二级分离 - 更广阔的视角，更远的轨道
+            // 相机轨道运动，绕火箭旋转
+            const angle = this.scrollProgress * Math.PI * 4;
+            const radius = 60 * distanceMultiplier; // 显著增加轨道半径
+            targetCameraPos.set(
+                Math.cos(angle) * radius,
+                rocketPos.y,
+                Math.sin(angle) * radius
+            );
+            targetLookAt.set(0, rocketPos.y, 0);
+        }
+        else {
+            // 阶段7: 进入轨道和卫星部署 - 超远景
+            const angle = this.scrollProgress * Math.PI;
+            const finalRadius = 100 * distanceMultiplier; // 非常远的最终视角
+            targetCameraPos.set(
+                Math.cos(angle) * finalRadius,
+                rocketPos.y + 30, // 更高的视角
+                Math.sin(angle) * finalRadius
+            );
+            targetLookAt.set(0, rocketPos.y, 0);
+            transitionDuration = 3.0; // 最终阶段慢速过渡
+        }
+
+        // 平滑过渡到目标位置
+        gsap.to(this.camera.position, {
+            x: targetCameraPos.x,
+            y: targetCameraPos.y,
+            z: targetCameraPos.z,
+            duration: transitionDuration,
+            ease: "power2.out"
+        });
+
+        // 更新辅助对象的目标位置
+        gsap.to(this.cameraTarget, {
+            x: targetLookAt.x,
+            y: targetLookAt.y,
+            z: targetLookAt.z,
+            duration: transitionDuration * 0.8, // 略快于位置变化
+            ease: "power1.out",
+            onUpdate: () => {
+                this.camera.lookAt(this.cameraTarget);
+            }
+        });
+
+        // 根据火箭速度动态调整视野 (FOV) - 减小FOV以获得远景望远镜效果
+        let targetFOV = 60; // 默认FOV降低到60
+
+        if (this.scrollProgress > 0.1 && this.scrollProgress < 0.3) {
+            // 发射阶段增加FOV以体现加速感，但整体比原来低
+            targetFOV = 60 + (this.scrollProgress - 0.1) * 10 / 0.2;
+        } else if (this.scrollProgress > 0.7) {
+            // 太空阶段降低FOV以体现广阔太空感
+            targetFOV = 60 - (this.scrollProgress - 0.7) * 20 / 0.3;
+        }
+
+        // 平滑过渡FOV变化
+        gsap.to(this.camera, {
+            fov: targetFOV,
+            duration: 2.0,
+            ease: "power1.inOut",
+            onUpdate: () => {
+                this.camera.updateProjectionMatrix();
+            }
+        });
     }
 
     // 窗口调整大小事件处理函数
@@ -318,6 +412,46 @@ class RocketLaunchApp {
             this.rocketLight.position.z = 20;
         }
 
+        // 添加相机微小晃动（仅在火箭发射阶段）
+        if (this.scrollProgress > 0.1 && this.scrollProgress < 0.4) {
+            // 根据火箭加速度计算晃动强度
+            const acceleration = Math.min((this.scrollProgress - 0.1) * 5, 1);
+            const shakeIntensity = 0.05 * acceleration;
+
+            // 临时位置偏移
+            const shakeX = (Math.random() - 0.5) * shakeIntensity;
+            const shakeY = (Math.random() - 0.5) * shakeIntensity;
+
+            // 应用到相机位置
+            this.camera.position.x += shakeX;
+            this.camera.position.y += shakeY;
+
+            // 应用到相机目标点（轻微偏移）
+            if (this.cameraTarget) {
+                this.cameraTarget.x += shakeX * 0.5;
+                this.cameraTarget.y += shakeY * 0.5;
+                this.camera.lookAt(this.cameraTarget);
+            }
+        }
+
+        // 更新相机轨迹
+        if (this.scrollProgress > 0.1 && this.cameraTrailPoints) {
+            // 移动所有点
+            for (let i = this.cameraTrailPoints.length - 1; i > 0; i--) {
+                this.cameraTrailPoints[i].copy(this.cameraTrailPoints[i - 1]);
+            }
+
+            // 添加当前相机位置作为新点
+            this.cameraTrailPoints[0].copy(this.camera.position);
+
+            // 更新几何体
+            this.cameraTrail.geometry.setFromPoints(this.cameraTrailPoints);
+            this.cameraTrail.geometry.attributes.position.needsUpdate = true;
+
+            // 设置轨迹显示/隐藏
+            this.cameraTrail.visible = (this.scrollProgress > 0.15 && this.scrollProgress < 0.9);
+        }
+
         // 渲染场景
         this.renderer.render(this.scene, this.camera);
 
@@ -327,5 +461,25 @@ class RocketLaunchApp {
         if (error !== gl.NO_ERROR) {
             console.error('WebGL错误:', error);
         }
+    }
+
+    createCameraTrail() {
+        // 创建相机轨迹线
+        const trailGeometry = new THREE.BufferGeometry();
+        const trailMaterial = new THREE.LineBasicMaterial({
+            color: 0x00ffff,
+            transparent: true,
+            opacity: 0.3
+        });
+
+        // 初始化轨迹点
+        this.cameraTrailPoints = [];
+        for (let i = 0; i < 50; i++) {
+            this.cameraTrailPoints.push(new THREE.Vector3(0, 0, 0));
+        }
+
+        trailGeometry.setFromPoints(this.cameraTrailPoints);
+        this.cameraTrail = new THREE.Line(trailGeometry, trailMaterial);
+        this.scene.add(this.cameraTrail);
     }
 } 

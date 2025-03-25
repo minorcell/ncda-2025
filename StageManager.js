@@ -93,24 +93,49 @@ class StageManager {
     updateFlames() {
         if (this.flames.length === 0) return;
 
-        const bottomPos = this.rocket.getBottomPosition();
+        // 火箭各阶段的火焰位置应该根据当前活跃的火箭级来确定
+        if (this.currentStage < 3) {
+            // 阶段1-2: 一级火箭引擎火焰
+            const bottomPos = this.rocket.getFirstStageBottomPosition();
 
-        // 更新中央引擎火焰位置
-        this.flames[0].position.copy(new THREE.Vector3(
-            bottomPos.x,
-            bottomPos.y,
-            bottomPos.z
-        ));
-
-        // 更新外围引擎火焰位置
-        for (let i = 1; i < this.flames.length; i++) {
-            const angle = ((i - 1) / 8) * Math.PI * 2;
-            const distance = 1.8;
-            this.flames[i].position.copy(new THREE.Vector3(
-                bottomPos.x + Math.cos(angle) * distance,
+            // 更新中央引擎火焰位置
+            this.flames[0].position.copy(new THREE.Vector3(
+                bottomPos.x,
                 bottomPos.y,
-                bottomPos.z + Math.sin(angle) * distance
+                bottomPos.z
             ));
+
+            // 更新外围引擎火焰位置
+            for (let i = 1; i < this.flames.length; i++) {
+                const angle = ((i - 1) / 8) * Math.PI * 2;
+                const distance = 1.8;
+                this.flames[i].position.copy(new THREE.Vector3(
+                    bottomPos.x + Math.cos(angle) * distance,
+                    bottomPos.y,
+                    bottomPos.z + Math.sin(angle) * distance
+                ));
+            }
+        }
+        else if (this.currentStage < 5) {
+            // 阶段3-4: 二级火箭引擎火焰
+            const enginePos = this.rocket.getSecondStageBottomPosition();
+
+            // 二级只有一个主引擎
+            this.flames[0].position.copy(enginePos);
+        }
+        else if (this.currentStage < 6) {
+            // 阶段5: 三级火箭引擎火焰
+            const enginePos = this.rocket.getThirdStageBottomPosition();
+
+            // 三级有小型引擎
+            this.flames[0].position.copy(enginePos);
+        }
+        else {
+            // 阶段6+: 卫星/有效载荷的小型推进器 (如果有)
+            if (this.flames.length > 0) {
+                const enginePos = this.rocket.getPayloadPosition();
+                this.flames[0].position.copy(enginePos);
+            }
         }
     }
 
@@ -150,15 +175,15 @@ class StageManager {
         let altitude = 0;
 
         if (progress < 0.1) {
-            // 初始准备阶段，火箭静止
-            altitude = 0;
+            // 初始准备阶段，火箭静止在发射台上
+            altitude = 25; // 保持初始高度
         } else if (progress < 0.6) {
             // 上升阶段，加速增加高度
             const liftoffProgress = (progress - 0.1) / 0.5;
-            altitude = liftoffProgress * liftoffProgress * 200;
+            altitude = 25 + liftoffProgress * liftoffProgress * 200; // 从初始高度开始上升
         } else {
             // 高空飞行阶段
-            altitude = 200 + (progress - 0.6) * 400;
+            altitude = 25 + 200 + (progress - 0.6) * 400; // 从初始高度+上升高度继续增加
         }
 
         // 更新火箭位置
@@ -181,79 +206,79 @@ class StageManager {
     executeStageTransition(newStage) {
         switch (newStage) {
             case 1: // 点火与发射
-                // 创建引擎火焰
-                this.createEngineFlames();
-                // 创建发射烟雾效果
-                this.particleSystem.createLaunchEffects(this.rocket.getBottomPosition());
-                // 播放音效（如果实现）
-                break;
-            case 3: // 一级分离
-                // 执行一级火箭分离
-                this.rocket.separateFirstStage();
-                // 创建分离效果
-                const firstStagePos = new THREE.Vector3(
-                    this.rocket.rocket.position.x,
-                    this.rocket.rocket.position.y - 15,
-                    this.rocket.rocket.position.z
-                );
-                this.particleSystem.createSeparationEffect(firstStagePos);
-
-                // 清除现有的引擎火焰
+                // 清除现有的火焰（如果有）
                 this.clearEngineFlames();
 
-                // 创建二级火箭引擎火焰（单个大型火焰）
-                const secondStageBottomPos = this.rocket.rocket.localToWorld(new THREE.Vector3(0, -5, 0));
-                const secondStageFire = this.particleSystem.createEngineFlame(
-                    secondStageBottomPos, 
-                    2.5,
-                    0x00aaff // 蓝色调的火焰
-                );
-                this.flames = [secondStageFire];
+                // 创建一级火箭引擎火焰（9个引擎）
+                this.createFirstStageFlames();
+
+                // 创建发射烟雾效果
+                const launchPos = this.rocket.getFirstStageBottomPosition();
+                this.particleSystem.createLaunchEffects(launchPos);
+                break;
+
+            case 3: // 一级分离
+                // 执行一级火箭分离
+                this.rocket.separateFirstStage().then(() => {
+                    // 创建分离效果
+                    const firstStagePos = new THREE.Vector3(
+                        this.rocket.rocket.position.x,
+                        this.rocket.rocket.position.y - 15,
+                        this.rocket.rocket.position.z
+                    );
+                    this.particleSystem.createSeparationEffect(firstStagePos);
+
+                    // 清除现有的引擎火焰
+                    this.clearEngineFlames();
+
+                    // 创建二级火箭引擎火焰（单个大型火焰）
+                    this.createSecondStageFlame();
+                });
                 break;
 
             case 4: // 整流罩分离
                 // 执行整流罩分离
-                this.rocket.openFairings();
-                // 分离效果
-                const fairingPos = new THREE.Vector3(
-                    this.rocket.rocket.position.x,
-                    this.rocket.rocket.position.y + 10,
-                    this.rocket.rocket.position.z
-                );
-                this.particleSystem.createSeparationEffect(fairingPos);
+                this.rocket.openFairings().then(() => {
+                    // 分离效果
+                    const fairingPos = new THREE.Vector3(
+                        this.rocket.rocket.position.x,
+                        this.rocket.rocket.position.y + 10,
+                        this.rocket.rocket.position.z
+                    );
+                    this.particleSystem.createSeparationEffect(fairingPos);
+
+                    // 火焰保持不变，继续使用二级火箭火焰
+                });
                 break;
 
             case 5: // 二级分离
                 // 执行二级火箭分离
-                this.rocket.separateSecondStage();
-                // 分离效果
-                const secondStagePos = new THREE.Vector3(
-                    this.rocket.rocket.position.x,
-                    this.rocket.rocket.position.y,
-                    this.rocket.rocket.position.z
-                );
-                this.particleSystem.createSeparationEffect(secondStagePos);
+                this.rocket.separateSecondStage().then(() => {
+                    // 分离效果
+                    const secondStagePos = new THREE.Vector3(
+                        this.rocket.rocket.position.x,
+                        this.rocket.rocket.position.y,
+                        this.rocket.rocket.position.z
+                    );
+                    this.particleSystem.createSeparationEffect(secondStagePos);
 
-                // 清除二级火箭的火焰
-                this.clearEngineFlames();
+                    // 清除二级火箭的火焰
+                    this.clearEngineFlames();
 
-                // 创建三级火箭引擎火焰（较小的火焰）
-                const thirdStageBottomPos = this.rocket.rocket.localToWorld(new THREE.Vector3(0, 5, 0));
-                const thirdStageFire = this.particleSystem.createEngineFlame(
-                    thirdStageBottomPos, 
-                    1.2,
-                    0x66ccff // 更亮的蓝色
-                );
-                this.flames = [thirdStageFire];
+                    // 创建三级火箭引擎火焰（较小的火焰）
+                    this.createThirdStageFlame();
+                });
                 break;
 
             case 6: // 进入轨道
                 // 部署卫星
-                this.rocket.deployPayload();
-                // 最终可以添加一些微型推进器的小火焰效果
-                const smallThrusterPos = this.rocket.rocket.localToWorld(new THREE.Vector3(0, 10, 0));
-                const smallThrusters = this.particleSystem.createEngineFlame(smallThrusterPos, 0.5);
-                this.flames = [smallThrusters]; // 小型推进器火焰
+                this.rocket.deployPayload().then(() => {
+                    // 清除现有火焰
+                    this.clearEngineFlames();
+
+                    // 最终可以添加一些微型推进器的小火焰效果
+                    this.createPayloadThrusters();
+                });
                 break;
         }
 
@@ -264,7 +289,77 @@ class StageManager {
         this.currentStage = newStage;
     }
 
-    // 添加一个方法来清除现有的引擎火焰
+    // 创建一级火箭的9个引擎火焰
+    createFirstStageFlames() {
+        const bottomPos = this.rocket.getFirstStageBottomPosition();
+
+        // 中央引擎
+        const mainFlame = this.particleSystem.createEngineFlame(
+            new THREE.Vector3(bottomPos.x, bottomPos.y, bottomPos.z),
+            2,
+            0xff5500 // 橙红色火焰
+        );
+        this.flames.push(mainFlame);
+
+        // 外围8个引擎
+        for (let i = 0; i < 8; i++) {
+            const angle = (i / 8) * Math.PI * 2;
+            const distance = 1.8;
+            const flamePos = new THREE.Vector3(
+                bottomPos.x + Math.cos(angle) * distance,
+                bottomPos.y,
+                bottomPos.z + Math.sin(angle) * distance
+            );
+
+            const flame = this.particleSystem.createEngineFlame(
+                flamePos,
+                1.5,
+                0xff5500
+            );
+            this.flames.push(flame);
+        }
+    }
+
+    // 创建二级火箭的单个引擎火焰
+    createSecondStageFlame() {
+        const enginePos = this.rocket.getSecondStageBottomPosition();
+
+        // 二级火箭使用更蓝的火焰（更高效燃料）
+        const secondStageFire = this.particleSystem.createEngineFlame(
+            enginePos,
+            2.5,
+            0x00aaff // 蓝色调火焰
+        );
+        this.flames = [secondStageFire]; // 新的火焰数组（只有一个火焰）
+    }
+
+    // 创建三级火箭的引擎火焰
+    createThirdStageFlame() {
+        const enginePos = this.rocket.getThirdStageBottomPosition();
+
+        // 三级火箭使用白蓝色火焰（最高效燃料）
+        const thirdStageFire = this.particleSystem.createEngineFlame(
+            enginePos,
+            1.2,
+            0x66ccff // 浅蓝色火焰
+        );
+        this.flames = [thirdStageFire]; // 新的火焰数组
+    }
+
+    // 创建有效载荷/卫星的小型推进器
+    createPayloadThrusters() {
+        const payloadPos = this.rocket.getPayloadPosition();
+
+        // 卫星姿态调整推进器（非常小）
+        const smallThrusters = this.particleSystem.createEngineFlame(
+            payloadPos,
+            0.5,
+            0xaaddff // 非常浅的蓝色
+        );
+        this.flames = [smallThrusters]; // 新的火焰数组
+    }
+
+    // 清除所有引擎火焰
     clearEngineFlames() {
         if (this.flames.length > 0) {
             this.flames.forEach(flame => {
