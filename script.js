@@ -32,7 +32,7 @@ class RocketLaunchApp {
 
         // 环境状态
         this.scrollProgress = 0;
-        this.atmosphereHeight = 100; // 假设100km是大气层高度
+        this.atmosphereHeight = 200; // 假设100km是大气层高度
 
         this.cameraMode = "normal"; // 默认相机模式
         this.eventTimeouts = {}; // 存储事件超时处理
@@ -40,7 +40,7 @@ class RocketLaunchApp {
         // 添加发射状态控制
         this.isLaunching = false;
         this.autoScrollTween = null;
-        this.missionDuration = 30; // 减少总任务时间至60秒（原来是120秒）
+        this.missionDuration = 60; // 减少总任务时间至60秒
     }
 
     init() {
@@ -88,7 +88,6 @@ class RocketLaunchApp {
         this.stageManager = new StageManager(this.scene, this.rocket, this.particleSystem);
 
         this.createCameraTrail();
-
 
         // 添加全局错误处理
         window.addEventListener('error', (event) => {
@@ -140,7 +139,7 @@ class RocketLaunchApp {
         });
 
         const starsVertices = [];
-        for (let i = 0; i < 2000; i++) {
+        for (let i = 0; i < 3000; i++) {
             const x = (Math.random() - 0.5) * 2000;
             const y = (Math.random() - 0.5) * 2000;
             const z = (Math.random() - 0.5) * 2000;
@@ -163,7 +162,7 @@ class RocketLaunchApp {
         });
 
         this.earth = new THREE.Mesh(earthGeometry, earthMaterial);
-        this.earth.position.y = -510; // 地球半径 + 一些距离，确保地面正好是地球的"顶部"
+        this.earth.position.y = -510;
         this.scene.add(this.earth);
 
         // 添加云层
@@ -194,11 +193,11 @@ class RocketLaunchApp {
 
     createLaunchPad() {
         // 创建发射台基座
-        const baseGeometry = new THREE.BoxGeometry(20, 1, 20);
+        const baseGeometry = new THREE.BoxGeometry(30, 1, 30);
         const baseMaterial = new THREE.MeshStandardMaterial({
-            color: 0x555555,
-            roughness: 0.8,
-            metalness: 0.2
+            color: 0x111111,
+            roughness: 0.8, // 粗糙度
+            metalness: 0.2 // 金属感
         });
 
         const base = new THREE.Mesh(baseGeometry, baseMaterial);
@@ -209,14 +208,14 @@ class RocketLaunchApp {
         // 创建发射支架
         const supportGeometry = new THREE.CylinderGeometry(0.3, 0.5, 10, 8);
         const supportMaterial = new THREE.MeshStandardMaterial({
-            color: 0x777777,
+            color: 0x000000,
             roughness: 0.6,
             metalness: 0.4
         });
 
         // 添加四个支架
-        for (let i = 0; i < 4; i++) {
-            const angle = (i / 4) * Math.PI * 2;
+        for (let i = 0; i < 3; i++) {
+            const angle = (i / 3) * Math.PI * 2;
             const support = new THREE.Mesh(supportGeometry, supportMaterial);
 
             support.position.set(
@@ -227,20 +226,6 @@ class RocketLaunchApp {
 
             support.castShadow = true;
             this.scene.add(support);
-        }
-
-        // 添加横向支撑
-        const crossSupportGeometry = new THREE.BoxGeometry(8, 0.5, 0.5);
-
-        for (let i = 0; i < 4; i++) {
-            const angle = (i / 4) * Math.PI * 2 + Math.PI / 4;
-            const crossSupport = new THREE.Mesh(crossSupportGeometry, supportMaterial);
-
-            crossSupport.position.set(0, 7, 0); // 支架顶部
-            crossSupport.rotation.y = angle;
-            crossSupport.castShadow = true;
-
-            this.scene.add(crossSupport);
         }
     }
 
@@ -617,7 +602,7 @@ class RocketLaunchApp {
             x: targetLookAt.x,
             y: targetLookAt.y,
             z: targetLookAt.z,
-            duration: duration * 0.8, // 视点略快于位置
+            duration: duration * 0.9, // 视点略快于位置
             ease: "power1.out",
             onUpdate: () => {
                 this.camera.lookAt(this.cameraTarget);
@@ -685,7 +670,7 @@ class RocketLaunchApp {
 
         // 更新星空旋转（随滚动进度）
         if (this.stars) {
-            this.stars.rotation.y += 0.0001;
+            this.stars.rotation.y += 0.0005;
             this.stars.rotation.z = this.scrollProgress * 0.2;
         }
 
@@ -1048,7 +1033,6 @@ class RocketLaunchApp {
 
         // 设置初始位置
         const orbitRadius = 520;
-        const inclination = Math.PI * 0.1;
 
         // 在地球上方显眼的位置
         satellite.position.set(

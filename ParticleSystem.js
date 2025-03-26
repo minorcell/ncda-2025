@@ -8,7 +8,7 @@ class ParticleSystem {
 
     createEngineFlame(position, size = 1, color = 0xff6600) {
         // 创建火箭引擎火焰粒子系统
-        const flameGeometry = new THREE.ConeGeometry(size * 0.5, size * 2, 20);
+        const flameGeometry = new THREE.ConeGeometry(size * 0.5, size * 2, 30);
         const flameMaterial = new THREE.MeshBasicMaterial({
             color: color, // 使用传入的颜色
             transparent: true,

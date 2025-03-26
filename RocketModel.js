@@ -15,9 +15,6 @@ class RocketModel {
 
         this.createRocket();
         this.scene.add(this.rocket);
-
-        // 添加整体轮廓效果
-        this.addOutlineGlow();
     }
 
     createRocket() {
@@ -325,13 +322,6 @@ class RocketModel {
         fairingShape.lineTo(0, fairingHeight); // 圆锥体顶点
         fairingShape.lineTo(0, 0); // 回到底部中心
 
-        // 使用旋转挤压创建3D形状
-        const extrudeSettings = {
-            steps: 1,
-            depth: 0.1,
-            bevelEnabled: false
-        };
-
         // 左右两瓣整流罩的材质
         const fairingMaterial = new THREE.MeshStandardMaterial({
             color: 0xeeeeee,
@@ -424,22 +414,6 @@ class RocketModel {
         }
     }
 
-    // 添加整体轮廓发光效果
-    addOutlineGlow() {
-        // 创建一个稍大的半透明材质包裹火箭
-        const glowGeometry = new THREE.CylinderGeometry(3, 3.5, 40, 24);
-        const glowMaterial = new THREE.MeshBasicMaterial({
-            color: 0x88ccff,
-            transparent: true,
-            opacity: 0.15,
-            side: THREE.BackSide
-        });
-
-        const glowMesh = new THREE.Mesh(glowGeometry, glowMaterial);
-        glowMesh.position.y = 0; // 位于火箭中心位置
-        this.rocket.add(glowMesh);
-    }
-
     // 分离一级火箭
     separateFirstStage() {
         return new Promise(resolve => {
@@ -519,8 +493,8 @@ class RocketModel {
             // 左右整流罩分离动画
             if (this.leftFairing) {
                 gsap.to(this.leftFairing.position, {
-                    x: -5,
-                    z: -1,
+                    x: 5,
+                    z: 1,
                     duration: 2,
                     ease: "power2.out"
                 });
@@ -535,8 +509,8 @@ class RocketModel {
 
             if (this.rightFairing) {
                 gsap.to(this.rightFairing.position, {
-                    x: 5,
-                    z: 1,
+                    x: -5,
+                    z: -1,
                     duration: 2,
                     ease: "power2.out"
                 });
