@@ -1,0 +1,13 @@
+/* 
+* fonts.css 专用于定义字体 
+*/
+
+@font-face {
+    font-family: hkjt;
+    src: url('../assets/fonts/HKJT.ttf');
+}
+
+@font-face {
+    font-family: qtbfsxt;
+    src: url('../assets/fonts/QTBFSXT.ttf');
+}
