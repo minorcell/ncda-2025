@@ -4,84 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D 火箭发射展示</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>赴九天 问苍穹｜中国载人航天</title>
+    <link rel="stylesheet" href="./styles/reset.css">
+    <link rel="stylesheet" href="./styles/index.css">
 </head>
 
 <body>
-    <div id="app">
-        <canvas id="rocket-canvas"></canvas>
-
-        <div class="stage-info">
-            <div class="progress-bar">
-                <div class="progress"></div>
-            </div>
-            <h2 id="stage-title">地面准备阶段</h2>
-            <p id="stage-description">火箭正在发射台准备发射</p>
-
-            <div class="data-panel">
-                <div class="data-item">
-                    <span class="label">高度</span>
-                    <span id="altitude" class="value">0 km</span>
-                </div>
-                <div class="data-item">
-                    <span class="label">速度</span>
-                    <span id="velocity" class="value">0 km/h</span>
-                </div>
-                <div class="data-item">
-                    <span class="label">时间</span>
-                    <span id="mission-time" class="value">T-00:00</span>
-                </div>
-            </div>
+    <div class="container">
+        <div class="page">
+            <h1 class="slogan">赴九天 问苍穹</h1>
+            <h3 class="title">中国载人航天</h3>
+            <div class="top-left-light"></div>
+            <div class="bottom-right-light"></div>
         </div>
-
-        <!-- 发射按钮 -->
-        <div class="launch-control">
-            <button id="launch-button">发射火箭</button>
-            <div class="countdown" id="countdown"></div>
+        <div class="page">
+            <h1 style="color: white;">Page Two</h1>
         </div>
-
-        <div class="instructions">
-            <p>点击发射按钮开始火箭发射过程</p>
+        <div class="page">
+            <h1 style="color: white;">Page Three</h1>
+        </div>
+        <div class="page">
+            <h1 style="color: white;">Page Four</h1>
+        </div>
+        <div class="page">
+            <h1 style="color: white;">Page Five</h1>
         </div>
     </div>
-
-    <!-- 通过 CDN 引入库 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.9.1/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.9.1/dist/ScrollTrigger.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-
-    <!-- 项目脚本 -->
-    <script src="ParticleSystem.js"></script>
-    <script src="RocketModel.js"></script>
-    <script src="StageManager.js"></script>
-    <script src="script.js"></script>
-
-    <script>
-        window.onerror = function (message, source, lineno, colno, error) {
-            document.body.innerHTML += `<div style="color:red;position:fixed;bottom:0;left:0;right:0;background:black;padding:10px;z-index:9999">
-                错误: ${message}<br>
-                来源: ${source}<br>
-                行号: ${lineno}<br>
-            </div>`;
-            return true;
-        };
-
-        // 检查WebGL支持
-        window.addEventListener('DOMContentLoaded', function () {
-            try {
-                const canvas = document.createElement('canvas');
-                const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-                if (!gl) {
-                    document.body.innerHTML += '<div style="color:red;position:fixed;top:0;left:0;right:0;background:black;padding:10px;z-index:9999">您的浏览器不支持WebGL，请尝试使用更现代的浏览器如Chrome、Firefox或Edge。</div>';
-                }
-            } catch (e) {
-                document.body.innerHTML += `<div style="color:red;position:fixed;top:0;left:0;right:0;background:black;padding:10px;z-index:9999">WebGL初始化错误: ${e.message}</div>`;
-            }
-        });
-    </script>
 </body>
 
 </html>
