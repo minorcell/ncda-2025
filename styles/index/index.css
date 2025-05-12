@@ -28,6 +28,8 @@ body {
     font-family: hkjt;
     font-weight: 400;
     font-size: 9rem;
+    -webkit-animation: tracking-in-expand-fwd-bottom 1s ease-in-out both;
+    animation: tracking-in-expand-fwd-bottom 1s ease-in-out both;
 }
 
 .page:nth-child(1) .title {
@@ -37,6 +39,8 @@ body {
     font-family: qtbfsxt;
     font-size: 2.5rem;
     font-weight: 200;
+    -webkit-animation: delay-show 2s ease-in-out both;
+    animation: delay-show 2s ease-in-out both;
 }
 
 .page:nth-child(1) .top-left-light {
@@ -51,6 +55,7 @@ body {
     -webkit-animation: vibrate-1 7s ease-out infinite alternate forwards;
     animation: vibrate-1 7s ease-out infinite alternate forwards;
 }
+
 
 .bottom-right-light {
     position: absolute;
