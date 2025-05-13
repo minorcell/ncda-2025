@@ -30,6 +30,7 @@ body {
     font-size: 9rem;
     -webkit-animation: tracking-in-expand-fwd-bottom 1s ease-in-out both;
     animation: tracking-in-expand-fwd-bottom 1s ease-in-out both;
+    z-index: 1;
 }
 
 .page:nth-child(1) .title {
@@ -41,6 +42,7 @@ body {
     font-weight: 200;
     -webkit-animation: delay-show 2s ease-in-out both;
     animation: delay-show 2s ease-in-out both;
+    z-index: 1;
 }
 
 .page:nth-child(1) .top-left-light {
@@ -51,7 +53,7 @@ body {
     height: 140vh;
     background: radial-gradient(circle at center, rgb(77, 22, 154) 0%, rgba(77, 22, 154, 0.8) 50%, rgba(77, 22, 154, 0) 70%);
     filter: blur(200px);
-    opacity: 0.6;
+    opacity: 0.4;
     -webkit-animation: vibrate-1 7s ease-out infinite alternate forwards;
     animation: vibrate-1 7s ease-out infinite alternate forwards;
 }
@@ -68,4 +70,46 @@ body {
     opacity: 0.6;
     -webkit-animation: vibrate-1 7s ease-out infinite alternate forwards;
     animation: vibrate-1 7s ease-out infinite alternate forwards;
+}
+
+.grid-overlay {
+    width: 75vw;
+    height: 75vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+
+    background-image:
+        repeating-linear-gradient(to right,
+            rgba(255, 255, 255, 0.2),
+            rgba(255, 255, 255, 0.2) 2px,
+            transparent 1.5px,
+            transparent 100px),
+        repeating-linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.2),
+            rgba(255, 255, 255, 0.2) 2px,
+            transparent 1.5px,
+            transparent 100px);
+
+    mask-image: radial-gradient(ellipse at center,
+            rgb(255, 255, 255) 0%,
+            rgb(255, 255, 255) 20%,
+            rgba(255, 255, 255, 0.9) 30%,
+            rgba(255, 255, 255, 0.7) 40%,
+            rgba(255, 255, 255, 0.5) 50%,
+            rgba(255, 255, 255, 0.3) 60%,
+            rgba(255, 255, 255, 0.1) 70%,
+            rgba(255, 255, 255, 0) 80%);
+
+    -webkit-mask-image: radial-gradient(ellipse at center,
+            rgb(255, 255, 255) 0%,
+            rgb(255, 255, 255) 20%,
+            rgba(255, 255, 255, 0.9) 30%,
+            rgba(255, 255, 255, 0.7) 40%,
+            rgba(255, 255, 255, 0.5) 50%,
+            rgba(255, 255, 255, 0.3) 60%,
+            rgba(255, 255, 255, 0.1) 70%,
+            rgba(255, 255, 255, 0) 80%);
 }
