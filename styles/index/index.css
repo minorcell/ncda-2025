@@ -79,20 +79,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    pointer-events: none;
-
-    background-image:
-        repeating-linear-gradient(to right,
-            rgba(255, 255, 255, 0.2),
-            rgba(255, 255, 255, 0.2) 2px,
-            transparent 1.5px,
-            transparent 100px),
-        repeating-linear-gradient(to bottom,
-            rgba(255, 255, 255, 0.2),
-            rgba(255, 255, 255, 0.2) 2px,
-            transparent 1.5px,
-            transparent 100px);
-
+    pointer-events: all;
     mask-image: radial-gradient(ellipse at center,
             rgb(255, 255, 255) 0%,
             rgb(255, 255, 255) 20%,
@@ -102,7 +89,6 @@ body {
             rgba(255, 255, 255, 0.3) 60%,
             rgba(255, 255, 255, 0.1) 70%,
             rgba(255, 255, 255, 0) 80%);
-
     -webkit-mask-image: radial-gradient(ellipse at center,
             rgb(255, 255, 255) 0%,
             rgb(255, 255, 255) 20%,
@@ -112,4 +98,15 @@ body {
             rgba(255, 255, 255, 0.3) 60%,
             rgba(255, 255, 255, 0.1) 70%,
             rgba(255, 255, 255, 0) 80%);
+}
+
+.grid-overlay line {
+    stroke: rgba(255, 255, 255, 0.2);
+    stroke-width: 1;
+    transition: stroke 0.3s ease;
+}
+
+.grid-overlay line:hover {
+    stroke: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
 }
