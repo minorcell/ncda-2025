@@ -14,10 +14,10 @@ body {
     scroll-snap-align: start;
     width: 100vw;
     height: 100vh;
+    position: relative;
 }
 
 .page:nth-child(1) {
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;

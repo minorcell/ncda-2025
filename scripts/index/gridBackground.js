@@ -105,9 +105,13 @@ class InteractiveGrid {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+
+
+function init() {
     const svgElement = document.querySelector('.grid-overlay');
     if (svgElement) {
         new InteractiveGrid(svgElement);
     }
-});
+}
+
+document.addEventListener('DOMContentLoaded', init);
