@@ -101,7 +101,6 @@ class StarBackground {
 
 function init() {
     const pages = document.querySelectorAll('.page');
-    console.log(pages);
 
     for (let i = 0; i < Math.min(3, pages.length); i++) {
         new StarBackground(pages[i]);

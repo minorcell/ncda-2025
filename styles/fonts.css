@@ -11,3 +11,8 @@
     font-family: qtbfsxt;
     src: url('../assets/fonts/QTBFSXT.ttf');
 }
+
+@font-face {
+    font-family: fys;
+    src: url('../assets/fonts/FYS.ttf');
+}
