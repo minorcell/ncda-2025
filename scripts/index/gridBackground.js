@@ -1,5 +1,5 @@
 const config = {
-    gridSize: 8,
+    gridSize: 5,
     cellSize: 80,
     mouseInfluenceRadius: 300,
 };
@@ -18,7 +18,7 @@ class InteractiveGrid {
         const aspectRatio = rect.width / rect.height;
         this.svg.setAttribute('viewBox', `0 0 ${1000 * aspectRatio} 1000`);
 
-        const segments = 15;
+        const segments = 50;
 
         for (let i = 0; i <= config.gridSize; i++) {
             const y = (i * 1000) / config.gridSize;
