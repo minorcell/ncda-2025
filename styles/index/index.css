@@ -76,9 +76,8 @@ body {
     font-family: hkjt;
     font-weight: 400;
     font-size: 9rem;
-    -webkit-animation: tracking-in-expand-fwd-bottom 1s ease-in-out both;
-    animation: tracking-in-expand-fwd-bottom 1s ease-in-out both;
-    z-index: 1;
+    -webkit-animation: fade-in-fwd 1s ease-in-out both;
+    animation: fade-in-fwd 2s ease-in-out both;
 }
 
 .page:nth-child(1) .title {
@@ -90,7 +89,6 @@ body {
     font-weight: 200;
     -webkit-animation: delay-show 2s ease-in-out both;
     animation: delay-show 2s ease-in-out both;
-    z-index: 1;
 }
 
 .page:nth-child(1) .top-left-light {
@@ -157,4 +155,140 @@ body {
 .grid-overlay line:hover {
     stroke: rgba(255, 255, 255, 0.5);
     cursor: pointer;
+}
+
+.page:nth-child(2) {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page:nth-child(2) .rocket-line-draft {
+    height: 85vh;
+    position: absolute;
+    left: 20vw;
+    top: 15vh;
+    will-change: transform, opacity;
+    z-index: 2;
+}
+
+.page:nth-child(2) .intro {
+    transform: translateY(25vh);
+    margin-left: 30vw;
+    color: rgba(255, 255, 255, 1);
+    width: 50rem;
+    height: 25rem;
+    position: relative;
+    border-radius: 1rem;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: start;
+    padding: 0 5rem;
+}
+
+.page:nth-child(2) .intro::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    background: linear-gradient(rgba(187, 186, 192, 0.1) 50%, rgba(127, 48, 150, 0.7) 100%);
+    border-radius: inherit;
+    z-index: -1;
+}
+
+.page:nth-child(2) .intro::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    background: inherit;
+    border-radius: calc(1rem - 2px);
+    z-index: -1
+}
+
+.page:nth-child(2) .intro .title {
+    transform: translateX(-2rem);
+    font-size: 4rem;
+    font-weight: 200;
+    font-family: 'fys';
+}
+
+.page:nth-child(2) .intro .en {
+    font-size: 2rem;
+    font-weight: 200;
+    font-family: serif;
+}
+
+.page:nth-child(2) .intro .detail {
+    font-size: 1.5rem;
+    font-weight: 200;
+    font-family: 'fys';
+}
+
+.page:nth-child(2) .intro .link-container {
+    width: 100%;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: end;
+}
+
+.intro .link-container a {
+    border-radius: 4rem;
+    font-size: 1.5rem;
+    font-family: "fys";
+    font-weight: 200;
+    display: flex;
+    width: 13rem;
+    height: 3.5rem;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 1);
+    border: 0.1rem solid transparent;
+    background:
+        linear-gradient(-75deg,
+            rgba(70, 48, 191),
+            rgba(0, 0, 0, 0.1),
+            rgba(127, 48, 150)) border-box,
+        linear-gradient(#1a1a1a, #1a1a1a) padding-box;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: 0 0 15rem rgb(90, 73, 93);
+}
+
+.intro .link-container a svg {
+    margin-left: 1rem;
+    width: 2rem;
+    height: 2rem;
+    transform: rotate(-90deg);
+}
+
+.meteor {
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%);
+    transform-origin: left;
+    animation: meteor 1.2s ease-in forwards;
+    z-index: 10;
+}
+
+.meteor::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4%;
+    height: 100px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 10px #fff;
 }
