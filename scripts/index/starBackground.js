@@ -28,7 +28,7 @@ class StarBackground {
     }
 
     createStars() {
-        const count = 250;
+        const count = 1000;
         const positions = new Float32Array(count * 3);
         const phases = new Float32Array(count);
         const sizes = new Float32Array(count);
@@ -38,7 +38,7 @@ class StarBackground {
             positions[3 * i + 1] = (Math.random() - 0.5) * 40;
             positions[3 * i + 2] = (Math.random() - 0.5) * 40;
             phases[i] = Math.random() * Math.PI * 2;
-            sizes[i] = Math.random() * 0.08 + 0.02;
+            sizes[i] = Math.random() * 0.08 + 0.08;
         }
 
         const geometry = new THREE.BufferGeometry();

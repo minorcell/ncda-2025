@@ -1,8 +1,7 @@
 const config = {
-    gridSize: 10,
-    cellSize: 40,
-    mouseInfluenceRadius: 400,
-    maxDisplacement: 10,
+    gridSize: 8,
+    cellSize: 80,
+    mouseInfluenceRadius: 300,
 };
 
 class InteractiveGrid {
@@ -19,28 +18,40 @@ class InteractiveGrid {
         const aspectRatio = rect.width / rect.height;
         this.svg.setAttribute('viewBox', `0 0 ${1000 * aspectRatio} 1000`);
 
+        const segments = 15;
+
         for (let i = 0; i <= config.gridSize; i++) {
             const y = (i * 1000) / config.gridSize;
-            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-            line.setAttribute("x1", "0");
-            line.setAttribute("y1", y.toString());
-            line.setAttribute("x2", (1000 * aspectRatio).toString());
-            line.setAttribute("y2", y.toString());
-            line.setAttribute("data-original-y", y);
-            this.svg.appendChild(line);
-            this.lines.push(line);
+            for (let j = 0; j < segments; j++) {
+                const x1 = (j * 1000 * aspectRatio) / segments;
+                const x2 = ((j + 1) * 1000 * aspectRatio) / segments;
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                line.setAttribute("x1", x1.toString());
+                line.setAttribute("y1", y.toString());
+                line.setAttribute("x2", x2.toString());
+                line.setAttribute("y2", y.toString());
+                line.setAttribute("data-original-y", y.toString());
+                line.setAttribute("data-center-x", ((x1 + x2) / 2).toString());
+                this.svg.appendChild(line);
+                this.lines.push(line);
+            }
         }
 
         for (let i = 0; i <= config.gridSize * aspectRatio; i++) {
             const x = (i * 1000 * aspectRatio) / (config.gridSize * aspectRatio);
-            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-            line.setAttribute("x1", x.toString());
-            line.setAttribute("y1", "0");
-            line.setAttribute("x2", x.toString());
-            line.setAttribute("y2", "1000");
-            line.setAttribute("data-original-x", x);
-            this.svg.appendChild(line);
-            this.lines.push(line);
+            for (let j = 0; j < segments; j++) {
+                const y1 = (j * 1000) / segments;
+                const y2 = ((j + 1) * 1000) / segments;
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                line.setAttribute("x1", x.toString());
+                line.setAttribute("y1", y1.toString());
+                line.setAttribute("x2", x.toString());
+                line.setAttribute("y2", y2.toString());
+                line.setAttribute("data-original-x", x.toString());
+                line.setAttribute("data-center-y", ((y1 + y2) / 2).toString());
+                this.svg.appendChild(line);
+                this.lines.push(line);
+            }
         }
     }
 
@@ -65,26 +76,39 @@ class InteractiveGrid {
     }
 
     updateGrid() {
+        const smoothstep = (min, max, value) => {
+            const x = Math.max(0, Math.min(1, (value - min) / (max - min)));
+            return x * x * (3 - 2 * x);
+        };
+
         this.lines.forEach(line => {
+            let distance;
             if (line.hasAttribute('data-original-y')) {
-                const originalY = parseFloat(line.getAttribute('data-original-y'));
-                const distance = Math.abs(originalY - this.mousePos.y);
-
-                if (distance < config.mouseInfluenceRadius) {
-                    const displacement = (1 - distance / config.mouseInfluenceRadius) * config.maxDisplacement;
-                    const newY = originalY + Math.sin((this.mousePos.x / 1000) * Math.PI * 2) * displacement;
-                    line.setAttribute('y1', newY);
-                    line.setAttribute('y2', newY);
-                }
+                const centerX = parseFloat(line.getAttribute('data-center-x'));
+                const centerY = parseFloat(line.getAttribute('data-original-y'));
+                distance = Math.sqrt(Math.pow(centerX - this.mousePos.x, 2) + Math.pow(centerY - this.mousePos.y, 2));
             } else {
-                const originalX = parseFloat(line.getAttribute('data-original-x'));
-                const distance = Math.abs(originalX - this.mousePos.x);
+                const centerX = parseFloat(line.getAttribute('data-original-x'));
+                const centerY = parseFloat(line.getAttribute('data-center-y'));
+                distance = Math.sqrt(Math.pow(centerX - this.mousePos.x, 2) + Math.pow(centerY - this.mousePos.y, 2));
+            }
 
-                if (distance < config.mouseInfluenceRadius) {
-                    const displacement = (1 - distance / config.mouseInfluenceRadius) * config.maxDisplacement;
-                    const newX = originalX + Math.sin((this.mousePos.y / 1000) * Math.PI * 2) * displacement;
-                    line.setAttribute('x1', newX);
-                    line.setAttribute('x2', newX);
+            if (distance < config.mouseInfluenceRadius) {
+                const intensity = smoothstep(0, config.mouseInfluenceRadius, config.mouseInfluenceRadius - distance);
+                const glowStrength = intensity * 10;
+                line.style.filter = `drop-shadow(0 0 ${glowStrength}px rgba(255, 255, 255, 0.9))`;
+                line.style.stroke = `rgba(255, 255, 255, ${intensity})`;
+                line.setAttribute('data-intensity', intensity);
+            } else {
+                const currentIntensity = parseFloat(line.getAttribute('data-intensity') || 0);
+                const newIntensity = Math.max(0, currentIntensity - 0.05);
+                line.setAttribute('data-intensity', newIntensity);
+                const glowStrength = newIntensity * 10;
+                line.style.filter = `drop-shadow(0 0 ${glowStrength}px rgba(255, 255, 255, 0.9))`;
+                line.style.stroke = `rgba(255, 255, 255, ${newIntensity})`;
+                if (newIntensity <= 0) {
+                    line.style.filter = 'none';
+                    line.style.stroke = 'rgba(255, 255, 255, 0.1)';
                 }
             }
         });
@@ -92,20 +116,11 @@ class InteractiveGrid {
 
     resetGrid() {
         this.lines.forEach(line => {
-            if (line.hasAttribute('data-original-y')) {
-                const originalY = line.getAttribute('data-original-y');
-                line.setAttribute('y1', originalY);
-                line.setAttribute('y2', originalY);
-            } else {
-                const originalX = line.getAttribute('data-original-x');
-                line.setAttribute('x1', originalX);
-                line.setAttribute('x2', originalX);
-            }
+            line.style.filter = 'none';
+            line.style.stroke = 'rgba(255, 255, 255, 0.1)';
         });
     }
 }
-
-
 
 function init() {
     const svgElement = document.querySelector('.grid-overlay');
