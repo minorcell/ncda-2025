@@ -38,7 +38,7 @@ class StarBackground {
             positions[3 * i + 1] = (Math.random() - 0.5) * 40;
             positions[3 * i + 2] = (Math.random() - 0.5) * 40;
             phases[i] = Math.random() * Math.PI * 2;
-            sizes[i] = Math.random() * 0.08 + 0.08;
+            sizes[i] = Math.random() * 0.08 + 0.04;
         }
 
         const geometry = new THREE.BufferGeometry();
@@ -84,9 +84,9 @@ class StarBackground {
 
     animate = () => {
         requestAnimationFrame(this.animate);
-        this.elapsed += 0.016;
-        this.stars.rotation.x += 0.0002;
-        this.stars.rotation.y += 0.0002;
+        this.elapsed += 0.008; // 减慢闪烁速度
+        this.stars.rotation.x += 0.00005; // 减慢X轴旋转速度
+        this.stars.rotation.y += 0.00005; // 减慢Y轴旋转速度
         this.stars.material.uniforms.elapsed.value = this.elapsed;
         this.renderer.render(this.scene, this.camera);
     }
