@@ -97,9 +97,9 @@ function makeGradientFollowMouse() {
         intro.style.background = `
         linear-gradient(
           ${deg.toFixed(1)}deg,
-          rgba(127,48,150,0.3) 0%,
+          rgba(127,48,150,0.2) 0%,
           rgba(70,48,191,0.1) 10%,
-          rgba(0,0,0,0.3) 100%
+          rgba(0,0,0,0.2) 100%
         )
       `;
     }

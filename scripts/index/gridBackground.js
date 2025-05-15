@@ -1,5 +1,5 @@
 const config = {
-    gridSize: 5,
+    gridSize: 5.5,
     cellSize: 80,
     mouseInfluenceRadius: 300,
 };
@@ -108,7 +108,7 @@ class InteractiveGrid {
                 line.style.stroke = `rgba(255, 255, 255, ${newIntensity})`;
                 if (newIntensity <= 0) {
                     line.style.filter = 'none';
-                    line.style.stroke = 'rgba(255, 255, 255, 0.1)';
+                    line.style.stroke = 'rgba(255, 255, 255, 0.15)';
                 }
             }
         });
@@ -117,7 +117,7 @@ class InteractiveGrid {
     resetGrid() {
         this.lines.forEach(line => {
             line.style.filter = 'none';
-            line.style.stroke = 'rgba(255, 255, 255, 0.1)';
+            line.style.stroke = 'rgba(255, 255, 255, 0.15)';
         });
     }
 }

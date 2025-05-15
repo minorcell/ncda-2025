@@ -85,7 +85,7 @@ body {
     transform: translate(22vw, 14vh);
     color: rgba(255, 255, 255, 1);
     font-family: qtbfsxt;
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 200;
     -webkit-animation: delay-show 2s ease-in-out both;
     animation: delay-show 2s ease-in-out both;
@@ -97,9 +97,8 @@ body {
     left: -70vh;
     width: 140vh;
     height: 140vh;
-    background: radial-gradient(circle at center, rgb(77, 22, 154) 0%, rgba(77, 22, 154, 0.8) 50%, rgba(77, 22, 154, 0) 70%);
-    filter: blur(200px);
-    opacity: 0.4;
+    background: rgba(70, 48, 191, 0.2);
+    filter: blur(512.7999877929688px);
     -webkit-animation: vibrate-1 7s ease-out infinite alternate forwards;
     animation: vibrate-1 7s ease-out infinite alternate forwards;
 }
@@ -111,8 +110,8 @@ body {
     right: -50vh;
     width: 140vh;
     height: 140vh;
-    background: radial-gradient(circle at center, rgb(60, 22, 71) 0%, rgba(60, 22, 71, 0.8) 50%, rgba(60, 22, 71, 0) 70%);
-    filter: blur(200px);
+    background: linear-gradient(180deg, rgba(127, 48, 150, 0.5) 0%, rgba(41, 15, 48, 0.5) 100%);
+    filter: blur(1091.199951171875px);
     opacity: 0.6;
     -webkit-animation: vibrate-1 7s ease-out infinite alternate forwards;
     animation: vibrate-1 7s ease-out infinite alternate forwards;
@@ -232,6 +231,8 @@ body {
     background-origin: border-box;
     background-clip: padding-box, border-box;
     box-shadow: 0 0 15rem rgb(90, 73, 93);
+    -webkit-animation: pulsate-bck 2s ease-in-out infinite both;
+    animation: pulsate-bck 2s ease-in-out infinite both;
 }
 
 .intro .link-container a svg {
@@ -262,4 +263,118 @@ body {
     border-radius: 50%;
     background: #fff;
     box-shadow: 0 0 10px #fff;
+}
+
+.page:nth-child(3) {
+    position: relative;
+}
+
+.page:nth-child(3) .bottom-left-light {
+    position: absolute;
+    bottom: -60vh;
+    left: -70vh;
+    width: 140vh;
+    height: 140vh;
+    background: linear-gradient(135deg, #803096 0%, #6730A8 44%, #4630BF 100%);
+    opacity: 0.45;
+    filter: blur(464.3999938964844px);
+    -webkit-animation: vibrate-1 7s ease-out infinite alternate forwards;
+    animation: vibrate-1 7s ease-out infinite alternate forwards;
+}
+
+.page:nth-child(3) .intro {
+    position: absolute;
+    color: rgba(255, 255, 255, 1);
+    width: 40rem;
+    height: 25rem;
+    bottom: 4rem;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    justify-content: center;
+    font-family: "fys";
+    padding-left: 5rem;
+}
+
+
+.page:nth-child(3) .intro .title {
+    font-size: 3.5rem;
+    margin-bottom: 1.7rem;
+    transform: translate(-1.5rem);
+}
+
+.page:nth-child(3) .intro .en {
+    font-size: 2rem;
+    font-weight: 200;
+    font-family: serif;
+    margin-bottom: 1.5rem;
+}
+
+.page:nth-child(3) .intro .line {
+    width: 75%;
+    height: 0.2rem;
+    background: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(3) .milestone {
+    width: 50rem;
+    height: 27rem;
+    position: absolute;
+    top: 11rem;
+    right: 8rem;
+}
+
+.milestone-bg {
+    width: 50rem;
+    height: 27rem;
+    border-radius: 50%;
+    position: absolute;
+    z-index: -1;
+    box-shadow: 0 0 500px rgba(127, 48, 150, 0.7);
+}
+
+.milestone .rocket-launch {
+    width: 100%;
+    height: 100%;
+    background: url('./../../assets/images/index/RocketLaunch.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: scale(1.25) translate(0, -2rem);
+}
+
+.milestone .rocket-launch .content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 1.5rem;
+    width: 28rem;
+    height: 10rem;
+    position: absolute;
+    background: url('../../assets/images/index/WithOutBottomRight.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: rgba(255, 255, 255, 1);
+    bottom: -4rem;
+    left: 21rem;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.milestone .rocket-launch .content:hover {
+    opacity: 0.9;
+    transform: translate(0.5rem, 0.5rem);
+}
+
+.milestone .rocket-launch .content h2 {
+    margin-left: 4rem;
+    font-family: "fys";
+    font-size: 1.5rem;
+}
+
+.milestone .rocket-launch .content img {
+    position: absolute;
+    right: -2rem;
+    bottom: -2rem;
+    transform: scale(0.6);
 }
