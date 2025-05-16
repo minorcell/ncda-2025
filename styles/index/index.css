@@ -378,3 +378,70 @@ body {
     bottom: -2rem;
     transform: scale(0.6);
 }
+
+/* 第四页样式 */
+.page:nth-child(4) {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page:nth-child(4) .planet-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.page:nth-child(4) .planet-canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.page:nth-child(4) .content {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.page:nth-child(4) .content .title {
+    font-family: 'fys';
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.page:nth-child(4) .content .subtitle {
+    font-family: serif;
+    font-size: 2rem;
+    font-weight: 200;
+    margin-bottom: 1rem;
+}
+
+.page:nth-child(4) .content .description {
+    font-family: 'fys';
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.page:nth-child(4) .content .start-btn {
+    font-family: 'fys';
+    font-size: 1.2rem;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 2rem;
+    background: linear-gradient(90deg, #803096, #4630BF);
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.page:nth-child(4) .content .start-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(127, 48, 150, 0.5);
+}
