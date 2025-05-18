@@ -1,0 +1,217 @@
+html {
+  font-size: 62.5%;
+  /* 1rem = 10px */
+}
+
+/* 消除浏览器默认样式。 */
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: #000;
+  color: #fff;
+  font-size: 1.6rem;
+}
+
+.star {
+  width: 100%;
+  height: 23.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  position: relative;
+
+}
+
+.header {
+  width: 45rem;
+  height: 16rem;
+  background-color: #000;
+  /* background: linear-gradient(to top, #1a0f24 50%, #3c1846); */
+  background: radial-gradient(circle, #3c1846 -40%, #000000);
+  border-top: 0.1rem solid #FFFFFF;
+}
+
+.title {
+  width: 40rem;
+  height: 9rem;
+  font-family: 'fys';
+  font-weight: 400;
+  font-size: 6rem;
+  color: #FFFFFF;
+  line-height: 18rem;
+  letter-spacing: 0.4rem;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+  /* background: #000; */
+  background-clip: padding-box;
+  display: inline-block;
+  padding: 2.3rem 0rem;
+  margin-left: 3rem;
+}
+
+.subtitle {
+  width: 30rem;
+  height: 3.7rem;
+  font-family: 'fys';
+  font-weight: 400;
+  font-size: 1.8rem;
+  color: #FFFFFF;
+  line-height: 5rem;
+  letter-spacing: 0.4rem;
+  text-align: center;
+  font-style: normal;
+  text-transform: none;
+  margin-left: 8rem;
+}
+
+.timeline {
+  position: relative;
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 4rem 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  width: 0.2rem;
+  background-color: rgba(245, 245, 245, 0.6);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -0.1rem;
+}
+
+/* 第一个时间轴项目加深加粗线段 */
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 0.2rem;
+  /* 加粗线段 */
+  background-color: #FFFFFF;
+  /* 加深颜色 */
+  top: 17.5rem;
+  height: 3.5rem;
+  left: calc(50% - 0.2rem);
+  /* z-index: 1; */
+}
+
+/* 第一个时间轴项目添加文字 */
+.timeline::before {
+  position: absolute;
+  top: 4rem;
+  color: #FFFFFF;
+  font-size: 1.4rem;
+}
+
+.item-left {
+  padding: 4rem 6rem;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+  box-sizing: border-box;
+  left: 0;
+}
+
+.item-right {
+  padding: 4rem 6rem;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+  box-sizing: border-box;
+  left: 50%;
+}
+
+.content {
+  padding: 2rem 3rem;
+}
+
+.img {
+  width: 40rem;
+  height: 22.5rem;
+  box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem #FFFFFF;
+  border: 0.1rem solid;
+  border-image: linear-gradient(136deg, rgba(128, 48, 150, 1), rgba(255, 255, 255, 0), rgba(70, 48, 191, 1), rgba(255, 255, 255, 0)) 1 1;
+  position: relative;
+}
+
+.content-title {
+  font-family: 'fys';
+  margin-top: 0;
+  color: #FFFFFF;
+  text-shadow: 2px 2px 3px #000000;
+  font-weight: 400;
+  font-size: 5.5rem;
+  line-height: 8.9rem;
+  letter-spacing: 0.4rem;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+}
+
+.item-left:first-child .content-title {
+  position: absolute;
+  margin-top: -5.2rem;
+}
+
+/* 其他时间段的 content-title 位于图片下方 */
+.item:not(:first-child) .content-title {
+  position: static;
+  margin-top: 1rem;
+}
+
+/* 缩小除第一个 content-title 外，其他 content-title 与 content-desc 的间距 */
+.item:not(:first-child) .content-desc {
+  padding-top: 0rem;
+  margin-top: 0rem;
+}
+
+.content-desc {
+  margin-top: 3rem;
+  width: 40rem;
+  height: auto;
+  font-family: 'fys';
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: #FFFFFF;
+  line-height: 2.8rem;
+  letter-spacing: 0.1rem;
+  text-indent: 3rem;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+}
+
+.detail-button {
+  font-family: 'fys';
+  width: 9.3rem;
+  height: 2.8rem;
+  border-radius: 2.5rem;
+  border: 0.1rem solid;
+  border-color: linear-gradient(95deg, rgba(128, 48, 150, 0.8), rgba(255, 255, 255, 0.1), rgba(70, 48, 191, 1), rgba(255, 255, 255, 0.1)) 1 1;
+  margin-top: 1rem;
+  display: block;
+  color: #FFFFFF;
+  background-color: transparent;
+  margin-left: 31rem;
+  margin-right: 0;
+  box-shadow: 0 0 15rem rgb(90, 73, 93);
+}
+
+.item-left:first-child::after {
+  content: '发射第一颗人造地球卫星';
+  font-family: 'fys';
+  position: absolute;
+  left: calc(100% + 4rem);
+  top: 15.5rem;
+  transform: translateY(-50%);
+  color: #FFFFFF;
+  font-size: 2rem;
+  white-space: nowrap;
+  /* 文本不会自动换行  */
+}
