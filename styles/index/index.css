@@ -52,7 +52,7 @@ body {
     color: rgba(255, 255, 255, 1);
     font-family: "fys";
     font-weight: 400;
-    font-size: 2.4rem;
+    font-size: 2rem;
 }
 
 #logo {
@@ -76,7 +76,7 @@ body {
     color: rgba(255, 255, 255, 1);
     font-family: hkjt;
     font-weight: 400;
-    font-size: 12.8rem;
+    font-size: 12rem;
     -webkit-animation: fade-in-fwd 1s ease-in-out both;
     animation: fade-in-fwd 2s ease-in-out both;
 }
@@ -86,7 +86,7 @@ body {
     transform: translate(22vw, 14vh);
     color: rgba(255, 255, 255, 1);
     font-family: qtbfsxt;
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 200;
     -webkit-animation: delay-show 2s ease-in-out both;
     animation: delay-show 2s ease-in-out both;
