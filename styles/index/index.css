@@ -11,20 +11,21 @@ body {
     position: fixed;
     top: 0;
     left: 0;
+    overflow-x: hidden;
 }
 
 .header {
     position: fixed;
     width: 100vw;
-    height: 4rem;
+    height: 7.4rem;
     transform: translateY(0);
     transition: transform 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 100%);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    background: linear-gradient(rgba(0, 0, 0, 0.1) 100%, rgba(0, 0, 0, 0.7) 0%);
+    -webkit-backdrop-filter: blur(1rem);
+    backdrop-filter: blur(1rem);
     z-index: 10;
 }
 
@@ -32,7 +33,7 @@ body {
 .header-center,
 .header-right {
     height: 100%;
-    padding: 0.5rem;
+    padding: 1.25rem;
 }
 
 .header-left,
@@ -51,7 +52,7 @@ body {
     color: rgba(255, 255, 255, 1);
     font-family: "fys";
     font-weight: 400;
-    font-size: 1.05rem;
+    font-size: 2.4rem;
 }
 
 #logo {
@@ -75,7 +76,7 @@ body {
     color: rgba(255, 255, 255, 1);
     font-family: hkjt;
     font-weight: 400;
-    font-size: 9rem;
+    font-size: 12.8rem;
     -webkit-animation: fade-in-fwd 1s ease-in-out both;
     animation: fade-in-fwd 2s ease-in-out both;
 }
@@ -85,7 +86,7 @@ body {
     transform: translate(22vw, 14vh);
     color: rgba(255, 255, 255, 1);
     font-family: qtbfsxt;
-    font-size: 2rem;
+    font-size: 4rem;
     font-weight: 200;
     -webkit-animation: delay-show 2s ease-in-out both;
     animation: delay-show 2s ease-in-out both;
@@ -98,7 +99,7 @@ body {
     width: 140vh;
     height: 140vh;
     background: rgba(70, 48, 191, 0.2);
-    filter: blur(512.7999877929688px);
+    filter: blur(32rem);
     -webkit-animation: vibrate-1 7s ease-out infinite alternate forwards;
     animation: vibrate-1 7s ease-out infinite alternate forwards;
 }
@@ -111,7 +112,7 @@ body {
     width: 140vh;
     height: 140vh;
     background: linear-gradient(180deg, rgba(127, 48, 150, 0.5) 0%, rgba(41, 15, 48, 0.5) 100%);
-    filter: blur(1091.199951171875px);
+    filter: blur(64rem);
     opacity: 0.6;
     -webkit-animation: vibrate-1 7s ease-out infinite alternate forwards;
     animation: vibrate-1 7s ease-out infinite alternate forwards;
@@ -135,7 +136,7 @@ body {
 }
 
 .page:nth-child(2) .rocket-line-draft {
-    height: 85vh;
+    height: 80vh;
     position: absolute;
     left: 20vw;
     top: 15vh;
@@ -147,26 +148,26 @@ body {
     transform: translateY(25vh);
     margin-left: 30vw;
     color: rgba(255, 255, 255, 1);
-    width: 50rem;
-    height: 25rem;
+    width: 87.2rem;
+    height: 41.5rem;
     position: relative;
-    border-radius: 1rem;
+    border-radius: 1.6rem;
     z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.6rem;
     justify-content: center;
     align-items: start;
-    padding: 0 5rem;
+    padding: 0 8rem;
 }
 
 .page:nth-child(2) .intro::before {
     content: '';
     position: absolute;
-    top: -1px;
-    left: -1px;
-    right: -1px;
-    bottom: -1px;
+    top: -0.1rem;
+    left: -0.1rem;
+    right: -0.1rem;
+    bottom: -0.1rem;
     background: linear-gradient(rgba(187, 186, 192, 0.1) 50%, rgba(127, 48, 150, 0.7) 100%);
     border-radius: inherit;
     z-index: -1;
@@ -175,53 +176,53 @@ body {
 .page:nth-child(2) .intro::after {
     content: '';
     position: absolute;
-    top: 2px;
-    left: 2px;
-    right: 2px;
-    bottom: 2px;
+    top: 0.2rem;
+    left: 0.2rem;
+    right: 0.2rem;
+    bottom: 0.2rem;
     background: inherit;
-    border-radius: calc(1rem - 2px);
+    border-radius: calc(1rem - 0.2rem);
     z-index: -1
 }
 
 .page:nth-child(2) .intro .title {
-    transform: translateX(-2rem);
-    font-size: 4rem;
+    transform: translateX(-3.2rem);
+    font-size: 5.4rem;
     font-weight: 200;
     font-family: 'fys';
 }
 
 .page:nth-child(2) .intro .en {
-    font-size: 2rem;
+    font-size: 3.2rem;
     font-weight: 200;
     font-family: serif;
 }
 
 .page:nth-child(2) .intro .detail {
-    font-size: 1.5rem;
+    font-size: 2.4rem;
     font-weight: 200;
     font-family: 'fys';
 }
 
 .page:nth-child(2) .intro .link-container {
     width: 100%;
-    padding: 0 2rem;
+    padding: 0 3.2rem;
     display: flex;
     justify-content: end;
 }
 
 .intro .link-container a {
-    border-radius: 4rem;
-    font-size: 1.5rem;
+    border-radius: 5.4rem;
+    font-size: 2.4rem;
     font-family: "fys";
     font-weight: 200;
     display: flex;
-    width: 13rem;
-    height: 3.5rem;
+    width: 20.8rem;
+    height: 5.6rem;
     align-items: center;
     justify-content: center;
     color: rgba(255, 255, 255, 1);
-    border: 0.1rem solid transparent;
+    border: 0.16rem solid transparent;
     background:
         linear-gradient(-75deg,
             rgba(70, 48, 191),
@@ -230,22 +231,22 @@ body {
         linear-gradient(#1a1a1a, #1a1a1a) padding-box;
     background-origin: border-box;
     background-clip: padding-box, border-box;
-    box-shadow: 0 0 15rem rgb(90, 73, 93);
+    box-shadow: 0 0 24rem rgb(90, 73, 93);
     -webkit-animation: pulsate-bck 2s ease-in-out infinite both;
     animation: pulsate-bck 2s ease-in-out infinite both;
 }
 
 .intro .link-container a svg {
-    margin-left: 1rem;
-    width: 2rem;
-    height: 2rem;
+    margin-left: 1.6rem;
+    width: 3.2rem;
+    height: 3.2rem;
     transform: rotate(-90deg);
 }
 
 .meteor {
     position: absolute;
-    width: 20px;
-    height: 2px;
+    width: 2rem;
+    height: 0.2rem;
     background: linear-gradient(90deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%);
     transform-origin: left;
     animation: meteor 1.2s ease-in forwards;
@@ -259,10 +260,10 @@ body {
     top: 50%;
     transform: translateY(-50%);
     width: 4%;
-    height: 100px;
+    height: 10rem;
     border-radius: 50%;
     background: #fff;
-    box-shadow: 0 0 10px #fff;
+    box-shadow: 0 0 1rem #fff;
 }
 
 .page:nth-child(3) {
@@ -277,7 +278,7 @@ body {
     height: 140vh;
     background: linear-gradient(135deg, #803096 0%, #6730A8 44%, #4630BF 100%);
     opacity: 0.45;
-    filter: blur(464.3999938964844px);
+    filter: blur(29rem);
     -webkit-animation: vibrate-1 7s ease-out infinite alternate forwards;
     animation: vibrate-1 7s ease-out infinite alternate forwards;
 }
@@ -285,52 +286,52 @@ body {
 .page:nth-child(3) .intro {
     position: absolute;
     color: rgba(255, 255, 255, 1);
-    width: 40rem;
-    height: 25rem;
-    bottom: 4rem;
+    width: 64rem;
+    height: 40rem;
+    bottom: 6.4rem;
     display: flex;
     align-items: start;
     flex-direction: column;
     justify-content: center;
     font-family: "fys";
-    padding-left: 5rem;
+    padding-left: 8rem;
 }
 
 
 .page:nth-child(3) .intro .title {
-    font-size: 3.5rem;
-    margin-bottom: 1.7rem;
-    transform: translate(-1.5rem);
+    font-size: 5.6rem;
+    margin-bottom: 2.72rem;
+    transform: translate(-2.4rem);
 }
 
 .page:nth-child(3) .intro .en {
-    font-size: 2rem;
+    font-size: 3.2rem;
     font-weight: 200;
     font-family: serif;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.4rem;
 }
 
 .page:nth-child(3) .intro .line {
     width: 75%;
-    height: 0.2rem;
+    height: 0.32rem;
     background: rgba(255, 255, 255, 1);
 }
 
 .page:nth-child(3) .milestone {
-    width: 50rem;
-    height: 27rem;
+    width: 80rem;
+    height: 43.2rem;
     position: absolute;
-    top: 11rem;
-    right: 8rem;
+    top: 17.6rem;
+    right: 12.8rem;
 }
 
 .milestone-bg {
-    width: 50rem;
-    height: 27rem;
+    width: 80rem;
+    height: 43.2rem;
     border-radius: 50%;
     position: absolute;
     z-index: -1;
-    box-shadow: 0 0 500px rgba(127, 48, 150, 0.7);
+    box-shadow: 0 0 31.25rem rgba(127, 48, 150, 0.7);
 }
 
 .milestone .rocket-launch {
@@ -339,7 +340,7 @@ body {
     background: url('./../../assets/images/index/RocketLaunch.png');
     background-repeat: no-repeat;
     background-size: cover;
-    transform: scale(1.25) translate(0, -2rem);
+    transform: scale(1.25) translate(0, -3.2rem);
 }
 
 .milestone .rocket-launch .content {
@@ -347,35 +348,35 @@ body {
     flex-direction: column;
     align-items: start;
     justify-content: center;
-    gap: 1.5rem;
-    width: 28rem;
-    height: 10rem;
+    gap: 2.324rem;
+    width: 44.8rem;
+    height: 16rem;
     position: absolute;
     background: url('../../assets/images/index/WithOutBottomRight.png');
     background-size: cover;
     background-repeat: no-repeat;
     color: rgba(255, 255, 255, 1);
-    bottom: -4rem;
-    left: 21rem;
+    bottom: -6.4rem;
+    left: 33.6rem;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
 }
 
 .milestone .rocket-launch .content:hover {
     opacity: 0.9;
-    transform: translate(0.5rem, 0.5rem);
+    transform: translate(0.8rem, 0.8rem);
 }
 
 .milestone .rocket-launch .content h2 {
-    margin-left: 4rem;
+    margin-left: 6.4rem;
     font-family: "fys";
-    font-size: 1.5rem;
+    font-size: 2.324rem;
 }
 
 .milestone .rocket-launch .content img {
     position: absolute;
-    right: -2rem;
-    bottom: -2rem;
+    right: -3.2rem;
+    bottom: -3.2rem;
     transform: scale(0.6);
 }
 
@@ -389,14 +390,22 @@ body {
 
 .page:nth-child(4) .planet-container {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 70vw;
+    height: 120vh;
     z-index: 1;
+    background: url('../../assets/images/index/Plant.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.page:nth-child(4) .planet-canvas {
-    width: 100%;
-    height: 100%;
+.page:nth-child(4) .planet-container .planet-canvas {
+    transform: translateY(-10rem);
+    width: 50vw;
+    height: 45vh;
 }
 
 .page:nth-child(4) .content {
@@ -407,41 +416,50 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 2.4rem;
+    transform: translateY(-15rem);
 }
 
 .page:nth-child(4) .content .title {
     font-family: 'fys';
-    font-size: 4rem;
-    margin-bottom: 1rem;
+    font-size: 6.4rem;
+    margin-bottom: 1.6rem;
 }
 
 .page:nth-child(4) .content .subtitle {
     font-family: serif;
-    font-size: 2rem;
+    font-size: 3.2rem;
     font-weight: 200;
-    margin-bottom: 1rem;
+    margin-bottom: 1.6rem;
+}
+
+.page:nth-child(4) .content .line {
+    width: 46.2rem;
+    height: 0.1rem;
+    background: rgba(255, 255, 255, 1);
 }
 
 .page:nth-child(4) .content .description {
     font-family: 'fys';
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
+    font-size: 3.2rem;
+    margin-bottom: 3.2rem;
 }
 
 .page:nth-child(4) .content .start-btn {
-    font-family: 'fys';
-    font-size: 1.2rem;
-    padding: 0.8rem 2rem;
+    width: 22.4rem;
+    height: 5.6rem;
     border: none;
-    border-radius: 2rem;
-    background: linear-gradient(90deg, #803096, #4630BF);
-    color: white;
-    cursor: pointer;
+    background: url('../../assets/images/index/StartExplor.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
 .page:nth-child(4) .content .start-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(127, 48, 150, 0.5);
+}
+
+.page:nth-child(4) .content .start-btn:active {
+    transform: scale(0.95);
 }
