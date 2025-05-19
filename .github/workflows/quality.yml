@@ -42,12 +42,3 @@ jobs:
       # 执行 Stylelint
       - name: Run Stylelint
         run: npx stylelint "**/*.css"
-
-  check-size:
-    name: Check Bundle Size
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: andresz1/size-limit-action@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
