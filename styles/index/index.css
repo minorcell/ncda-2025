@@ -94,28 +94,30 @@ body {
 
 .page:nth-child(1) .top-left-light {
     position: absolute;
-    top: -70vh;
-    left: -70vh;
-    width: 140vh;
-    height: 140vh;
-    background: rgba(70, 48, 191, 0.2);
-    filter: blur(32rem);
+    top: -120rem;
+    left: -120rem;
+    width: 188.9rem;
+    height: 188.9rem;
+    background: rgba(70, 48, 191, 0.4);
+    filter: blur(64rem);
     -webkit-animation: vibrate-1 7s ease-out infinite alternate forwards;
     animation: vibrate-1 7s ease-out infinite alternate forwards;
+    z-index: 1;
 }
 
 
 .bottom-right-light {
     position: absolute;
-    bottom: -60vh;
-    right: -50vh;
-    width: 140vh;
-    height: 140vh;
-    background: linear-gradient(180deg, rgba(127, 48, 150, 0.5) 0%, rgba(41, 15, 48, 0.5) 100%);
+    top: 20rem;
+    right: -56rem;
+    width: 135.6rem;
+    height: 105.75rem;
+    background: rgba(128, 48, 150, 0.5);
     filter: blur(64rem);
     opacity: 0.6;
-    -webkit-animation: vibrate-1 7s ease-out infinite alternate forwards;
-    animation: vibrate-1 7s ease-out infinite alternate forwards;
+    -webkit-animation: vibrate-1 8s ease-out infinite alternate forwards;
+    animation: vibrate-1 8s ease-out infinite alternate forwards;
+    z-index: 1;
 }
 
 .grid-overlay {
@@ -388,6 +390,15 @@ body {
     align-items: center;
 }
 
+.page:nth-child(4) .mask {
+    position: absolute;
+    height: 5rem;
+    width: 100vw;
+    background: linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, .3) 50%, rgba(0, 0, 0, 1) 100%);
+    z-index: 1;
+    bottom: 0;
+}
+
 .page:nth-child(4) .planet-container {
     position: absolute;
     width: 70vw;
@@ -400,6 +411,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    transform: translate(0, 15rem);
 }
 
 .page:nth-child(4) .planet-container .planet-canvas {
@@ -417,7 +429,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 2.4rem;
-    transform: translateY(-15rem);
+    transform: translateY(-5rem);
 }
 
 .page:nth-child(4) .content .title {
