@@ -14,17 +14,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # HTMLHint 检查
-      - name: Run HTMLHint
-        uses: tj-actions/htmlhint@v3
-        with:
-          htmlhint_config: .htmlhintrc
-
       # 安装 Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          
+      # 安装并运行 HTMLHint
+      - name: Install and Run HTMLHint
+        run: |
+          npm install htmlhint --save-dev
+          npx htmlhint "**/*.html" --config .htmlhintrc
 
       # 安装 Stylelint
       - name: Install Stylelint
@@ -49,3 +49,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: andresz1/size-limit-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
