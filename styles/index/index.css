@@ -475,3 +475,48 @@ body {
 .page:nth-child(4) .content .start-btn:active {
     transform: scale(0.95);
 }
+
+.page:nth-child(5) .last-plant {
+    width: 103rem;
+    height: 80.2rem;
+    position: absolute;
+    bottom: 5rem;
+    right: 0rem;
+}
+
+.page:nth-child(5) .last-plant img:nth-child(1) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: light 1s ease-in-out infinite;
+}
+
+.page:nth-child(5) .last-plant img:nth-child(2) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: light 2s ease-in-out infinite;
+}
+
+.page:nth-child(5) .last-plant img:nth-child(3) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: light 3s ease-in-out infinite;
+}
+
+.page:nth-child(5) .last-plant img:nth-child(4) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: light 4s ease-in-out infinite;
+}
+
+.page:nth-child(5) .stars-bg {
+    position: absolute;
+    width: 75vw;
+    height: 75vh;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+}
