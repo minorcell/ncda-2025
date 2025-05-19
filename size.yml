@@ -1,0 +1,10 @@
+name: Check Bundle Size
+
+on: [pull_request]
+
+jobs:
+  check-size:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: andresz1/size-limit-action@v1
