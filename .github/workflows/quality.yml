@@ -2,6 +2,9 @@ name: Code Quality Checks
 
 on: [push, pull_request]
 
+permissions:
+  contents: read
+
 jobs:
   lint:
     name: Run Linters
@@ -28,7 +31,6 @@ jobs:
         run: |
           npm init -y
           npm install stylelint stylelint-config-standard --save-dev
-
       # 创建基础配置（如果还没有）
       - name: Create default .stylelintrc.json
         run: |
