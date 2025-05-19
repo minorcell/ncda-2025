@@ -153,8 +153,7 @@ function makeGradientFollowMouse() {
 
 function rocketShow() {
     const rocket = document.querySelector('.rocket-line-draft');
-    const pages = document.querySelectorAll('.page');
-    const page = pages[1];
+    const page = document.querySelectorAll('.page')[1];
 
     if (!rocket || !page) return;
 
@@ -193,6 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
     new BackgroundMusic();
     // 第二页背景图控制
     makeGradientFollowMouse();
-    // 火箭控制
+    // 火箭线稿控制
     rocketShow();
 });
