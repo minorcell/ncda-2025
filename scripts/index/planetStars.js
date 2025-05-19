@@ -27,24 +27,24 @@ class PlanetStars {
         this.camera.position.z = 5;
 
         // 创建星星
-        const starGeometry = new THREE.SphereGeometry(0.015, 5, 5);
+        const starGeometry = new THREE.SphereGeometry(0.01, 5, 5);
         const starMaterial = new THREE.MeshBasicMaterial({
             color: 0xffffff,
             transparent: true
         });
 
         // 创建多个星星
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 50; i++) {
             const star = new THREE.Mesh(starGeometry, starMaterial.clone());
 
             // 随机位置
-            star.position.x = (Math.random() - 0.5) * 10;
+            star.position.x = (Math.random() - 0.4) * 10;
             star.position.y = (Math.random() - 0.5) * 5;
             star.position.z = (Math.random() - 0.5) * 5;
 
             // 为每个星星添加动画属性
             star.userData = {
-                speed: Math.random() * 0.005 + 0.005,
+                speed: Math.random() * 0.001 + 0.001,
                 opacity: Math.random() * 0.5 + 0.5
             };
 
