@@ -14,51 +14,6 @@ body {
     overflow-x: hidden;
 }
 
-.header {
-    position: fixed;
-    width: 100vw;
-    height: 7.4rem;
-    transform: translateY(0);
-    transition: transform 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(rgba(0, 0, 0, 0.1) 100%, rgba(0, 0, 0, 0.7) 0%);
-    backdrop-filter: blur(1rem);
-    z-index: 10;
-}
-
-.header-left,
-.header-center,
-.header-right {
-    height: 100%;
-    padding: 1.25rem;
-}
-
-.header-left,
-.header-right {
-    width: 25%;
-}
-
-.header-center {
-    width: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.nav-link {
-    color: rgba(255, 255, 255, 1);
-    font-family: "fys", sans-serif;
-    font-weight: 400;
-    font-size: 2rem;
-}
-
-/* stylelint-disable-next-line selector-max-id */
-#logo {
-    height: 100%;
-}
-
 .page {
     scroll-snap-align: start;
     width: 100vw;

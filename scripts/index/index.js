@@ -1,42 +1,6 @@
 import { StarBackground } from '../common/StarBackground.js';
 import { MeteorEffect } from '../common/MeteorEffect.js';
-
-class HeaderController {
-    constructor() {
-        this.header = document.querySelector('.header');
-        this.container = document.querySelector('.container');
-        this.lastScrollY = this.container.scrollTop;
-        this.ticking = false;
-        this.init();
-    }
-
-    init() {
-        this.container.addEventListener('scroll', () => this.onScroll());
-    }
-
-    onScroll() {
-        if (!this.ticking) {
-            window.requestAnimationFrame(() => {
-                this.updateHeader();
-                this.ticking = false;
-            });
-            this.ticking = true;
-        }
-    }
-
-    updateHeader() {
-        const currentScrollY = this.container.scrollTop;
-
-        if (currentScrollY > this.lastScrollY && currentScrollY > this.header.offsetHeight) {
-            this.header.style.transform = 'translateY(-100%)';
-        }
-        else {
-            this.header.style.transform = 'translateY(0)';
-        }
-
-        this.lastScrollY = currentScrollY;
-    }
-}
+import { HeaderController } from '../common/HeaderController.js';
 
 class BackgroundMusic {
     constructor() {
@@ -189,8 +153,12 @@ function rocketShow() {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('.header');
+    const container = document.querySelector('.container');
+    const pages = document.querySelectorAll('.page');
+    const starsBgOfPageFive = document.querySelector('.stars-bg')
     // 导航栏控制
-    new HeaderController();
+    new HeaderController(header, { container });
     // 背景音乐控制
     new BackgroundMusic();
     // 第二页背景图控制
@@ -198,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 火箭线稿控制
     rocketShow();
 
-    const pages = document.querySelectorAll('.page');
+    // 前三页面特效
     for (let i = 0; i < Math.min(3, pages.length); i++) {
         // 添加星空背景
         new StarBackground(pages[i]);
@@ -229,8 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 第五页面的部分的流行效果
-    const starsBgOfPageFive = document.querySelector('.stars-bg')
-
     if (starsBgOfPageFive) {
         new StarBackground(starsBgOfPageFive, {
             starCount: 500,
