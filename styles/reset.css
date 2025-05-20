@@ -8,13 +8,7 @@
     user-select: none;
     list-style: none;
     text-decoration: none;
-}
-
-* {
     -ms-overflow-style: none;
-}
-
-* {
     overflow: -moz-scrollbars-none;
 }
 
