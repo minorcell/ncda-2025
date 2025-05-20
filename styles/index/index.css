@@ -49,11 +49,12 @@ body {
 
 .nav-link {
     color: rgba(255, 255, 255, 1);
-    font-family: "fys";
+    font-family: "fys", sans-serif;
     font-weight: 400;
     font-size: 2rem;
 }
 
+/* stylelint-disable-next-line selector-max-id */
 #logo {
     height: 100%;
 }
@@ -73,7 +74,7 @@ body {
 
 .page:nth-child(1) .slogan {
     color: rgba(255, 255, 255, 1);
-    font-family: hkjt;
+    font-family: 'hkjt', sans-serif;
     font-weight: 400;
     font-size: 12rem;
     animation: fade-in-fwd 2s ease-in-out both;
@@ -83,7 +84,7 @@ body {
     position: absolute;
     transform: translate(22vw, 14vh);
     color: rgba(255, 255, 255, 1);
-    font-family: qtbfsxt;
+    font-family: 'qtbfsxt', sans-serif;
     font-size: 3rem;
     font-weight: 200;
     animation: delay-show 2s ease-in-out both;
@@ -186,19 +187,19 @@ body {
     transform: translateX(-3.2rem);
     font-size: 5.4rem;
     font-weight: 200;
-    font-family: 'fys';
+    font-family: 'fys', sans-serif;
 }
 
 .page:nth-child(2) .intro .en {
     font-size: 3.2rem;
     font-weight: 200;
-    font-family: serif;
+    font-family: serif, sans-serif;
 }
 
 .page:nth-child(2) .intro .detail {
     font-size: 2.4rem;
     font-weight: 200;
-    font-family: 'fys';
+    font-family: 'fys', sans-serif;
 }
 
 .page:nth-child(2) .intro .link-container {
@@ -208,10 +209,10 @@ body {
     justify-content: end;
 }
 
-.intro .link-container a {
+.page:nth-child(2) .intro .link-container a {
     border-radius: 5.4rem;
     font-size: 2.4rem;
-    font-family: "fys";
+    font-family: "fys", sans-serif;
     font-weight: 200;
     display: flex;
     width: 20.8rem;
@@ -232,7 +233,7 @@ body {
     animation: pulsate-bck 2s ease-in-out infinite both;
 }
 
-.intro .link-container a svg {
+.page:nth-child(2) .intro .link-container a svg {
     margin-left: 1.6rem;
     width: 3.2rem;
     height: 3.2rem;
@@ -288,7 +289,7 @@ body {
     align-items: start;
     flex-direction: column;
     justify-content: center;
-    font-family: "fys";
+    font-family: "fys", sans-serif;
     padding-left: 8rem;
 }
 
@@ -302,7 +303,7 @@ body {
 .page:nth-child(3) .intro .en {
     font-size: 3.2rem;
     font-weight: 200;
-    font-family: serif;
+    font-family: serif, sans-serif;
     margin-bottom: 2.4rem;
 }
 
@@ -338,6 +339,19 @@ body {
     transform: scale(1.25) translate(0, -3.2rem);
 }
 
+/* 将 .content 选择器移到前面 */
+.page:nth-child(4) .content {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.4rem;
+    transform: translateY(-5rem);
+}
+
 .milestone .rocket-launch .content {
     display: flex;
     flex-direction: column;
@@ -364,7 +378,7 @@ body {
 
 .milestone .rocket-launch .content h2 {
     margin-left: 6.4rem;
-    font-family: "fys";
+    font-family: "fys", sans-serif;
     font-size: 2.324rem;
 }
 
@@ -412,26 +426,16 @@ body {
     height: 45vh;
 }
 
-.page:nth-child(4) .content {
-    position: relative;
-    z-index: 2;
-    color: white;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2.4rem;
-    transform: translateY(-5rem);
-}
+/* 已将此选择器移到前面 */
 
 .page:nth-child(4) .content .title {
-    font-family: 'fys';
+    font-family: 'fys', sans-serif;
     font-size: 6.4rem;
     margin-bottom: 1.6rem;
 }
 
 .page:nth-child(4) .content .subtitle {
-    font-family: serif;
+    font-family: serif, sans-serif;
     font-size: 3.2rem;
     font-weight: 200;
     margin-bottom: 1.6rem;
@@ -444,7 +448,7 @@ body {
 }
 
 .page:nth-child(4) .content .description {
-    font-family: 'fys';
+    font-family: 'fys', sans-serif;
     font-size: 3.2rem;
     margin-bottom: 3.2rem;
 }
@@ -505,4 +509,57 @@ body {
     top: 50vh;
     left: 50vw;
     transform: translate(-50%, -50%);
+}
+
+.page:nth-child(5) .intro {
+    position: absolute;
+    bottom: 10rem;
+    left: 0;
+    color: rgba(255, 255, 255, 1);
+    font-family: "fys", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 2.8rem;
+    padding: 0 9.2rem;
+    z-index: 1;
+}
+
+.page:nth-child(5) .intro .title {
+    font-size: 5.4rem;
+    transform: translateX(-3.2rem);
+}
+
+.page:nth-child(5) .intro .en {
+    font-size: 2.4rem;
+}
+
+.page:nth-child(5) .intro .line {
+    width: 46.2rem;
+    height: 0.2rem;
+    background: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(5) .intro .link-container {
+    width: 100%;
+    padding: 2rem 0;
+    font-size: 3.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.page:nth-child(5) .intro .link-container .link {
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 1);
+    transform: translateX(7.5rem);
+    cursor: pointer;
+}
+
+.page:nth-child(5) .intro .link-container .link svg {
+    margin-left: 1rem;
+    width: 3.6rem;
+    height: 3.6rem;
+    transform: rotate(-90deg);
 }

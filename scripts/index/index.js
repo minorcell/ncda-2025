@@ -1,3 +1,6 @@
+import { StarBackground } from '../common/StarBackground.js';
+import { MeteorEffect } from '../common/MeteorEffect.js';
+
 class HeaderController {
     constructor() {
         this.header = document.querySelector('.header');
@@ -194,4 +197,47 @@ document.addEventListener('DOMContentLoaded', () => {
     makeGradientFollowMouse();
     // 火箭线稿控制
     rocketShow();
+
+    const pages = document.querySelectorAll('.page');
+    for (let i = 0; i < Math.min(3, pages.length); i++) {
+        // 添加星空背景
+        new StarBackground(pages[i]);
+
+        // 在第二页添加流星效果
+        if (i == 1) {
+            new MeteorEffect(pages[i], {
+                maxMeteors: 15,
+                zIndex: 1,
+                meteor: {
+                    startXMin: 50,
+                    startXMax: 100,
+                    startYMin: 0,
+                    startYMax: 30,
+                    lengthMin: 10,
+                    lengthMax: 20,
+                    angleMin: 150,
+                    angleMax: 180,
+                    speedMin: 1,
+                    speedMax: 2,
+                    widthMin: 0.1,
+                    widthMax: 0.2,
+                    tailLengthMin: 1.2,
+                    tailLengthMax: 2
+                }
+            });
+        }
+    }
+
+    // 第五页面的部分的流行效果
+    const starsBgOfPageFive = document.querySelector('.stars-bg')
+
+    if (starsBgOfPageFive) {
+        new StarBackground(starsBgOfPageFive, {
+            starCount: 500,
+            starSizeMin: 0.1,
+            starSizeMax: 0.2,
+            xSpeed: 0.0003,
+            ySpeed: 0.0003
+        });
+    }
 });
