@@ -24,7 +24,6 @@ body {
     align-items: center;
     justify-content: center;
     background: linear-gradient(rgba(0, 0, 0, 0.1) 100%, rgba(0, 0, 0, 0.7) 0%);
-    -webkit-backdrop-filter: blur(1rem);
     backdrop-filter: blur(1rem);
     z-index: 10;
 }
@@ -77,7 +76,6 @@ body {
     font-family: hkjt;
     font-weight: 400;
     font-size: 12rem;
-    -webkit-animation: fade-in-fwd 1s ease-in-out both;
     animation: fade-in-fwd 2s ease-in-out both;
 }
 
@@ -88,7 +86,6 @@ body {
     font-family: qtbfsxt;
     font-size: 3rem;
     font-weight: 200;
-    -webkit-animation: delay-show 2s ease-in-out both;
     animation: delay-show 2s ease-in-out both;
 }
 
@@ -100,7 +97,6 @@ body {
     height: 188.9rem;
     background: rgba(70, 48, 191, 0.4);
     filter: blur(64rem);
-    -webkit-animation: vibrate-1 7s ease-out infinite alternate forwards;
     animation: vibrate-1 7s ease-out infinite alternate forwards;
     z-index: 1;
 }
@@ -115,7 +111,6 @@ body {
     background: rgba(128, 48, 150, 0.5);
     filter: blur(64rem);
     opacity: 0.6;
-    -webkit-animation: vibrate-1 8s ease-out infinite alternate forwards;
     animation: vibrate-1 8s ease-out infinite alternate forwards;
     z-index: 1;
 }
@@ -233,8 +228,7 @@ body {
         linear-gradient(#1a1a1a, #1a1a1a) padding-box;
     background-origin: border-box;
     background-clip: padding-box, border-box;
-    box-shadow: 0 0 24rem rgb(90, 73, 93);
-    -webkit-animation: pulsate-bck 2s ease-in-out infinite both;
+    box-shadow: 0 0 24rem rgba(90, 73, 93, 1);
     animation: pulsate-bck 2s ease-in-out infinite both;
 }
 
@@ -281,7 +275,6 @@ body {
     background: linear-gradient(135deg, #803096 0%, #6730A8 44%, #4630BF 100%);
     opacity: 0.45;
     filter: blur(29rem);
-    -webkit-animation: vibrate-1 7s ease-out infinite alternate forwards;
     animation: vibrate-1 7s ease-out infinite alternate forwards;
 }
 
@@ -382,7 +375,6 @@ body {
     transform: scale(0.6);
 }
 
-/* 第四页样式 */
 .page:nth-child(4) {
     overflow: hidden;
     display: flex;
@@ -484,31 +476,25 @@ body {
     right: 0rem;
 }
 
-.page:nth-child(5) .last-plant img:nth-child(1) {
+.page:nth-child(5) .last-plant img {
     position: absolute;
     top: 0;
     left: 0;
+}
+
+.page:nth-child(5) .last-plant img:nth-child(1) {
     animation: light 1s ease-in-out infinite;
 }
 
 .page:nth-child(5) .last-plant img:nth-child(2) {
-    position: absolute;
-    top: 0;
-    left: 0;
     animation: light 2s ease-in-out infinite;
 }
 
 .page:nth-child(5) .last-plant img:nth-child(3) {
-    position: absolute;
-    top: 0;
-    left: 0;
     animation: light 3s ease-in-out infinite;
 }
 
 .page:nth-child(5) .last-plant img:nth-child(4) {
-    position: absolute;
-    top: 0;
-    left: 0;
     animation: light 4s ease-in-out infinite;
 }
 

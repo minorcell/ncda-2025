@@ -19,26 +19,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          
+
       # 安装并运行 HTMLHint
       - name: Install and Run HTMLHint
         run: |
           npm install htmlhint --save-dev
           npx htmlhint "**/*.html" --config .htmlhintrc
 
-      # 安装 Stylelint
-      - name: Install Stylelint
+      # 初始化项目（如果需要），安装 Stylelint
+      - name: Initialize npm and install Stylelint
         run: |
           npm init -y
           npm install stylelint stylelint-config-standard --save-dev
-      # 创建基础配置（如果还没有）
-      - name: Create default .stylelintrc.json
-        run: |
-          echo '{
-            "extends": "stylelint-config-standard"
-          }' > .stylelintrc.json
-        if: ${{ !hashFiles('.stylelintrc.json') }}
 
-      # 执行 Stylelint
+      # 运行 Stylelint 检查 CSS 文件
       - name: Run Stylelint
         run: npx stylelint "**/*.css"
