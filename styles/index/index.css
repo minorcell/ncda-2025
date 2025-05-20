@@ -74,7 +74,7 @@ body {
 
 .page:nth-child(1) .slogan {
     color: rgba(255, 255, 255, 1);
-    font-family: hkjt;
+    font-family: 'hkjt', sans-serif;
     font-weight: 400;
     font-size: 12rem;
     animation: fade-in-fwd 2s ease-in-out both;
@@ -84,7 +84,7 @@ body {
     position: absolute;
     transform: translate(22vw, 14vh);
     color: rgba(255, 255, 255, 1);
-    font-family: qtbfsxt;
+    font-family: 'qtbfsxt', sans-serif;
     font-size: 3rem;
     font-weight: 200;
     animation: delay-show 2s ease-in-out both;
