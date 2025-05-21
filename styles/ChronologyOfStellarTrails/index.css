@@ -10,8 +10,8 @@ html {
 }
 
 body {
-  background-color: #000;
-  color: #fff;
+  background-color: rgba(0, 0, 0, 1);
+  color: rgba(255, 255, 255, 1);
   font-size: 1.6rem;
 }
 
@@ -21,7 +21,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 1);
   position: relative;
 
 }
@@ -29,10 +29,9 @@ body {
 .header {
   width: 45rem;
   height: 16rem;
-  /* background-color: #000; */
-  /* background: linear-gradient(to top, #1a0f24 50%, #3c1846); */
-  background: radial-gradient(circle, #3c1846 -40%, #000000);
-  border-top: 0.1rem solid #FFFFFF;
+  background-color: rgba(0, 0, 0, 1);
+  background: radial-gradient(circle, rgba(60, 24, 70, 1) -40%, rgba(0, 0, 0, 1));
+  border-top: 0.1rem solid rgba(255, 255, 255, 1);
 }
 
 .title {
@@ -41,7 +40,7 @@ body {
   font-family: 'fys' sans-serif;
   font-weight: 400;
   font-size: 6rem;
-  color: #FFFFFF;
+  color: rgba(255, 255, 255, 1);
   line-height: 18rem;
   letter-spacing: 0.4rem;
   text-align: left;
@@ -59,7 +58,7 @@ body {
   font-family: 'fys';
   font-weight: 400;
   font-size: 1.8rem;
-  color: #FFFFFF;
+  color: rgba(255, 255, 255, 1);
   line-height: 5rem;
   letter-spacing: 0.4rem;
   text-align: center;
@@ -92,12 +91,20 @@ body {
   position: absolute;
   width: 0.2rem;
   /* 加粗线段 */
-  background-color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 1);
   /* 加深颜色 */
   top: 17.5rem;
   height: 3.5rem;
   left: calc(50% - 0.2rem);
   /* z-index: 1; */
+}
+
+/* 第一个时间轴项目添加文字 */
+.timeline::before {
+  position: absolute;
+  top: 4rem;
+  color: rgba(255, 255, 255, 1);
+  font-size: 1.4rem;
 }
 
 .item-left {
@@ -125,7 +132,7 @@ body {
 .img {
   width: 40rem;
   height: 22.5rem;
-  box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem #FFFFFF;
+  box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgba(255, 255, 255, 1);
   border: 0.1rem solid;
   border-image: linear-gradient(136deg, rgba(128, 48, 150, 1), rgba(255, 255, 255, 0), rgba(70, 48, 191, 1), rgba(255, 255, 255, 0)) 1 1;
   position: relative;
@@ -134,8 +141,8 @@ body {
 .content-title {
   font-family: 'fys';
   margin-top: 0;
-  color: #FFFFFF;
-  text-shadow: 2px 2px 3px #000000;
+  color: rgba(255, 255, 255, 1);
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 1);
   font-weight: 400;
   font-size: 5.5rem;
   line-height: 8.9rem;
@@ -163,7 +170,7 @@ body {
   font-family: 'fys';
   font-weight: 400;
   font-size: 1.5rem;
-  color: #FFFFFF;
+  color: rgba(255, 255, 255, 1);
   line-height: 2.8rem;
   letter-spacing: 0.1rem;
   text-indent: 3rem;
@@ -189,11 +196,11 @@ body {
   /* border-color: linear-gradient(95deg, rgba(128, 48, 150, 0.8), rgba(255, 255, 255, 0.1), rgba(70, 48, 191, 1), rgba(255, 255, 255, 0.1)) 1 1; */
   margin-top: 1rem;
   display: block;
-  color: #FFFFFF;
+  color: rgba(255, 255, 255, 1);
   background-color: transparent;
   margin-left: 31rem;
   margin-right: 0;
-  box-shadow: 0 0 15rem rgb(90, 73, 93);
+  box-shadow: 0 0 15rem rgba(90, 73, 93, 1);
 }
 
 .item-left:first-child::after {
@@ -203,7 +210,7 @@ body {
   left: calc(100% + 4rem);
   top: 15.5rem;
   transform: translateY(-50%);
-  color: #FFFFFF;
+  color: rgba(255, 255, 255, 1);
   font-size: 2rem;
   white-space: nowrap;
   /* 文本不会自动换行  */

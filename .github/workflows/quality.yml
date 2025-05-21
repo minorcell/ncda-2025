@@ -1,0 +1,72 @@
+name: Code Quality Checks
+
+on: [push, pull_request]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  lint:
+    name: Run Linters and Auto-Fix
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Initialize project and install dependencies
+        run: |
+          npm init -y
+          npm install htmlhint stylelint stylelint-config-standard --save-dev
+
+      # Run HTMLHint (no autofix)
+      - name: Run HTMLHint
+        run: npx htmlhint "**/*.html" --config .htmlhintrc || true
+
+      # Create default stylelint config if missing
+      - name: Create default .stylelintrc.json
+        run: |
+          echo '{
+            "extends": "stylelint-config-standard"
+          }' > .stylelintrc.json
+        if: ${{ !hashFiles('.stylelintrc.json') }}
+
+      # Run stylelint with autofix
+      - name: Run Stylelint with Autofix
+        run: npx stylelint "**/*.css" --fix
+
+      # Commit and push changes if any
+      - name: Commit and create PR if fixes exist
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+            # Create a new branch for the fix
+            git checkout -b stylelint-autofix-${{ github.run_id }}
+            git add .
+            git commit -m "stylelint: auto-fixed CSS issues"
+            git push origin stylelint-autofix-${{ github.run_id }}
+
+            # Install GitHub CLI
+            sudo apt-get update
+            sudo apt-get install gh -y
+
+            # Authenticate and create PR
+            gh auth setup-git
+            gh pr create \
+              --title "stylelint: auto-fix CSS issues" \
+              --body "This PR contains auto-fixed CSS issues via Stylelint." \
+              --head stylelint-autofix-${{ github.run_id }} \
+              --base main
+          else
+            echo "No changes detected after stylelint autofix."
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

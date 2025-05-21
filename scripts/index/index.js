@@ -1,39 +1,6 @@
-class HeaderController {
-    constructor() {
-        this.header = document.querySelector('.header');
-        this.container = document.querySelector('.container');
-        this.lastScrollY = this.container.scrollTop;
-        this.ticking = false;
-        this.init();
-    }
-
-    init() {
-        this.container.addEventListener('scroll', () => this.onScroll());
-    }
-
-    onScroll() {
-        if (!this.ticking) {
-            window.requestAnimationFrame(() => {
-                this.updateHeader();
-                this.ticking = false;
-            });
-            this.ticking = true;
-        }
-    }
-
-    updateHeader() {
-        const currentScrollY = this.container.scrollTop;
-
-        if (currentScrollY > this.lastScrollY && currentScrollY > this.header.offsetHeight) {
-            this.header.style.transform = 'translateY(-100%)';
-        }
-        else {
-            this.header.style.transform = 'translateY(0)';
-        }
-
-        this.lastScrollY = currentScrollY;
-    }
-}
+import { StarBackground } from '../common/StarBackground.js';
+import { MeteorEffect } from '../common/MeteorEffect.js';
+import { HeaderController } from '../common/HeaderController.js';
 
 class BackgroundMusic {
     constructor() {
@@ -153,8 +120,7 @@ function makeGradientFollowMouse() {
 
 function rocketShow() {
     const rocket = document.querySelector('.rocket-line-draft');
-    const pages = document.querySelectorAll('.page');
-    const page = pages[1];
+    const page = document.querySelectorAll('.page')[1];
 
     if (!rocket || !page) return;
 
@@ -187,12 +153,57 @@ function rocketShow() {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('.header');
+    const container = document.querySelector('.container');
+    const pages = document.querySelectorAll('.page');
+    const starsBgOfPageFive = document.querySelector('.stars-bg')
     // 导航栏控制
-    new HeaderController();
+    new HeaderController(header, { container });
     // 背景音乐控制
     new BackgroundMusic();
     // 第二页背景图控制
     makeGradientFollowMouse();
-    // 火箭控制
+    // 火箭线稿控制
     rocketShow();
+
+    // 前三页面特效
+    for (let i = 0; i < Math.min(3, pages.length); i++) {
+        // 添加星空背景
+        new StarBackground(pages[i]);
+
+        // 在第二页添加流星效果
+        if (i == 1) {
+            new MeteorEffect(pages[i], {
+                maxMeteors: 15,
+                zIndex: 1,
+                meteor: {
+                    startXMin: 50,
+                    startXMax: 100,
+                    startYMin: 0,
+                    startYMax: 30,
+                    lengthMin: 10,
+                    lengthMax: 20,
+                    angleMin: 150,
+                    angleMax: 180,
+                    speedMin: 1,
+                    speedMax: 2,
+                    widthMin: 0.1,
+                    widthMax: 0.2,
+                    tailLengthMin: 1.2,
+                    tailLengthMax: 2
+                }
+            });
+        }
+    }
+
+    // 第五页面的部分的流行效果
+    if (starsBgOfPageFive) {
+        new StarBackground(starsBgOfPageFive, {
+            starCount: 500,
+            starSizeMin: 0.1,
+            starSizeMax: 0.2,
+            xSpeed: 0.0003,
+            ySpeed: 0.0003
+        });
+    }
 });

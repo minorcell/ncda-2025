@@ -7,8 +7,8 @@
     <link rel="icon" type="images/svg" href="./assets/images/logo.svg">
     <title>赴九天 问苍穹｜中国载人航天</title>
     <link rel="stylesheet" href="./styles/reset.css">
+    <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/index/index.css">
-    <link rel="stylesheet" href="./styles/index/meteor.css">
 </head>
 
 <body>
@@ -17,11 +17,13 @@
     </audio>
     <header class="header">
         <div class="header-left">
-            <img id="logo" src="./assets/images/logo.svg" alt="赴九天 问苍穹｜中国载人航天 LOGO">
+            <a href="./index.html">
+                <img id="logo" src="./assets/images/logo.svg" alt="赴九天 问苍穹｜中国载人航天 LOGO">
+            </a>
         </div>
         <div class="header-center">
-            <a href="#" class="nav-link">十二阶星辰</a>
-            <a href="./pages/ChronologyOfStellarTrails.html" class="nav-link">星际轨年</a>
+            <a href="./pages/TwelveOrderStars.html" class="nav-link">十二阶星辰</a>
+            <a href="./pages/ChronologyOfStellarTrails.html" class="nav-link">星轨纪年</a>
             <a href="#" class="nav-link">问天阁</a>
             <a href="#" class="nav-link">寰宇速报</a>
         </div>
@@ -78,18 +80,38 @@
             <div class="content">
                 <h1 class="title">「问天阁」</h1>
                 <h2 class="subtitle">Cosmic Inquiry Lab</h2>
+                <div class="line"></div>
                 <p class="description">破解宇宙奥秘的108道天问</p>
-                <button class="start-btn">开始探索</button>
+                <button class="start-btn"></button>
             </div>
+            <div class="mask"></div>
         </div>
         <div class="page">
-            <h1 style="color: white;">Page Five</h1>
+            <div class="intro">
+                <div class="title">「寰宇速报」</div>
+                <div class="en">Galaxy Bulletin</div>
+                <div class="line"></div>
+                <div class="link-container">
+                    <a href="#" class="link">
+                        同步空间站视角的航天要闻
+                        <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="m12 22l-7-7l1.4-1.425l4.6 4.6V11h2v7.175l4.6-4.575L19 15zM11 9V6h2v3zm0-5V2h2v2z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="stars-bg"></div>
+            <div class="last-plant">
+                <img src="./assets/images/index/LastPlant.svg" alt="孤独星球">
+                <img src="./assets/images/index/LastPlant.svg" alt="孤独星球">
+                <img src="./assets/images/index/LastPlant.svg" alt="孤独星球">
+                <img src="./assets/images/index/LastPlant.svg" alt="孤独星球">
+            </div>
         </div>
     </div>
+    <script type="module" src="./scripts/index/planetStars.js"></script>
     <script type="module" src="./scripts/index/gridBackground.js"></script>
-    <script type="module" src="./scripts/index/starBackground.js"></script>
-    <script type="module" src="./scripts/index/MeteorEffect.js"></script>
-    <script type="module" src="./scripts/index/PlanetBackground.js"></script>
     <script type="module" src="./scripts/index/index.js"></script>
 </body>
 

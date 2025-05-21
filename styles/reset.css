@@ -8,20 +8,10 @@
     user-select: none;
     list-style: none;
     text-decoration: none;
-}
-
-*::-webkit-scrollbar {
-    width: 0 !important
-}
-
-* {
     -ms-overflow-style: none;
-}
-
-* {
     overflow: -moz-scrollbars-none;
 }
 
-*::-webkit-scrollbar {
-    width: 0 !important
+html {
+    font-size: 10px;
 }

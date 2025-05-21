@@ -1,26 +1,46 @@
 import * as THREE from '../../build/threejs/three.module.min.js';
 
-class StarBackground {
-    constructor(page) {
+/**
+ * 创建一个基于 Three.js 的星空背景
+ * 
+ * @class StarBackground
+ * @param {HTMLElement} container - 要添加星空背景的容器元素
+ * @param {Object} [options] - 配置选项
+ * @param {number} [options.starCount=1000] - 星星数量
+ * @param {number} [options.starSizeMin=0.04] - 星星最小尺寸
+ * @param {number} [options.starSizeMax=0.12] - 星星最大尺寸
+ * @param {number} [options.xSpeed=0.00005] - X轴旋转速度
+ * @param {number} [options.ySpeed=0.00005] - Y轴旋转速度
+ * @param {number} [options.elapsed=0] - 初始动画时间
+ */
+export class StarBackground {
+    constructor(container, options = {}) {
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(
             75,
-            page.clientWidth / page.clientHeight,
+            container.clientWidth / container.clientHeight,
             0.1,
             1000
         );
         this.camera.position.z = 5;
 
         this.renderer = new THREE.WebGLRenderer({ alpha: true });
-        this.renderer.setSize(page.clientWidth, page.clientHeight);
+        this.renderer.setSize(container.clientWidth, container.clientHeight);
         this.renderer.setClearColor(0x000000, 0);
         this.canvas = this.renderer.domElement;
         this.canvas.style.position = 'absolute';
-        this.canvas.style.zIndex = '0';
+        this.canvas.style.zIndex = '0'; // 确保星星在网格背景之下
         this.canvas.style.pointerEvents = 'none';
-        page.appendChild(this.canvas);
+        container.appendChild(this.canvas);
 
-        this.elapsed = 0;
+        // 设置星星的默认参数和从options获取的参数
+        this.starCount = options.starCount || 1000; // 默认1000颗星星
+        this.starSizeMin = options.starSizeMin || 0.04; // 默认最小尺寸
+        this.starSizeMax = options.starSizeMax || 0.12; // 默认最大尺寸 (0.04 + 0.08)
+        this.xSpeed = options.xSpeed || 0.00005; // X轴转动速度
+        this.ySpeed = options.ySpeed || 0.00005; // Y轴转动速度
+        this.elapsed = options.elapsed || 0;  // 闪缩速度
+
         this.createStars();
         this.animate();
 
@@ -28,7 +48,7 @@ class StarBackground {
     }
 
     createStars() {
-        const count = 1000;
+        const count = this.starCount;
         const positions = new Float32Array(count * 3);
         const phases = new Float32Array(count);
         const sizes = new Float32Array(count);
@@ -38,7 +58,7 @@ class StarBackground {
             positions[3 * i + 1] = (Math.random() - 0.5) * 40;
             positions[3 * i + 2] = (Math.random() - 0.5) * 40;
             phases[i] = Math.random() * Math.PI * 2;
-            sizes[i] = Math.random() * 0.08 + 0.04;
+            sizes[i] = Math.random() * (this.starSizeMax - this.starSizeMin) + this.starSizeMin;
         }
 
         const geometry = new THREE.BufferGeometry();
@@ -85,8 +105,8 @@ class StarBackground {
     animate = () => {
         requestAnimationFrame(this.animate);
         this.elapsed += 0.008; // 减慢闪烁速度
-        this.stars.rotation.x += 0.00005; // 减慢X轴旋转速度
-        this.stars.rotation.y += 0.00005; // 减慢Y轴旋转速度
+        this.stars.rotation.x += this.xSpeed;
+        this.stars.rotation.y += this.ySpeed;
         this.stars.material.uniforms.elapsed.value = this.elapsed;
         this.renderer.render(this.scene, this.camera);
     }
@@ -98,13 +118,3 @@ class StarBackground {
         this.renderer.setSize(parent.clientWidth, parent.clientHeight);
     }
 }
-
-function init() {
-    const pages = document.querySelectorAll('.page');
-
-    for (let i = 0; i < Math.min(3, pages.length); i++) {
-        new StarBackground(pages[i]);
-    }
-}
-
-document.addEventListener('DOMContentLoaded', init);

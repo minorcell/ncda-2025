@@ -1,10 +1,29 @@
 /**
- * MeteorEffect.js
- * 使用SVG和原生JavaScript实现流星效果
+ * 创建流星效果
+ * 
+ * @class MeteorEffect
+ * @param {HTMLElement} container - 要添加流星效果的容器元素
+ * @param {Object} [options] - 配置选项
+ * @param {number} [options.maxMeteors=10] - 同时允许存在最多的流星数量
+ * @param {number} [options.zIndex=1] - 容器图层
+ * @param {Object} [options.meteor] - 流星参数配置
+ * @param {number} [options.meteor.startXMin=50] - 起始X坐标最小值
+ * @param {number} [options.meteor.startXMax=100] - 起始X坐标最大值
+ * @param {number} [options.meteor.startYMin=0] - 起始Y坐标最小值
+ * @param {number} [options.meteor.startYMax=30] - 起始Y坐标最大值
+ * @param {number} [options.meteor.lengthMin=10] - 流星长度最小值
+ * @param {number} [options.meteor.lengthMax=20] - 流星长度最大值
+ * @param {number} [options.meteor.angleMin=150] - 流星角度最小值
+ * @param {number} [options.meteor.angleMax=180] - 流星角度最大值
+ * @param {number} [options.meteor.speedMin=1] - 流星速度最小值
+ * @param {number} [options.meteor.speedMax=2] - 流星速度最大值
+ * @param {number} [options.meteor.widthMin=0.1] - 流星宽度最小值
+ * @param {number} [options.meteor.widthMax=0.2] - 流星宽度最大值
+ * @param {number} [options.meteor.tailLengthMin=1.2] - 尾迹长度系数最小值
+ * @param {number} [options.meteor.tailLengthMax=2] - 尾迹长度系数最大值
  */
-
-class MeteorEffect {
-    constructor(container) {
+export class MeteorEffect {
+    constructor(container, options = {}) {
         this.container = container;
         this.svgNS = "http://www.w3.org/2000/svg";
         this.isActive = false; // 控制流星是否生成
@@ -21,13 +40,45 @@ class MeteorEffect {
         this.svg.style.width = "100%";
         this.svg.style.height = "100%";
         this.svg.style.pointerEvents = "none";
-        this.svg.style.zIndex = "1";
+        this.svg.style.zIndex = options.zIndex || '1';
 
         this.container.appendChild(this.svg);
 
         // 流星参数
         this.meteors = [];
-        this.maxMeteors = 10; // 最大同时存在的流星数量
+        this.maxMeteors = options.maxMeteors || 10;
+
+        // 流星参数配置
+        this.meteorConfig = {
+            startX: {
+                min: options.meteor?.startXMin ?? 50,
+                max: options.meteor?.startXMax ?? 100
+            },
+            startY: {
+                min: options.meteor?.startYMin ?? 0,
+                max: options.meteor?.startYMax ?? 30
+            },
+            length: {
+                min: options.meteor?.lengthMin ?? 10,
+                max: options.meteor?.lengthMax ?? 20
+            },
+            angle: {
+                min: options.meteor?.angleMin ?? 150,
+                max: options.meteor?.angleMax ?? 180
+            },
+            speed: {
+                min: options.meteor?.speedMin ?? 1,
+                max: options.meteor?.speedMax ?? 2
+            },
+            width: {
+                min: options.meteor?.widthMin ?? 0.1,
+                max: options.meteor?.widthMax ?? 0.2
+            },
+            tailLength: {
+                min: options.meteor?.tailLengthMin ?? 1.2,
+                max: options.meteor?.tailLengthMax ?? 2
+            }
+        };
 
         // 设置页面可见性观察器
         this.setupVisibilityObserver();
@@ -44,13 +95,13 @@ class MeteorEffect {
         if (this.meteors.length >= this.maxMeteors) return;
 
         // 随机生成流星参数
-        const startX = 50 + Math.random() * 50; // 起始X坐标 (右半部分)
-        const startY = Math.random() * 30; // 起始Y坐标 (上部)
-        const length = 10 + Math.random() * 10; // 流星长度
-        const angle = 150 + Math.random() * 30; // 角度 (150-180度)从右往左
-        const speed = 1 + Math.random() * 1; // 速度
-        const width = 0.1 + Math.random() * 0.1; // 流星宽度
-        const tailLength = length * (1.2 + Math.random() * 0.8); // 尾迹长度
+        const startX = this.meteorConfig.startX.min + Math.random() * (this.meteorConfig.startX.max - this.meteorConfig.startX.min);
+        const startY = this.meteorConfig.startY.min + Math.random() * (this.meteorConfig.startY.max - this.meteorConfig.startY.min);
+        const length = this.meteorConfig.length.min + Math.random() * (this.meteorConfig.length.max - this.meteorConfig.length.min);
+        const angle = this.meteorConfig.angle.min + Math.random() * (this.meteorConfig.angle.max - this.meteorConfig.angle.min);
+        const speed = this.meteorConfig.speed.min + Math.random() * (this.meteorConfig.speed.max - this.meteorConfig.speed.min);
+        const width = this.meteorConfig.width.min + Math.random() * (this.meteorConfig.width.max - this.meteorConfig.width.min);
+        const tailLength = length * (this.meteorConfig.tailLength.min + Math.random() * (this.meteorConfig.tailLength.max - this.meteorConfig.tailLength.min));
 
         // 计算方向和垂直方向
         const radians = angle * Math.PI / 180;
@@ -244,7 +295,6 @@ class MeteorEffect {
         if (this.isActive) return; // 如果已经激活，不重复启动
 
         this.isActive = true;
-        console.log('流星效果已启动');
 
         // 创建初始流星
         this.createMeteor();
@@ -259,7 +309,6 @@ class MeteorEffect {
         if (!this.isActive) return; // 如果已经停止，不重复操作
 
         this.isActive = false;
-        console.log('流星效果已停止');
 
         // 清除定时器
         if (this.meteorTimer) {
@@ -273,15 +322,3 @@ class MeteorEffect {
         requestAnimationFrame(this.animate);
     }
 }
-
-function init() {
-    const pages = document.querySelectorAll('.page');
-
-    for (let i = 0; i < Math.min(3, pages.length); i++) {
-        if (i === 1) {
-            new MeteorEffect(pages[i]);
-        }
-    }
-}
-
-document.addEventListener('DOMContentLoaded', init);

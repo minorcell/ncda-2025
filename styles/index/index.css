@@ -11,51 +11,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-}
-
-.header {
-    position: fixed;
-    width: 100vw;
-    height: 4rem;
-    transform: translateY(0);
-    transition: transform 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 100%);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    z-index: 10;
-}
-
-.header-left,
-.header-center,
-.header-right {
-    height: 100%;
-    padding: 0.5rem;
-}
-
-.header-left,
-.header-right {
-    width: 25%;
-}
-
-.header-center {
-    width: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.nav-link {
-    color: rgba(255, 255, 255, 1);
-    font-family: "fys";
-    font-weight: 400;
-    font-size: 1.05rem;
-}
-
-#logo {
-    height: 100%;
+    overflow-x: hidden;
 }
 
 .page {
@@ -73,10 +29,9 @@ body {
 
 .page:nth-child(1) .slogan {
     color: rgba(255, 255, 255, 1);
-    font-family: hkjt;
+    font-family: 'hkjt', sans-serif;
     font-weight: 400;
-    font-size: 9rem;
-    -webkit-animation: fade-in-fwd 1s ease-in-out both;
+    font-size: 12rem;
     animation: fade-in-fwd 2s ease-in-out both;
 }
 
@@ -84,37 +39,36 @@ body {
     position: absolute;
     transform: translate(22vw, 14vh);
     color: rgba(255, 255, 255, 1);
-    font-family: qtbfsxt;
-    font-size: 2rem;
+    font-family: 'qtbfsxt', sans-serif;
+    font-size: 3rem;
     font-weight: 200;
-    -webkit-animation: delay-show 2s ease-in-out both;
     animation: delay-show 2s ease-in-out both;
 }
 
 .page:nth-child(1) .top-left-light {
     position: absolute;
-    top: -70vh;
-    left: -70vh;
-    width: 140vh;
-    height: 140vh;
-    background: rgba(70, 48, 191, 0.2);
-    filter: blur(512.7999877929688px);
-    -webkit-animation: vibrate-1 7s ease-out infinite alternate forwards;
+    top: -120rem;
+    left: -120rem;
+    width: 188.9rem;
+    height: 188.9rem;
+    background: rgba(70, 48, 191, 0.4);
+    filter: blur(64rem);
     animation: vibrate-1 7s ease-out infinite alternate forwards;
+    z-index: 1;
 }
 
 
 .bottom-right-light {
     position: absolute;
-    bottom: -60vh;
-    right: -50vh;
-    width: 140vh;
-    height: 140vh;
-    background: linear-gradient(180deg, rgba(127, 48, 150, 0.5) 0%, rgba(41, 15, 48, 0.5) 100%);
-    filter: blur(1091.199951171875px);
+    top: 20rem;
+    right: -56rem;
+    width: 135.6rem;
+    height: 105.75rem;
+    background: rgba(128, 48, 150, 0.5);
+    filter: blur(64rem);
     opacity: 0.6;
-    -webkit-animation: vibrate-1 7s ease-out infinite alternate forwards;
-    animation: vibrate-1 7s ease-out infinite alternate forwards;
+    animation: vibrate-1 8s ease-out infinite alternate forwards;
+    z-index: 1;
 }
 
 .grid-overlay {
@@ -135,7 +89,7 @@ body {
 }
 
 .page:nth-child(2) .rocket-line-draft {
-    height: 85vh;
+    height: 80vh;
     position: absolute;
     left: 20vw;
     top: 15vh;
@@ -147,26 +101,26 @@ body {
     transform: translateY(25vh);
     margin-left: 30vw;
     color: rgba(255, 255, 255, 1);
-    width: 50rem;
-    height: 25rem;
+    width: 87.2rem;
+    height: 41.5rem;
     position: relative;
-    border-radius: 1rem;
+    border-radius: 1.6rem;
     z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.6rem;
     justify-content: center;
     align-items: start;
-    padding: 0 5rem;
+    padding: 0 8rem;
 }
 
 .page:nth-child(2) .intro::before {
     content: '';
     position: absolute;
-    top: -1px;
-    left: -1px;
-    right: -1px;
-    bottom: -1px;
+    top: -0.1rem;
+    left: -0.1rem;
+    right: -0.1rem;
+    bottom: -0.1rem;
     background: linear-gradient(rgba(187, 186, 192, 0.1) 50%, rgba(127, 48, 150, 0.7) 100%);
     border-radius: inherit;
     z-index: -1;
@@ -175,53 +129,53 @@ body {
 .page:nth-child(2) .intro::after {
     content: '';
     position: absolute;
-    top: 2px;
-    left: 2px;
-    right: 2px;
-    bottom: 2px;
+    top: 0.2rem;
+    left: 0.2rem;
+    right: 0.2rem;
+    bottom: 0.2rem;
     background: inherit;
-    border-radius: calc(1rem - 2px);
+    border-radius: calc(1rem - 0.2rem);
     z-index: -1
 }
 
 .page:nth-child(2) .intro .title {
-    transform: translateX(-2rem);
-    font-size: 4rem;
+    transform: translateX(-3.2rem);
+    font-size: 5.4rem;
     font-weight: 200;
-    font-family: 'fys';
+    font-family: 'fys', sans-serif;
 }
 
 .page:nth-child(2) .intro .en {
-    font-size: 2rem;
+    font-size: 3.2rem;
     font-weight: 200;
-    font-family: serif;
+    font-family: serif, sans-serif;
 }
 
 .page:nth-child(2) .intro .detail {
-    font-size: 1.5rem;
+    font-size: 2.4rem;
     font-weight: 200;
-    font-family: 'fys';
+    font-family: 'fys', sans-serif;
 }
 
 .page:nth-child(2) .intro .link-container {
     width: 100%;
-    padding: 0 2rem;
+    padding: 0 3.2rem;
     display: flex;
     justify-content: end;
 }
 
-.intro .link-container a {
-    border-radius: 4rem;
-    font-size: 1.5rem;
-    font-family: "fys";
+.page:nth-child(2) .intro .link-container a {
+    border-radius: 5.4rem;
+    font-size: 2.4rem;
+    font-family: "fys", sans-serif;
     font-weight: 200;
     display: flex;
-    width: 13rem;
-    height: 3.5rem;
+    width: 20.8rem;
+    height: 5.6rem;
     align-items: center;
     justify-content: center;
     color: rgba(255, 255, 255, 1);
-    border: 0.1rem solid transparent;
+    border: 0.16rem solid transparent;
     background:
         linear-gradient(-75deg,
             rgba(70, 48, 191),
@@ -230,22 +184,21 @@ body {
         linear-gradient(#1a1a1a, #1a1a1a) padding-box;
     background-origin: border-box;
     background-clip: padding-box, border-box;
-    box-shadow: 0 0 15rem rgb(90, 73, 93);
-    -webkit-animation: pulsate-bck 2s ease-in-out infinite both;
+    box-shadow: 0 0 24rem rgba(90, 73, 93, 1);
     animation: pulsate-bck 2s ease-in-out infinite both;
 }
 
-.intro .link-container a svg {
-    margin-left: 1rem;
-    width: 2rem;
-    height: 2rem;
+.page:nth-child(2) .intro .link-container a svg {
+    margin-left: 1.6rem;
+    width: 3.2rem;
+    height: 3.2rem;
     transform: rotate(-90deg);
 }
 
 .meteor {
     position: absolute;
-    width: 20px;
-    height: 2px;
+    width: 2rem;
+    height: 0.2rem;
     background: linear-gradient(90deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%);
     transform-origin: left;
     animation: meteor 1.2s ease-in forwards;
@@ -259,10 +212,10 @@ body {
     top: 50%;
     transform: translateY(-50%);
     width: 4%;
-    height: 100px;
+    height: 10rem;
     border-radius: 50%;
     background: #fff;
-    box-shadow: 0 0 10px #fff;
+    box-shadow: 0 0 1rem #fff;
 }
 
 .page:nth-child(3) {
@@ -277,60 +230,59 @@ body {
     height: 140vh;
     background: linear-gradient(135deg, #803096 0%, #6730A8 44%, #4630BF 100%);
     opacity: 0.45;
-    filter: blur(464.3999938964844px);
-    -webkit-animation: vibrate-1 7s ease-out infinite alternate forwards;
+    filter: blur(29rem);
     animation: vibrate-1 7s ease-out infinite alternate forwards;
 }
 
 .page:nth-child(3) .intro {
     position: absolute;
     color: rgba(255, 255, 255, 1);
-    width: 40rem;
-    height: 25rem;
-    bottom: 4rem;
+    width: 64rem;
+    height: 40rem;
+    bottom: 6.4rem;
     display: flex;
     align-items: start;
     flex-direction: column;
     justify-content: center;
-    font-family: "fys";
-    padding-left: 5rem;
+    font-family: "fys", sans-serif;
+    padding-left: 8rem;
 }
 
 
 .page:nth-child(3) .intro .title {
-    font-size: 3.5rem;
-    margin-bottom: 1.7rem;
-    transform: translate(-1.5rem);
+    font-size: 5.6rem;
+    margin-bottom: 2.72rem;
+    transform: translate(-2.4rem);
 }
 
 .page:nth-child(3) .intro .en {
-    font-size: 2rem;
+    font-size: 3.2rem;
     font-weight: 200;
-    font-family: serif;
-    margin-bottom: 1.5rem;
+    font-family: serif, sans-serif;
+    margin-bottom: 2.4rem;
 }
 
 .page:nth-child(3) .intro .line {
     width: 75%;
-    height: 0.2rem;
+    height: 0.32rem;
     background: rgba(255, 255, 255, 1);
 }
 
 .page:nth-child(3) .milestone {
-    width: 50rem;
-    height: 27rem;
+    width: 80rem;
+    height: 43.2rem;
     position: absolute;
-    top: 11rem;
-    right: 8rem;
+    top: 17.6rem;
+    right: 12.8rem;
 }
 
 .milestone-bg {
-    width: 50rem;
-    height: 27rem;
+    width: 80rem;
+    height: 43.2rem;
     border-radius: 50%;
     position: absolute;
     z-index: -1;
-    box-shadow: 0 0 500px rgba(127, 48, 150, 0.7);
+    box-shadow: 0 0 31.25rem rgba(127, 48, 150, 0.7);
 }
 
 .milestone .rocket-launch {
@@ -339,66 +291,10 @@ body {
     background: url('./../../assets/images/index/RocketLaunch.png');
     background-repeat: no-repeat;
     background-size: cover;
-    transform: scale(1.25) translate(0, -2rem);
+    transform: scale(1.25) translate(0, -3.2rem);
 }
 
-.milestone .rocket-launch .content {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: center;
-    gap: 1.5rem;
-    width: 28rem;
-    height: 10rem;
-    position: absolute;
-    background: url('../../assets/images/index/WithOutBottomRight.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    color: rgba(255, 255, 255, 1);
-    bottom: -4rem;
-    left: 21rem;
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-}
-
-.milestone .rocket-launch .content:hover {
-    opacity: 0.9;
-    transform: translate(0.5rem, 0.5rem);
-}
-
-.milestone .rocket-launch .content h2 {
-    margin-left: 4rem;
-    font-family: "fys";
-    font-size: 1.5rem;
-}
-
-.milestone .rocket-launch .content img {
-    position: absolute;
-    right: -2rem;
-    bottom: -2rem;
-    transform: scale(0.6);
-}
-
-/* 第四页样式 */
-.page:nth-child(4) {
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.page:nth-child(4) .planet-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
-.page:nth-child(4) .planet-canvas {
-    width: 100%;
-    height: 100%;
-}
-
+/* 将 .content 选择器移到前面 */
 .page:nth-child(4) .content {
     position: relative;
     z-index: 2;
@@ -407,41 +303,218 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 2.4rem;
+    transform: translateY(-5rem);
 }
 
+.milestone .rocket-launch .content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 2.324rem;
+    width: 44.8rem;
+    height: 16rem;
+    position: absolute;
+    background: url('../../assets/images/index/WithOutBottomRight.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: rgba(255, 255, 255, 1);
+    bottom: -6.4rem;
+    left: 33.6rem;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.milestone .rocket-launch .content:hover {
+    opacity: 0.9;
+    transform: translate(0.8rem, 0.8rem);
+}
+
+.milestone .rocket-launch .content h2 {
+    margin-left: 6.4rem;
+    font-family: "fys", sans-serif;
+    font-size: 2.324rem;
+}
+
+.milestone .rocket-launch .content img {
+    position: absolute;
+    right: -3.2rem;
+    bottom: -3.2rem;
+    transform: scale(0.6);
+}
+
+.page:nth-child(4) {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page:nth-child(4) .mask {
+    position: absolute;
+    height: 5rem;
+    width: 100vw;
+    background: linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, .3) 50%, rgba(0, 0, 0, .8) 100%);
+    z-index: 1;
+    bottom: 0;
+}
+
+.page:nth-child(4) .planet-container {
+    position: absolute;
+    width: 70vw;
+    height: 120vh;
+    z-index: 1;
+    background: url('../../assets/images/index/Plant.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(0, 15rem);
+}
+
+.page:nth-child(4) .planet-container .planet-canvas {
+    transform: translateY(-10rem);
+    width: 50vw;
+    height: 45vh;
+}
+
+/* 已将此选择器移到前面 */
+
 .page:nth-child(4) .content .title {
-    font-family: 'fys';
-    font-size: 4rem;
-    margin-bottom: 1rem;
+    font-family: 'fys', sans-serif;
+    font-size: 6.4rem;
+    margin-bottom: 1.6rem;
 }
 
 .page:nth-child(4) .content .subtitle {
-    font-family: serif;
-    font-size: 2rem;
+    font-family: serif, sans-serif;
+    font-size: 3.2rem;
     font-weight: 200;
-    margin-bottom: 1rem;
+    margin-bottom: 1.6rem;
+}
+
+.page:nth-child(4) .content .line {
+    width: 46.2rem;
+    height: 0.1rem;
+    background: rgba(255, 255, 255, 1);
 }
 
 .page:nth-child(4) .content .description {
-    font-family: 'fys';
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
+    font-family: 'fys', sans-serif;
+    font-size: 3.2rem;
+    margin-bottom: 3.2rem;
 }
 
 .page:nth-child(4) .content .start-btn {
-    font-family: 'fys';
-    font-size: 1.2rem;
-    padding: 0.8rem 2rem;
+    width: 22.4rem;
+    height: 5.6rem;
     border: none;
-    border-radius: 2rem;
-    background: linear-gradient(90deg, #803096, #4630BF);
-    color: white;
-    cursor: pointer;
+    background: url('../../assets/images/index/StartExplor.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
 .page:nth-child(4) .content .start-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(127, 48, 150, 0.5);
+}
+
+.page:nth-child(4) .content .start-btn:active {
+    transform: scale(0.95);
+}
+
+.page:nth-child(5) .last-plant {
+    width: 103rem;
+    height: 80.2rem;
+    position: absolute;
+    bottom: 5rem;
+    right: 0rem;
+}
+
+.page:nth-child(5) .last-plant img {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.page:nth-child(5) .last-plant img:nth-child(1) {
+    animation: light 1s ease-in-out infinite;
+}
+
+.page:nth-child(5) .last-plant img:nth-child(2) {
+    animation: light 2s ease-in-out infinite;
+}
+
+.page:nth-child(5) .last-plant img:nth-child(3) {
+    animation: light 3s ease-in-out infinite;
+}
+
+.page:nth-child(5) .last-plant img:nth-child(4) {
+    animation: light 4s ease-in-out infinite;
+}
+
+.page:nth-child(5) .stars-bg {
+    position: absolute;
+    width: 75vw;
+    height: 75vh;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+}
+
+.page:nth-child(5) .intro {
+    position: absolute;
+    bottom: 10rem;
+    left: 0;
+    color: rgba(255, 255, 255, 1);
+    font-family: "fys", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 2.8rem;
+    padding: 0 9.2rem;
+    z-index: 1;
+}
+
+.page:nth-child(5) .intro .title {
+    font-size: 5.4rem;
+    transform: translateX(-3.2rem);
+}
+
+.page:nth-child(5) .intro .en {
+    font-size: 2.4rem;
+}
+
+.page:nth-child(5) .intro .line {
+    width: 46.2rem;
+    height: 0.2rem;
+    background: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(5) .intro .link-container {
+    width: 100%;
+    padding: 2rem 0;
+    font-size: 3.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.page:nth-child(5) .intro .link-container .link {
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 1);
+    transform: translateX(7.5rem);
+    cursor: pointer;
+}
+
+.page:nth-child(5) .intro .link-container .link svg {
+    margin-left: 1rem;
+    width: 3.6rem;
+    height: 3.6rem;
+    transform: rotate(-90deg);
 }
