@@ -29,7 +29,7 @@ body {
 .header {
   width: 45rem;
   height: 16rem;
-  background-color: #000;
+  /* background-color: #000; */
   /* background: linear-gradient(to top, #1a0f24 50%, #3c1846); */
   background: radial-gradient(circle, #3c1846 -40%, #000000);
   border-top: 0.1rem solid #FFFFFF;
@@ -38,7 +38,7 @@ body {
 .title {
   width: 40rem;
   height: 9rem;
-  font-family: 'fys';
+  font-family: 'fys' sans-serif;
   font-weight: 400;
   font-size: 6rem;
   color: #FFFFFF;
@@ -47,7 +47,6 @@ body {
   text-align: left;
   font-style: normal;
   text-transform: none;
-  /* background: #000; */
   background-clip: padding-box;
   display: inline-block;
   padding: 2.3rem 0rem;
@@ -99,14 +98,6 @@ body {
   height: 3.5rem;
   left: calc(50% - 0.2rem);
   /* z-index: 1; */
-}
-
-/* 第一个时间轴项目添加文字 */
-.timeline::before {
-  position: absolute;
-  top: 4rem;
-  color: #FFFFFF;
-  font-size: 1.4rem;
 }
 
 .item-left {
@@ -165,12 +156,6 @@ body {
   margin-top: 1rem;
 }
 
-/* 缩小除第一个 content-title 外，其他 content-title 与 content-desc 的间距 */
-.item:not(:first-child) .content-desc {
-  padding-top: 0rem;
-  margin-top: 0rem;
-}
-
 .content-desc {
   margin-top: 3rem;
   width: 40rem;
@@ -187,13 +172,21 @@ body {
   text-transform: none;
 }
 
+/* 缩小除第一个 content-title 外，其他 content-title 与 content-desc 的间距 */
+.item:not(:first-child) .content-desc {
+  padding-top: 0rem;
+  margin-top: 0rem;
+}
+
+
+
 .detail-button {
-  font-family: 'fys';
+  font-family: 'fys' sans-serif;
   width: 9.3rem;
   height: 2.8rem;
   border-radius: 2.5rem;
   border: 0.1rem solid;
-  border-color: linear-gradient(95deg, rgba(128, 48, 150, 0.8), rgba(255, 255, 255, 0.1), rgba(70, 48, 191, 1), rgba(255, 255, 255, 0.1)) 1 1;
+  /* border-color: linear-gradient(95deg, rgba(128, 48, 150, 0.8), rgba(255, 255, 255, 0.1), rgba(70, 48, 191, 1), rgba(255, 255, 255, 0.1)) 1 1; */
   margin-top: 1rem;
   display: block;
   color: #FFFFFF;
@@ -205,7 +198,7 @@ body {
 
 .item-left:first-child::after {
   content: '发射第一颗人造地球卫星';
-  font-family: 'fys';
+  font-family: 'fys' sans-serif;
   position: absolute;
   left: calc(100% + 4rem);
   top: 15.5rem;
@@ -215,4 +208,3 @@ body {
   white-space: nowrap;
   /* 文本不会自动换行  */
 }
-
