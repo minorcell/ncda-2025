@@ -9,8 +9,6 @@
 基于 Three.js 的星空背景组件，创建一个动态的星空效果。
 
 ```javascript
-import { StarBackground } from '../common/StarBackground.js';
-
 // 创建星空背景
 new StarBackground(container, {
     starCount: 1000,     // 星星数量
@@ -27,8 +25,6 @@ new StarBackground(container, {
 使用 SVG 和原生 JavaScript 实现的流星效果组件。
 
 ```javascript
-import { MeteorEffect } from '../common/MeteorEffect.js';
-
 // 创建流星效果
 new MeteorEffect(container, {
     maxMeteors: 15,      // 同时存在的最大流星数量
