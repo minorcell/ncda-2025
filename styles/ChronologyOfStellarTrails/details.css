@@ -1,3 +1,4 @@
+
 body {
   background-color: rgba(5, 2, 6);
   color: rgba(254, 254, 254);
@@ -15,8 +16,9 @@ body {
 .orbital {
   position: relative;
   width: 56%;
-  height: 55rem;
-  right: 34rem;
+  height: 85rem;
+  top: 3rem;
+  right: 55rem;
 }
 
 .orbital-circle {
@@ -25,8 +27,9 @@ body {
   left: calc(2 / 3 * 100%);
   transform: translate(-30%, -50%);
   border-radius: 50%;
-  border: 0.13rem solid rgba(254, 254, 254);
+  border: 0.2rem solid rgba(254, 254, 254);
 }
+
 
 .orbital-circle:nth-child(1) {
   width: calc(100% / 6);
@@ -34,11 +37,6 @@ body {
 }
 
 .orbital-circle:nth-child(2) {
-  width: calc(100% / 3);
-  height: calc(100% / 3);
-}
-
-.orbital-circle:nth-child(3) {
   width: calc(100% / 3);
   height: calc(100% / 3);
 }
@@ -66,26 +64,25 @@ body {
 
 .header {
   position: relative;
-  right: 7rem;
-  margin-top: 8rem;
+  bottom: 3rem;
+  right: 14rem;
   float: left;
   font-family: 'fys' sans-serif;
 }
 
 .info h1 {
-  font-size: 3.1rem;
+  line-height: 8rem;
+  font-size: 5rem;
 }
 
 .info .date {
-  font-size: 3rem;
+  font-size: 5rem;
   margin: 1rem 0;
   font-family: 'fys' sans-serif;
 }
 
 .logo {
-  margin-left: 0.6rem;
-  margin-bottom: 1rem;
-  width: 55%;
+  width: 60%;
   height: auto;
 }
 
@@ -97,43 +94,45 @@ body {
 
 .astronauts-introduction {
   position: relative;
-  top: 10rem;
-  right: 9rem;
-  font-size: 2rem;
+  top: 5rem;
+  right: 10rem;
+  font-size: 3rem;
   width: 2rem;
-  line-height: 2.4rem;
+  line-height: 3.5rem;
   display: inline-block;
 }
 
 .astronaut {
-  margin-right: 3.4rem;
+  bottom: 4rem;
+  right: 2rem;
+  margin-right: 5rem;
   position: relative;
-  right: 5rem;
-  top: 7rem;
   font-family: 'fys' sans-serif;
 }
 
 .astronaut img {
-  width: 9rem;
+  width: 14rem;
   height: auto;
   /* border-radius: 1rem; */
 }
 
 .astronaut p {
-  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-left: 4.4rem;
+  font-size: 2rem;
 }
 
 .mission-details {
   position: relative;
-  right: 4rem;
   width: 50%;
-  height: 8rem;
-  top: 11rem;
+  right: 4rem;
+  height: 13rem;
+  top: 4rem;
   display: flex;
   flex-direction: column;
   border-radius: 1.5rem;
 
-  border: 0.1px solid;
+  border: 0.1rem solid;
   /* border-image: linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(128, 48, 150, 1)) 1 1; */
   /* border-image-repeat: round; */
 }
@@ -142,25 +141,25 @@ body {
   position: absolute;
   top: 50%;
   left: 55%;
-  width: 15rem;
+  width: 25rem;
   transform: translate(-50%, -50%);
-  font-size: 1.09rem;
-  line-height: 2rem;
+  font-size: 2rem;
+  line-height: 3.5rem;
   font-family: 'fys' sans-serif;
 }
 
 .description {
   position: relative;
-  right: 5rem;
-  margin-top: 16rem;
-  font-size: 1.5rem;
-  line-height: 2.7rem;
+  right: 10rem;
+  margin-top: 13rem;
+  font-size: 2.5rem;
+  line-height: 4rem;
   font-family: 'fys' sans-serif;
 }
 
 .right-circles {
   position: absolute;
-  right: 3rem;
+  right: 5rem;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -170,15 +169,15 @@ body {
 }
 
 .right-circle {
-  width: 4rem;
-  height: 4rem;
+  width: 6rem;
+  height: 6rem;
   /* background-color: #6200ea; */
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: rgba(254, 254, 254);
-  font-size: 24px;
+  font-size: 2.4rem;
   background: rgba(152, 117, 161, 0.15);
   box-shadow: inset 0px 0px 3px 2px #803096;
   border: 1px solid rgba(209, 209, 209);
