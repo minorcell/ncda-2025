@@ -1,7 +1,5 @@
-import * as THREE from '../../build/threejs/three.module.min.js';
-
 /**
- * 创建一个基于 Three.js 的星空背景
+ * 创建一个基于 js 的星空背景
  * 
  * @class StarBackground
  * @param {HTMLElement} container - 要添加星空背景的容器元素
@@ -13,10 +11,10 @@ import * as THREE from '../../build/threejs/three.module.min.js';
  * @param {number} [options.ySpeed=0.00005] - Y轴旋转速度
  * @param {number} [options.elapsed=0] - 初始动画时间
  */
-export class StarBackground {
+class StarBackground {
     constructor(container, options = {}) {
-        this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(
+        this.scene = new Scene();
+        this.camera = new PerspectiveCamera(
             75,
             container.clientWidth / container.clientHeight,
             0.1,
@@ -24,7 +22,7 @@ export class StarBackground {
         );
         this.camera.position.z = 5;
 
-        this.renderer = new THREE.WebGLRenderer({ alpha: true });
+        this.renderer = new WebGLRenderer({ alpha: true });
         this.renderer.setSize(container.clientWidth, container.clientHeight);
         this.renderer.setClearColor(0x000000, 0);
         this.canvas = this.renderer.domElement;
@@ -61,15 +59,15 @@ export class StarBackground {
             sizes[i] = Math.random() * (this.starSizeMax - this.starSizeMin) + this.starSizeMin;
         }
 
-        const geometry = new THREE.BufferGeometry();
-        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        geometry.setAttribute('phase', new THREE.BufferAttribute(phases, 1));
-        geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+        const geometry = new BufferGeometry();
+        geometry.setAttribute('position', new BufferAttribute(positions, 3));
+        geometry.setAttribute('phase', new BufferAttribute(phases, 1));
+        geometry.setAttribute('size', new BufferAttribute(sizes, 1));
 
-        const material = new THREE.ShaderMaterial({
+        const material = new ShaderMaterial({
             uniforms: {
                 elapsed: { value: 0 },
-                color: { value: new THREE.Color(0xffffff) }
+                color: { value: new Color(0xffffff) }
             },
             vertexShader: `
                 uniform float elapsed;
@@ -94,11 +92,11 @@ export class StarBackground {
                 }
             `,
             transparent: true,
-            blending: THREE.AdditiveBlending,
+            blending: AdditiveBlending,
             depthWrite: false
         });
 
-        this.stars = new THREE.Points(geometry, material);
+        this.stars = new Points(geometry, material);
         this.scene.add(this.stars);
     }
 

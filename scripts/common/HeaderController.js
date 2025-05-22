@@ -3,7 +3,7 @@
  * @param {Object} options - 配置选项
  * @param {HTMLElement|Window} [options.container=window] - 滚动容器，默认为window
  */
-export class HeaderController {
+class HeaderController {
     constructor(header, options = {}) {
         if (!header) {
             throw new Error('Header element is required');
