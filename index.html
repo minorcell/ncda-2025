@@ -6,9 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="images/svg" href="./assets/images/logo.svg">
     <title>赴九天 问苍穹｜中国载人航天</title>
+    <link rel="preload" href="./assets/fonts/FYS.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="./assets/fonts/HKJT.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="./assets/fonts/QTBFSXT.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="./styles/reset.css">
     <link rel="stylesheet" href="./styles/header.css">
     <link rel="stylesheet" href="./styles/index/index.css">
+    <script src="./build/three.js"></script>
 </head>
 
 <body>
@@ -110,9 +114,10 @@
             </div>
         </div>
     </div>
-    <script type="module" src="./scripts/index/planetStars.js"></script>
-    <script type="module" src="./scripts/index/gridBackground.js"></script>
-    <script type="module" src="./scripts/index/index.js"></script>
+    <script src="./scripts/common/HeaderController.js"></script>
+    <script src="./scripts/common/StarBackground.js"></script>
+    <script src="./scripts/common/MeteorEffect.js"></script>
+    <script src="./scripts/index/index.js"></script>
 </body>
 
 </html>
