@@ -30,7 +30,6 @@ body {
 .header {
   width: 45rem;
   height: 16rem;
-  background-color: rgba(0, 0, 0, 1);
   background: radial-gradient(circle, rgba(60, 24, 70, 1) -40%, rgba(0, 0, 0, 1));
   border-top: 0.1rem solid rgba(255, 255, 255, 1);
 }
@@ -84,6 +83,7 @@ body {
   bottom: 0;
   left: 50%;
   margin-left: -0.1rem;
+  font-size: 4rem;
 }
 
 /* 第一个时间轴项目加深加粗线段 */
@@ -100,13 +100,6 @@ body {
   /* z-index: 1; */
 }
 
-/* 第一个时间轴项目添加文字 */
-.timeline::before {
-  position: absolute;
-  top: 4rem;
-  color: rgba(255, 255, 255, 1);
-  font-size: 1.4rem;
-}
 
 .item-left {
   padding: 4rem 6rem;
