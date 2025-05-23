@@ -22,7 +22,7 @@
  * @param {number} [options.meteor.tailLengthMin=1.2] - 尾迹长度系数最小值
  * @param {number} [options.meteor.tailLengthMax=2] - 尾迹长度系数最大值
  */
-export class MeteorEffect {
+class MeteorEffect {
     constructor(container, options = {}) {
         this.container = container;
         this.svgNS = "http://www.w3.org/2000/svg";
