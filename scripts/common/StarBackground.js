@@ -13,8 +13,8 @@
  */
 class StarBackground {
     constructor(container, options = {}) {
-        this.scene = new Scene();
-        this.camera = new PerspectiveCamera(
+        this.scene = new THREE.Scene();
+        this.camera = new THREE.PerspectiveCamera(
             75,
             container.clientWidth / container.clientHeight,
             0.1,
@@ -22,7 +22,7 @@ class StarBackground {
         );
         this.camera.position.z = 5;
 
-        this.renderer = new WebGLRenderer({ alpha: true });
+        this.renderer = new THREE.WebGLRenderer({ alpha: true });
         this.renderer.setSize(container.clientWidth, container.clientHeight);
         this.renderer.setClearColor(0x000000, 0);
         this.canvas = this.renderer.domElement;
@@ -59,15 +59,15 @@ class StarBackground {
             sizes[i] = Math.random() * (this.starSizeMax - this.starSizeMin) + this.starSizeMin;
         }
 
-        const geometry = new BufferGeometry();
-        geometry.setAttribute('position', new BufferAttribute(positions, 3));
-        geometry.setAttribute('phase', new BufferAttribute(phases, 1));
-        geometry.setAttribute('size', new BufferAttribute(sizes, 1));
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('phase', new THREE.BufferAttribute(phases, 1));
+        geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 
-        const material = new ShaderMaterial({
+        const material = new THREE.ShaderMaterial({
             uniforms: {
                 elapsed: { value: 0 },
-                color: { value: new Color(0xffffff) }
+                color: { value: new THREE.Color(0xffffff) }
             },
             vertexShader: `
                 uniform float elapsed;
@@ -92,11 +92,11 @@ class StarBackground {
                 }
             `,
             transparent: true,
-            blending: AdditiveBlending,
+            blending: THREE.AdditiveBlending,
             depthWrite: false
         });
 
-        this.stars = new Points(geometry, material);
+        this.stars = new THREE.Points(geometry, material);
         this.scene.add(this.stars);
     }
 
