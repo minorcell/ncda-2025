@@ -41,6 +41,7 @@ body {
   transform: translate(-30%, -50%);
   border-radius: 50%;
   border: 0.2rem solid rgba(254, 254, 254);
+  /* animation: rotate 10s linear infinite; */
 }
 
 
