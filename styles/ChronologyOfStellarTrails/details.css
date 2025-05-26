@@ -228,3 +228,18 @@ body {
   box-shadow: inset 0px 0px 3px 2px rgba(128, 48, 150);
   border: 1px solid rgba(209, 209, 209);
 }
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.right-circle.clicked {
+  animation: bounce 0.5s ease-in-out;
+}

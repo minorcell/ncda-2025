@@ -35,3 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+const StarBackground = new StarBackground(container, {
+  starCount: 1000,     // 星星数量
+  starSizeMin: 0.04,   // 最小星星尺寸
+  starSizeMax: 0.12,   // 最大星星尺寸
+  xSpeed: 0.00005,     // X轴旋转速度
+  ySpeed: 0.00005,     // Y轴旋转速度
+  elapsed: 0           // 初始动画时间
+});
+
