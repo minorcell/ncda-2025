@@ -47,3 +47,53 @@ rightCircles.forEach(circle => {
     }
   });
 });
+
+const container = document.getElementById('starbg')
+if (container) {
+  const StarBackgroundInstance = new StarBackground(container, {
+    starCount: 1000,     // 星星数量
+    starSizeMin: 0.04,   // 最小星星尺寸
+    starSizeMax: 0.12,   // 最大星星尺寸
+    xSpeed: 0.00005,     // X轴旋转速度
+    ySpeed: 0.00005,     // Y轴旋转速度
+    elapsed: 0           // 初始动画时间
+  });
+}
+else {
+  console.error('未找到对应的容器元素');
+
+}
+
+const containers = document.getElementById('starbg')
+if (containers) {
+  new MeteorEffect(container, {
+    maxMeteors: 20,      // 同时存在的最大流星数量
+    zIndex: 1,           // 容器层级
+    meteor: {
+      // 起始位置配置
+      startXMin: 10,   // X坐标最小值
+      startXMax: 20,  // X坐标最大值
+      startYMin: 10,    // Y坐标最小值
+      startYMax: 40,   // Y坐标最大值
+
+      // 流星外观配置
+      lengthMin: 10,   // 长度最小值
+      lengthMax: 25,   // 长度最大值
+      widthMin: 0.1,   // 宽度最小值
+      widthMax: 0.2,   // 宽度最大值
+
+      // 运动参数配置
+      angleMin: 150,   // 运动角度最小值
+      angleMax: 180,   // 运动角度最大值
+      speedMin: 0.5,     // 速度最小值
+      speedMax: 1,     // 速度最大值
+
+      // 尾迹效果配置
+      tailLengthMin: 1.2,  // 尾迹长度系数最小值
+      tailLengthMax: 2     // 尾迹长度系数最大值
+    }
+  });
+}
+else {
+  console.error('未找到对应的容器元素')
+}

@@ -22,8 +22,6 @@ body {
   width: 70rem;
   height: 60em;
   background-image: linear-gradient(45deg, rgba(5, 2, 6) 50%, rgba(60, 24, 70, 0.8) 100%);
-  /* clip-path: polygon(0 0, 100% 0, 100% 100%); */
-  /* background:linear-gradient( rgba(60, 24, 70, 0.8) , rgba(5, 2, 6) ) ; */
 }
 
 .orbital {
@@ -90,8 +88,14 @@ body {
 
 .info {
   width: 52%;
-  height: 50rem;
+  height: 55rem;
   padding: 1rem;
+}
+
+#starbg {
+  margin: auto;
+  height: 33rem;
+  width: 100%;
 }
 
 .header {
@@ -119,6 +123,7 @@ body {
 }
 
 
+
 .astronauts {
   display: flex;
 
@@ -126,8 +131,8 @@ body {
 
 .astronauts-introduction {
   position: relative;
-  top: 5rem;
-  right: 10rem;
+  top: 3rem;
+  right: 20rem;
   font-size: 3rem;
   width: 2rem;
   line-height: 3.5rem;
@@ -135,12 +140,13 @@ body {
 }
 
 .astronaut {
-  bottom: 4rem;
-  right: 2rem;
+  top: 1rem;
+  right: 3rem;
   margin-right: 5rem;
   position: relative;
   font-family: 'fys', 'Microsoft YaHei', 'PingFang SC', 'Microsoft JhengHei', sans-serif;
 }
+
 
 .astronaut img {
   width: 14rem;
@@ -159,14 +165,13 @@ body {
   width: 50%;
   right: 4rem;
   height: 14rem;
-  top: 4rem;
+  bottom: 4rem;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   border-radius: 4rem;
   overflow: hidden;
   border: 0.11rem solid rgba(46, 38, 48, 1);
-  /* border-color:  linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(128, 48, 150, 1)) 1 1; */
   background-color: rgba(128, 48, 150, 0.1);
 }
 
@@ -197,7 +202,7 @@ body {
 .description {
   position: relative;
   right: 10rem;
-  margin-top: 13rem;
+  margin-top: 3rem;
   font-size: 2.5rem;
   line-height: 4rem;
   font-family: 'fys', 'Microsoft YaHei', 'PingFang SC', 'Microsoft JhengHei', sans-serif;
@@ -228,13 +233,16 @@ body {
   box-shadow: inset 0px 0px 3px 2px rgba(128, 48, 150);
   border: 1px solid rgba(209, 209, 209);
 }
+
 @keyframes bounce {
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
   }

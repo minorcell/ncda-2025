@@ -27,7 +27,6 @@ body {
   background-color: rgba(0, 0, 0, 1);
   position: relative;
   z-index: 0;
-
 }
 
 .header {
@@ -77,15 +76,6 @@ body {
   padding: 4rem 0;
 }
 
-.item.active .content-title {
-  position: absolute;
-  margin-top: -5.2rem;
-}
-
-.item.active .detail-button {
-  display: inline-block;
-  /* 确保按钮显示 */
-}
 
 .timeline::before {
   content: '';
@@ -156,6 +146,11 @@ body {
   text-transform: none;
 }
 
+.item.active .content-title {
+  position: absolute;
+  margin-top: -5.2rem;
+}
+
 .item-left:first-child .content-title {
   position: absolute;
   margin-top: -5.2rem;
@@ -183,13 +178,13 @@ body {
   text-transform: none;
 }
 
+
+
 /* 缩小除第一个 content-title 外，其他 content-title 与 content-desc 的间距 */
 .item:not(:first-child) .content-desc {
   padding-top: 0rem;
   margin-top: 0rem;
 }
-
-
 
 .detail-button {
   font-family: 'fys', 'Microsoft YaHei', 'PingFang SC', 'Microsoft JhengHei', sans-serif;
@@ -200,7 +195,6 @@ body {
   /* border-color: linear-gradient(95deg, rgba(128, 48, 150, 0.8), rgba(255, 255, 255, 0.1), rgba(70, 48, 191, 1), rgba(255, 255, 255, 0.1)) 1 1; */
   padding-top: 0.5rem;
   display: block;
-  /* color: rgba(255, 255, 255, 1); */
   /* background-color: transparent; */
   margin-left: 31rem;
   margin-right: 0;
@@ -208,6 +202,7 @@ body {
   padding-left: 2.4rem;
   color: rgba(255, 255, 255, 1);
 }
+
 
 .item-left:first-child::after {
   content: '发射第一颗人造地球卫星';
