@@ -13,7 +13,7 @@ const missionDetailContent = document.querySelector('.info .detail-content');
 
 let currentMissionIndex = 0; // 当前任务索引
 let isAnimating = false; // 是否正在执行动画的标志
-const animationDuration = 500; // 动画持续时间 (毫秒), 如果CSS中的动画时间修改了，这里也需要对应调整
+const animationDuration = 300; // 动画持续时间 (毫秒), 如果CSS中的动画时间修改了，这里也需要对应调整
 
 const missionData = [
   {
