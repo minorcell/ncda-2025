@@ -1,116 +1,60 @@
 const container = document.querySelector(".star-bg");
+const orbitalCircles = document.querySelectorAll('.orbital-circle');
 const lastCircle = document.querySelector(".last-circle");
 const nextCircle = document.querySelector(".next-circle");
-const orbitalCircles = document.querySelectorAll('.orbital-circle');
 
-const missionData = [
-  {
-    id: 1,
-    rocketName: "神舟六号",
-    launchDate: "20051012",
-    people: [
-      {
-        name: "费俊龙",
-        imgSrc: "../assets/images/ChronologyOfStellarTrails/first.webp",
-      },
-      {
-        name: "聂海胜",
-        imgSrc: "../assets/images/ChronologyOfStellarTrails/second.webp",
-      }
-    ],
-    missionStartDate: "2005.10.12 09:00",
-    flyTime: "4天19小时32分",
-    missionEndDate: "2005.10.17 04:32",
-    description: "公元2005年10月12日神舟六号飞船搭载航天员费俊龙、聂海胜成功发射升空进入预定轨道。2005年10月17日返回舱在内蒙古中部预定区域成功着陆，完成了多人多天航天飞行的任务。神舟六号载人航天飞行的成功实现顺利开局，是中国载人航天工程继神舟五号首次载人飞行之后取得的又一具有里程碑意义的重大成果。"
-  },
-  {
-    id: 2,
-    rocketName: "神舟七号",
-    launchDate: "20051012",
-    people: [
-      {
-        name: "费俊龙",
-        imgSrc: "../assets/images/ChronologyOfStellarTrails/first.webp",
-      },
-      {
-        name: "聂海胜",
-        imgSrc: "../assets/images/ChronologyOfStellarTrails/second.webp",
-      }
-    ],
-    missionStartDate: "2005.10.12 09:00",
-    flyTime: "4天19小时32分",
-    missionEndDate: "2005.10.17 04:32",
-    description: "公元2005年10月12日神舟六号飞船搭载航天员费俊龙、聂海胜成功发射升空进入预定轨道。2005年10月17日返回舱在内蒙古中部预定区域成功着陆，完成了多人多天航天飞行的任务。神舟六号载人航天飞行的成功实现顺利开局，是中国载人航天工程继神舟五号首次载人飞行之后取得的又一具有里程碑意义的重大成果。"
-  },
-  {
-    id: 3,
-    rocketName: "神舟八号",
-    launchDate: "20051012",
-    people: [
-      {
-        name: "费俊龙",
-        imgSrc: "../assets/images/ChronologyOfStellarTrails/first.webp",
-      },
-      {
-        name: "聂海胜",
-        imgSrc: "../assets/images/ChronologyOfStellarTrails/second.webp",
-      }
-    ],
-    missionStartDate: "2005.10.12 09:00",
-    flyTime: "4天19小时32分",
-    missionEndDate: "2005.10.17 04:32",
-    description: "公元2005年10月12日神舟六号飞船搭载航天员费俊龙、聂海胜成功发射升空进入预定轨道。2005年10月17日返回舱在内蒙古中部预定区域成功着陆，完成了多人多天航天飞行的任务。神舟六号载人航天飞行的成功实现顺利开局，是中国载人航天工程继神舟五号首次载人飞行之后取得的又一具有里程碑意义的重大成果。"
-  },
-];
+const infoContainer = document.querySelector('.info');
+const missionLogo = document.querySelector('.info .intro .left .logo');
+const missionRocketName = document.querySelector('.info .intro .left .roctet-name');
+const missionLaunchDate = document.querySelector('.info .intro .left .launch-date');
+const missionPeoplesContainer = document.querySelector('.info .intro .right .peoples');
+const missionLaunchInfoContainer = document.querySelector('.info .intro .right .launch-info');
+const missionDetailContent = document.querySelector('.info .detail-content');
 
 let currentMissionIndex = 0;
 
-// 更新页面内容的函数
-function updateMissionContent(index) {
-  const mission = missionData[index];
-  if (!mission) return;
-
-  // 更新标题和日期
-  document.querySelector('.header h1').textContent = mission.rocketName;
-  document.querySelector('.date').textContent = mission.launchDate.replace(/(.{4})(.{2})(.{2})/, '$1 $2 $3');
-
-  // 更新宇航员信息
-  const astronautsContainer = document.querySelector('.astronauts');
-  let astronautsHTML = '<div class="astronauts-introduction">宇航员</div>';
-  mission.people.forEach(person => {
-    astronautsHTML += `
-            <div class="astronaut">
-                <img src="${person.imgSrc}" alt="${person.name}">
-                <p>${person.name}</p>
-            </div>
-        `;
-  });
-  astronautsContainer.innerHTML = astronautsHTML;
-
-  // 更新任务详情
-  const missionContent = document.querySelector('.mission-content');
-  missionContent.innerHTML = `
-        <p>起飞时: ${mission.missionStartDate}</p>
-        <p>飞行时间: ${mission.flyTime}</p>
-        <p>降落时: ${mission.missionEndDate}</p>
-    `;
-
-  // 更新描述
-  document.querySelector('.description').textContent = mission.description;
-
-  // 添加过渡动画
-  const elements = ['.header', '.astronauts', '.mission-details', '.description'];
-  elements.forEach(selector => {
-    const element = document.querySelector(selector);
-    element.style.opacity = '0';
-    element.style.transform = 'translateY(20px)';
-    setTimeout(() => {
-      element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-      element.style.opacity = '1';
-      element.style.transform = 'translateY(0)';
-    }, 50);
-  });
-}
+const missionData = [
+  {
+    id: 1,  // id
+    logoSrc: "../assets/images/ChronologyOfStellarTrails/shenzhouliuhaologo.webp",  // 任务logo
+    rocketName: "神舟六号",  // 火箭名称
+    launchDate: "2005 10 12",  // 发射日期
+    people: [  // 参与人员
+      {
+        name: "费俊龙",  // 姓名
+        imgSrc: "../assets/images/ChronologyOfStellarTrails/feijunlong.webp",  // 头像图片路径
+      },
+      {
+        name: "聂海胜",
+        imgSrc: "../assets/images/ChronologyOfStellarTrails/niehaisheng.webp",
+      }
+    ],
+    missionStartDate: "2005.10.12 09:00",  // 起飞时间
+    flyTime: "4天19小时32分",  // 飞行市场
+    missionEndDate: "2005.10.17 09:00",  // 着陆时间
+    description: "公元2005年10月12日神舟六号飞船搭载航天员费俊龙、聂海胜成功发射升空进入预定轨道。2005年10月17日返回舱在内蒙古中部预定区域成功着陆，完成了多人多天航天飞行的任务。神舟六号载人航天飞行的成功实现顺利开局，是中国载人航天工程继神舟五号首次载人飞行之后取得的又一具有里程碑意义的重大成果。"  // 任务描述
+  },
+  {
+    id: 2,  // id
+    logoSrc: "../assets/images/ChronologyOfStellarTrails/shenzhouliuhaologo.webp",  // 任务logo
+    rocketName: "神舟七号",  // 火箭名称
+    launchDate: "2008 09 25",  // 发射日期
+    people: [  // 参与人员
+      {
+        name: "翟志刚",  // 姓名
+        imgSrc: "../assets/images/ChronologyOfStellarTrails/feijunlong.webp",  // 头像图片路径
+      },
+      {
+        name: "刘伯明",
+        imgSrc: "../assets/images/ChronologyOfStellarTrails/niehaisheng.webp",
+      }
+    ],
+    missionStartDate: "2008.09.25 09:00",  // 起飞时间
+    flyTime: "4天19小时32分",  // 飞行市场
+    missionEndDate: "2008.09.25 09:00",  // 着陆时间
+    description: "公元2008年9月25日神舟七号飞船搭载航天员翟志刚、刘伯明成功发射升空进入预定轨道。2008年9月25日返回舱在内蒙古中部预定区域成功着陆，完成了多人多天航天飞行的任务。神舟七号载人航天飞行的成功实现顺利开局，是中国载人航天工程继神舟五号首次载人飞行之后取得的又一具有里程碑意义的重大成果。"  // 任务描述
+  },
+]
 
 // 初始化轨道动画
 function initOrbitAnimation() {
@@ -171,14 +115,15 @@ function initOrbitAnimation() {
   });
 }
 
+// 初始化星空背景和流星效果
 function StartBackground() {
   // 创建星空背景
   new StarBackground(container, {
-    starCount: 1000,
-    starSizeMin: 0.04,
-    starSizeMax: 0.12,
-    xSpeed: 0.00005,
-    ySpeed: 0.00005,
+    starCount: 500,
+    starSizeMin: 0.08,
+    starSizeMax: 0.24,
+    xSpeed: 0.0001,
+    ySpeed: 0.0001,
     elapsed: 0,
   });
 
@@ -186,56 +131,90 @@ function StartBackground() {
   new MeteorEffect(container, {
     maxMeteors: 20,
     zIndex: 1,
-    meteor: {
-      startXMin: 10,
-      startXMax: 20,
-      startYMin: 10,
-      startYMax: 40,
-      lengthMin: 10,
-      lengthMax: 25,
-      widthMin: 0.1,
-      widthMax: 0.2,
-      angleMin: 150,
-      angleMax: 180,
-      speedMin: 0.5,
-      speedMax: 1,
-      tailLengthMin: 1.2,
-      tailLengthMax: 2,
-    },
   });
 }
 
-function HandleCircleClick() {
+// 更新页面内容的函数
+function updateMissionContent(index) {
+  const mission = missionData[index];
+  if (!mission) return;
+
+  // Apply fade-out animation
+  infoContainer.style.animation = 'none'; // Reset animation to allow re-trigger
+  infoContainer.style.opacity = '0';
+
+  setTimeout(() => {
+    // Update Logo
+    missionLogo.src = mission.logoSrc;
+    missionLogo.alt = mission.rocketName + " logo";
+
+    // Update Rocket Name
+    missionRocketName.textContent = mission.rocketName;
+
+    // Update Launch Date
+    missionLaunchDate.textContent = mission.launchDate;
+
+    // Update Astronauts
+    // Clear existing astronauts, keeping the title
+    const peopleElements = missionPeoplesContainer.querySelectorAll('.people');
+    peopleElements.forEach(el => el.remove());
+
+    mission.people.forEach(person => {
+      const personDiv = document.createElement('div');
+      personDiv.classList.add('people');
+      personDiv.innerHTML = `
+        <img src="${person.imgSrc}" alt="宇航员 ${person.name}" class="avatar">
+        <h3 class="name">${person.name}</h3>
+      `;
+      missionPeoplesContainer.appendChild(personDiv);
+    });
+
+    // Update Launch Info
+    missionLaunchInfoContainer.innerHTML = `
+      <h3>起飞时间：${mission.missionStartDate}</h3>
+      <h3>飞行时长：${mission.flyTime}</h3>
+      <h3>降落时间：${mission.missionEndDate}</h3>
+    `;
+
+    // Update Description
+    missionDetailContent.textContent = mission.description;
+
+    // Apply fade-in animation
+    infoContainer.style.opacity = '1';
+    infoContainer.style.animation = 'slide-in-bck-center 1s ease-in-out forwards';
+  }, 300); // Delay to allow fade-out to be visible
+}
+
+// 处理导航按钮点击
+function handleNavigation() {
   lastCircle.addEventListener("click", function () {
-    if (currentMissionIndex > 0) {
-      currentMissionIndex--;
-    } else {
-      currentMissionIndex = missionData.length - 1; // 循环到最后一个
+    currentMissionIndex--;
+    if (currentMissionIndex < 0) {
+      currentMissionIndex = missionData.length - 1; // Loop to the last item
     }
     updateMissionContent(currentMissionIndex);
   });
 
   nextCircle.addEventListener("click", function () {
-    if (currentMissionIndex < missionData.length - 1) {
-      currentMissionIndex++;
-    } else {
-      currentMissionIndex = 0; // 循环回到第一个
+    currentMissionIndex++;
+    if (currentMissionIndex >= missionData.length) {
+      currentMissionIndex = 0; // Loop to the first item
     }
     updateMissionContent(currentMissionIndex);
   });
 }
 
-
+// 初始化页面
 document.addEventListener("DOMContentLoaded", function () {
-  // 初始化页面内容
-  updateMissionContent(currentMissionIndex);
-
   // 初始化星空背景和流星效果
   StartBackground();
 
   // 初始化轨道动画
   initOrbitAnimation();
 
+  // 初始化页面内容
+  updateMissionContent(currentMissionIndex);
+
   // 处理导航按钮点击
-  HandleCircleClick();
+  handleNavigation();
 });
