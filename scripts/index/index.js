@@ -204,9 +204,9 @@ class PlanetStars {
         this.canvas = document.querySelector('.planet-canvas');
         if (!this.canvas) return;
 
-        this.scene = new Scene();
-        this.camera = new PerspectiveCamera(75, this.canvas.clientWidth / this.canvas.clientHeight, 0.1, 1000);
-        this.renderer = new WebGLRenderer({
+        this.scene = new THREE.Scene();
+        this.camera = new THREE.PerspectiveCamera(75, this.canvas.clientWidth / this.canvas.clientHeight, 0.1, 1000);
+        this.renderer = new THREE.WebGLRenderer({
             canvas: this.canvas,
             alpha: true,
             antialias: true
@@ -226,15 +226,15 @@ class PlanetStars {
         this.camera.position.z = 5;
 
         // 创建星星
-        const starGeometry = new SphereGeometry(0.01, 5, 5);
-        const starMaterial = new MeshBasicMaterial({
+        const starGeometry = new THREE.SphereGeometry(0.01, 5, 5);
+        const starMaterial = new THREE.MeshBasicMaterial({
             color: 0xffffff,
             transparent: true
         });
 
         // 创建多个星星
         for (let i = 0; i < 50; i++) {
-            const star = new Mesh(starGeometry, starMaterial.clone());
+            const star = new THREE.Mesh(starGeometry, starMaterial.clone());
 
             // 随机位置
             star.position.x = (Math.random() - 0.4) * 10;

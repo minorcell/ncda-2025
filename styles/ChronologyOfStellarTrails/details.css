@@ -92,7 +92,7 @@ body {
   padding: 1rem;
 }
 
-#starbg {
+.star-bg {
   margin: auto;
   height: 33rem;
   width: 100%;

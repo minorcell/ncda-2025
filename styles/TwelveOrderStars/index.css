@@ -4,7 +4,65 @@ body {
 }
 
 .container {
-    min-height: 110vh;
+    height: 100vh;
     width: 100vw;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    position: fixed;
+    top: 0;
+    left: 0;
     overflow-x: hidden;
+}
+
+.page {
+    scroll-snap-align: start;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+.page:nth-child(1) {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page:nth-child(1) .rocket {
+    border: 1px solid rgba(255, 255, 255, 1);
+    height: 90vh;
+    position: absolute;
+    left: 20vw;
+    top: 5vh;
+    will-change: transform, opacity;
+    z-index: 2;
+}
+
+.page:nth-child(1) .intro {
+    position: absolute;
+    left: 93.4rem;
+    top: 52.2rem;
+    color: rgba(255, 255, 255, 1);
+    width: 87.2rem;
+    height: 41.5rem;
+    border-radius: 1.6rem;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: start;
+    padding: 0 8rem;
+    background: url('../../assets/images/TwelveOrderStars/intro-mask.webp') no-repeat center center;
+}
+
+.page:nth-child(1) .intro .title {
+    font-size: 6.4rem;
+    font-weight: 200;
+    font-family: 'fys', sans-serif;
+}
+
+.page:nth-child(1) .intro .detail {
+    font-size: 3.2rem;
+    font-weight: 200;
+    font-family: 'fys', sans-serif;
 }
