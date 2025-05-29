@@ -24,10 +24,10 @@ function initThreeJS() {
     scene.add(directionalLight);
 
     // 替换图片为canvas
-    const rocketImage = document.querySelector('.rocket-line-draft');
+    const rocketImage = document.querySelector('.rocket');
     const rocketContainer = rocketImage.parentElement;
     rocketContainer.replaceChild(renderer.domElement, rocketImage);
-    renderer.domElement.classList.add('rocket-line-draft');
+    renderer.domElement.classList.add('rocket');
 }
 
 function LoadRocketModelForFirstPage() {

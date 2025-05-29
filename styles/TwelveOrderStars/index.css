@@ -28,7 +28,8 @@ body {
     align-items: center;
 }
 
-.page:nth-child(1) .rocket-line-draft {
+.page:nth-child(1) .rocket {
+    border: 1px solid rgba(255, 255, 255, 1);
     height: 90vh;
     position: absolute;
     left: 20vw;
