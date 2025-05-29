@@ -146,24 +146,21 @@ body {
   text-transform: none;
 }
 
-.item.active .content-title {
-  position: absolute;
-  margin-top: -5.2rem;
-}
-
+/* 让第一个时间段的 content-title 位于下边沿 */
 .item-left:first-child .content-title {
   position: absolute;
-  margin-top: -5.2rem;
+  bottom: 19rem;
 }
 
-/* 其他时间段的 content-title 位于图片下方 */
-.item:not(:first-child) .content-title {
-  position: static;
-  margin-top: 1rem;
+/* 让最后一个时间段的 content-title 位于下边沿 */
+.item-left:last-child .content-title,
+.item-right:last-child .content-title {
+  position: absolute;
+  bottom: 19rem;
 }
 
 .content-desc {
-  margin-top: 3rem;
+  /* margin-bottom: 3rem; */
   width: 40rem;
   height: auto;
   font-family: 'fys', 'Microsoft YaHei', 'PingFang SC', 'Microsoft JhengHei', sans-serif;
@@ -178,12 +175,14 @@ body {
   text-transform: none;
 }
 
+.item-left:first-child .content-desc {
+  position: relative;
+  top: 5rem;
+}
 
-
-/* 缩小除第一个 content-title 外，其他 content-title 与 content-desc 的间距 */
-.item:not(:first-child) .content-desc {
-  padding-top: 0rem;
-  margin-top: 0rem;
+.item-left:Last-child .content-desc {
+  position: relative;
+  top: 5rem;
 }
 
 .detail-button {
@@ -198,6 +197,7 @@ body {
   /* background-color: transparent; */
   margin-left: 31rem;
   margin-right: 0;
+  margin-top: 6rem;
   box-shadow: 0 0 15rem rgba(90, 73, 93, 1);
   padding-left: 2.4rem;
   color: rgba(255, 255, 255, 1);
