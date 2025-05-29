@@ -94,3 +94,108 @@
     transform: scale(1.01);
   }
 }
+
+/* 
+  轨道星星转动动画
+*/
+@keyframes orbit {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes ping {
+  0% {
+    transform: scale(0.2);
+    opacity: 0.8;
+  }
+
+  80% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+@keyframes rotate-in-center {
+  0% {
+    transform: rotate(-360deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: rotate(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-bck-center {
+  0% {
+    transform: translateZ(600px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateZ(0);
+    opacity: 1;
+  }
+}
+
+/*
+  详情页的切换动画  
+*/
+@keyframes slide-out-up-rotate {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(-100%) rotateX(45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in-down-rotate {
+  from {
+    transform: translateY(-100%) rotateX(45deg);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0) rotateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out-down-rotate {
+  from {
+    transform: translateY(0) rotateX(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(100%) rotateX(-45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in-up-rotate {
+  from {
+    transform: translateY(100%) rotateX(-45deg);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0) rotateX(0);
+    opacity: 1;
+  }
+}

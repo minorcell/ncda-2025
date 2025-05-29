@@ -1,253 +1,280 @@
 body {
-  position: relative;
-  background-color: rgba(5, 2, 6);
-  color: rgba(254, 254, 254);
-  width: 100%;
-  height: 100%;
+  background-color: rgba(0, 0, 0, 1);
 }
 
 .container {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.container::before {
-  content: "";
-  position: absolute;
-  top: 0rem;
-  right: 0rem;
-  width: 70rem;
-  height: 60em;
-  background-image: linear-gradient(45deg, rgba(5, 2, 6) 50%, rgba(60, 24, 70, 0.8) 100%);
+  height: 100vh;
+  perspective: 1000px; /* 增加透视效果 */
+  width: 100vw;
+  overflow: hidden;
 }
 
 .orbital {
   position: relative;
-  width: 56%;
-  height: 85rem;
-  top: 3rem;
-  right: 55rem;
+  left: calc(-50vh + 100vh / 12);
+  width: 100vh;
+  height: 100vh;
 }
 
 .orbital-circle {
+  border-radius: 100%;
   position: absolute;
   top: 50%;
-  left: calc(2 / 3 * 100%);
-  transform: translate(-30%, -50%);
-  border-radius: 50%;
-  border: 0.2rem solid rgba(254, 254, 254);
-  /* animation: rotate 10s linear infinite; */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 0.2rem solid rgba(255, 255, 255, 1);
+  transform-origin: center;
+  box-shadow: 0 0 2rem rgba(255, 255, 255, 0.5),
+    inset 0 0 2rem rgba(255, 255, 255, 0.5);
 }
 
-
 .orbital-circle:nth-child(1) {
-  width: calc(100% / 6);
-  height: calc(100% / 6);
+  width: calc(1.5 * 100% / 12);
+  height: calc(1.5 * 100% / 12);
 }
 
 .orbital-circle:nth-child(2) {
-  width: calc(100% / 3);
-  height: calc(100% / 3);
+  width: calc(3 * 100% / 12);
+  height: calc(3 * 100% / 12);
 }
 
 .orbital-circle:nth-child(3) {
-  width: calc(100% / 2);
-  height: calc(100% / 2);
+  width: calc(4.5 * 100% / 12);
+  height: calc(4.5 * 100% / 12);
 }
 
 .orbital-circle:nth-child(4) {
-  width: calc(2 * 100% / 3);
-  height: calc(2 * 100% / 3);
+  width: calc(6.5 * 100% / 12);
+  height: calc(6.5 * 100% / 12);
 }
 
 .orbital-circle:nth-child(5) {
-  width: 100%;
-  height: 100%;
+  width: calc(9 * 100% / 12);
+  height: calc(9 * 100% / 12);
 }
 
+.orbital-circle:nth-child(6) {
+  width: calc(12 * 100% / 12);
+  height: calc(12 * 100% / 12);
+}
+
+.dot {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0.5rem rgba(255, 255, 255, 1),
+    0 0 1rem rgba(255, 255, 255, 0.95),
+    0 0 2rem rgba(255, 255, 255, 0.9),
+    0 0 4rem rgba(255, 255, 255, 0.85),
+    0 0 6rem rgba(255, 255, 255, 0.8);
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+}
 
 .arrow {
   position: absolute;
   top: 50%;
-  left: calc(2 / 3 * 100%);
-  transform: translate(-30%, -50%);
-
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.arrow-left {
-  font-size: 8.5rem;
-  padding-left: 1rem;
-  background: linear-gradient(90deg, #FFFFFF 0%, #803096 100%);
-  /* -webkit-background-clip: text; */
-  background-clip: text;
-  color: transparent;
-}
-
-.info {
-  width: 52%;
-  height: 55rem;
-  padding: 1rem;
+.arrow img {
+  width: 6.4rem;
+  height: 6.4rem;
+  animation: rotate-in-center 6s ease-in-out forwards;
 }
 
 .star-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
   margin: auto;
-  height: 33rem;
-  width: 100%;
+  height: 60vh;
+  width: 70vw;
 }
 
-.header {
-  position: relative;
-  bottom: 3rem;
-  right: 14rem;
-  float: left;
-  font-family: 'fys', 'Microsoft YaHei', 'PingFang SC', 'Microsoft JhengHei', sans-serif;
-}
-
-.info h1 {
-  line-height: 8rem;
-  font-size: 5rem;
-}
-
-.info .date {
-  font-size: 5rem;
-  margin: 1rem 0;
-  font-family: 'fys', 'Microsoft YaHei', 'PingFang SC', 'Microsoft JhengHei', sans-serif;
-}
-
-.logo {
-  width: 60%;
-  height: auto;
-}
-
-
-
-.astronauts {
-  display: flex;
-
-}
-
-.astronauts-introduction {
-  position: relative;
-  top: 3rem;
-  right: 20rem;
-  font-size: 3rem;
-  width: 2rem;
-  line-height: 3.5rem;
-  display: inline-block;
-}
-
-.astronaut {
-  top: 1rem;
-  right: 3rem;
-  margin-right: 5rem;
-  position: relative;
-  font-family: 'fys', 'Microsoft YaHei', 'PingFang SC', 'Microsoft JhengHei', sans-serif;
-}
-
-
-.astronaut img {
-  width: 14rem;
-  height: auto;
-  /* border-radius: 1rem; */
-}
-
-.astronaut p {
-  margin-top: 2rem;
-  margin-left: 4.4rem;
-  font-size: 2rem;
-}
-
-.mission-details {
-  position: relative;
-  width: 50%;
-  right: 4rem;
-  height: 14rem;
-  bottom: 4rem;
+.info {
+  position: absolute;
+  transform-style: preserve-3d; /* 使子元素保持3D变换 */
+  top: 0;
+  right: 12rem;
+  color: rgba(255, 255, 255, 1);
+  width: 118.8rem;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
-  border-radius: 4rem;
-  overflow: hidden;
-  border: 0.11rem solid rgba(46, 38, 48, 1);
-  background-color: rgba(128, 48, 150, 0.1);
+  justify-content: space-between;
+
+  z-index: 10;
 }
 
-.mission-details::before {
-  content: "";
-  position: absolute;
+.info .intro {
   width: 100%;
+  height: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info .intro .left {
   height: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 0.14rem solid;
-  box-sizing: border-box;
-  border-image: linear-gradient(136deg, rgba(128, 48, 150, 0.5) -10%, rgba(239, 235, 235, 0.35) 40%, rgba(70, 48, 191, 0.5), rgba(255, 255, 255, 0)) 1 1;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
 }
 
-.mission-content {
-  position: absolute;
-  top: 50%;
-  left: 55%;
-  width: 25rem;
-  transform: translate(-50%, -50%);
-  font-size: 1.7rem;
-  line-height: 3.5rem;
-  font-family: 'fys', 'Microsoft YaHei', 'PingFang SC', 'Microsoft JhengHei', sans-serif;
+.info .intro .left .logo {
+  width: 19.2rem;
+  height: 19.2rem;
 }
 
-.description {
-  position: relative;
-  right: 10rem;
-  margin-top: 3rem;
-  font-size: 2.5rem;
-  line-height: 4rem;
-  font-family: 'fys', 'Microsoft YaHei', 'PingFang SC', 'Microsoft JhengHei', sans-serif;
+.info .intro .left .roctet-name {
+  font-size: 6.4rem;
+  font-family: fys, sans-serif;
+}
+
+.info .intro .left .launch-date {
+  font-size: 3.2rem;
+  font-family: ysbty, sans-serif;
+}
+
+.info .intro .right {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info .intro .right .peoples {
+  width: 100%;
+  height: 65%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.info .intro .right .peoples .title {
+  width: 6rem;
+  height: 13.5rem;
+  font-size: 3.2rem;
+  font-family: hksjt, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  writing-mode: vertical-lr;
+}
+
+.info .intro .right .peoples .people {
+  transform: translateY(10%);
+}
+
+
+.info .intro .right .peoples .people .avatar {
+  width: 18.4rem;
+  height: 22.5rem;
+}
+
+.info .intro .right .peoples .people .name {
+  margin-top: 1.8rem;
+  font-size: 3.2rem;
+  font-family: hksjt, sans-serif;
+  text-align: center;
+}
+
+.info .intro .right .launch-info {
+  width: 55.8rem;
+  height: 18.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: start;
+  padding-left: 10rem;
+  background-image: url('../../assets/images/ChronologyOfStellarTrails/launch-info-bg.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-family: hksjt, sans-serif;
+  font-size: 2.4rem;
+}
+
+.info .detail-content {
+  width: 100%;
+  flex: 1;
+  font-size: 3.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: hksjt, sans-serif;
+  text-indent: 2em;
+  letter-spacing: 0.1rem;
+  line-height: 1.5;
 }
 
 .right-circles {
   position: absolute;
-  right: 5rem;
+  right: 4rem;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
-
+  gap: 3rem;
+  z-index: 100;
 }
 
-.right-circle {
-  width: 6rem;
-  height: 6rem;
-  /* background-color: #6200ea; */
+.last-circle,
+.next-circle {
+  width: 7.4rem;
+  height: 7.4rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(254, 254, 254);
-  font-size: 2.4rem;
+  color: rgba(255, 255, 255, 1);
   background: rgba(152, 117, 161, 0.15);
   box-shadow: inset 0px 0px 3px 2px rgba(128, 48, 150);
-  border: 1px solid rgba(209, 209, 209);
+  border: 0.1rem solid rgba(209, 209, 209);
+  cursor: pointer;
 }
 
-@keyframes bounce {
-  0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.1);
-  }
-
-  100% {
-    transform: scale(1);
-  }
+.last-circle svg,
+.next-circle svg {
+  transition: all 0.3s ease-in-out;
 }
 
-.right-circle.clicked {
-  animation: bounce 0.5s ease-in-out;
+.last-circle svg {
+  width: 3.2rem;
+  height: 3.2rem;
+  transform: rotate(90deg);
+}
+
+.next-circle svg {
+  width: 3.2rem;
+  height: 3.2rem;
+  transform: rotate(-90deg);
+}
+
+.last-circle:hover,
+.next-circle:hover {
+  background: rgba(152, 117, 161, 0.25);
+  transform: scale(1.1);
+  transition: all 0.3s ease-in-out;
+  animation: pulsate-bck 1s ease-in-out forwards;
+}
+
+.last-circle:active svg {
+  transform: rotate(450deg);
+}
+
+.next-circle:active svg {
+  transform: rotate(270deg);
 }
