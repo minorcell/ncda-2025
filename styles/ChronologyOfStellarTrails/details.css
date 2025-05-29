@@ -86,9 +86,6 @@ body {
 .arrow img {
   width: 6.4rem;
   height: 6.4rem;
-}
-
-.arrow img {
   animation: rotate-in-center 6s ease-in-out forwards;
 }
 

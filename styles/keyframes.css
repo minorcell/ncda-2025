@@ -152,7 +152,7 @@
 /*
   详情页的切换动画  
 */
-@keyframes slideOutUpRotate {
+@keyframes slide-out-up-rotate {
   from {
     transform: translateY(0);
     opacity: 1;
@@ -164,7 +164,7 @@
   }
 }
 
-@keyframes slideInDownRotate {
+@keyframes slide-in-down-rotate {
   from {
     transform: translateY(-100%) rotateX(45deg);
     opacity: 0;
@@ -176,7 +176,7 @@
   }
 }
 
-@keyframes slideOutDownRotate {
+@keyframes slide-out-down-rotate {
   from {
     transform: translateY(0) rotateX(0);
     opacity: 1;
@@ -188,7 +188,7 @@
   }
 }
 
-@keyframes slideInUpRotate {
+@keyframes slide-in-up-rotate {
   from {
     transform: translateY(100%) rotateX(-45deg);
     opacity: 0;

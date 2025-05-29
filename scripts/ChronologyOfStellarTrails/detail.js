@@ -199,11 +199,11 @@ function updateMissionContent(index, direction) { // index: 目标任务的索�
     // 应用滑入动画
     let slideInAnimation = '';
     if (direction === 'next') {
-      slideInAnimation = `slideInUpRotate ${animationDuration / 1000}s ease-in-out forwards`; // 新内容从底部向上滑入并旋转
+      slideInAnimation = `slide-in-up-rotate ${animationDuration / 1000}s ease-in-out forwards`; // 新内容从底部向上滑入并旋转
     } else if (direction === 'prev') {
-      slideInAnimation = `slideInDownRotate ${animationDuration / 1000}s ease-in-out forwards`; // 新内容从顶部向下滑入并旋转
+      slideInAnimation = `slide-in-down-rotate ${animationDuration / 1000}s ease-in-out forwards`; // 新内容从顶部向下滑入并旋转
     } else { // initial 初始加载
-      slideInAnimation = `slideInUpRotate ${animationDuration / 1000}s ease-in-out forwards`; // 默认初始动画 (从底部向上滑入并旋转)
+      slideInAnimation = `slide-in-up-rotate ${animationDuration / 1000}s ease-in-out forwards`; // 默认初始动画 (从底部向上滑入并旋转)
     }
     infoContainer.style.animation = 'none'; // 清除之前的动画状态，确保新动画能够触发
     requestAnimationFrame(() => { // 确保样式刷新后再应用新动画
@@ -225,9 +225,9 @@ function updateMissionContent(index, direction) { // index: 目标任务的索�
   } else {
     let slideOutAnimation = '';
     if (direction === 'next') {
-      slideOutAnimation = `slideOutUpRotate ${animationDuration / 1000}s ease-in-out forwards`; // 当前内容向上滑出并旋转
+      slideOutAnimation = `slide-out-up-rotate ${animationDuration / 1000}s ease-in-out forwards`; // 当前内容向上滑出并旋转
     } else if (direction === 'prev') {
-      slideOutAnimation = `slideOutDownRotate ${animationDuration / 1000}s ease-in-out forwards`; // 当前内容向下滑出并旋转
+      slideOutAnimation = `slide-out-down-rotate ${animationDuration / 1000}s ease-in-out forwards`; // 当前内容向下滑出并旋转
     }
     infoContainer.style.animation = 'none';
     requestAnimationFrame(() => {
