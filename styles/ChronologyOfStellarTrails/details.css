@@ -1,16 +1,28 @@
 body {
+  position: relative;
   background-color: rgba(5, 2, 6);
   color: rgba(254, 254, 254);
+  width: 100%;
+  height: 100%;
 }
 
 .container {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  background: linear-gradient(rgba(60, 24, 70, 1) -40%, rgba(0, 0, 0, 1));
 }
 
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  width: 70rem;
+  height: 60em;
+  background-image: linear-gradient(45deg, rgba(5, 2, 6) 50%, rgba(60, 24, 70, 0.8) 100%);
+}
 
 .orbital {
   position: relative;
@@ -27,6 +39,7 @@ body {
   transform: translate(-30%, -50%);
   border-radius: 50%;
   border: 0.2rem solid rgba(254, 254, 254);
+  /* animation: rotate 10s linear infinite; */
 }
 
 
@@ -55,10 +68,34 @@ body {
   height: 100%;
 }
 
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  left: calc(2 / 3 * 100%);
+  transform: translate(-30%, -50%);
+
+}
+
+.arrow-left {
+  font-size: 8.5rem;
+  padding-left: 1rem;
+  background: linear-gradient(90deg, #FFFFFF 0%, #803096 100%);
+  /* -webkit-background-clip: text; */
+  background-clip: text;
+  color: transparent;
+}
+
 .info {
   width: 52%;
-  height: 50rem;
+  height: 55rem;
   padding: 1rem;
+}
+
+#starbg {
+  margin: auto;
+  height: 33rem;
+  width: 100%;
 }
 
 .header {
@@ -86,6 +123,7 @@ body {
 }
 
 
+
 .astronauts {
   display: flex;
 
@@ -93,8 +131,8 @@ body {
 
 .astronauts-introduction {
   position: relative;
-  top: 5rem;
-  right: 10rem;
+  top: 3rem;
+  right: 20rem;
   font-size: 3rem;
   width: 2rem;
   line-height: 3.5rem;
@@ -102,12 +140,13 @@ body {
 }
 
 .astronaut {
-  bottom: 4rem;
-  right: 2rem;
+  top: 1rem;
+  right: 3rem;
   margin-right: 5rem;
   position: relative;
   font-family: 'fys', 'Microsoft YaHei', 'PingFang SC', 'Microsoft JhengHei', sans-serif;
 }
+
 
 .astronaut img {
   width: 14rem;
@@ -125,15 +164,28 @@ body {
   position: relative;
   width: 50%;
   right: 4rem;
-  height: 13rem;
-  top: 4rem;
+  height: 14rem;
+  bottom: 4rem;
   display: flex;
   flex-direction: column;
-  border-radius: 1.5rem;
+  box-sizing: border-box;
+  border-radius: 4rem;
+  overflow: hidden;
+  border: 0.11rem solid rgba(46, 38, 48, 1);
+  background-color: rgba(128, 48, 150, 0.1);
+}
 
-  border: 0.1rem solid;
-  /* border-image: linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(128, 48, 150, 1)) 1 1; */
-  /* border-image-repeat: round; */
+.mission-details::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 0.14rem solid;
+  box-sizing: border-box;
+  border-image: linear-gradient(136deg, rgba(128, 48, 150, 0.5) -10%, rgba(239, 235, 235, 0.35) 40%, rgba(70, 48, 191, 0.5), rgba(255, 255, 255, 0)) 1 1;
 }
 
 .mission-content {
@@ -142,7 +194,7 @@ body {
   left: 55%;
   width: 25rem;
   transform: translate(-50%, -50%);
-  font-size: 2rem;
+  font-size: 1.7rem;
   line-height: 3.5rem;
   font-family: 'fys', 'Microsoft YaHei', 'PingFang SC', 'Microsoft JhengHei', sans-serif;
 }
@@ -150,7 +202,7 @@ body {
 .description {
   position: relative;
   right: 10rem;
-  margin-top: 13rem;
+  margin-top: 3rem;
   font-size: 2.5rem;
   line-height: 4rem;
   font-family: 'fys', 'Microsoft YaHei', 'PingFang SC', 'Microsoft JhengHei', sans-serif;
@@ -178,6 +230,24 @@ body {
   color: rgba(254, 254, 254);
   font-size: 2.4rem;
   background: rgba(152, 117, 161, 0.15);
-  box-shadow: inset 0px 0px 3px 2px #803096;
+  box-shadow: inset 0px 0px 3px 2px rgba(128, 48, 150);
   border: 1px solid rgba(209, 209, 209);
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.right-circle.clicked {
+  animation: bounce 0.5s ease-in-out;
 }
