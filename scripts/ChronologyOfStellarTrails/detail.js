@@ -11,7 +11,9 @@ const missionPeoplesContainer = document.querySelector('.info .intro .right .peo
 const missionLaunchInfoContainer = document.querySelector('.info .intro .right .launch-info');
 const missionDetailContent = document.querySelector('.info .detail-content');
 
-let currentMissionIndex = 0;
+let currentMissionIndex = 0; // 当前任务索引
+let isAnimating = false; // 是否正在执行动画的标志
+const animationDuration = 500; // 动画持续时间 (毫秒), 如果CSS中的动画时间修改了，这里也需要对应调整
 
 const missionData = [
   {
@@ -53,6 +55,26 @@ const missionData = [
     flyTime: "4天19小时32分",  // 飞行市场
     missionEndDate: "2008.09.25 09:00",  // 着陆时间
     description: "公元2008年9月25日神舟七号飞船搭载航天员翟志刚、刘伯明成功发射升空进入预定轨道。2008年9月25日返回舱在内蒙古中部预定区域成功着陆，完成了多人多天航天飞行的任务。神舟七号载人航天飞行的成功实现顺利开局，是中国载人航天工程继神舟五号首次载人飞行之后取得的又一具有里程碑意义的重大成果。"  // 任务描述
+  },
+  {
+    id: 3,  // id
+    logoSrc: "../assets/images/ChronologyOfStellarTrails/shenzhouliuhaologo.webp",  // 任务logo
+    rocketName: "神舟八号",  // 火箭名称
+    launchDate: "2011 11 09",  // 发射日期
+    people: [  // 参与人员
+      {
+        name: "景海鹏",  // 姓名
+        imgSrc: "../assets/images/ChronologyOfStellarTrails/feijunlong.webp",  // 头像图片路径
+      },
+      {
+        name: "刘洋",
+        imgSrc: "../assets/images/ChronologyOfStellarTrails/niehaisheng.webp",
+      }
+    ],
+    missionStartDate: "2011.11.09 09:00",  // 起飞时间
+    flyTime: "4天19小时32分",  // 飞行市场
+    missionEndDate: "2011.11.14 09:00",  // 着陆时间
+    description: "公元2011年11月9日神舟八号飞船搭载航天员翟志刚、刘伯明成功发射升空进入预定轨道。2011年11月14日返回舱在内蒙古中部预定区域成功着陆，完成了多人多天航天飞行的任务。神舟八号载人航天飞行的成功实现顺利开局，是中国载人航天工程继神舟五号首次载人飞行之后取得的又一具有里程碑意义的重大成果。"  // 任务描述
   },
 ]
 
@@ -135,30 +157,27 @@ function StartBackground() {
 }
 
 // 更新页面内容的函数
-function updateMissionContent(index) {
+function updateMissionContent(index, direction) { // index: 目标任务的索引, direction: 切换方向 ('next', 'prev', 'initial')
+  if (isAnimating) return;
+  isAnimating = true; // 设置动画标志为真
+
   const mission = missionData[index];
-  if (!mission) return;
+  if (!mission) { // 如果找不到任务数据
+    isAnimating = false; // 重置动画标志
+    return;
+  }
 
-  // Apply fade-out animation
-  infoContainer.style.animation = 'none'; // Reset animation to allow re-trigger
-  infoContainer.style.opacity = '0';
-
-  setTimeout(() => {
-    // Update Logo
+  const performUpdate = () => {
+    // 更新Logo
     missionLogo.src = mission.logoSrc;
     missionLogo.alt = mission.rocketName + " logo";
-
-    // Update Rocket Name
+    // 更新火箭名称
     missionRocketName.textContent = mission.rocketName;
-
-    // Update Launch Date
+    // 更新发射日期
     missionLaunchDate.textContent = mission.launchDate;
-
-    // Update Astronauts
-    // Clear existing astronauts, keeping the title
+    // 更新宇航员信息
     const peopleElements = missionPeoplesContainer.querySelectorAll('.people');
-    peopleElements.forEach(el => el.remove());
-
+    peopleElements.forEach(el => el.remove()); // 清除已有的宇航员元素 (保留标题)
     mission.people.forEach(person => {
       const personDiv = document.createElement('div');
       personDiv.classList.add('people');
@@ -168,53 +187,82 @@ function updateMissionContent(index) {
       `;
       missionPeoplesContainer.appendChild(personDiv);
     });
-
-    // Update Launch Info
+    // 更新发射信息
     missionLaunchInfoContainer.innerHTML = `
       <h3>起飞时间：${mission.missionStartDate}</h3>
       <h3>飞行时长：${mission.flyTime}</h3>
       <h3>降落时间：${mission.missionEndDate}</h3>
     `;
-
-    // Update Description
+    // 更新任务描述
     missionDetailContent.textContent = mission.description;
 
-    // Apply fade-in animation
-    infoContainer.style.opacity = '1';
-    infoContainer.style.animation = 'slide-in-bck-center 1s ease-in-out forwards';
-  }, 300); // Delay to allow fade-out to be visible
+    // 应用滑入动画
+    let slideInAnimation = '';
+    if (direction === 'next') {
+      slideInAnimation = `slideInUpRotate ${animationDuration / 1000}s ease-in-out forwards`; // 新内容从底部向上滑入并旋转
+    } else if (direction === 'prev') {
+      slideInAnimation = `slideInDownRotate ${animationDuration / 1000}s ease-in-out forwards`; // 新内容从顶部向下滑入并旋转
+    } else { // initial 初始加载
+      slideInAnimation = `slideInUpRotate ${animationDuration / 1000}s ease-in-out forwards`; // 默认初始动画 (从底部向上滑入并旋转)
+    }
+    infoContainer.style.animation = 'none'; // 清除之前的动画状态，确保新动画能够触发
+    requestAnimationFrame(() => { // 确保样式刷新后再应用新动画
+      infoContainer.style.animation = slideInAnimation;
+    });
+
+
+    setTimeout(() => {
+      isAnimating = false; // 动画结束后，重置动画标志
+    }, animationDuration);
+  };
+
+  if (direction === 'initial') { // 如果是初始加载
+    infoContainer.style.opacity = '0'; // 初始时设置为透明，以配合滑入动画
+    performUpdate();
+    requestAnimationFrame(() => { // 确保 opacity:0 已应用，再开始动画（设为1，动画本身会处理opacity）
+      infoContainer.style.opacity = '1';
+    });
+  } else {
+    let slideOutAnimation = '';
+    if (direction === 'next') {
+      slideOutAnimation = `slideOutUpRotate ${animationDuration / 1000}s ease-in-out forwards`; // 当前内容向上滑出并旋转
+    } else if (direction === 'prev') {
+      slideOutAnimation = `slideOutDownRotate ${animationDuration / 1000}s ease-in-out forwards`; // 当前内容向下滑出并旋转
+    }
+    infoContainer.style.animation = 'none';
+    requestAnimationFrame(() => {
+      infoContainer.style.animation = slideOutAnimation;
+    });
+
+    setTimeout(performUpdate, animationDuration); // 滑出动画结束后执行内容更新和滑入动画
+  }
 }
 
 // 处理导航按钮点击
 function handleNavigation() {
   lastCircle.addEventListener("click", function () {
+    if (isAnimating) return;
     currentMissionIndex--;
     if (currentMissionIndex < 0) {
-      currentMissionIndex = missionData.length - 1; // Loop to the last item
+      currentMissionIndex = missionData.length - 1; // 循环到最后一个
     }
-    updateMissionContent(currentMissionIndex);
+    updateMissionContent(currentMissionIndex, 'prev');
   });
 
   nextCircle.addEventListener("click", function () {
+    if (isAnimating) return;
     currentMissionIndex++;
     if (currentMissionIndex >= missionData.length) {
-      currentMissionIndex = 0; // Loop to the first item
+      currentMissionIndex = 0; // 循环到第一个
     }
-    updateMissionContent(currentMissionIndex);
+    updateMissionContent(currentMissionIndex, 'next');
   });
 }
 
 // 初始化页面
 document.addEventListener("DOMContentLoaded", function () {
-  // 初始化星空背景和流星效果
-  StartBackground();
-
-  // 初始化轨道动画
-  initOrbitAnimation();
-
-  // 初始化页面内容
-  updateMissionContent(currentMissionIndex);
-
-  // 处理导航按钮点击
-  handleNavigation();
+  StartBackground(); // 初始化星空背景和流星效果
+  initOrbitAnimation(); // 初始化轨道动画
+  updateMissionContent(currentMissionIndex, 'initial'); // 初始加载第一条任务数据
+  handleNavigation(); // 设置导航按钮的点击事件监听
 });

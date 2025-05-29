@@ -4,6 +4,7 @@ body {
 
 .container {
   height: 100vh;
+  perspective: 1000px; /* 增加透视效果 */
   width: 100vw;
   overflow: hidden;
 }
@@ -102,6 +103,7 @@ body {
 
 .info {
   position: absolute;
+  transform-style: preserve-3d; /* 使子元素保持3D变换 */
   top: 0;
   right: 12rem;
   color: rgba(255, 255, 255, 1);
@@ -110,7 +112,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  animation: slide-in-bck-center 0.5s ease-in-out forwards;
+
   z-index: 10;
 }
 

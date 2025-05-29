@@ -148,3 +148,54 @@
     opacity: 1;
   }
 }
+
+/*
+  详情页的切换动画  
+*/
+@keyframes slideOutUpRotate {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(-100%) rotateX(45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes slideInDownRotate {
+  from {
+    transform: translateY(-100%) rotateX(45deg);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0) rotateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutDownRotate {
+  from {
+    transform: translateY(0) rotateX(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(100%) rotateX(-45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes slideInUpRotate {
+  from {
+    transform: translateY(100%) rotateX(-45deg);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0) rotateX(0);
+    opacity: 1;
+  }
+}
