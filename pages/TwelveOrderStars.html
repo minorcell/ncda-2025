@@ -43,16 +43,39 @@
             </h1>
         </div>
         <div class="page">
-            <h1 style="
-                    color: rgba(255, 255, 255, 1);
-                ">
-                Page Three
-            </h1>
+            <div class="content">
+                <div class="bg-color"></div>
+                <div class="star-bg"></div>
+                <div class="title">
+                    「 十二阶星辰 」
+                </div>
+                <div class="detail" id="launch-detail-btn">
+                    发射纪实
+                    <svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 2rem;" width="128" height="128"
+                        viewBox="0 0 24 24">
+                        <path fill="#ffffff" d="M16.175 13H4v-2h12.175l-5.6-5.6L12 4l8 8l-8 8l-1.425-1.4z" />
+                    </svg>
+                </div>
+            </div>
+            <div class="video-player" id="video-player">
+                <video id="launch-video">
+                    <source src="../assets/videos/launch.mp4" type="video/mp4">
+                    您的浏览器不支持视频播放
+                </video>
+                <button class="close-video" id="close-video-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
         </div>
     </div>
     <script src="../build/three_r145.js"></script>
     <script src="../build/three_objloader.js"></script>
     <script src="../scripts/common/HeaderController.js"></script>
+    <script src="../scripts/common/StarBackground.js"></script>
     <script src="../scripts/TwelveOrderStars/index.js"></script>
 </body>
 
