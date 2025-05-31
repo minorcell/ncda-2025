@@ -1,21 +1,23 @@
 body {
     min-height: 100vh;
     background: rgba(0, 0, 0, 1);
-}
-
-.container {
-    height: 100vh;
-    width: 100vw;
-    overflow-y: auto;
-    scroll-snap-type: y mandatory;
-    position: fixed;
-    top: 0;
-    left: 0;
     overflow-x: hidden;
 }
 
+.container {
+    height: 500vh;
+    width: 100vw;
+    overflow-y: auto;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    background-image: url("../../assets/images/index/home-line.svg");
+    background-size: cover;
+    background-position: top 38.3vh left -2.6vw;
+    background-repeat: no-repeat;
+}
+
 .page {
-    scroll-snap-align: start;
     width: 100vw;
     height: 100vh;
     position: relative;

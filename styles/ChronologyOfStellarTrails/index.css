@@ -1,218 +1,236 @@
 body {
   background-color: rgba(0, 0, 0, 1);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.star-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
+.container {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info {
+  position: relative;
+  width: 100vw;
+  height: 30vh;
+  margin-top: 10vh;
   color: rgba(255, 255, 255, 1);
-  font-size: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10rem;
+}
+
+.light {
+  width: 100vw;
+  height: 50vh;
+  position: absolute;
+  top: -12rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-image: url("../../assets/images/ChronologyOfStellarTrails/light.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.info .title {
+  font-size: 9.6rem;
+  font-family: fys, sans-serif;
+}
+
+.info .intro {
+  margin-top: 2rem;
+  font-size: 3.2rem;
+  font-family: fys, sans-serif;
+}
+
+/* 时间轴样式 */
+.cards {
+  position: relative;
+  width: 85%;
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 中轴线 */
+.cards::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+/* 卡片样式 */
+.card {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 64.7rem;
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.line {
-  width: 55rem;
-  height: 0.1rem;
-  position: absolute;
-  margin-bottom: 15rem;
-  z-index: calc(1);
-  opacity: 0.6;
-  /* 添加渐变色背景 */
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0));
+.card.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.star {
-  width: 100%;
-  height: 27rem;
+.card .left {
+  width: 65.067rem;
+}
+
+/* 奇数卡片在左侧 */
+.card:nth-child(odd) .left {
+  align-self: flex-start;
+  margin-right: auto;
+}
+
+/* 偶数卡片在右侧 */
+.card:nth-child(even) .left {
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.card .left .card-image {
+  width: 65.067rem;
+  height: 36.6rem;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 0.3rem;
+  box-shadow: 0 0 2rem rgba(255, 255, 255, 0.5),
+    inset 0 0 2rem rgba(255, 255, 255, 0.5);
+}
+
+.card .left .card-content {
+  width: 65.067rem;
+  padding: 1.5rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.card .left .card-year {
+  font-size: 8.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  font-family: fys, sans-serif;
+  opacity: 0;
+  transition: all 0.8s ease;
+}
+
+.card .left .card-year.visible {
+  opacity: 1;
+  transform: translateX(5rem) translateY(-6rem) scale(1.2);
+}
+
+.card .left .card-description {
+  font-size: 2.4rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.card .left .detail-btn {
+  background-image: url("../../assets/images/ChronologyOfStellarTrails/button-bg.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 18.5rem;
+  height: 5.6rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 1);
-  position: relative;
-  z-index: 0;
-}
-
-.header {
-  width: 55rem;
-  height: 20rem;
-  position: relative;
-  background: radial-gradient(rgba(60, 24, 70, 1) 7%, rgba(0, 0, 0, 1) 80%);
-}
-
-.title {
-  width: 40rem;
-  height: 9rem;
-  font-family: 'fys', 'Microsoft YaHei', 'PingFang SC', 'Microsoft JhengHei', sans-serif;
-  font-weight: 400;
-  font-size: 6rem;
+  font-size: 2.4rem;
+  font-family: fys, sans-serif;
   color: rgba(255, 255, 255, 1);
-  line-height: 18rem;
-  letter-spacing: 0.4rem;
-  text-align: left;
-  font-style: normal;
-  text-transform: none;
-  background-clip: padding-box;
-  display: inline-block;
-  padding: 2.3rem 0rem;
-  margin-left: 9rem;
+  cursor: pointer;
 }
 
-.subtitle {
-  width: 30rem;
-  height: 3.7rem;
-  font-family: 'fys', 'Microsoft YaHei', 'PingFang SC', 'Microsoft JhengHei', sans-serif;
-  font-weight: 400;
-  font-size: 1.8rem;
-  color: rgba(255, 255, 255, 1);
-  line-height: 5rem;
-  letter-spacing: 0.4rem;
-  text-align: center;
-  font-style: normal;
-  text-transform: none;
-  margin-left: 14rem;
+.card:nth-child(odd) .detail-btn {
+  align-self: flex-end;
 }
 
-.timeline {
-  position: relative;
-  max-width: 120rem;
-  margin: 0 auto;
-  padding: 4rem 0;
+.card:nth-child(even) .detail-btn {
+  align-self: flex-start;
 }
 
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  width: 0.2rem;
-  background-color: rgba(245, 245, 245, 0.6);
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  margin-left: -0.1rem;
-  font-size: 4rem;
+.card .left .detail-btn svg {
+  width: 3.2rem;
+  height: 3.2rem;
 }
 
-/* 第一个时间轴项目加深加粗线段 */
-.timeline::after {
-  content: '';
+.card:nth-child(even) .detail-btn svg {
+  transform: rotate(180deg);
+}
+
+.card .left .detail-btn.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.bar {
   position: absolute;
   width: 0.3rem;
-  background-color: rgba(255, 255, 255, 1);
-  height: 4rem;
-  left: calc(50% - 0.2rem);
-  /* 使用自定义属性控制 top 值 */
-  top: var(--timeline-after-top, 20rem);
+  height: 5.5rem;
+  border-radius: 100%;
+  background: rgba(255, 255, 255, 1);
+  z-index: 10;
+  box-shadow: 0 0 1rem rgba(255, 255, 255, 0.9), 0 0 2rem rgba(255, 255, 255, 0.8), 0 0 4rem rgba(255, 255, 255, 0.7);
 }
 
-.item-left {
-  padding: 4rem 6rem;
-  position: relative;
-  background-color: inherit;
-  width: 50%;
-  box-sizing: border-box;
-  left: 0;
-}
-
-.item-right {
-  padding: 4rem 6rem;
-  position: relative;
-  background-color: inherit;
-  width: 50%;
-  box-sizing: border-box;
+.card:nth-child(odd) .bar {
+  top: 18.3rem;
   left: 50%;
+  transform: translateX(-50%) translateY(-50%);
 }
 
-.content {
-  padding: 2rem 3rem;
+.card:nth-child(even) .bar {
+  top: 18.3rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
 }
 
-.img {
-  width: 40rem;
-  height: 22.5rem;
-  box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgba(255, 255, 255, 1);
-  border: 0.1rem solid;
-  border-image: linear-gradient(136deg, rgba(128, 48, 150, 1), rgba(255, 255, 255, 0), rgba(70, 48, 191, 1), rgba(255, 255, 255, 0)) 1 1;
-  position: relative;
-}
-
-.content-title {
-  font-family: 'fys', 'Microsoft YaHei', 'PingFang SC', 'Microsoft JhengHei', sans-serif;
-  margin-top: 0;
-  color: rgba(255, 255, 255, 1);
-  text-shadow: 2px 2px 3px rgba(0, 0, 0, 1);
-  font-weight: 400;
-  font-size: 5.5rem;
-  line-height: 8.9rem;
-  letter-spacing: 0.4rem;
-  text-align: left;
-  font-style: normal;
-  text-transform: none;
-}
-
-/* 让第一个时间段的 content-title 位于下边沿 */
-.item-left:first-child .content-title {
+.card-title {
   position: absolute;
-  bottom: 19rem;
-}
-
-/* 让最后一个时间段的 content-title 位于下边沿 */
-.item-left:last-child .content-title,
-.item-right:last-child .content-title {
-  position: absolute;
-  bottom: 19rem;
-}
-
-.content-desc {
-  /* margin-bottom: 3rem; */
-  width: 40rem;
-  height: auto;
-  font-family: 'fys', 'Microsoft YaHei', 'PingFang SC', 'Microsoft JhengHei', sans-serif;
-  font-weight: 400;
-  font-size: 1.5rem;
+  top: 25%;
+  font-size: 3.2rem;
+  font-family: fys, sans-serif;
   color: rgba(255, 255, 255, 1);
-  line-height: 2.8rem;
-  letter-spacing: 0.1rem;
-  text-indent: 3rem;
-  text-align: left;
-  font-style: normal;
-  text-transform: none;
-}
-
-.item-left:first-child .content-desc {
-  position: relative;
-  top: 5rem;
-}
-
-.item-left:Last-child .content-desc {
-  position: relative;
-  top: 5rem;
-}
-
-.detail-button {
-  font-family: 'fys', 'Microsoft YaHei', 'PingFang SC', 'Microsoft JhengHei', sans-serif;
-  width: 9.3rem;
-  height: 2.8rem;
-  border-radius: 2.5rem;
-  border: 0.1rem solid;
-  /* border-color: linear-gradient(95deg, rgba(128, 48, 150, 0.8), rgba(255, 255, 255, 0.1), rgba(70, 48, 191, 1), rgba(255, 255, 255, 0.1)) 1 1; */
-  padding-top: 0.5rem;
-  display: block;
-  /* background-color: transparent; */
-  margin-left: 31rem;
-  margin-right: 0;
-  margin-top: 6rem;
-  box-shadow: 0 0 15rem rgba(90, 73, 93, 1);
-  padding-left: 2.4rem;
-  color: rgba(255, 255, 255, 1);
-}
-
-
-.item-left:first-child::after {
-  content: '发射第一颗人造地球卫星';
-  font-family: 'fys', 'Microsoft YaHei', 'PingFang SC', 'Microsoft JhengHei', sans-serif;
-  position: absolute;
-  left: calc(100% + 4rem);
-  top: 15.5rem;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  opacity: 0;
   transform: translateY(-50%);
-  color: rgba(255, 255, 255, 1);
-  font-size: 2rem;
+  transition: opacity 0.5s ease, transform 0.5s ease;
   white-space: nowrap;
-  /* 文本不会自动换行  */
+  z-index: 2;
+}
+
+.card:nth-child(odd) .card-title {
+  left: 55%;
+}
+
+.card:nth-child(even) .card-title {
+  right: 55%;
+}
+
+.card.visible .card-title {
+  opacity: 1;
+  transform: translateY(0);
 }

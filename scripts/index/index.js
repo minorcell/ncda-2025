@@ -390,7 +390,6 @@ function rocketShow() {
     observer.observe(page);
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('.header');
     const container = document.querySelector('.container');
