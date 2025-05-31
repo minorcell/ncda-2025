@@ -35,24 +35,41 @@ function renderCards(container, cardsData) {
   container.innerHTML = '';
 
   // 遍历卡片数据生成HTML
-  cardsData.forEach(card => {
+  cardsData.forEach((card, index) => {
     const cardElement = document.createElement('div');
     cardElement.className = 'card';
     cardElement.setAttribute('data-id', card.id);
 
+    let btn = '';
+    if (index % 2 === 0) {
+      btn = `<a href="ChronologyOfStellarTrailsDetails.html?id=${card.id}" class="detail-btn">
+            查看详情
+            <svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 2rem;" width="128" height="128" viewBox="0 0 24 24"><path fill="#ffffff" d="M16.175 13H4v-2h12.175l-5.6-5.6L12 4l8 8l-8 8l-1.425-1.4z"/></svg>
+          </a>`
+
+    } else {
+      btn = `<a href="ChronologyOfStellarTrailsDetails.html?id=${card.id}" class="detail-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" style="margin-right: 2rem;" width="128" height="128" viewBox="0 0 24 24"><path fill="#ffffff" d="M16.175 13H4v-2h12.175l-5.6-5.6L12 4l8 8l-8 8l-1.425-1.4z"/></svg>
+            查看详情
+          </a>`
+    }
+
+
     cardElement.innerHTML = `
-        <div class="card-image"
+        <div class="left">
+          <div class="card-image"
           style="background-image: url('${card.imgSrc}'); background-size: cover; background-position: center; background-repeat: no-repeat;"
         ></div>
-        <div class="bar"></div>
         <div class="card-content">
           <div class="card-year">${card.year}</div>
           <div class="card-description">${card.description}</div>
-          <a href="ChronologyOfStellarTrailsDetails.html?id=${card.id}" class="detail-btn">查看详情
-            <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24"><path fill="#ffffff" d="M16.175 13H4v-2h12.175l-5.6-5.6L12 4l8 8l-8 8l-1.425-1.4z"/></svg>
-          </a>
+          ${btn}
         </div>
-        <div class="card-title">${card.title}</div>
+        </div>
+        <div class="bar"></div>
+        <div class="right">
+          <div class="card-title">${card.title}</div>
+        </div>
     `;
 
     container.appendChild(cardElement);

@@ -19,7 +19,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-x: hidden;
 }
 
 .info {
@@ -62,8 +61,8 @@ body {
 /* 时间轴样式 */
 .cards {
   position: relative;
-  width: 100%;
-  padding: 2rem 16.1rem;
+  width: 85%;
+  padding: 2rem 0;
   display: flex;
   flex-direction: column;
 }
@@ -84,7 +83,7 @@ body {
 /* 卡片样式 */
 .card {
   position: relative;
-  width: 65.067rem;
+  width: 100%;
   height: 64.7rem;
   opacity: 0;
   transition: opacity 0.8s ease, transform 0.8s ease;
@@ -96,19 +95,22 @@ body {
 }
 
 /* 奇数卡片在左侧 */
-.card:nth-child(odd) {
+.card:nth-child(odd) .left {
   align-self: flex-start;
   margin-right: auto;
 }
 
 /* 偶数卡片在右侧 */
-.card:nth-child(even) {
+.card:nth-child(even) .left {
   align-self: flex-end;
   margin-left: auto;
 }
 
-/* 卡片内容 */
-.card-image {
+.card .left {
+  width: 65.067rem;
+}
+
+.card .left .card-image {
   width: 65.067rem;
   height: 36.6rem;
   object-fit: contain;
@@ -118,7 +120,7 @@ body {
     inset 0 0 2rem rgba(255, 255, 255, 0.5);
 }
 
-.card-content {
+.card .left .card-content {
   width: 65.067rem;
   padding: 1.5rem;
   color: white;
@@ -126,7 +128,7 @@ body {
   flex-direction: column;
 }
 
-.card-year {
+.card .left .card-year {
   font-size: 8.5rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
@@ -135,18 +137,18 @@ body {
   transition: all 0.8s ease;
 }
 
-.card-year.visible {
+.card .left .card-year.visible {
   opacity: 1;
   transform: translateX(5rem) translateY(-6rem) scale(1.2);
 }
 
-.card-description {
+.card .left .card-description {
   font-size: 2.4rem;
   line-height: 1.5;
   margin-bottom: 1.5rem;
 }
 
-.detail-btn {
+.card .left .detail-btn {
   background-image: url("../../assets/images/ChronologyOfStellarTrails/button-bg.svg");
   background-size: cover;
   background-position: center;
@@ -170,19 +172,40 @@ body {
   align-self: flex-start;
 }
 
-.card:nth-child(even) .detail-btn svg {
-  transform: rotate(180deg);
-}
-
-.detail-btn svg {
-  margin-left: 1rem;
+.card .left .detail-btn svg {
   width: 3.2rem;
   height: 3.2rem;
 }
 
-.card.visible .detail-btn {
+.card:nth-child(even) .detail-btn svg {
+  transform: rotate(180deg);
+}
+
+.card .left .detail-btn.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.bar {
+  position: absolute;
+  width: 0.3rem;
+  height: 5.5rem;
+  border-radius: 100%;
+  background: rgba(255, 255, 255, 1);
+  z-index: 10;
+  box-shadow: 0 0 1rem rgba(255, 255, 255, 0.9), 0 0 2rem rgba(255, 255, 255, 0.8), 0 0 4rem rgba(255, 255, 255, 0.7);
+}
+
+.card:nth-child(odd) .bar {
+  top: 18.3rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.card:nth-child(even) .bar {
+  top: 18.3rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
 }
 
 .card-title {
@@ -200,36 +223,14 @@ body {
 }
 
 .card:nth-child(odd) .card-title {
-  right: -60rem;
+  left: 55%;
 }
 
 .card:nth-child(even) .card-title {
-  left: -60rem;
+  right: 55%;
 }
 
 .card.visible .card-title {
   opacity: 1;
   transform: translateY(0);
-}
-
-.bar {
-  position: absolute;
-  width: 0.3rem;
-  height: 5.5rem;
-  border-radius: 100%;
-  background: rgba(255, 255, 255, 1);
-  z-index: 10;
-  box-shadow: 0 0 1rem rgba(255, 255, 255, 0.9), 0 0 2rem rgba(255, 255, 255, 0.8), 0 0 4rem rgba(255, 255, 255, 0.7);
-}
-
-.card:nth-child(odd) .bar {
-  top: 18.3rem;
-  right: -15.1rem;
-  transform: translateX(-50%) translateY(-50%);
-}
-
-.card:nth-child(even) .bar {
-  top: 18.3rem;
-  left: -14.833rem;
-  transform: translateX(-50%) translateY(-50%);
 }
