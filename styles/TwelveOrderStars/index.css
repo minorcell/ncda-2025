@@ -1,21 +1,18 @@
 body {
     min-height: 100vh;
     background: rgba(0, 0, 0, 1);
+    overflow-x: hidden;
 }
 
 .container {
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
-    overflow-y: auto;
-    scroll-snap-type: y mandatory;
-    position: fixed;
     top: 0;
     left: 0;
     overflow-x: hidden;
 }
 
 .page {
-    scroll-snap-align: start;
     width: 100vw;
     height: 100vh;
     position: relative;
@@ -65,4 +62,140 @@ body {
     font-size: 3.2rem;
     font-weight: 200;
     font-family: 'fys', sans-serif;
+}
+
+.page:nth-child(3) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page:nth-child(3) .content {
+    background-image: url("../../assets/images/TwelveOrderStars/TwelveOrderStartsEndPage.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 152.9rem;
+    height: 81.2rem;
+    border: 0.2rem solid rgba(100, 29, 111, 1);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10rem;
+    position: relative;
+}
+
+.page:nth-child(3) .content .bg-color {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(14, 5, 15, 1);
+    z-index: -1;
+}
+
+.page:nth-child(3) .content .star-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 152.9rem;
+    height: 56.6rem;
+    z-index: 1;
+}
+
+.page:nth-child(3) .content .title {
+    font-size: 9.6rem;
+    font-family: 'fys', sans-serif;
+    color: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(3) .content .detail {
+    width: 22.4rem;
+    height: 5.6rem;
+    font-size: 2.4rem;
+    font-family: 'fys', sans-serif;
+    color: rgba(255, 255, 255, 1);
+    background-image: url("../../assets/images/TwelveOrderStars/button-bg.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.page:nth-child(3) .content .detail svg {
+    width: 3rem;
+    height: 3rem;
+}
+
+.video-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.video-player.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.video-player video {
+    width: 80%;
+    max-height: 80%;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 2rem rgba(255, 255, 255, 0.2);
+}
+
+.close-video {
+    position: absolute;
+    top: 5rem;
+    right: 5rem;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgba(100, 29, 111, 0.7);
+    transition: background-color 0.3s ease;
+}
+
+.close-video:hover {
+    background-color: rgba(100, 29, 111, 1);
+}
+
+.close-video svg {
+    width: 2.5rem;
+    height: 2.5rem;
+    stroke: white;
+    stroke-width: 0.2rem;
+}
+
+.page:nth-child(3) .content {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.page:nth-child(3) .content.fade-out {
+    opacity: 0;
+    transform: scale(0.95);
 }
