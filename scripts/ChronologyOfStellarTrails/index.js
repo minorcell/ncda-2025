@@ -1,108 +1,137 @@
-const container = document.getElementById("star");
-if (container) {
-  const StarBackgroundInstance = new StarBackground(container, {
-    starCount: 500, // 星星数量
-    starSizeMin: 0.04, // 最小星星尺寸
-    starSizeMax: 0.12, // 最大星星尺寸
-    xSpeed: 0.00005, // X轴旋转速度
-    ySpeed: 0.00005, // Y轴旋转速度
-    elapsed: 0, // 初始动画时间
+const bar = document.querySelector('.bar');
+
+const cards = [
+  {
+    id: 1,
+    imgSrc: "../../assets/images/ChronologyOfStellarTrails/index01.png",
+    year: "1970",
+    description: "中国于1970年4月24日发射第一颗人造地球卫星，是继苏联、美国、法国、日本之后世界上第5个能独立发射人造卫星的国家。",
+    title: "发射第一颗人造地球卫星"
+  },
+  {
+    id: 2,
+    imgSrc: "../../assets/images/ChronologyOfStellarTrails/index02.png",
+    year: "1975",
+    description: "中国于1975年成功发射了第一颗返回式遥感卫星，标志着中国掌握了卫星返回技术。",
+    title: "发射第一颗返回式遥感卫星"
+  },
+  {
+    id: 3,
+    imgSrc: "../../assets/images/ChronologyOfStellarTrails/index03.png",
+    year: "1980",
+    description: "中国于1980年成功发射了第一颗实用气象卫星风云一号，标志着中国掌握了气象卫星技术。",
+    title: "发射第一颗实用气象卫星"
+  }
+]
+
+
+/**
+ * 渲染卡片到指定容器
+ * @param {HTMLElement} container - 卡片容器
+ * @param {Array} cardsData - 卡片数据
+ */
+function renderCards(container, cardsData) {
+  // 清空容器
+  container.innerHTML = '';
+
+  // 遍历卡片数据生成HTML
+  cardsData.forEach(card => {
+    const cardElement = document.createElement('div');
+    cardElement.className = 'card';
+    cardElement.setAttribute('data-id', card.id);
+
+    cardElement.innerHTML = `
+        <div class="card-image"
+          style="background-image: url('${card.imgSrc}'); background-size: cover; background-position: center; background-repeat: no-repeat;"
+        ></div>
+        <div class="bar"></div>
+        <div class="card-content">
+          <div class="card-year">${card.year}</div>
+          <div class="card-description">${card.description}</div>
+          <a href="ChronologyOfStellarTrailsDetails.html?id=${card.id}" class="detail-btn">查看详情
+            <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24"><path fill="#ffffff" d="M16.175 13H4v-2h12.175l-5.6-5.6L12 4l8 8l-8 8l-1.425-1.4z"/></svg>
+          </a>
+        </div>
+        <div class="card-title">${card.title}</div>
+    `;
+
+    container.appendChild(cardElement);
   });
-} else {
-  console.error("未找到对应的容器元素");
 }
 
-const containers = document.getElementById("star");
-if (containers) {
-  new MeteorEffect(container, {
-    maxMeteors: 15, // 同时存在的最大流星数量
-    zIndex: 1, // 容器层级
-    meteor: {
-      // 起始位置配置
-      startXMin: 0, // X坐标最小值
-      startXMax: 10, // X坐标最大值
-      startYMin: 0, // Y坐标最小值
-      startYMax: 30, // Y坐标最大值
-
-      // 流星外观配置
-      lengthMin: 5, // 长度最小值
-      lengthMax: 15, // 长度最大值
-      widthMin: 0.1, // 宽度最小值
-      widthMax: 0.2, // 宽度最大值
-
-      // 运动参数配置
-      angleMin: 150, // 运动角度最小值
-      angleMax: 180, // 运动角度最大值
-      speedMin: 0.5, // 速度最小值
-      speedMax: 1, // 速度最大值
-
-      // 尾迹效果配置
-      tailLengthMin: 1.2, // 尾迹长度系数最小值
-      tailLengthMax: 2, // 尾迹长度系数最大值
-    },
+/**
+ * 使用Intersection Observer监听卡片进入视口
+ */
+function observeCards() {
+  createVisibilityObserver('.card', (element, isVisible) => {
+    if (isVisible) {
+      element.classList.add('visible');
+    } else {
+      element.classList.remove('visible');
+    }
   });
-} else {
-  console.error("未找到对应的容器元素");
+}
+
+/**
+ * 监视year进入视口
+ */
+function observeYears() {
+  createVisibilityObserver('.card-year', (element, isVisible) => {
+    if (isVisible) {
+      element.classList.add('visible');
+    } else {
+      element.classList.remove('visible');
+    }
+  });
+}
+
+/**
+ * 监视title进入视口
+ */
+function observeTitles() {
+  createVisibilityObserver('.card-title', (element, isVisible) => {
+    if (isVisible) {
+      element.classList.add('visible');
+    } else {
+      element.classList.remove('visible');
+    }
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const timeline = document.querySelector(".timeline");
-  const timelineItems = document.querySelectorAll(".item-left, .item-right");
-  const firstItem = timelineItems[0];
-  const lastItem = timelineItems[timelineItems.length - 1];
+  const header = document.querySelector('.header');
+  const starContainer = document.querySelector('.star-bg');
+  const scrollContainer = document.querySelector('.container');
+  const cardsContainer = document.querySelector('.cards');
 
-  // 获取第一个时间点 content-title 的位置
-  const firstTitle = firstItem.querySelector(".content-title");
-  const firstTitleRect = firstTitle.getBoundingClientRect(); //获取firstTitle元素在视口内的位置信息（矩形对象）
-  const firstItemRect = firstItem.getBoundingClientRect(); //获取firstItem元素在视口内的位置信息（矩形对象）
-  const targetTop = firstTitleRect.top - firstItemRect.top;
+  // 初始化头部控制器
+  new HeaderController(header, { scrollContainer });
 
-  // 获取时间轴起始和结束位置
-  const firstItemFullRect = firstItem.getBoundingClientRect();
-  const lastItemFullRect = lastItem.getBoundingClientRect();
-  const timelineStart = firstItemFullRect.top + window.pageYOffset; //计算时间轴的起始位置，结合元素顶部位置和页面偏移量
-  const timelineEnd = lastItemFullRect.bottom + window.pageYOffset; //计算时间轴结束位置，结合元素底部位置和页面滚动偏移量
-
-  // 监听滚动事件
-  window.addEventListener("scroll", () => {
-    const scrollTop = window.pageYOffset;
-    const timelineRect = timeline.getBoundingClientRect();
-    const timelineTop = timelineRect.top + window.pageYOffset; //计算时间轴顶部在页面中的位置结合视口顶部位置和页面偏移量
-
-    // 计算滚动位置相对于时间轴起始位置的偏移量
-    let newTop = scrollTop - timelineStart;
-
-    // 确保加粗线段在时间轴范围内滑动
-    if (newTop < 0) {
-      newTop = 0;
-    } else if (newTop > timelineEnd - timelineStart - timelineRect.height) {
-      newTop = timelineEnd - timelineStart - timelineRect.height;
-    }
-
-    // 设置自定义属性
-    timeline.style.setProperty("--timeline-after-top", `${newTop}px`);
-
-    timelineItems.forEach((item, index) => {
-      const itemRect = item.getBoundingClientRect();
-      const title = item.querySelector(".content-title");
-      if (index === 0) {
-        // 第一个时间点的 content-title 不动
-        title.style.transform = "translateY(0)";
-        return;
-      }
-
-      // 判断加粗线段是否在该事件点位置
-      const isAtItem =
-        scrollTop + newTop >= item.offsetTop &&
-        scrollTop + newTop <= item.offsetTop + item.offsetHeight;
-
-      if (isAtItem) {
-        // 移动到与第一个时间点的 content-title 相同位置
-        title.style.transform = `translateY(-5rem)`;
-      } else {
-        // 恢复默认位置
-        title.style.transform = "translateY(0)";
-      }
-    });
+  // 初始化星空背景
+  new StarBackground(starContainer, {
+    starCount: 500,
+    starSizeMin: 0.08,
+    starSizeMax: 0.16,
+    xSpeed: 0.0002,
+    ySpeed: 0.0002,
+    elapsed: 0,
   });
+
+  // 初始化流星效果
+  new MeteorEffect(starContainer, {
+    maxMeteors: 20,
+    zIndex: 1,
+  });
+
+  // 渲染卡片
+  renderCards(cardsContainer, cards);
+
+  // 监听卡片可见性
+  observeCards();
+
+  // 监听年份可见性
+  observeYears();
+
+  // 监听标题可见性
+  observeTitles();
 });
