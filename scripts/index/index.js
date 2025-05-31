@@ -357,42 +357,6 @@ function makeGradientFollowMouse() {
     startAutoAnimation();
 }
 
-/**
- * 监听滚动事件，控制 home-line 的显示位置
- */
-function controlHomeLinePosition() {
-    const homeLine = document.querySelector('.home-line');
-    const container = document.querySelector('.container');
-    const pages = document.querySelectorAll('.page');
-    
-    if (!homeLine || !container || !pages.length) return;
-    
-    // 页面总数
-    const pageCount = pages.length;
-    
-    // 监听容器的滚动事件
-    container.addEventListener('scroll', () => {
-        // 计算当前显示的是第几页
-        // 由于使用了 scroll-snap，滚动位置会自动对齐到页面高度的整数倍
-        const scrollTop = container.scrollTop;
-        const pageHeight = container.clientHeight;
-        const currentPageIndex = Math.round(scrollTop / pageHeight);
-        
-        // 根据当前页面索引计算 home-line 应该显示的位置
-        // 每页显示 100vh 的内容，即 home-line 总高度的 1/5 (因为 home-line 高度为 500vh)
-        const offset = -currentPageIndex * 100; // 负值，因为要向上移动
-        
-        // 使用 transform 调整 home-line 的位置
-        homeLine.style.transform = `translateY(${offset}vh)`;
-        
-        // 添加过渡效果，使移动更平滑
-        homeLine.style.transition = 'transform 0.5s ease';
-    });
-    
-    // 初始化位置
-    homeLine.style.transform = 'translateY(0)';
-}
-
 function rocketShow() {
     const rocket = document.querySelector('.rocket-line-draft');
     const page = document.querySelectorAll('.page')[1];
@@ -439,8 +403,6 @@ document.addEventListener('DOMContentLoaded', () => {
     makeGradientFollowMouse();
     // 火箭线稿控制
     rocketShow();
-    // home-line 位置控制
-    controlHomeLinePosition();
 
     // 前三页面特效
     for (let i = 0; i < Math.min(3, pages.length); i++) {
