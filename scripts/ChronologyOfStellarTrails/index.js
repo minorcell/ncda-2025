@@ -3,21 +3,21 @@ const bar = document.querySelector('.bar');
 const cards = [
   {
     id: 1,
-    imgSrc: "../../assets/images/ChronologyOfStellarTrails/index01.png",
+    imgSrc: "../assets/images/ChronologyOfStellarTrails/index01.png",
     year: "1970",
     description: "中国于1970年4月24日发射第一颗人造地球卫星，是继苏联、美国、法国、日本之后世界上第5个能独立发射人造卫星的国家。",
     title: "发射第一颗人造地球卫星"
   },
   {
     id: 2,
-    imgSrc: "../../assets/images/ChronologyOfStellarTrails/index02.png",
+    imgSrc: "../assets/images/ChronologyOfStellarTrails/index02.png",
     year: "1975",
     description: "中国于1975年成功发射了第一颗返回式遥感卫星，标志着中国掌握了卫星返回技术。",
     title: "发射第一颗返回式遥感卫星"
   },
   {
     id: 3,
-    imgSrc: "../../assets/images/ChronologyOfStellarTrails/index03.png",
+    imgSrc: "../assets/images/ChronologyOfStellarTrails/index03.png",
     year: "1980",
     description: "中国于1980年成功发射了第一颗实用气象卫星风云一号，标志着中国掌握了气象卫星技术。",
     title: "发射第一颗实用气象卫星"
