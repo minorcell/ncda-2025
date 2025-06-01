@@ -26,11 +26,12 @@ body {
 }
 
 .page:nth-child(1) .rocket {
-    border: 1px solid rgba(255, 255, 255, 1);
-    height: 90vh;
     position: absolute;
-    left: 20vw;
-    top: 5vh;
+    width: 100vw;
+    height: 100vh;
+    border: 1px solid rgba(255, 255, 255, 1);
+    left: 0;
+    top: 0;
     will-change: transform, opacity;
     z-index: 2;
 }
