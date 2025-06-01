@@ -135,6 +135,13 @@ body {
     z-index: 2;
 }
 
+.close-video svg {
+    width: 2.5rem;
+    height: 2.5rem;
+    stroke: white;
+    stroke-width: 0.2rem;
+}
+
 .page:nth-child(3) .content .detail svg {
     width: 3rem;
     height: 3rem;
@@ -189,11 +196,4 @@ body {
 
 .close-video:hover {
     background-color: rgba(100, 29, 111, 1);
-}
-
-.close-video svg {
-    width: 2.5rem;
-    height: 2.5rem;
-    stroke: white;
-    stroke-width: 0.2rem;
 }
