@@ -86,6 +86,12 @@ body {
     align-items: center;
     gap: 10rem;
     position: relative;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.page:nth-child(3) .content.fade-out {
+    opacity: 0;
+    transform: scale(0.95);
 }
 
 .page:nth-child(3) .content .bg-color {
@@ -190,13 +196,4 @@ body {
     height: 2.5rem;
     stroke: white;
     stroke-width: 0.2rem;
-}
-
-.page:nth-child(3) .content {
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.page:nth-child(3) .content.fade-out {
-    opacity: 0;
-    transform: scale(0.95);
 }
