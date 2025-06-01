@@ -26,11 +26,12 @@ body {
 }
 
 .page:nth-child(1) .rocket {
-    border: 1px solid rgba(255, 255, 255, 1);
-    height: 90vh;
     position: absolute;
-    left: 20vw;
-    top: 5vh;
+    width: 100vw;
+    height: 100vh;
+    border: 1px solid rgba(255, 255, 255, 1);
+    left: 0;
+    top: 0;
     will-change: transform, opacity;
     z-index: 2;
 }
@@ -85,6 +86,12 @@ body {
     align-items: center;
     gap: 10rem;
     position: relative;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.page:nth-child(3) .content.fade-out {
+    opacity: 0;
+    transform: scale(0.95);
 }
 
 .page:nth-child(3) .content .bg-color {
@@ -126,6 +133,13 @@ body {
     align-items: center;
     cursor: pointer;
     z-index: 2;
+}
+
+.close-video svg {
+    width: 2.5rem;
+    height: 2.5rem;
+    stroke: white;
+    stroke-width: 0.2rem;
 }
 
 .page:nth-child(3) .content .detail svg {
@@ -182,20 +196,4 @@ body {
 
 .close-video:hover {
     background-color: rgba(100, 29, 111, 1);
-}
-
-.close-video svg {
-    width: 2.5rem;
-    height: 2.5rem;
-    stroke: white;
-    stroke-width: 0.2rem;
-}
-
-.page:nth-child(3) .content {
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.page:nth-child(3) .content.fade-out {
-    opacity: 0;
-    transform: scale(0.95);
 }
