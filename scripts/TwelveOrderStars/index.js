@@ -1,70 +1,158 @@
-let scene, camera, renderer;
+let rocketScene, rocketCamera, rocketRenderer;
 let rocketModel;
+let clock = new THREE.Clock();
 
-function initThreeJS() {
+/**
+ * 初始化Three.js场景和加载3D模型
+ */
+function initRocketModel() {
+    const canvas = document.querySelector('.rocket');
+    if (!canvas) return;
+
     // 创建场景
-    scene = new THREE.Scene();
-    scene.background = null; // 透明背景
+    rocketScene = new THREE.Scene();
 
-    // 创建相机
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 5;
+    // 创建透视相机
+    rocketCamera = new THREE.PerspectiveCamera(14, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+    rocketCamera.position.set(0, 0, 10);
 
     // 创建渲染器
-    renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize(400, 600); // 设置大小以匹配原始图片尺寸
-    renderer.setClearColor(0x000000, 0);
+    rocketRenderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        antialias: true,
+        alpha: true
+    });
+    rocketRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    rocketRenderer.setPixelRatio(window.devicePixelRatio);
+    rocketRenderer.shadowMap.enabled = true; // 启用阴影
+    rocketRenderer.toneMapping = THREE.ACESFilmicToneMapping; // 设置色调映射
+    rocketRenderer.toneMappingExposure = 1.0; // 调整曝光度
 
-    // 添加光源
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(ambientLight);
+    // 添加环境光源
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1); // 降低环境光强度
+    rocketScene.add(ambientLight);
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    directionalLight.position.set(1, 1, 1);
-    scene.add(directionalLight);
+    // 添加平行光源
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // 增强平行光强度
+    directionalLight.position.set(5, 10, 7); // 调整光源位置，使其从斜上方照射
+    directionalLight.castShadow = true; // 平行光投射阴影
+    // 配置阴影属性
+    directionalLight.shadow.mapSize.width = 2048; // 提高阴影贴图分辨率
+    directionalLight.shadow.mapSize.height = 2048;
+    directionalLight.shadow.camera.near = 0.5;
+    directionalLight.shadow.camera.far = 50;
+    directionalLight.shadow.bias = -0.0001; // 调整阴影偏移，防止条纹
+    rocketScene.add(directionalLight);
 
-    // 替换图片为canvas
-    const rocketImage = document.querySelector('.rocket');
-    const rocketContainer = rocketImage.parentElement;
-    rocketContainer.replaceChild(renderer.domElement, rocketImage);
-    renderer.domElement.classList.add('rocket');
-}
+    // 添加点光源 (可以稍微降低强度或调整位置作为补光)
+    const pointLight = new THREE.PointLight(0xffffff, 0.3);
+    pointLight.position.set(-5, 5, 5); // 调整点光源位置
+    rocketScene.add(pointLight);
 
-function LoadRocketModelForFirstPage() {
-    const loader = new THREE.OBJLoader();
+    // 为3D场景中的标签创建一个组
+    labelsGroup = new THREE.Group();
+    rocketScene.add(labelsGroup);
+
+    // 加载3D模型
+    const loader = new THREE.GLTFLoader();
     loader.load(
-        '../../assets/models/Rocket.obj',
-        function (object) {
-            rocketModel = object;
-            // 中心化模型
-            const box = new THREE.Box3().setFromObject(object);
+        '../assets/models/rocket_model.glb',
+        (gltf) => {
+            rocketModel = gltf.scene;
+
+            // 调整模型尺寸和位置
+            rocketModel.scale.set(1, 1, 1);
+
+            // 遍历模型，设置阴影投射和接收，并调整材质
+            rocketModel.traverse((object) => {
+                if (object.isMesh) {
+                    object.castShadow = true;
+                    object.receiveShadow = true;
+                    if (object.material.isMeshStandardMaterial) {
+                        object.material.roughness = 0.1; // 调整粗糙度
+                        object.material.metalness = 0.2; // 调整金属感
+                        // 如果有贴图，确保颜色空间正确
+                        if (object.material.map) {
+                            object.material.map.encoding = THREE.sRGBEncoding;
+                        }
+                    }
+                }
+            });
+
+            // 计算模型的边界框以确定中心点和底部
+            const box = new THREE.Box3().setFromObject(rocketModel);
             const center = box.getCenter(new THREE.Vector3());
-            object.position.sub(center);
 
-            // 按比例缩放模型
-            const scale = 2.0;
-            object.scale.set(scale, scale, scale);
+            // 将模型移至原点
+            rocketModel.position.set(-center.x, -center.y, -center.z);
 
-            // 旋转模型以匹配线稿方向
-            object.rotation.y = Math.PI / 4;
+            // 创建一个组来包含模型
+            const modelGroup = new THREE.Group();
+            modelGroup.add(rocketModel);
 
-            scene.add(object);
+            // 将组添加到场景中
+            rocketScene.add(modelGroup);
+
+            // 将整个模型组向左移动（例如，移动到X轴的-2位置）
+            modelGroup.position.x = -1;
+
+            // 更新模型变量为组
+            rocketModel = modelGroup;
+
+            // 显示canvas和火箭信息元素，实现渐显效果
+            setTimeout(() => {
+                const canvas = document.querySelector('.rocket');
+                const rocketInfo = document.querySelector('.rocket-info');
+
+                if (canvas) {
+                    canvas.style.opacity = '1';
+                }
+
+                if (rocketInfo) {
+                    rocketInfo.style.opacity = '1';
+                }
+            }, 100);
+
+            // 自动旋转展示模型
+            animate();
         },
-        function (xhr) {
-            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+        (xhr) => {
+            console.log('Loading model: ' + Math.floor((xhr.loaded / xhr.total) * 100) + '%');
         },
-        function (error) {
-            console.log('Error loading model:', error);
+        (error) => {
+            console.error('Error loading model:', error);
         }
     );
+
+    // 添加窗口大小变化的监听器
+    window.addEventListener('resize', onWindowResize);
 }
 
+/**
+ * 响应窗口大小变化
+ */
+function onWindowResize() {
+    const canvas = document.querySelector('.rocket');
+    if (!canvas || !rocketCamera || !rocketRenderer) return;
+
+    rocketCamera.aspect = canvas.clientWidth / canvas.clientHeight;
+    rocketCamera.updateProjectionMatrix();
+    rocketRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
+}
+
+/**
+ * 动画循环
+ */
 function animate() {
     requestAnimationFrame(animate);
+
     if (rocketModel) {
-        rocketModel.rotation.y += 0.005; // 慢慢旋转火箭
+        rocketModel.rotation.y += 0.015;
     }
-    renderer.render(scene, camera);
+
+    if (rocketRenderer && rocketScene && rocketCamera) {
+        rocketRenderer.render(rocketScene, rocketCamera);
+    }
 }
 
 /**
@@ -79,44 +167,26 @@ function setupVideoPlayer() {
 
     if (!launchDetailBtn || !videoPlayer || !closeVideoBtn || !launchVideo || !content) return;
 
-    // 点击发射纪实按钮
     launchDetailBtn.addEventListener('click', () => {
-        // 添加淘出效果类
         content.classList.add('fade-out');
-
-        // 延迟显示视频播放器，等待内容淘出效果完成
         setTimeout(() => {
-            // 显示视频播放器
             videoPlayer.classList.add('active');
-            // 自动播放视频
             launchVideo.play();
-        }, 500); // 设置为500ms，与 CSS 过渡效果时间一致
+        }, 500);
     });
 
-    // 点击关闭按钮
     closeVideoBtn.addEventListener('click', () => {
-        // 暂停视频并重置到开头
         launchVideo.pause();
         launchVideo.currentTime = 0;
-
-        // 隐藏视频播放器
         videoPlayer.classList.remove('active');
-
-        // 延迟显示内容，等待视频播放器隐藏效果完成
         setTimeout(() => {
-            // 移除淘出效果类，使内容重新显示
             content.classList.remove('fade-out');
         }, 500);
     });
 
-    // 当视频播放结束时自动关闭视频播放器
     launchVideo.addEventListener('ended', () => {
-        // 隐藏视频播放器
         videoPlayer.classList.remove('active');
-
-        // 延迟显示内容，等待视频播放器隐藏效果完成
         setTimeout(() => {
-            // 移除淘出效果类，使内容重新显示
             content.classList.remove('fade-out');
         }, 500);
     });
@@ -124,10 +194,10 @@ function setupVideoPlayer() {
 
 document.addEventListener("DOMContentLoaded", () => {
     const header = document.querySelector('.header');
-    const container = document.querySelector('.container');
     const lastPageContentStarContainer = document.querySelector('.page:nth-child(3) .content .star-bg');
+    const bgContainer = document.querySelector('.page:nth-child(1) .bg');
 
-    new HeaderController(header, { container });
+    new HeaderController(header);
 
     new StarBackground(lastPageContentStarContainer, {
         starCount: 200,
@@ -138,10 +208,21 @@ document.addEventListener("DOMContentLoaded", () => {
         elapsed: 0,
     });
 
-    initThreeJS();
-    LoadRocketModelForFirstPage();
-    animate();
+    new StarBackground(bgContainer, {
+        starCount: 500,
+        starSizeMin: 0.10,
+        starSizeMax: 0.20,
+        xSpeed: 0.0002,
+        ySpeed: 0.0002,
+        elapsed: 0,
+    });
 
-    // 初始化视频播放器功能
+    new MeteorEffect(bgContainer, {
+        maxMeteors: 20,
+    });
+
+
+
     setupVideoPlayer();
+    initRocketModel();
 });

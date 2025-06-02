@@ -9,7 +9,7 @@
     justify-content: center;
     background: linear-gradient(rgba(0, 0, 0, 0.1) 100%, rgba(0, 0, 0, 0.7) 0%);
     backdrop-filter: blur(1rem);
-    z-index: 10;
+    z-index: 1000;
 }
 
 .header-left,
