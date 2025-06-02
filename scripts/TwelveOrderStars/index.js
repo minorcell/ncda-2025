@@ -1,43 +1,6 @@
 let rocketScene, rocketCamera, rocketRenderer;
 let rocketModel;
 let clock = new THREE.Clock();
-let labelsGroup;
-let fontLoader;
-let font;
-
-// 火箭各部分的缓存对象（简化版）
-let rocketParts = {
-    'escape-tower': {
-        meshes: [],
-        name: '逃逸塔',
-        position: { y: 4.0 },
-        displayOrder: 1
-    },
-    'fairing': {
-        meshes: [],
-        name: '整流罩',
-        position: { y: 2.5 },
-        displayOrder: 2
-    },
-    'core-two': {
-        meshes: [],
-        name: '芯二级',
-        position: { y: 1.0 },
-        displayOrder: 3
-    },
-    'core-one': {
-        meshes: [],
-        name: '芯一级',
-        position: { y: -0.5 },
-        displayOrder: 4
-    },
-    'booster': {
-        meshes: [],
-        name: '助推器',
-        position: { y: -2.0 },
-        displayOrder: 5
-    }
-};
 
 /**
  * 初始化Three.js场景和加载3D模型
@@ -50,7 +13,7 @@ function initRocketModel() {
     rocketScene = new THREE.Scene();
 
     // 创建透视相机
-    rocketCamera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+    rocketCamera = new THREE.PerspectiveCamera(14, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
     rocketCamera.position.set(0, 0, 10);
 
     // 创建渲染器
@@ -98,7 +61,7 @@ function initRocketModel() {
             rocketModel = gltf.scene;
 
             // 调整模型尺寸和位置
-            rocketModel.scale.set(3.5, 3.5, 3.5);
+            rocketModel.scale.set(1, 1, 1);
 
             // 遍历模型，设置阴影投射和接收，并调整材质
             rocketModel.traverse((object) => {
@@ -106,7 +69,7 @@ function initRocketModel() {
                     object.castShadow = true;
                     object.receiveShadow = true;
                     if (object.material.isMeshStandardMaterial) {
-                        object.material.roughness = 0.4; // 调整粗糙度
+                        object.material.roughness = 0.1; // 调整粗糙度
                         object.material.metalness = 0.2; // 调整金属感
                         // 如果有贴图，确保颜色空间正确
                         if (object.material.map) {
@@ -131,7 +94,7 @@ function initRocketModel() {
             rocketScene.add(modelGroup);
 
             // 将整个模型组向左移动（例如，移动到X轴的-2位置）
-            modelGroup.position.x = -3.3;
+            modelGroup.position.x = -1;
 
             // 更新模型变量为组
             rocketModel = modelGroup;
@@ -170,7 +133,7 @@ function animate() {
     requestAnimationFrame(animate);
 
     if (rocketModel) {
-        rocketModel.rotation.y += 0.01;
+        rocketModel.rotation.y += 0.015;
     }
 
     if (rocketRenderer && rocketScene && rocketCamera) {
@@ -217,11 +180,10 @@ function setupVideoPlayer() {
 
 document.addEventListener("DOMContentLoaded", () => {
     const header = document.querySelector('.header');
-    const container = document.querySelector('.container');
     const lastPageContentStarContainer = document.querySelector('.page:nth-child(3) .content .star-bg');
     const bgContainer = document.querySelector('.page:nth-child(1) .bg');
 
-    new HeaderController(header, { container });
+    new HeaderController(header);
 
     new StarBackground(lastPageContentStarContainer, {
         starCount: 200,
