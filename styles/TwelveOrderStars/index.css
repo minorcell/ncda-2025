@@ -27,22 +27,22 @@ body {
 
 .page:nth-child(1) .rocket {
     position: absolute;
-    width: 20vw;
-    height: 80vh;
-    border: 1px solid rgba(255, 255, 255, 1);
-    left: 10vw;
-    top: 10vh;
+    width: 100vw;
+    height: 100vh;
+    left: 0vw;
+    top: 0vh;
     will-change: transform, opacity;
     z-index: 2;
+    cursor: pointer;
 }
 
 .page:nth-child(1) .intro {
     position: absolute;
-    left: 93.4rem;
-    top: 52.2rem;
+    right: 6vw;
+    bottom: 9vh;
     color: rgba(255, 255, 255, 1);
-    width: 87.2rem;
-    height: 41.5rem;
+    width: 46vw;
+    height: 40vh;
     border-radius: 1.6rem;
     z-index: 1;
     display: flex;
@@ -51,6 +51,29 @@ body {
     align-items: start;
     padding: 0 8rem;
     background: url('../../assets/images/TwelveOrderStars/intro-mask.webp') no-repeat center center;
+    background-size: contain;
+}
+
+.page:nth-child(1) .bg {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    left: 0vw;
+    top: 0vh;
+    will-change: transform, opacity;
+    z-index: 10;
+}
+
+/* 火箭画布样式 */
+.rocket {
+    cursor: default;
+    z-index: 5;
+}
+
+/* 高亮的部件样式 */
+.highlight-mesh {
+    outline: 2px solid rgba(0, 162, 255, 0.8);
+    transition: outline 0.3s ease;
 }
 
 .page:nth-child(1) .intro .title {
