@@ -99,6 +99,20 @@ function initRocketModel() {
             // 更新模型变量为组
             rocketModel = modelGroup;
 
+            // 显示canvas和火箭信息元素，实现渐显效果
+            setTimeout(() => {
+                const canvas = document.querySelector('.rocket');
+                const rocketInfo = document.querySelector('.rocket-info');
+
+                if (canvas) {
+                    canvas.style.opacity = '1';
+                }
+
+                if (rocketInfo) {
+                    rocketInfo.style.opacity = '1';
+                }
+            }, 100);
+
             // 自动旋转展示模型
             animate();
         },
