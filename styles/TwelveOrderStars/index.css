@@ -32,8 +32,16 @@ body {
     left: 0vw;
     top: 0vh;
     will-change: transform, opacity;
-    z-index: 2;
+    z-index: 100;
     cursor: pointer;
+}
+
+.page:nth-child(1) .rocket-info {
+    position: absolute;
+    left: 16vw;
+    height: 82vh;
+    bottom: 9vh;
+    z-index: 1;
 }
 
 .page:nth-child(1) .intro {
@@ -64,16 +72,17 @@ body {
     z-index: 10;
 }
 
-/* 火箭画布样式 */
-.rocket {
-    cursor: default;
-    z-index: 5;
-}
-
-/* 高亮的部件样式 */
-.highlight-mesh {
-    outline: 2px solid rgba(0, 162, 255, 0.8);
-    transition: outline 0.3s ease;
+.page:nth-child(1) .bg .top-right-light {
+    position: absolute;
+    top: -40rem;
+    right: -40rem;
+    width: 135.6rem;
+    height: 105.75rem;
+    background: rgba(146, 70, 167, 0.5);
+    filter: blur(64rem);
+    opacity: 0.6;
+    animation: vibrate-1 8s ease-out infinite alternate forwards;
+    z-index: 1;
 }
 
 .page:nth-child(1) .intro .title {
