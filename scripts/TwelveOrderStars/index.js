@@ -5,6 +5,38 @@ let launchAnimationActive = false;
 let countdownInterval;
 let currentLaunchStage = 0;
 let arrowAnimation;
+let currentPartIndex = 0;
+let hoveredPartIndex = -1; // -1 means no part is hovered
+
+/**
+ * 鼠标事件
+ * 1. 移动到当前的part上时，当前的part和stage-info显示，其他的动画继续
+ */
+function setupMouseEvents() {
+    const parts = document.querySelectorAll('.page:nth-child(2) .parts .part');
+    if (!parts.length) return;
+    
+    parts.forEach((part, index) => {
+        part.index = index;
+        part.addEventListener('mouseenter', () => {
+            hoveredPartIndex = index;
+            part.style.opacity = "1";
+            part.querySelector('.stage-info').style.opacity = "1";
+        });
+        part.addEventListener('mouseleave', () => {
+            if (hoveredPartIndex === index) {
+                hoveredPartIndex = -1;
+                if (currentPartIndex === index) {
+                    part.style.opacity = '1';
+                    part.querySelector('.stage-info').style.opacity = '1';
+                } else {
+                    part.style.opacity = '0.1';
+                    part.querySelector('.stage-info').style.opacity = '0';
+                }
+            }
+        });
+    });
+}
 
 /**
  * 初始化Three.js场景和加载3D模型
@@ -180,7 +212,14 @@ function initLaunchAnimation() {
     secondElement.textContent = '分钟';
     
     parts.forEach(part => {
-        part.style.opacity = '0.1';
+        if (part.index === hoveredPartIndex) return;
+        if (currentPartIndex !== part.index) {
+            part.style.opacity = '0.1';
+            part.querySelector('.stage-info').style.opacity = '0';
+        } else {
+            part.style.opacity = '1';
+            part.querySelector('.stage-info').style.opacity = '1';
+        }
     });
     
     // 等待一小段时间，确保元素都加载完成
@@ -223,7 +262,14 @@ function resetLaunchAnimation() {
     
     // 隐藏所有部分
     parts.forEach(part => {
-        part.style.opacity = '0.1';
+        if (part.index === hoveredPartIndex) return;
+        if (currentPartIndex !== part.index) {
+            part.style.opacity = '0.1';
+            part.querySelector('.stage-info').style.opacity = '0';
+        } else {
+            part.style.opacity = '1';
+            part.querySelector('.stage-info').style.opacity = '1';
+        }
     });
     
     // 重置状态变量
@@ -320,6 +366,7 @@ function showLaunchStage(stageIndex) {
     
     // 隐藏所有部分
     parts.forEach(part => {
+        if (part.index === hoveredPartIndex) return;
         part.style.opacity = '0.1';
         stageInfo.forEach(info => {
             info.style.opacity = '0';
@@ -399,6 +446,7 @@ document.addEventListener("DOMContentLoaded", function() {
         starSizeMax: 0.20,
         xSpeed: 0.0002,
         ySpeed: 0.0002,
+
         elapsed: 0,
     });
 
@@ -407,4 +455,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     setupVideoPlayer();
+
+    setupMouseEvents();
 });

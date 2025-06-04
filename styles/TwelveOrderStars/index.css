@@ -117,11 +117,12 @@ body {
     background-repeat: no-repeat;
     opacity: 1;
     transition: opacity 0.8s ease-in-out;
+    cursor: pointer;
 }
 
 .page:nth-child(2) .parts .part .stage-info {
     opacity: 0;
-    transition: opacity 1s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
     z-index: 10;
 }
 
