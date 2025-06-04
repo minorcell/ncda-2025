@@ -18,6 +18,9 @@ ncda-2025/
 ├── pages/                 # HTML页面
 │   └── XXXX.html          # XXXX页面
 ├── scripts/               # JavaScript脚本
+│   └── common/            # 公共脚本
+│   |   └── XXXX.js        # 公共脚本
+│   |   └── README.md      # 公共脚本说明文档
 │   └── XXXX/              # XXXX页面脚本
 │       └── index.js       # 主逻辑
 ├── styles/                # 样式文件
