@@ -2,6 +2,7 @@ body {
     min-height: 100vh;
     background: rgba(0, 0, 0, 1);
     overflow-x: hidden;
+    color: rgba(255, 255, 255, 1);
 }
 
 .container {
@@ -114,8 +115,14 @@ body {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 0.1;
+    opacity: 1;
     transition: opacity 0.8s ease-in-out;
+}
+
+.page:nth-child(2) .parts .part .stage-info {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 10;
 }
 
 .page:nth-child(2) .parts .part:nth-child(1) {
@@ -124,6 +131,51 @@ body {
     left: 9vw;
     bottom: 2vh;
     background-image: url("../../assets/images/TwelveOrderStars/2_1.png");
+    position: absolute;
+}
+
+.page:nth-child(2) .parts .part:nth-child(1) .stage-info {
+    position: absolute;
+    left: 20vw;
+    top: 10%;
+    display: flex;
+    width: 25vw;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: start;
+    gap: 1rem;
+}
+
+.page:nth-child(2) .parts .part:nth-child(1) .stage-info .line {
+    position: absolute;
+    top: 1.2rem;
+    left: -50%;
+    width: 20rem;
+    height: 0.1rem;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(2) .parts .part:nth-child(1) .stage-info .name {
+    font-size: 2.4rem;
+    font-weight: 200;
+    font-family: 'fys', sans-serif;
+    color: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(2) .parts .part:nth-child(1) .stage-info .intro {
+    font-size: 2rem;
+    font-weight: 200;
+    font-family: 'fys', sans-serif;
+    color: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(2) .parts .part:nth-child(1) .stage-info .live-img {
+    width: 100%;
+    height: 20rem;
+    background-image: url("../../assets/images/TwelveOrderStars/process_1_bg.png");
+    background-size: contain;
+    background-position: start;
+    background-repeat: no-repeat;
 }
 
 .page:nth-child(2) .parts .part:nth-child(2) {
@@ -134,12 +186,100 @@ body {
     background-image: url("../../assets/images/TwelveOrderStars/2_2.png");
 }
 
+.page:nth-child(2) .parts .part:nth-child(2) .stage-info {
+    position: absolute;
+    left: 21vw;
+    top: 50%;
+    display: flex;
+    width: 25vw;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: start;
+    gap: 1rem;
+}
+
+.page:nth-child(2) .parts .part:nth-child(2) .stage-info .line {
+    position: absolute;
+    top: 1.2rem;
+    left: -45%;
+    width: 16rem;
+    height: 0.1rem;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(2) .parts .part:nth-child(2) .stage-info .name {
+    font-size: 2.4rem;
+    font-weight: 200;
+    font-family: 'fys', sans-serif;
+    color: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(2) .parts .part:nth-child(2) .stage-info .intro {
+    font-size: 2rem;
+    font-weight: 200;
+    font-family: 'fys', sans-serif;
+    color: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(2) .parts .part:nth-child(2) .stage-info .live-img {
+    width: 100%;
+    height: 20rem;
+    background-image: url("../../assets/images/TwelveOrderStars/process_1_bg.png");
+    background-size: contain;
+    background-position: start;
+    background-repeat: no-repeat;
+}
+
 .page:nth-child(2) .parts .part:nth-child(3) {
     width: 10vw;
     height: 15vh;
     left: 23vw;
     bottom: 66vh;
     background-image: url("../../assets/images/TwelveOrderStars/2_3.png");
+}
+
+.page:nth-child(2) .parts .part:nth-child(3) .stage-info {
+    position: absolute;
+    left: 11vw;
+    top: 60%;
+    display: flex;
+    width: 25vw;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: start;
+    gap: 1rem;
+}
+
+.page:nth-child(2) .parts .part:nth-child(3) .stage-info .line {
+    position: absolute;
+    top: 1.2rem;
+    left: -20%;
+    width: 7rem;
+    height: 0.1rem;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(2) .parts .part:nth-child(3) .stage-info .name {
+    font-size: 2.4rem;
+    font-weight: 200;
+    font-family: 'fys', sans-serif;
+    color: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(2) .parts .part:nth-child(3) .stage-info .intro {
+    font-size: 2rem;
+    font-weight: 200;
+    font-family: 'fys', sans-serif;
+    color: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(2) .parts .part:nth-child(3) .stage-info .live-img {
+    width: 100%;
+    height: 20rem;
+    background-image: url("../../assets/images/TwelveOrderStars/process_1_bg.png");
+    background-size: contain;
+    background-position: start;
+    background-repeat: no-repeat;
 }
 
 .page:nth-child(2) .parts .part:nth-child(4) {
@@ -150,6 +290,50 @@ body {
     background-image: url("../../assets/images/TwelveOrderStars/2_4.png");
 }
 
+.page:nth-child(2) .parts .part:nth-child(4) .stage-info {
+    position: absolute;
+    left: 10vw;
+    top: 50%;
+    display: flex;
+    width: 25vw;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: start;
+    gap: 1rem;
+}
+
+.page:nth-child(2) .parts .part:nth-child(4) .stage-info .line {
+    position: absolute;
+    top: 1.2rem;
+    left: -15%;
+    width: 5rem;
+    height: 0.1rem;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(2) .parts .part:nth-child(4) .stage-info .name {
+    font-size: 2.4rem;
+    font-weight: 200;
+    font-family: 'fys', sans-serif;
+    color: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(2) .parts .part:nth-child(4) .stage-info .intro {
+    font-size: 2rem;
+    font-weight: 200;
+    font-family: 'fys', sans-serif;
+    color: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(2) .parts .part:nth-child(4) .stage-info .live-img {
+    width: 100%;
+    height: 20rem;
+    background-image: url("../../assets/images/TwelveOrderStars/process_1_bg.png");
+    background-size: contain;
+    background-position: start;
+    background-repeat: no-repeat;
+}
+
 .page:nth-child(2) .parts .part:nth-child(5) {
     width: 8vw;
     height: 9vh;
@@ -158,12 +342,91 @@ body {
     background-image: url("../../assets/images/TwelveOrderStars/2_5.png");
 }
 
+.page:nth-child(2) .parts .part:nth-child(5) .stage-info {
+    position: absolute;
+    left: 10lvw;
+    top: 70%;
+    display: flex;
+    width: 25vw;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: start;
+    gap: 1rem;
+}
+
+.page:nth-child(2) .parts .part:nth-child(5) .stage-info .line {
+    position: absolute;
+    top: 1.2rem;
+    left: -15%;
+    width: 5rem;
+    height: 0.1rem;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(2) .parts .part:nth-child(5) .stage-info .name {
+    font-size: 2.4rem;
+    font-weight: 200;
+    font-family: 'fys', sans-serif;
+    color: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(2) .parts .part:nth-child(5) .stage-info .intro {
+    font-size: 2rem;
+    font-weight: 200;
+    font-family: 'fys', sans-serif;
+    color: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(2) .parts .part:nth-child(5) .stage-info .live-img {
+    width: 100%;
+    height: 20rem;
+    background-image: url("../../assets/images/TwelveOrderStars/process_1_bg.png");
+    background-size: contain;
+    background-position: start;
+    background-repeat: no-repeat;
+}
+
 .page:nth-child(2) .parts .part:nth-child(6) {
     width: 6vw;
     height: 9vh;
     left: 63vw;
     bottom: 88vh;
     background-image: url("../../assets/images/TwelveOrderStars/2_6.png");
+}
+
+.page:nth-child(2) .parts .part:nth-child(6) .stage-info {
+    position: absolute;
+    left: 0vw;
+    top: 100%;
+    display: flex;
+    width: 25vw;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: start;
+    gap: 1rem;
+}
+
+.page:nth-child(2) .parts .part:nth-child(6) .stage-info .name {
+    font-size: 2.4rem;
+    font-weight: 200;
+    font-family: 'fys', sans-serif;
+    color: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(2) .parts .part:nth-child(6) .stage-info .intro {
+    font-size: 2rem;
+    font-weight: 200;
+    font-family: 'fys', sans-serif;
+    color: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(2) .parts .part:nth-child(6) .stage-info .live-img {
+    width: 100%;
+    height: 20rem;
+    background-image: url("../../assets/images/TwelveOrderStars/process_1_bg.png");
+    background-size: contain;
+    background-position: start;
+    background-repeat: no-repeat;
 }
 
 .page:nth-child(2) .process {
@@ -200,8 +463,8 @@ body {
 
 .page:nth-child(2) .info {
     position: absolute;
-    right: 40rem;
-    bottom: 45vh;
+    right: 38rem;
+    bottom: 42vh;
     transform: translateY(-50%);
     font-size: 6.4rem;
     font-weight: 200;

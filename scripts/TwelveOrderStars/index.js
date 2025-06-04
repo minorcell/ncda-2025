@@ -6,39 +6,6 @@ let countdownInterval;
 let currentLaunchStage = 0;
 let arrowAnimation;
 
-const pageTwoData = [
-    {
-        name: "一过程",
-        intro: "解释文字解释文字解释文字解释文字",
-        liveImg: "../../assets/images/TwelveOrderStars/process-1-bg.png",
-    },
-    {
-        name: "二过程",
-        intro: "解释文字解释文字解释文字解释文字",
-        liveImg: "../../assets/images/TwelveOrderStars/process-1-bg.png",
-    },
-    {
-        name: "三过程",
-        intro: "解释文字解释文字解释文字解释文字",
-        liveImg: "../../assets/images/TwelveOrderStars/process-1-bg.png",
-    },
-    {
-        name: "四过程",
-        intro: "解释文字解释文字解释文字解释文字",
-        liveImg: "../../assets/images/TwelveOrderStars/process-1-bg.png",
-    },
-    {
-        name: "五过程",
-        intro: "解释文字解释文字解释文字解释文字",
-        liveImg: "../../assets/images/TwelveOrderStars/process-1-bg.png",
-    },
-    {
-        name: "六过程",
-        intro: "解释文字解释文字解释文字解释文字",
-        liveImg: "../../assets/images/TwelveOrderStars/process-1-bg.png",
-    }
-]
-
 /**
  * 初始化Three.js场景和加载3D模型
  */
@@ -345,6 +312,7 @@ function startLaunchSequence() {
  */
 function showLaunchStage(stageIndex) {
     const parts = document.querySelectorAll('.page:nth-child(2) .parts .part');
+    const stageInfo = document.querySelectorAll('.page:nth-child(2) .parts .part .stage-info');
     if (!parts.length || stageIndex < 0 || stageIndex >= parts.length) return;
     
     // 更新当前阶段
@@ -353,10 +321,14 @@ function showLaunchStage(stageIndex) {
     // 隐藏所有部分
     parts.forEach(part => {
         part.style.opacity = '0.1';
+        stageInfo.forEach(info => {
+            info.style.opacity = '0';
+        });
     });
     
     // 显示当前阶段
     parts[stageIndex].style.opacity = '1';
+    stageInfo[stageIndex].style.opacity = '1';
 }
 
 /**
