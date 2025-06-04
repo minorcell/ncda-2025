@@ -1,6 +1,10 @@
 let rocketScene, rocketCamera, rocketRenderer;
 let rocketModel;
 let clock = new THREE.Clock();
+let launchAnimationActive = false;
+let countdownInterval;
+let currentLaunchStage = 0;
+let arrowAnimation;
 
 const pageTwoData = [
     {
@@ -189,6 +193,173 @@ function animate() {
 }
 
 /**
+ * 初始化火箭发射动画
+ */
+function initLaunchAnimation() {
+    const parts = document.querySelectorAll('.page:nth-child(2) .parts .part');
+    const digitElement = document.querySelector('.page:nth-child(2) .time .digit');
+    const secondElement = document.querySelector('.page:nth-child(2) .time .second');
+    const arrow = document.querySelector('.page:nth-child(2) .process .arrow');
+
+    if (!parts.length || !digitElement || !secondElement || !arrow) return;
+
+    // 初始设置，先给箭头设置底部位置和透明度
+    arrow.classList.add('reset'); // 添加reset类以禁用过渡
+    arrow.style.bottom = '0';
+    arrow.style.opacity = '0';
+    
+    // 初始化其他元素
+    digitElement.textContent = '0';
+    secondElement.textContent = '分钟';
+    
+    parts.forEach(part => {
+        part.style.opacity = '0.1';
+    });
+    
+    // 等待一小段时间，确保元素都加载完成
+    setTimeout(() => {
+        // 直接开始发射序列而不是倒计时
+        startLaunchSequence();
+    }, 500);
+}
+
+/**
+ * 重置火箭发射动画
+ */
+function resetLaunchAnimation() {
+    const parts = document.querySelectorAll('.page:nth-child(2) .parts .part');
+    const digitElement = document.querySelector('.page:nth-child(2) .time .digit');
+    const secondElement = document.querySelector('.page:nth-child(2) .time .second');
+    const arrow = document.querySelector('.page:nth-child(2) .process .arrow');
+    
+    if (!parts.length || !digitElement || !secondElement || !arrow) return;
+
+    // 清除任何现有的时间计数器和动画
+    if (countdownInterval) clearInterval(countdownInterval);
+    if (arrowAnimation) clearTimeout(arrowAnimation);
+    
+    // 首先让箭头渐隐
+    arrow.style.opacity = '0';
+    
+    // 等待透明度过渡完成
+    setTimeout(() => {
+        // 添加reset类以禁用过渡效果
+        arrow.classList.add('reset');
+        
+        // 重置箭头位置
+        arrow.style.bottom = '0';
+    }, 800); // 与透明度过渡时间一致
+    
+    // 重置时间显示为0分钟
+    digitElement.textContent = '0';
+    secondElement.textContent = '分钟';
+    
+    // 隐藏所有部分
+    parts.forEach(part => {
+        part.style.opacity = '0.1';
+    });
+    
+    // 重置状态变量
+    launchAnimationActive = false;
+    currentLaunchStage = 0;
+}
+
+
+
+/**
+ * 开始火箭发射序列
+ */
+function startLaunchSequence() {
+    const parts = document.querySelectorAll('.page:nth-child(2) .parts .part');
+    const digitElement = document.querySelector('.page:nth-child(2) .time .digit');
+    const secondElement = document.querySelector('.page:nth-child(2) .time .second');
+    const arrow = document.querySelector('.page:nth-child(2) .process .arrow');
+    
+    if (!parts.length || !digitElement || !secondElement || !arrow) return;
+    
+    // 防止多次启动
+    if (launchAnimationActive) return;
+    launchAnimationActive = true;
+    
+    // 各阶段显示的持续时间（毫秒）
+    const stageDuration = 1500;
+    const totalAnimationTime = parts.length * stageDuration; // 总动画时间（毫秒）
+    const timeInterval = 50; // 更新时间的间隔（毫秒）
+    
+    // 更新时间显示为分钟
+    digitElement.textContent = '0';
+    secondElement.textContent = '分钟';
+    
+    // 启动发射时间计数器
+    let elapsedTime = 0;
+    const incrementPerInterval = 56 / (totalAnimationTime / timeInterval);
+    
+    countdownInterval = setInterval(() => {
+        elapsedTime += incrementPerInterval;
+        const minutes = Math.floor(elapsedTime);
+        digitElement.textContent = minutes;
+        
+        if (minutes >= 56) {
+            digitElement.textContent = '56';
+            clearInterval(countdownInterval);
+        }
+    }, timeInterval);
+    
+    // 首先确保箭头在底部且隐藏状态
+    arrow.classList.add('reset'); // 先添加reset防止过渡
+    arrow.style.bottom = '0';
+    arrow.style.opacity = '0';
+    
+    // 下一帧中移除reset，并显示箭头
+    requestAnimationFrame(() => {
+        // 移除reset类，允许过渡效果
+        arrow.classList.remove('reset');
+        
+        // 先显示箭头
+        arrow.style.opacity = '1';
+        
+        // 等待箭头显示出来后，开始上升动画
+        setTimeout(() => {
+            arrow.style.bottom = '90vh'; // 移动到顶部
+        }, 300);
+    });
+    
+    // 显示第一个阶段
+    showLaunchStage(0);
+    
+    // 依次显示其他阶段
+    for (let i = 1; i < parts.length; i++) {
+        setTimeout(() => showLaunchStage(i), i * stageDuration);
+    }
+    
+    // 全部阶段完成后重置动画
+    setTimeout(() => {
+        resetLaunchAnimation();
+        // 短暂延迟后重新开始
+        setTimeout(() => startLaunchSequence(), 2000);
+    }, totalAnimationTime + 1000);
+}
+
+/**
+ * 显示特定的发射阶段，同时隐藏其他阶段
+ */
+function showLaunchStage(stageIndex) {
+    const parts = document.querySelectorAll('.page:nth-child(2) .parts .part');
+    if (!parts.length || stageIndex < 0 || stageIndex >= parts.length) return;
+    
+    // 更新当前阶段
+    currentLaunchStage = stageIndex;
+    
+    // 隐藏所有部分
+    parts.forEach(part => {
+        part.style.opacity = '0.1';
+    });
+    
+    // 显示当前阶段
+    parts[stageIndex].style.opacity = '1';
+}
+
+/**
  * 初始化视频播放器功能
  */
 function setupVideoPlayer() {
@@ -225,7 +396,16 @@ function setupVideoPlayer() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function() {
+    // 检查并初始化火箭模型
+    initRocketModel();
+    
+    // 设置视频播放器功能
+    setupVideoPlayer();
+    
+    // 初始化火箭发射动画
+    initLaunchAnimation();
+    
     const header = document.querySelector('.header');
     const lastPageContentStarContainer = document.querySelector('.page:nth-child(3) .content .star-bg');
     const bgContainer = document.querySelector('.page:nth-child(1) .bg');
@@ -254,8 +434,5 @@ document.addEventListener("DOMContentLoaded", () => {
         maxMeteors: 20,
     });
 
-
-
     setupVideoPlayer();
-    initRocketModel();
 });

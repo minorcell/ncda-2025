@@ -114,6 +114,8 @@ body {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    opacity: 0.1;
+    transition: opacity 0.8s ease-in-out;
 }
 
 .page:nth-child(2) .parts .part:nth-child(1) {
@@ -174,6 +176,7 @@ body {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    z-index: 1001;
 }
 
 .page:nth-child(2) .process .arrow {
@@ -187,6 +190,12 @@ body {
     bottom: 0;
     right: 5vw;
     transform: translate(-50%, 50%);
+    transition: bottom 10s ease-in-out, opacity 0.8s ease-in-out;
+    opacity: 0;
+}
+
+.page:nth-child(2) .process .arrow.reset {
+    transition: none;
 }
 
 .page:nth-child(2) .info {
@@ -226,7 +235,7 @@ body {
     font-size: 3.2rem;
     font-weight: 200;
     font-family: 'fys', sans-serif;
-    transform: translate(50%, 3rem);
+    transform: translate(0, 3rem);
 }
 
 .page:nth-child(3) {
