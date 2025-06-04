@@ -2,6 +2,39 @@ let rocketScene, rocketCamera, rocketRenderer;
 let rocketModel;
 let clock = new THREE.Clock();
 
+const pageTwoData = [
+    {
+        name: "一过程",
+        intro: "解释文字解释文字解释文字解释文字",
+        liveImg: "../../assets/images/TwelveOrderStars/process-1-bg.png",
+    },
+    {
+        name: "二过程",
+        intro: "解释文字解释文字解释文字解释文字",
+        liveImg: "../../assets/images/TwelveOrderStars/process-1-bg.png",
+    },
+    {
+        name: "三过程",
+        intro: "解释文字解释文字解释文字解释文字",
+        liveImg: "../../assets/images/TwelveOrderStars/process-1-bg.png",
+    },
+    {
+        name: "四过程",
+        intro: "解释文字解释文字解释文字解释文字",
+        liveImg: "../../assets/images/TwelveOrderStars/process-1-bg.png",
+    },
+    {
+        name: "五过程",
+        intro: "解释文字解释文字解释文字解释文字",
+        liveImg: "../../assets/images/TwelveOrderStars/process-1-bg.png",
+    },
+    {
+        name: "六过程",
+        intro: "解释文字解释文字解释文字解释文字",
+        liveImg: "../../assets/images/TwelveOrderStars/process-1-bg.png",
+    }
+]
+
 /**
  * 初始化Three.js场景和加载3D模型
  */
