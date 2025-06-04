@@ -63,7 +63,7 @@ body {
     justify-content: space-evenly;
     align-items: start;
     padding: 0 8rem;
-    background: url('../../assets/images/TwelveOrderStars/intro-mask.webp') no-repeat center center;
+    background: url('../../assets/images/TwelveOrderStars/intro-mask.webp') no-repeat left center;
     background-size: contain;
 }
 
@@ -175,7 +175,7 @@ body {
     height: 20rem;
     background-image: url("../../assets/images/TwelveOrderStars/process_1_bg.png");
     background-size: contain;
-    background-position: start;
+    background-position: left;
     background-repeat: no-repeat;
 }
 
@@ -227,7 +227,7 @@ body {
     height: 20rem;
     background-image: url("../../assets/images/TwelveOrderStars/process_1_bg.png");
     background-size: contain;
-    background-position: start;
+    background-position: left;
     background-repeat: no-repeat;
 }
 
@@ -279,7 +279,7 @@ body {
     height: 20rem;
     background-image: url("../../assets/images/TwelveOrderStars/process_1_bg.png");
     background-size: contain;
-    background-position: start;
+    background-position: left;
     background-repeat: no-repeat;
 }
 
@@ -331,7 +331,7 @@ body {
     height: 20rem;
     background-image: url("../../assets/images/TwelveOrderStars/process_1_bg.png");
     background-size: contain;
-    background-position: start;
+    background-position: left;
     background-repeat: no-repeat;
 }
 
@@ -345,7 +345,7 @@ body {
 
 .page:nth-child(2) .parts .part:nth-child(5) .stage-info {
     position: absolute;
-    left: 10lvw;
+    left: 10vw;
     top: 70%;
     display: flex;
     width: 25vw;
@@ -383,7 +383,7 @@ body {
     height: 20rem;
     background-image: url("../../assets/images/TwelveOrderStars/process_1_bg.png");
     background-size: contain;
-    background-position: start;
+    background-position: left;
     background-repeat: no-repeat;
 }
 
@@ -426,7 +426,7 @@ body {
     height: 20rem;
     background-image: url("../../assets/images/TwelveOrderStars/process_1_bg.png");
     background-size: contain;
-    background-position: start;
+    background-position: left;
     background-repeat: no-repeat;
 }
 
