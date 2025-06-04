@@ -4,20 +4,30 @@
 
 ```
 ncda-2025/
-├── .github/               # GitHub 配置文件
+├── .github/               # GitHub 配置和工作流
 │   └── workflows/         # GitHub Actions 工作流配置
-├── assets/               # 静态资源
-│   ├── images/           # 图片资源
-│   ├── videos/           # 视频资源
-│   ├── fonts/            # 字体文件
-│   └── audio/            # 音频资源
-├── styles/               # CSS 样式
-│   ├── reset.css         # 重置默认样式
-│   ├── fonts.css         # 字体定义
-│   ├── keyframes.css     # 动画关键帧定义
-│   └── index/            # 页面特定样式
-│       └── index.css     # 首页样式
-└── index.html            # 主页面
+├── assets/                # 静态资源
+│   ├── images/            # 图片资源（WebP格式优先）
+│   ├── videos/            # 视频资源（MP4格式）
+│   ├── fonts/             # 字体文件（WOFF2格式）
+│   └── audio/             # 音频资源（MP3格式）
+│   └── models/            # 3D模型资源
+├── build/                 # 下载的依赖包
+│   └── README.md          # 下载依赖包的说明文档
+│   └── XXXX.js/           # 下载的依赖包
+├── pages/                 # HTML页面
+│   └── XXXX.html          # XXXX页面
+├── scripts/               # JavaScript脚本
+│   └── XXXX/              # XXXX页面脚本
+│       └── index.js       # 主逻辑
+├── styles/                # 样式文件
+│   ├── reset.css          # 浏览器样式重置
+│   ├── fonts.css          # 字体定义
+│   ├── keyframes.css      # 动画关键帧定义
+│   └── XXXX/              # XXXX页面样式
+│       └── index.css      # 主样式
+├── index.html             # 网站入口
+└── README.md              # 项目说明文档
 ```
 
 ## CSS 编码规范
@@ -84,7 +94,7 @@ ncda-2025/
 ## 代码提交规范
 
 - 遵循 [Conventional Commits](https://www.conventionalcommits.org/) 规范
-- commit 类型:
+- commit 类型：
   - feat: 新功能
   - fix: 修复问题
   - docs: 文档更新
@@ -95,6 +105,4 @@ ncda-2025/
   - build: 构建系统或外部依赖
   - ci: CI 配置
 
----
-
-本文档最后更新时间：2025 年 5 月 12 日
+本文档最后更新时间：2025 年 6 月 5 日
