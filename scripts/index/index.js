@@ -452,4 +452,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 第四页面的行星星星效果
     new PlanetStars();
+
+    // 鼠标特效
+    new Mouse({
+        defaultCursor: './assets/images/common/mouse-default.svg',
+        clickCursor: './assets/images/common/mouse-click.svg',
+    });
 });

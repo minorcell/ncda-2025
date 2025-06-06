@@ -23,7 +23,7 @@ body {
 }
 
 #slider {
-    transition: stroke-dashoffset 0.1s ease;
+    transition: all 0.1s ease;
     animation: blink 1.5s infinite ease-in-out;
 }
 

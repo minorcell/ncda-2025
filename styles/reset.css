@@ -14,4 +14,22 @@
 
 html {
     font-size: 10px;
+    cursor: none;
+}
+
+.custom-cursor {
+    position: fixed;
+    width: 3.2rem;
+    height: 3.2rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 9999;
+    transition: background-image 0.1s ease;
+    opacity: 1;
+}
+
+.custom-cursor.hidden {
+    opacity: 0;
+    transform: scale(0.9);
 }
