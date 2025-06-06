@@ -109,12 +109,50 @@
                 <img src="./assets/images/index/LastPlant.svg" alt="孤独星球">
             </div>
         </div>
+        <svg id="home-line" viewBox="0 0 1920 5090" preserveAspectRatio="none">
+            <defs>
+                <filter id="glow" x="-50%" y="-50%" width="200%" height="300%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                    <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+            </defs>
+            <path id="curve"
+                d="M1852.95 127.789C1852.95 127.789 1657.58 180.447 1412.08 362.447C1201.1 518.855 1048.58 672.447 1080.95 947.789C1113.31 1223.13 1587.62 1201.53 1657.59 1507.45C1717.39 1768.96 1657.59 1920.45 1420.58 2138.95C1161.66 2377.64 850.066 2453.99 651.586 2523.95C453.105 2593.91 -333.897 3018.95 321.103 3643.45C976.104 4267.95 305.103 4671.45 210.103 4828.45C115.103 4985.45 717.103 5089.45 288.603 4986.94"
+                fill="none" stroke="rgba(255, 255, 255, 0.5)" stroke-width="0.8" />
+            <ellipse id="slider" cx="0" cy="0" rx="20" ry="2" fill="white" filter="url(#glow)" />
+        </svg>
     </div>
     <script src="./build/three_r145.js"></script>
     <script src="./scripts/common/HeaderController.js"></script>
     <script src="./scripts/common/StarBackground.js"></script>
     <script src="./scripts/common/MeteorEffect.js"></script>
     <script src="./scripts/index/index.js"></script>
+    <script>
+        const curve = document.getElementById('curve');
+        const slider = document.getElementById('slider');
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const speedFactor = 1;
+
+        function updateSlider() {
+            const scrollY = window.scrollY;
+            const scrollFraction = scrollY / totalHeight;
+            const pathLength = curve.getTotalLength();
+            const offset = scrollFraction * pathLength * speedFactor;
+
+            const point = curve.getPointAtLength(offset);
+            const prevPoint = curve.getPointAtLength(Math.max(offset - 0.1, 0));
+            const angle = Math.atan2(point.y - prevPoint.y, point.x - prevPoint.x) * 180 / Math.PI;
+
+            slider.setAttribute('transform', `translate(${point.x}, ${point.y}) rotate(${angle})`);
+        }
+
+        window.addEventListener('scroll', updateSlider);
+        window.addEventListener('resize', updateSlider);
+        updateSlider();
+    </script>
 </body>
 
 </html>

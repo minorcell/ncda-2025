@@ -11,10 +11,20 @@ body {
     top: 0;
     left: 0;
     overflow-x: hidden;
-    background-image: url("../../assets/images/index/home-line.svg");
-    background-size: cover;
-    background-position: top 38.3vh left -2.6vw;
-    background-repeat: no-repeat;
+}
+
+#home-line {
+    position: absolute;
+    top: 10vh;
+    left: 0;
+    width: 100vw;
+    height: 500vh;
+    z-index: -1;
+}
+
+#slider {
+    transition: stroke-dashoffset 0.1s ease;
+    animation: blink 1.5s infinite ease-in-out;
 }
 
 .page {
