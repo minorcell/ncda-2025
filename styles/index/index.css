@@ -13,6 +13,7 @@ body {
     overflow-x: hidden;
 }
 
+/* stylelint-disable-next-line selector-max-id */
 #home-line {
     position: absolute;
     top: 10vh;
@@ -22,6 +23,7 @@ body {
     z-index: -1;
 }
 
+/* stylelint-disable-next-line selector-max-id */
 #slider {
     transition: all 0.1s ease;
     animation: blink 1.5s infinite ease-in-out;
