@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", function () {
   handleNavigation(); // 设置导航按钮的点击事件监听
   // 初始化鼠标控制器
   new Mouse({
-    defaultCursor: '../../assets/images/common/mouse-default.svg',
-    clickCursor: '../../assets/images/common/mouse-click.svg',
+    defaultCursor: '../assets/images/common/mouse-default.svg',
+    clickCursor: '../assets/images/common/mouse-click.svg',
   });
 });
