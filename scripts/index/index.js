@@ -455,7 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 鼠标特效
     new Mouse({
-        defaultCursor: './assets/images/common/mouse-default.svg',
-        clickCursor: './assets/images/common/mouse-click.svg',
+        defaultCursor: './assets/images/common/MouseDefault.svg',
+        clickCursor: './assets/images/common/MouseClick.svg',
     });
 });
