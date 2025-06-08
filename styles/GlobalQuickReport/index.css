@@ -1,19 +1,158 @@
 body {
     background-color: rgba(0, 0, 0, 1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-size: 10px;
+    overflow-x: hidden;
 }
 
-h1 {
-    animation: tracking-in-expand 2s ease-in-out both;
-    font-family: 'hkjt', sans-serif;
-    font-style: italic;
-    font-weight: normal;
-    font-size: 20rem;
-    color: rgba(238, 236, 225, 1);
-    text-decoration: underline dashed;
-    text-shadow: 0px 0.8rem 0.8rem;
+.container {
+    height: 200vh;
+    width: 100vw;
+    overflow-x: hidden;
+    color: rgba(255, 255, 255, 1);
+}
+
+.page:nth-child(1) {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    padding-left: 10rem;
+    padding-right: 10rem;
+}
+
+.page:nth-child(1) .star-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+
+.page:nth-child(1) .light-bg {
+    background-image: url("../../assets/images/GlobalQuickReport/BgLight.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    width: 113.9rem;
+    height: 170.567rem;
+    top: -55rem;
+    left: 94.6rem;
+    z-index: -1;
+}
+
+.page:nth-child(1) .info {
+    width: 100vw;
+    margin-top: 8rem;
+    margin-bottom: 5rem;
+}
+
+.page:nth-child(1) .info .title {
+    font-size: 8rem;
+    font-family: 'fys', sans-serif;
+    transform: translateX(-4rem);
+}
+
+.page:nth-child(1) .info .en {
+    font-size: 4rem;
+    font-family: serif, sans-serif;
+    font-weight: 200;
+}
+
+.page:nth-child(1) .news {
+    width: 100%;
+    height: calc(100vh - 30rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-y: scroll;
+}
+
+.page:nth-child(1) .news .new-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 3rem;
+    font-family: serif, sans-serif;
+    font-weight: 200;
+    padding: 2rem 20rem 2rem 8rem;
+    transition: all 0.3s ease;
+    border-top: 0.2rem solid rgba(255, 255, 255, 0.3);
+}
+
+
+.page:nth-child(1) .news .new-item:nth-last-child(1) {
+    border-bottom: 0.2rem solid rgba(255, 255, 255, 0.3);
+}
+
+.page:nth-child(1) .news .new-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+}
+
+.page:nth-child(1) .news .new-item .new-content-box {
+    display: none;
+    transition: all 0.3s ease;
+    position: fixed;
+    opacity: 0;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(0.5rem);
+    animation: fade-in-fwd 0.3s ease;
+}
+
+.page:nth-child(1) .news .new-item .new-content-box .children {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url("../../assets/images/GlobalQuickReport/ModelBg.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 144.49rem;
+    height: 77.793rem;
+    padding: 2rem;
+    padding: 5rem 8rem 5rem 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    color: rgba(255, 255, 255, 1);
+}
+
+.new-content-box .close-btn {
+    background-image: url("../../assets/images/GlobalQuickReport/CloseBtn.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 8rem;
+    height: 8rem;
+    position: absolute;
+    top: 8rem;
+    right: 10rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: rotate-in 0.6s ease-in-out;
+}
+
+.new-content-box .close-btn:hover {
+    transform: scale(1.1);
+}
+
+.new-content-box .children .new-box-title {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    font-family: serif, sans-serif;
+}
+
+.new-content-box .children .line {
+    width: 100%;
+    height: 0.2rem;
+    background-color: rgba(164, 55, 194, 1);
+    margin-bottom: 2rem;
 }

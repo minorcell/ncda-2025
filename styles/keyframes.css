@@ -28,6 +28,18 @@
   }
 }
 
+@keyframes rotate-in {
+  0% {
+    transform: rotate(-360deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: rotate(0);
+    opacity: 1;
+  }
+}
+
 @keyframes fade-in-fwd {
   0% {
     transform: translateZ(-80px);
