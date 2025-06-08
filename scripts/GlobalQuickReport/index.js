@@ -51,6 +51,92 @@ const news = [
     }
 ]
 
+const htkjyymfw = [
+    {
+        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW01.jpg",
+        vodeo: "../../assets/videos/launch.mp4",
+    },
+    {
+        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW02.png",
+        vodeo: "../../assets/videos/launch.mp4",
+    },
+    {
+        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW03.png",
+        vodeo: "../../assets/videos/launch.mp4",
+    },
+    {
+        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW05.jpg",
+        vodeo: "../../assets/videos/launch.mp4",
+    },
+    {
+        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW06.webp",
+        vodeo: "../../assets/videos/launch.mp4",
+    },
+    {
+        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW01.jpg",
+        vodeo: "../../assets/videos/launch.mp4",
+    },
+    {
+        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW02.png",
+        vodeo: "../../assets/videos/launch.mp4",
+    },
+    {
+        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW03.png",
+        vodeo: "../../assets/videos/launch.mp4",
+    },
+    {
+        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW05.jpg",
+        vodeo: "../../assets/videos/launch.mp4",
+    },
+    {
+        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW06.webp",
+        vodeo: "../../assets/videos/launch.mp4",
+    },
+]
+
+const gkhz = [
+    {
+        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW01.jpg",
+        vodeo: "../../assets/videos/launch.mp4",
+    },
+    {
+        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW02.png",
+        vodeo: "../../assets/videos/launch.mp4",
+    },
+    {
+        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW03.png",
+        vodeo: "../../assets/videos/launch.mp4",
+    },
+    {
+        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW05.jpg",
+        vodeo: "../../assets/videos/launch.mp4",
+    },
+    {
+        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW06.webp",
+        vodeo: "../../assets/videos/launch.mp4",
+    },
+    {
+        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW01.jpg",
+        vodeo: "../../assets/videos/launch.mp4",
+    },
+    {
+        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW02.png",
+        vodeo: "../../assets/videos/launch.mp4",
+    },
+    {
+        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW03.png",
+        vodeo: "../../assets/videos/launch.mp4",
+    },
+    {
+        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW05.jpg",
+        vodeo: "../../assets/videos/launch.mp4",
+    },
+    {
+        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW06.webp",
+        vodeo: "../../assets/videos/launch.mp4",
+    },
+]
+
 function createNewsItem(news = []) {
     const newsContainer = document.querySelector('.news');
     newsContainer.innerHTML = news.map((item, index) =>
@@ -89,6 +175,64 @@ function createNewsItem(news = []) {
     });
 }
 
+function createPopupVideoOverlay(videoSrc) {
+    // 如果已有弹窗，先清除
+    const existing = document.querySelector('.video-popup-overlay');
+    if (existing) existing.remove();
+
+    const overlay = document.createElement('div');
+    overlay.className = 'video-popup-overlay';
+    overlay.innerHTML = `
+        <div class="video-popup">
+            <div class="close-video-btn"></div>
+            <video src="${videoSrc}" autoplay controls></video>
+        </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    overlay.querySelector('.close-video-btn').addEventListener('click', () => {
+        overlay.remove();
+    });
+}
+
+
+function initHTKJYYYMSFW() {
+    const container = document.querySelector('.htkj-yyymsfw');
+    container.innerHTML = htkjyymfw.map((item, index) =>
+        `<div class="item">
+            <img src="${item.img}" data-index="${index}" alt="HTKJYYYMSFW Image">
+        </div>`
+    ).join('');
+
+    container.addEventListener('click', (event) => {
+        const img = event.target.closest('img');
+        if (img) {
+            const index = img.dataset.index;
+            const videoSrc = htkjyymfw[index].vodeo;
+            createPopupVideoOverlay(videoSrc);
+        }
+    });
+}
+
+function initGJHZ() {
+    const container = document.querySelector('.gjhz');
+    container.innerHTML = gkhz.map((item, index) =>
+        `<div class="item">
+            <img src="${item.img}" data-index="${index}" alt="GKHZ Image">
+        </div>`
+    ).join('');
+
+    container.addEventListener('click', (event) => {
+        const img = event.target.closest('img');
+        if (img) {
+            const index = img.dataset.index;
+            const videoSrc = gkhz[index].vodeo;
+            createPopupVideoOverlay(videoSrc);
+        }
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const header = document.querySelector('.header');
     const scrollContainer = document.querySelector('.container');
@@ -111,4 +255,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 创建新闻项
     createNewsItem(news);
+
+    // 初始化HTKJYYYMSFW
+    initHTKJYYYMSFW();
+
+    // 初始化GKHZ
+    initGJHZ();
 });

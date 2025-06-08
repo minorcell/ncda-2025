@@ -156,3 +156,109 @@ body {
     background-color: rgba(164, 55, 194, 1);
     margin-bottom: 2rem;
 }
+
+.page:nth-child(2) {
+    position: relative;
+    width: 100vw;
+    min-height: 120vh;
+    padding-left: 10rem;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.page:nth-child(2) .title-one {
+    background-image: url("../../assets/images/GlobalQuickReport/HTKJYYYMSFW.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 49.5rem;
+    height: 9.7rem;
+    transform: translateX(-4rem);
+    margin: 4rem 0;
+}
+
+.htkj-yyymsfw,
+.gjhz {
+    width: max-content;
+    height: 36.8rem;
+    display: flex;
+    align-items: center;
+    animation: scroll-left 60s linear infinite;
+}
+
+.htkj-yyymsfw img,
+.gjhz img {
+    width: 50.5rem;
+    height: 34.4rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    animation: fade-in-fwd 0.6s ease-in-out;
+    transition: transform 0.3s ease;
+    border: 0.3rem solid transparent;
+}
+
+.gjhz img:hover,
+.htkj-yyymsfw img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 1rem rgba(164, 55, 194, 0.5);
+    border: 0.3rem solid rgba(164, 55, 194, 1);
+}
+
+.page:nth-child(2) .title-two {
+    background-image: url("../../assets/images/GlobalQuickReport/GJHZ.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 37.3rem;
+    height: 9.7rem;
+    transform: translateX(-4rem);
+    margin: 4rem 0;
+}
+
+.video-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.video-popup {
+    position: relative;
+    padding: 1rem;
+    max-width: 90vw;
+    max-height: 80vh;
+}
+
+.video-popup video {
+    width: 100%;
+    height: auto;
+    border: 0.2rem solid rgba(164, 55, 194, 1);
+    box-shadow: 1rem 1rem 2rem rgba(0, 0, 0, 0.5),
+        0 0 1rem rgba(164, 55, 194, 0.5);
+}
+
+.close-video-btn {
+    background-image: url("../../assets/images/GlobalQuickReport/CloseBtn.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 8rem;
+    height: 8rem;
+    position: absolute;
+    top: 0rem;
+    right: -10rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: rotate-in 0.6s ease-in-out;
+}
+
+.close-video-btn:hover {
+    transform: scale(1.1);
+}
