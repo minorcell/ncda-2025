@@ -10,6 +10,8 @@
     text-decoration: none;
     -ms-overflow-style: none;
     overflow: -moz-scrollbars-none;
+    cursor: none !important;
+    -webkit-user-select: none;
 }
 
 html {
@@ -29,7 +31,6 @@ html {
     opacity: 1;
 }
 
-.custom-cursor.hidden {
-    opacity: 0;
-    transform: scale(0.9);
+p {
+    text-indent: 2em;
 }

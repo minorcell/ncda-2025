@@ -34,7 +34,7 @@ body {
     top: 0vh;
     will-change: transform, opacity;
     z-index: 100;
-    cursor: pointer;
+
     opacity: 0;
     transition: opacity 0.8s ease-out;
 }
@@ -117,7 +117,7 @@ body {
     background-repeat: no-repeat;
     opacity: 1;
     transition: opacity 0.8s ease-in-out;
-    cursor: pointer;
+
 }
 
 .page:nth-child(2) .parts .part .stage-info {
@@ -568,7 +568,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
+
     z-index: 2;
 }
 
@@ -620,7 +620,7 @@ body {
     border: none;
     color: white;
     font-size: 3rem;
-    cursor: pointer;
+
     width: 5rem;
     height: 5rem;
     display: flex;

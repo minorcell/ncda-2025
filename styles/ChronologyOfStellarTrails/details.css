@@ -4,7 +4,8 @@ body {
 
 .container {
   height: 100vh;
-  perspective: 1000px; /* 增加透视效果 */
+  perspective: 1000px;
+  /* 增加透视效果 */
   width: 100vw;
   overflow: hidden;
 }
@@ -100,7 +101,8 @@ body {
 
 .info {
   position: absolute;
-  transform-style: preserve-3d; /* 使子元素保持3D变换 */
+  transform-style: preserve-3d;
+  /* 使子元素保持3D变换 */
   top: 0;
   right: 12rem;
   color: rgba(255, 255, 255, 1);
@@ -215,7 +217,6 @@ body {
   justify-content: center;
   align-items: center;
   font-family: hksjt, sans-serif;
-  text-indent: 2em;
   letter-spacing: 0.1rem;
   line-height: 1.5;
 }
@@ -243,7 +244,7 @@ body {
   background: rgba(152, 117, 161, 0.15);
   box-shadow: inset 0px 0px 3px 2px rgba(128, 48, 150);
   border: 0.1rem solid rgba(209, 209, 209);
-  cursor: pointer;
+
 }
 
 .last-circle svg,

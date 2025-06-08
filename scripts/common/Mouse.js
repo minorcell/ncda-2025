@@ -23,7 +23,7 @@ class Mouse {
             this.showCursor();
             const isLink = e.target.tagName === 'A' || e.target.tagName === 'BUTTON';
             const cursorImg = isLink ? this.clickCursor : this.defaultCursor;
-            const transform = isLink ? 'scale(1.5)' : 'scale(1) rotate(15deg)';
+            const transform = isLink ? 'scale(1.5)' : 'scale(1.5) rotate(15deg)';
 
             this.setCursorImage(cursorImg);
             this.cursor.style.transform = transform;
@@ -40,7 +40,7 @@ class Mouse {
         // Up
         document.addEventListener('mouseup', () => {
             this.setCursorImage(this.defaultCursor);
-            this.cursor.style.transform = 'scale(1) rotate(15deg)';
+            this.cursor.style.transform = 'scale(1.5) rotate(15deg)';
         });
 
         // Hide native cursor
@@ -59,13 +59,11 @@ class Mouse {
 
     hideCursor() {
         this.visible = false;
-        this.cursor.classList.add('hidden');
     }
 
     showCursor() {
         if (!this.visible) {
             this.visible = true;
-            this.cursor.classList.remove('hidden');
         }
     }
 }

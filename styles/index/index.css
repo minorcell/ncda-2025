@@ -337,7 +337,7 @@ body {
     bottom: -6.4rem;
     left: 33.6rem;
     transition: all 0.3s ease-in-out;
-    cursor: pointer;
+
 }
 
 .milestone .rocket-launch .content:hover {
@@ -430,7 +430,7 @@ body {
     background-repeat: no-repeat;
     background-size: contain;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
+
 }
 
 .page:nth-child(4) .content .start-btn:hover {
@@ -523,7 +523,7 @@ body {
     align-items: center;
     color: rgba(255, 255, 255, 1);
     transform: translateX(7.5rem);
-    cursor: pointer;
+
 }
 
 .page:nth-child(5) .intro .link-container .link svg {
