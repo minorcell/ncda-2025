@@ -134,7 +134,7 @@ body {
     height: 8rem;
     position: absolute;
     top: 8rem;
-    right: 10rem;
+    right: 5rem;
 
     transition: all 0.3s ease;
     animation: rotate-in 0.6s ease-in-out;
