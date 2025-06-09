@@ -43,87 +43,87 @@ const news = [
 
 const htkjyymfw = [
     {
-        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW01.jpg",
-        vodeo: "../../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW01.jpg",
+        vodeo: "../assets/videos/launch.mp4",
     },
     {
-        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW02.png",
-        vodeo: "../../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW02.png",
+        vodeo: "../assets/videos/launch.mp4",
     },
     {
-        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW03.png",
-        vodeo: "../../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW03.png",
+        vodeo: "../assets/videos/launch.mp4",
     },
     {
-        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW05.jpg",
-        vodeo: "../../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW05.jpg",
+        vodeo: "../assets/videos/launch.mp4",
     },
     {
-        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW06.webp",
-        vodeo: "../../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW06.webp",
+        vodeo: "../assets/videos/launch.mp4",
     },
     {
-        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW01.jpg",
-        vodeo: "../../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW01.jpg",
+        vodeo: "../assets/videos/launch.mp4",
     },
     {
-        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW02.png",
-        vodeo: "../../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW02.png",
+        vodeo: "../assets/videos/launch.mp4",
     },
     {
-        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW03.png",
-        vodeo: "../../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW03.png",
+        vodeo: "../assets/videos/launch.mp4",
     },
     {
-        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW05.jpg",
-        vodeo: "../../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW05.jpg",
+        vodeo: "../assets/videos/launch.mp4",
     },
     {
-        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW06.webp",
-        vodeo: "../../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW06.webp",
+        vodeo: "../assets/videos/launch.mp4",
     },
 ]
 
 const gkhz = [
     {
-        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW01.jpg",
-        vodeo: "../../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW01.jpg",
+        vodeo: "../assets/videos/launch.mp4",
     },
     {
-        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW02.png",
-        vodeo: "../../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW02.png",
+        vodeo: "../assets/videos/launch.mp4",
     },
     {
-        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW03.png",
-        vodeo: "../../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW03.png",
+        vodeo: "../assets/videos/launch.mp4",
     },
     {
-        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW05.jpg",
-        vodeo: "../../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW05.jpg",
+        vodeo: "../assets/videos/launch.mp4",
     },
     {
-        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW06.webp",
-        vodeo: "../../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW06.webp",
+        vodeo: "../assets/videos/launch.mp4",
     },
     {
-        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW01.jpg",
-        vodeo: "../../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW01.jpg",
+        vodeo: "../assets/videos/launch.mp4",
     },
     {
-        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW02.png",
-        vodeo: "../../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW02.png",
+        vodeo: "../assets/videos/launch.mp4",
     },
     {
-        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW03.png",
-        vodeo: "../../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW03.png",
+        vodeo: "../assets/videos/launch.mp4",
     },
     {
-        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW05.jpg",
-        vodeo: "../../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW05.jpg",
+        vodeo: "../assets/videos/launch.mp4",
     },
     {
-        img: "../../assets/images/GlobalQuickReport/HTKJYYYMSFW06.webp",
-        vodeo: "../../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW06.webp",
+        vodeo: "../assets/videos/launch.mp4",
     },
 ]
 
