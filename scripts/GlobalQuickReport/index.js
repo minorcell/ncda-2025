@@ -249,7 +249,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // 初始化星空背景
-    new StarBackground(starBg);
+    new StarBackground(starBg, {
+        starCount: 200
+    });
 
     new MeteorEffect(starBg)
 

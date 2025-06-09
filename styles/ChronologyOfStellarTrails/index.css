@@ -50,14 +50,14 @@ body {
 .info .title {
   font-size: 9.6rem;
   font-family: fys, sans-serif;
-  animation: tracking-in-expand 1s ease-in-out both;
+  animation: tracking-in-expand 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 }
 
 .info .intro {
   margin-top: 2rem;
   font-size: 3.2rem;
   font-family: fys, sans-serif;
-  animation: tracking-in-expand 1s ease-in-out both;
+  animation: tracking-in-expand 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 }
 
 /* 时间轴样式 */

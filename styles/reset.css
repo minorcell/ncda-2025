@@ -27,7 +27,6 @@ html {
     background-repeat: no-repeat;
     pointer-events: none;
     z-index: 9999;
-    transition: background-image 0.1s ease;
     opacity: 1;
 }
 

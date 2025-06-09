@@ -50,12 +50,14 @@ body {
     font-size: 8rem;
     font-family: 'fys', sans-serif;
     transform: translateX(-4rem);
+    animation: tracking-in-expand 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 }
 
 .page:nth-child(1) .info .en {
     font-size: 4rem;
     font-family: serif, sans-serif;
     font-weight: 200;
+    animation: tracking-in-expand 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 }
 
 .page:nth-child(1) .news {

@@ -25,3 +25,22 @@ function createVisibilityObserver(selector, visibilityChangeCallback, customOpti
         observer.observe(element);
     });
 }
+
+/**
+ * 函数节流：确保函数在指定的时间间隔内最多执行一次
+ * @param {function} func - 需要节流的函数
+ * @param {number} limit - 时间间隔（毫秒）
+ * @returns {function} - 包装后的节流函数
+ */
+function throttle(func, limit) {
+    let inThrottle;
+    return function () {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    }
+}

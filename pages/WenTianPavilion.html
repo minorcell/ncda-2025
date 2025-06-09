@@ -25,19 +25,40 @@
     </div>
     <div class="header-right"></div>
   </header>
-  <div class="qa-container">
-    <div class="qa-header">
-      <div class="info">
-        <!-- 初始渲染标题 -->
-        <div class="title">
-          「问天阁」
-        </div>
-        <div class="en">
-          Cosmic Inquiry Lab
-        </div>
+  <!-- 动态的头部：
+    1. 初始渲染标题
+    2. 点"开始"的时候切换成当前关卡和进度的渲染
+    -->
+  <div class="qa-header">
+    <div class="info">
+      <!-- 初始渲染标题 -->
+      <div class="title" id="level-title-header">
+        「问天阁」
       </div>
-      <!-- 点“开始”的时候切换成当前关卡和进度的渲染 -->
+      <div class="en" id="level-en-header">
+        Cosmic Inquiry Lab
+      </div>
     </div>
+    <!-- 点"开始"的时候切换成当前关卡和进度的渲染 -->
+  </div>
+  <!-- 动态的问答：
+    1. 初始渲染开始页面
+    2. 点击开始开始答题 
+  -->
+  <div class="qa-container">
+    <!-- 初始内容 -->
+    <div class="start-content">
+      <img src="../assets/images/WenTianPavilion/QuestionChar.svg" alt="start-content">
+      <h2>破解宇宙奥秘的108道天问</h2>
+      <div class="start-btn">
+        开始
+        <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24">
+          <path fill="currentColor"
+            d="M16.175 13H5q-.425 0-.712-.288T4 12t.288-.712T5 11h11.175l-4.9-4.9q-.3-.3-.288-.7t.313-.7q.3-.275.7-.288t.7.288l6.6 6.6q.15.15.213.325t.062.375t-.062.375t-.213.325l-6.6 6.6q-.275.275-.687.275T11.3 19.3q-.3-.3-.3-.712t.3-.713z" />
+        </svg>
+      </div>
+    </div>
+
   </div>
   <script src="../build/three_r145.js"></script>
   <script src="../build/three_objloader.js"></script>

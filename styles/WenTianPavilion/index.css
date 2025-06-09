@@ -1,11 +1,92 @@
 body {
-    background-color: rgba(0, 0, 0, 1);
-    color: rgba(255, 255, 255, 1);
+    background-color: #000;
+    color: #fff;
+    font-family: 'YSBTY', sans-serif;
+    overflow: hidden;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.qa-header {
+    position: absolute;
+    top: 8rem;
+    left: 6rem;
+}
+
+.qa-header .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.qa-header .info .title {
+    font-size: 6rem;
+    font-family: 'fys', sans-serif;
+    transform: translateX(-4rem);
+    animation: tracking-in-expand 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+
+.qa-header .info .en {
+    font-size: 2rem;
+    font-family: serif, sans-serif;
+    transform: translateX(-4rem);
+    animation: tracking-in-expand 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 }
 
 .qa-container {
-    border-radius: 12px;
-    padding: 32px;
-    max-width: 600px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 123.5rem;
+    height: 63.7rem;
+    box-sizing: border-box;
+    background-image: url("../../assets/images/WenTianPavilion/QuestionBg.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* 初始内容 */
+.qa-container .start-content {
     width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.qa-container .start-content img {
+    width: 22.454rem;
+    height: 33.465rem;
+}
+
+.qa-container .start-content h2 {
+    font-size: 3.2rem;
+    font-family: 'fys', sans-serif;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(191, 151, 202, 1), rgba(127, 48, 150, 1));
+    background-clip: text;
+    color: transparent;
+}
+
+.qa-container .start-content .start-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(230, 138, 255, 1);
+    font-size: 3.2rem;
+    font-family: 'fys', sans-serif;
+}
+
+.qa-container .start-content .start-btn svg {
+    margin-left: 4rem;
+    width: 3.2rem;
+    height: 3.2rem;
 }
