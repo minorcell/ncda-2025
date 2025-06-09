@@ -50,6 +50,7 @@ body {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    z-index: 1000;
 }
 
 /* 初始内容 */
@@ -61,6 +62,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 4rem;
+    animation: fade-in-fwd 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 }
 
 .qa-container .start-content img {
@@ -89,4 +91,124 @@ body {
     margin-left: 4rem;
     width: 3.2rem;
     height: 3.2rem;
+}
+
+/* 答题环节 */
+.qa-container .qa-box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    padding: 0 12rem;
+    gap: 6rem;
+}
+
+.qa-container .qa-box .question {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.qa-container .qa-box .question img {
+    width: 4.4rem;
+    height: 6.557rem;
+    margin-right: 4rem;
+}
+
+.qa-container .qa-box .question {
+    font-size: 3.2rem;
+    font-family: 'fys', sans-serif;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(191, 151, 202, 1), rgba(127, 48, 150, 1));
+    background-clip: text;
+    color: transparent;
+}
+
+.qa-container .qa-box .options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    gap: 3rem;
+    padding-left: 9rem;
+}
+
+.qa-container .qa-box .options .option {
+    width: 100%;
+    font-size: 3.2rem;
+    font-family: 'fys', sans-serif;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(191, 151, 202, 1), rgba(127, 48, 150, 1));
+    background-clip: text;
+    color: transparent;
+}
+
+.qa-container .qa-box .control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 12rem;
+}
+
+.qa-container .qa-box .control .submit,
+.qa-container .qa-box .control .analysis {
+    font-size: 2.8rem;
+    font-family: 'fys', sans-serif;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(191, 151, 202, 1), rgba(127, 48, 150, 1));
+    background-clip: text;
+    color: transparent;
+    border: 0.3rem solid rgba(127, 48, 150, 1);
+    width: 19.4rem;
+    height: 5.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qa-container .qa-box .control .submit:hover,
+.qa-container .qa-box .control .analysis:hover {
+    background-clip: content-box;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(127, 48, 150, 1);
+}
+
+.qa-container .qa-box .next-prev {
+    position: absolute;
+    width: 100%;
+    bottom: 2rem;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.qa-container .qa-box .next-prev .prev,
+.qa-container .qa-box .next-prev .next {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 2.8rem;
+    font-family: 'fys', sans-serif;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(191, 151, 202, 1), rgba(127, 48, 150, 1));
+    background-clip: text;
+    color: transparent;
+    width: 19.4rem;
+    height: 5.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.qa-container .qa-box .next-prev .prev svg,
+.qa-container .qa-box .next-prev .next svg {
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+.qa-container .qa-box .next-prev .next svg {
+    transform: rotate(180deg);
 }

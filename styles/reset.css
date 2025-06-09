@@ -26,10 +26,14 @@ html {
     background-size: contain;
     background-repeat: no-repeat;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 9999999;
     opacity: 1;
 }
 
 p {
     text-indent: 2em;
+}
+
+.page {
+    animation: fade-in-fwd 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 }

@@ -254,22 +254,3 @@
     stroke-dashoffset: 0;
   }
 }
-
-@keyframes shake {
-
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-
-  25% {
-    transform: translateX(-0.3125rem);
-  }
-
-  /* 5px */
-  75% {
-    transform: translateX(0.3125rem);
-  }
-
-  /* 5px */
-}
