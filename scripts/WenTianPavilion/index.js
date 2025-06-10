@@ -163,6 +163,8 @@ class QAController {
 
 document.addEventListener("DOMContentLoaded", () => {
     const qaContainer = document.querySelector('.qa-container');
+    const startContent = document.querySelector('.start-content');
+    const qaBox = document.querySelector(".qa-box")
     // 初始化鼠标控制器
     new Mouse({
         defaultCursor: '../assets/images/common/MouseDefault.svg',
@@ -180,5 +182,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // 初始化QA控制器
-    new QAController(data);
+    // new QAController(data);
+
+    // 开发调试
+    startContent.style.display = 'none'
+    qaBox.style.display = 'none'
 });

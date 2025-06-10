@@ -28,6 +28,8 @@ html {
     pointer-events: none;
     z-index: 99999;
     opacity: 1;
+    will-change: transform;
+    transition: transform 0.1s ease;
 }
 
 p {
