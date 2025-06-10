@@ -212,3 +212,170 @@ body {
 .qa-container .qa-box .next-prev .next svg {
     transform: rotate(180deg);
 }
+
+.qa-container .fragment-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6rem;
+}
+
+.qa-container .fragment-box .info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.qa-container .fragment-box .info img {
+    width: 3.2rem;
+    height: 3.2rem;
+}
+
+.qa-container .fragment-box .info h2 {
+    font-size: 3.2rem;
+    font-family: 'fys', sans-serif;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(191, 151, 202, 1), rgba(127, 48, 150, 1));
+    background-clip: text;
+    color: transparent;
+}
+
+.qa-container .fragment-box .fragment-img {
+    width: 100%;
+    height: 14.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 2rem;
+}
+
+.qa-container .fragment-box .fragment-img img {
+    height: 100%;
+    width: auto;
+}
+
+.qa-container .fragment-box .continue-btn {
+    width: 19.4rem;
+    height: 5.3rem;
+    border: 0.3rem solid rgba(127, 48, 150, 1);
+    font-size: 3.2rem;
+    font-family: 'fys', sans-serif;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(191, 151, 202, 1), rgba(127, 48, 150, 1));
+    background-clip: text;
+    color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qa-container .fragment-box .progress-box {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    font-size: 2.4rem;
+    font-family: 'fys', sans-serif;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(191, 151, 202, 1), rgba(127, 48, 150, 1));
+    background-clip: text;
+    color: transparent;
+}
+
+.qa-container .backpack-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6rem;
+}
+
+.qa-container .backpack-box .info {
+    font-size: 3.2rem;
+    font-family: 'fys', sans-serif;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(191, 151, 202, 1), rgba(127, 48, 150, 1));
+    background-clip: text;
+    color: transparent;
+}
+
+.qa-container .backpack-box .backpack-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.qa-container .backpack-box .backpack-item img {
+    width: auto;
+    height: 14.1rem;
+}
+
+.qa-container .backpack-box .continue-btn {
+    width: 19.4rem;
+    height: 5.3rem;
+    border: 0.3rem solid rgba(127, 48, 150, 1);
+    font-size: 3.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(191, 151, 202, 1), rgba(127, 48, 150, 1));
+    background-clip: text;
+    color: transparent;
+}
+
+.qa-container .puzzle-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10rem;
+}
+
+.qa-container .puzzle-box .info {
+    font-size: 3.2rem;
+    font-family: 'fys', sans-serif;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(191, 151, 202, 1), rgba(127, 48, 150, 1));
+    background-clip: text;
+    color: transparent;
+}
+
+.qa-container .puzzle-box .puzzle-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.qa-container .puzzle-box .puzzle-item .full-puzzle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 29.3rem;
+    height: 23.1rem;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.qa-container .puzzle-box .puzzle-item .full-puzzle img {
+    width: 100%;
+    height: 100%;
+}
+
+.qa-container .puzzle-box .puzzle-item img {
+    width: auto;
+    height: 14.1rem;
+}

@@ -165,6 +165,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const qaContainer = document.querySelector('.qa-container');
     const startContent = document.querySelector('.start-content');
     const qaBox = document.querySelector(".qa-box")
+    const fragmentBox = document.querySelector(".fragment-box")
+    const backpackBox = document.querySelector(".backpack-box")
     // 初始化鼠标控制器
     new Mouse({
         defaultCursor: '../assets/images/common/MouseDefault.svg',
@@ -187,4 +189,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // 开发调试
     startContent.style.display = 'none'
     qaBox.style.display = 'none'
+    fragmentBox.style.display = 'none'
+    backpackBox.style.display = 'none'
 });
