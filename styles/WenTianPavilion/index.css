@@ -12,28 +12,77 @@ body {
     position: absolute;
     top: 8rem;
     left: 6rem;
+    width: calc(100vw - 12rem);
 }
 
-.qa-header .info {
+.qa-header .init-info {
+    justify-self: self-start;
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    justify-content: start;
 }
 
-.qa-header .info .title {
+.qa-header .init-info .title {
     font-size: 6rem;
     font-family: 'fys', sans-serif;
     transform: translateX(-4rem);
     animation: tracking-in-expand 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 }
 
-.qa-header .info .en {
+.qa-header .init-info .en {
     font-size: 2rem;
     font-family: serif, sans-serif;
     transform: translateX(-4rem);
     animation: tracking-in-expand 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 }
+
+.qa-header .level-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.qa-header .level-info .level-title {
+    font-size: 3.2rem;
+    font-family: 'fys', sans-serif;
+    background-clip: text;
+    color: rgba(255, 255, 255, 1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.qa-header .level-info .level-progress {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+    font-size: 2.4rem;
+    font-family: 'fys', sans-serif;
+}
+
+.qa-header .level-info .level-progress .process-container {
+    position: relative;
+    width: 27.6rem;
+    height: 2.7rem;
+    background-color: rgba(127, 48, 150, 1);
+    border: 0.3rem solid rgba(96, 69, 246, 1);
+}
+
+.qa-header .level-info .level-progress .process-container .process-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 1);
+}
+
+
+
+
 
 .qa-container {
     position: absolute;

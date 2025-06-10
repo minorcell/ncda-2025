@@ -135,30 +135,9 @@ const data = [
     }
 ]
 
+// TODO: 答题控制器
 class QAController {
-    constructor(data) {
-        this.qaContainer = document.querySelector('.qa-container');
-        this.startContent = this.qaContainer.querySelector('.start-content');
-        this.qaBox = this.qaContainer.querySelector('.qa-box');
-        this.nextPrev = this.qaBox.querySelector('.next-prev');
-        this.prevBtn = this.nextPrev.querySelector('.prev');
-        this.nextBtn = this.nextPrev.querySelector('.next');
-        this.submitBtn = this.qaBox.querySelector('.submit');
-        this.analysisBtn = this.qaBox.querySelector('.analysis');
-        this.data = data;
-        this.currentQuestionIndex = 0;
-        this.currentQuestion = this.data[this.currentQuestionIndex];
-        this.init();
-    }
-
-    init() {
-        this.startContent.style.display = 'flex';
-        this.qaBox.style.display = 'none';
-        this.startContent.addEventListener('click', () => {
-            this.startContent.style.display = 'none';
-            this.qaBox.style.display = 'flex';
-        });
-    }
+    
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -167,6 +146,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const qaBox = document.querySelector(".qa-box")
     const fragmentBox = document.querySelector(".fragment-box")
     const backpackBox = document.querySelector(".backpack-box")
+    const initInfo = document.querySelector(".init-info")
+    const levelInfo = document.querySelector(".level-info")
     // 初始化鼠标控制器
     new Mouse({
         defaultCursor: '../assets/images/common/MouseDefault.svg',
@@ -191,4 +172,5 @@ document.addEventListener("DOMContentLoaded", () => {
     qaBox.style.display = 'none'
     fragmentBox.style.display = 'none'
     backpackBox.style.display = 'none'
+    initInfo.style.display = 'none'
 });
