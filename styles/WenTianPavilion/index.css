@@ -8,6 +8,10 @@ body {
     height: 100vh;
 }
 
+* {
+    transition: all 0.3s ease;
+}
+
 .qa-header {
     position: absolute;
     top: 8rem;
@@ -449,4 +453,15 @@ body {
 .back-entry img {
     height: 131.83rem;
     width: 13.6rem;
+}
+
+/* 解析 */
+.analysis-text {
+    font-size: 2.8rem;
+    font-family: 'fys', sans-serif;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(191, 151, 202, 1), rgba(127, 48, 150, 1));
+    background-clip: text;
+    color: transparent;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
