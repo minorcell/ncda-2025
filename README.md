@@ -1,9 +1,9 @@
-# NCDA-2025 项目规范
+# CMS-PROGRAM 项目规范
 
 ## 项目结构
 
 ```
-ncda-2025/
+cms-program/
 ├── .github/               # GitHub 配置和工作流
 │   └── workflows/         # GitHub Actions 工作流配置
 ├── assets/                # 静态资源
