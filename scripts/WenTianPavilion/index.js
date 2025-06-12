@@ -527,11 +527,21 @@ class QAController {
 
     showHideController(hiddenControllers, showControllers) {
         hiddenControllers.forEach(controller => {
-            if (controller) controller.style.display = 'none';
+            if (controller) {
+                controller.style.opacity = '0';
+                setTimeout(() => {
+                    controller.style.display = 'none';
+                }, 300);
+            }
         });
-        showControllers.forEach(controller => {
-            if (controller) controller.style.display = 'flex';
-        });
+        setTimeout(() => {
+            showControllers.forEach(controller => {
+                if (controller) {
+                    controller.style.opacity = '1';
+                    controller.style.display = 'flex';
+                }
+            });
+        }, 300);
     }
 }
 
