@@ -190,16 +190,19 @@ class QAController {
             this.qaBox,
             this.fragmentBox,
             this.backpackBox,
-            this.puzzleBox,
-            this.backEntry
+            this.puzzleBox
         ], [this.initInfo, this.startContent]);
+
+        // 初始时隐藏背包入口
+        this.hideBackEntry();
 
         if (this.startBtn) {
             this.startBtn.addEventListener("click", () => {
                 this.showHideController([
                     this.initInfo,
                     this.startContent
-                ], [this.levelInfo, this.qaBox, this.backEntry]);
+                ], [this.levelInfo, this.qaBox]);
+                this.showBackEntry();
                 this.updateHeader();
                 this.showQuestion();
             });
@@ -365,7 +368,6 @@ class QAController {
                     this.qaBox,
                     this.levelInfo,
                     this.fragmentBox,
-                    this.backEntry,
                     this.backpackBox
                 ], [this.puzzleBox]);
                 this.renderPuzzle();
@@ -390,8 +392,7 @@ class QAController {
         const level = this.getCurrentLevel();
         this.showHideController([
             this.qaBox,
-            this.levelInfo,
-            this.backEntry
+            this.levelInfo
         ], [this.fragmentBox]);
         if (this.fragmentImgElem) this.fragmentImgElem.src = level.reward;
         const totalLevels = this.data.length;
@@ -406,7 +407,7 @@ class QAController {
             this.selectedOptionId = null;
             this.showHideController([
                 this.fragmentBox
-            ], [this.levelInfo, this.qaBox, this.backEntry]);
+            ], [this.levelInfo, this.qaBox]);
             this.updateHeader();
             this.showQuestion();
         } else {
@@ -415,7 +416,7 @@ class QAController {
                 this.fragmentBox,
                 this.levelInfo,
                 this.qaBox
-            ], [this.backEntry, this.backpackBox]);
+            ], [this.backpackBox]);
             this.renderBackpack();
         }
     }
@@ -455,7 +456,7 @@ class QAController {
                 this.levelInfo,
                 this.qaBox,
                 this.fragmentBox,
-                this.backEntry
+                this.backpackBox
             ], [this.puzzleBox]);
             this.renderPuzzle();
         }
@@ -467,7 +468,7 @@ class QAController {
         } else {
             this.showHideController([
                 this.backpackBox
-            ], [this.levelInfo, this.qaBox, this.backEntry]);
+            ], [this.levelInfo, this.qaBox]);
             this.updateHeader();
             this.showQuestion();
         }
@@ -619,23 +620,42 @@ class QAController {
         }
     }
 
+    showBackEntry() {
+        if (this.backEntry) {
+            this.backEntry.style.display = 'flex';
+            this.backEntry.style.opacity = '1';
+        }
+    }
+
+    hideBackEntry() {
+        if (this.backEntry) {
+            this.backEntry.style.display = 'none';
+            this.backEntry.style.opacity = '0';
+        }
+    }
+
     showHideController(hiddenControllers, showControllers) {
+        // 立即隐藏不需要的元素
         hiddenControllers.forEach(controller => {
             if (controller) {
+                controller.style.display = 'none';
                 controller.style.opacity = '0';
-                setTimeout(() => {
-                    controller.style.display = 'none';
-                }, 300);
             }
         });
-        setTimeout(() => {
-            showControllers.forEach(controller => {
-                if (controller) {
+
+        // 立即显示需要的元素，然后添加渐入效果
+        showControllers.forEach(controller => {
+            if (controller) {
+                controller.style.display = 'flex';
+                controller.style.opacity = '0';
+                // 强制重排，确保display变化生效
+                controller.offsetHeight;
+                // 添加渐入效果
+                setTimeout(() => {
                     controller.style.opacity = '1';
-                    controller.style.display = 'flex';
-                }
-            });
-        }, 300);
+                }, 50);
+            }
+        });
     }
 }
 
