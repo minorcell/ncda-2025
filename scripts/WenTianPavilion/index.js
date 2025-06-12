@@ -81,7 +81,7 @@ const data = [
                 analysis: "神舟系列载人飞船的设计特点是具有高度的可靠性和安全性。它们能够在太空中进行多次任务。"
             }
         ],
-        reward: "../../assets/images/WenTianPavilion/back02.svg",
+        reward: "../../assets/images/WenTianPavilion/back04.svg",
     },
     {
         id: '3',
@@ -106,7 +106,7 @@ const data = [
                 analysis: "空间站的主要任务是进行科学实验和技术试验。它们是中国载人航天工程的重要组成部分。"
             }
         ],
-        reward: "../../assets/images/WenTianPavilion/back03.svg",
+        reward: "../../assets/images/WenTianPavilion/back02.svg",
     },
     {
         id: '4',
@@ -131,23 +131,19 @@ const data = [
                 analysis: "人造卫星的主要任务是探索太空。它们是中国载人航天工程的重要组成部分。"
             }
         ],
-        reward: "../../assets/images/WenTianPavilion/back04.svg",
-    }
+        reward: "../../assets/images/WenTianPavilion/back03.svg",
+    },
 ]
 
+// 答题控制器
 // 答题控制器
 class QAController {
     constructor(data) {
         this.data = data;
-        // 当前关卡索引
         this.currentLevelIndex = 0;
-        // 当前关卡问题索引
         this.currentQuestionIndex = 0;
-        // 已获得奖励碎片列表
         this.currentRewardFragments = [];
-        // 是否完成了所有关卡
         this.isAllLevelCompleted = false;
-        // 选中的选项 ID
         this.selectedOptionId = null;
 
         // DOM 元素
@@ -160,42 +156,35 @@ class QAController {
         this.puzzleBox = document.querySelector(".puzzle-box");
         this.backEntry = document.querySelector(".back-entry");
 
-        // 头部信息元素
         this.levelTitleElem = this.levelInfo.querySelector(".level-title");
         this.progressTextContainer = this.levelInfo.querySelector(".progress-text");
         this.processBarElem = this.levelInfo.querySelector(".process-bar");
 
-        // QA 区元素
         this.questionElem = this.qaBox.querySelector(".question");
         this.optionsContainer = this.qaBox.querySelector(".options");
         this.submitBtn = this.qaBox.querySelector(".submit");
         this.analysisBtn = this.qaBox.querySelector(".analysis");
         this.nextBtn = this.qaBox.querySelector(".next");
         this.prevBtn = this.qaBox.querySelector(".prev");
-        this.analysisTextElem = null; // 动态创建展示解析
+        this.analysisTextElem = null;
 
-        // 碎片区元素
         this.fragmentContinueBtn = this.fragmentBox.querySelector(".continue-btn");
         this.fragmentImgElem = this.fragmentBox.querySelector(".fragment-img img");
         this.fragmentProgressElem = this.fragmentBox.querySelector(".progress-box");
 
-        // 背包区元素
         this.backpackContinueBtn = this.backpackBox.querySelector(".continue-btn");
         this.backpackItemContainer = this.backpackBox.querySelector(".backpack-item");
         this.backpackInfoElem = this.backpackBox.querySelector(".info");
 
-        // 拼图区元素
         this.puzzleInfoElem = this.puzzleBox.querySelector(".info");
         this.puzzleItemContainer = this.puzzleBox.querySelector(".puzzle-item");
 
-        // 开始按钮
         this.startBtn = this.startContent.querySelector(".start-btn");
 
         this.init();
     }
 
     init() {
-        // 初始隐藏所有，显示开始
         this.showHideController([
             this.levelInfo,
             this.qaBox,
@@ -205,7 +194,6 @@ class QAController {
             this.backEntry
         ], [this.initInfo, this.startContent]);
 
-        // 点击开始
         if (this.startBtn) {
             this.startBtn.addEventListener("click", () => {
                 this.showHideController([
@@ -217,17 +205,13 @@ class QAController {
             });
         }
 
-        // 下一题或下一关
         if (this.nextBtn) {
             this.nextBtn.style.cursor = 'pointer';
             this.nextBtn.addEventListener("click", () => {
                 const level = this.getCurrentLevel();
-                // 还有当前关卡下的下一个问题
                 if (this.currentQuestionIndex < level.questions.length - 1) {
                     this.currentQuestionIndex++;
-                }
-                // 当前是最后问题且有下一关
-                else if (this.currentQuestionIndex === level.questions.length - 1 && this.currentLevelIndex < this.data.length - 1) {
+                } else if (this.currentQuestionIndex === level.questions.length - 1 && this.currentLevelIndex < this.data.length - 1) {
                     this.currentLevelIndex++;
                     this.currentQuestionIndex = 0;
                 } else {
@@ -238,16 +222,13 @@ class QAController {
                 this.showQuestion();
             });
         }
-        // 上一题或上一关
+
         if (this.prevBtn) {
             this.prevBtn.style.cursor = 'pointer';
             this.prevBtn.addEventListener("click", () => {
-                // 有上一题
                 if (this.currentQuestionIndex > 0) {
                     this.currentQuestionIndex--;
-                }
-                // 第一题且有上一关，则跳到上一关最后一题
-                else if (this.currentQuestionIndex === 0 && this.currentLevelIndex > 0) {
+                } else if (this.currentQuestionIndex === 0 && this.currentLevelIndex > 0) {
                     this.currentLevelIndex--;
                     const prevLevel = this.getCurrentLevel();
                     this.currentQuestionIndex = prevLevel.questions.length - 1;
@@ -259,15 +240,11 @@ class QAController {
                 this.showQuestion();
             });
         }
-        // 提交
+
         if (this.submitBtn) this.submitBtn.addEventListener("click", () => this.handleSubmit());
-        // 查看解析
         if (this.analysisBtn) this.analysisBtn.addEventListener("click", () => this.showAnalysis());
-        // 碎片区继续
         if (this.fragmentContinueBtn) this.fragmentContinueBtn.addEventListener("click", () => this.handleFragmentContinue());
-        // 背包区继续
         if (this.backpackContinueBtn) this.backpackContinueBtn.addEventListener("click", () => this.handleBackpackContinue());
-        // 打开背包入口
         if (this.backEntry) {
             this.backEntry.style.cursor = 'pointer';
             this.backEntry.addEventListener("click", () => this.openBackpack());
@@ -278,12 +255,10 @@ class QAController {
         return this.data[this.currentLevelIndex];
     }
 
-    // 计算所有层级总题目数
     getTotalQuestions() {
         return this.data.reduce((sum, lvl) => sum + (lvl.questions ? lvl.questions.length : 0), 0);
     }
 
-    // 计算已完成题目数
     getCompletedQuestions() {
         let count = 0;
         this.data.forEach(lvl => {
@@ -296,33 +271,26 @@ class QAController {
 
     updateHeader() {
         const level = this.getCurrentLevel();
-        // 更新标题显示当前关卡标题
         if (this.levelTitleElem) this.levelTitleElem.textContent = `当前关卡：${level.title}`;
-        // 进度显示所有题目完成进度
         const totalAll = this.getTotalQuestions();
         const doneAll = this.getCompletedQuestions();
-        // 更新进度文本
         if (this.progressTextContainer) {
             this.progressTextContainer.innerHTML = `<span style="color: #7a93ff;">已答 ${doneAll}</span>/${totalAll}`;
         }
-        // 更新进度条宽度按比例
         if (this.processBarElem) {
             const ratio = totalAll > 0 ? doneAll / totalAll : 0;
             this.processBarElem.style.width = `${ratio * 100}%`;
         }
 
-        // 按钮状态：上一题可见条件
         if (this.prevBtn) {
             const showPrev = this.currentQuestionIndex > 0 || this.currentLevelIndex > 0;
             this.prevBtn.style.visibility = showPrev ? 'visible' : 'hidden';
         }
-        // 下一题可见条件
         if (this.nextBtn) {
             const hasNextInLevel = this.currentQuestionIndex < level.questions.length - 1;
             const hasNextLevel = this.currentQuestionIndex === level.questions.length - 1 && this.currentLevelIndex < this.data.length - 1;
             this.nextBtn.style.visibility = (hasNextInLevel || hasNextLevel) ? 'visible' : 'hidden';
         }
-        // 清除可能存在的解析
         if (this.analysisTextElem) {
             this.analysisTextElem.remove();
             this.analysisTextElem = null;
@@ -332,9 +300,7 @@ class QAController {
     showQuestion() {
         const level = this.getCurrentLevel();
         const question = level.questions[this.currentQuestionIndex];
-        // 更新题目内容
         if (this.questionElem) this.questionElem.innerHTML = `<img src="../assets/images/WenTianPavilion/QuestionChar.svg" alt="question"> ${question.title}`;
-        // 清空选项
         if (this.optionsContainer) this.optionsContainer.innerHTML = '';
         if (this.optionsContainer) {
             question.options.forEach(opt => {
@@ -343,15 +309,12 @@ class QAController {
                 div.dataset.id = opt.id;
                 div.textContent = opt.content;
                 div.style.cursor = 'pointer';
-                // 初始无边框
                 div.style.border = '1px solid transparent';
                 div.addEventListener('click', () => this.selectOption(div));
                 this.optionsContainer.appendChild(div);
             });
         }
-        // 重置选项
         this.selectedOptionId = null;
-        // 重置按钮状态
         if (this.submitBtn) {
             this.submitBtn.style.pointerEvents = 'auto';
             this.submitBtn.style.opacity = '1';
@@ -366,7 +329,6 @@ class QAController {
             });
         }
         div.classList.add('selected');
-        // 增加边框提示
         div.style.borderBottom = '2px solid rgba(127, 48, 150, 1)';
         div.style.borderRadius = '10px';
         this.selectedOptionId = div.dataset.id;
@@ -378,18 +340,13 @@ class QAController {
         if (!this.selectedOptionId) {
             return;
         }
-        // 禁止重复提交
         if (this.submitBtn) {
             this.submitBtn.style.pointerEvents = 'none';
             this.submitBtn.style.opacity = '0.6';
         }
-        // 标记已完成
         question.isCompleted = true;
-        // 显示解析按钮
         if (this.analysisBtn) this.analysisBtn.style.display = 'flex';
-        // 检查答案正确性
         const correct = this.selectedOptionId === question.answer;
-        // 可选：高亮正确或错误
         if (this.optionsContainer) {
             Array.from(this.optionsContainer.children).forEach(child => {
                 if (child.dataset.id === question.answer) {
@@ -399,15 +356,11 @@ class QAController {
                 }
             });
         }
-        // 无论正确与否，只要是最后一题，都完成关卡
         if (this.currentQuestionIndex === level.questions.length - 1) {
             level.isCompleted = true;
-            // 收集碎片
             this.currentRewardFragments.push(level.reward);
-            // 如果是最后关卡，直接显示拼图页面
             if (this.currentLevelIndex === this.data.length - 1) {
                 this.isAllLevelCompleted = true;
-                // 隐藏所有其他界面，显示拼图
                 this.showHideController([
                     this.qaBox,
                     this.levelInfo,
@@ -521,8 +474,149 @@ class QAController {
     }
 
     renderPuzzle() {
-        if (this.puzzleInfoElem) this.puzzleInfoElem.textContent = '拖拽完成拼图';
-        // 此处可初始化拼图逻辑
+        if (this.puzzleInfoElem) this.puzzleInfoElem.textContent = '拖拽碎片到对应位置完成拼图';
+        if (this.puzzleItemContainer) this.puzzleItemContainer.innerHTML = '';
+
+        // 创建拼图碎片容器
+        const piecesContainer = document.createElement('div');
+        piecesContainer.classList.add('puzzle-pieces');
+        this.puzzleItemContainer.appendChild(piecesContainer);
+
+        // 创建目标区域容器
+        const targetsContainer = document.createElement('div');
+        targetsContainer.classList.add('puzzle-targets');
+        this.puzzleItemContainer.appendChild(targetsContainer);
+
+        // 打乱碎片顺序，增加难度
+        const shuffledFragments = [...this.currentRewardFragments].sort(() => Math.random() - 0.5);
+
+        // 创建拼图碎片（打乱的顺序）
+        shuffledFragments.forEach((src, displayIndex) => {
+            // 找到这个碎片的原始索引
+            const originalIndex = this.currentRewardFragments.indexOf(src);
+
+            const piece = document.createElement('img');
+            piece.src = src;
+            piece.classList.add('puzzle-piece');
+            piece.setAttribute('draggable', 'true');
+            piece.dataset.index = originalIndex; // 使用原始索引作为正确位置
+            piece.style.width = '8rem';
+            piece.style.height = '8rem';
+            piece.title = `碎片 ${originalIndex + 1}`;
+            piecesContainer.appendChild(piece);
+
+            // 添加拖拽事件
+            piece.addEventListener('dragstart', (e) => this.handleDragStart(e));
+        });
+
+        // 创建目标区域（按正确顺序）
+        this.currentRewardFragments.forEach((src, index) => {
+            const target = document.createElement('div');
+            target.classList.add('puzzle-target');
+            target.dataset.index = index;
+            target.style.width = '8rem';
+            target.style.height = '8rem';
+            target.textContent = `位置 ${index + 1}`;
+            target.style.fontSize = '1.4rem';
+            target.style.color = 'rgba(122, 147, 255, 0.7)';
+            targetsContainer.appendChild(target);
+
+            // 添加拖拽事件
+            target.addEventListener('dragover', (e) => this.handleDragOver(e));
+            target.addEventListener('drop', (e) => this.handleDrop(e));
+            target.addEventListener('dragenter', (e) => this.handleDragEnter(e));
+            target.addEventListener('dragleave', (e) => this.handleDragLeave(e));
+        });
+    }
+
+    handleDragStart(e) {
+        e.dataTransfer.setData('text/plain', e.target.dataset.index);
+        e.target.style.opacity = '0.5';
+    }
+
+    handleDragOver(e) {
+        e.preventDefault();
+    }
+
+    handleDragEnter(e) {
+        e.preventDefault();
+        e.target.classList.add('drag-over');
+    }
+
+    handleDragLeave(e) {
+        e.target.classList.remove('drag-over');
+    }
+
+    handleDrop(e) {
+        e.preventDefault();
+        e.target.classList.remove('drag-over');
+
+        const pieceIndex = e.dataTransfer.getData('text/plain');
+        const targetIndex = e.target.dataset.index;
+        const piece = document.querySelector(`.puzzle-piece[data-index="${pieceIndex}"]`);
+
+        if (!piece) return;
+
+        // 恢复透明度
+        piece.style.opacity = '1';
+
+        // 检查是否已有碎片在目标位置
+        const existingPiece = e.target.querySelector('.puzzle-piece');
+        if (existingPiece) {
+            // 将现有碎片移回碎片容器
+            const piecesContainer = document.querySelector('.puzzle-pieces');
+            piecesContainer.appendChild(existingPiece);
+        }
+
+        if (pieceIndex === targetIndex) {
+            // 正确放置
+            e.target.appendChild(piece);
+            e.target.textContent = ''; // 清除位置提示文字
+            e.target.classList.add('puzzle-completed');
+            this.checkPuzzleCompletion();
+        } else {
+            // 错误放置，直接移回碎片容器
+            e.target.appendChild(piece);
+            e.target.textContent = ''; // 清除位置提示文字
+            setTimeout(() => {
+                const piecesContainer = document.querySelector('.puzzle-pieces');
+                piecesContainer.appendChild(piece);
+                e.target.textContent = `位置 ${parseInt(targetIndex) + 1}`;
+                e.target.classList.remove('puzzle-completed');
+            }, 500);
+        }
+    }
+
+    checkPuzzleCompletion() {
+        const targets = document.querySelectorAll('.puzzle-target');
+        let correctCount = 0;
+        let totalCount = targets.length;
+
+        targets.forEach(target => {
+            const piece = target.querySelector('.puzzle-piece');
+            if (piece && piece.dataset.index === target.dataset.index) {
+                correctCount++;
+            }
+        });
+
+        // 更新进度显示
+        if (this.puzzleInfoElem) {
+            this.puzzleInfoElem.textContent = `拼图进度：${correctCount}/${totalCount} - ${correctCount === totalCount ? '完成！' : '继续拖拽碎片到正确位置'}`;
+        }
+
+        if (correctCount === totalCount) {
+            // 拼图完成
+            setTimeout(() => {
+                alert('🎉 恭喜！拼图完成！\n\n你已经成功解开了宇宙的奥秘，收集了所有的知识碎片！');
+                // 可以添加完成后的效果
+                const puzzleContainer = document.querySelector('.puzzle-targets');
+                if (puzzleContainer) {
+                    puzzleContainer.style.borderColor = '#4ade80';
+                    puzzleContainer.style.backgroundColor = 'rgba(74, 222, 128, 0.2)';
+                    puzzleContainer.style.boxShadow = '0 0 2rem rgba(74, 222, 128, 0.5)';
+                }
+            }, 500);
+        }
     }
 
     showHideController(hiddenControllers, showControllers) {

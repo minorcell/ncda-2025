@@ -84,10 +84,6 @@ body {
     background-color: rgba(0, 0, 0, 1);
 }
 
-
-
-
-
 .qa-container {
     position: absolute;
     top: 50%;
@@ -464,4 +460,111 @@ body {
     color: transparent;
     margin-top: 2rem;
     margin-bottom: 2rem;
+}
+
+/* 拼图样式 */
+.puzzle-pieces {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.puzzle-targets {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1rem;
+    border: 0.2rem dashed rgba(127, 48, 150, 0.5);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background-color: rgba(127, 48, 150, 0.1);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    width: 20rem;
+    height: 20rem;
+}
+
+.puzzle-piece {
+    cursor: move;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.puzzle-piece:hover {
+    border-color: #7a93ff;
+    transform: scale(1.05);
+}
+
+.puzzle-target {
+    border: 0.2rem dashed rgba(122, 147, 255, 0.3);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(122, 147, 255, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    min-height: 8rem;
+    min-width: 8rem;
+    font-size: 1.4rem;
+}
+
+.puzzle-target.drag-over {
+    border-color: #7a93ff;
+    background-color: rgba(122, 147, 255, 0.15);
+}
+
+.puzzle-target .puzzle-piece {
+    margin: 0;
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+}
+
+/* 拼图完成状态 */
+.puzzle-completed {
+    border-color: #4ade80 !important;
+    background-color: rgba(74, 222, 128, 0.1) !important;
+}
+
+.puzzle-completed .puzzle-piece {
+    border-color: #4ade80 !important;
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.fade-out {
+    animation: fadeOut 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(0.98);
+    }
 }
