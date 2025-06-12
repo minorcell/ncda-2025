@@ -137,17 +137,98 @@ const data = [
 
 // TODO: 答题控制器
 class QAController {
-    
+    constructor(data, questionCount) {
+        this.data = data;
+        // 当前关卡索引
+        this.currentLevelIndex = 0;
+        // 当前关卡问题索引
+        this.currentQuestionIndex = 0;
+        // 目前获得奖励碎片
+        this.currentRewardFragment = [];
+        // 是否完成了所有关卡
+        this.isAllLevelCompleted = false;
+        // 当前进度
+        this.currentProgress = questionCount;
+
+        // 一些组合元素：
+        // 初始化头部信息
+        this.initInfo = document.querySelector(".init-info");
+        // 关卡进行时信息
+        this.levelInfo = document.querySelector(".level-info");
+        // 初始内容
+        this.startContent = document.querySelector(".start-content");
+        // 答题内容
+        this.qaBox = document.querySelector(".qa-box");
+        // 获得奖励碎片
+        this.fragmentBox = document.querySelector(".fragment-box");
+        // 打开背包碎片
+        this.backpackBox = document.querySelector(".backpack-box");
+        // 拼图环节
+        this.puzzleBox = document.querySelector(".puzzle-box");
+        // 背包入口
+        this.backEntry = document.querySelector(".back-entry");
+
+        // 一些操作性的DOM元素，比如：开始、下一题目、上一题目、提交
+        this.startBtn = document.querySelector(".start-content .start-btn");
+        this.nextBtn = document.querySelector(".qa-box .next-btn");
+        this.prevBtn = document.querySelector(".qa-box .prev-btn");
+        this.submitBtn = document.querySelector(".qa-box .submit-btn");
+        // 初始化
+        this.init();
+    }
+
+    init() {
+        // 初始化显示头部信息、初始内容
+        this.showHideController([this.levelInfo, this.qaBox, this.fragmentBox, this.backpackBox, this.puzzleBox, this.backEntry], [this.initInfo, this.startContent]);
+        // 初始化开始按钮
+        this.startBtn.addEventListener("click", () => {
+            // 更新组合内容
+            this.showHideController([this.initInfo, this.startContent], [this.levelInfo, this.qaBox, this.backEntry]);
+        });
+
+    }
+
+    core() {
+        /**
+         * 核心逻辑：
+         * 1. 实时更新头部关卡信息：当前关卡进度、所有问题进度
+         * 2. 实时更新答题内容
+         * 3. 上一题目、下一题目、提交按钮的控制
+         * 4. 用户主动打开背包入口
+         * 5. 完成当前关卡获得碎片时打开获得奖励碎片
+         */
+    }
+
+    // 下一题目
+    nextQuestion() {
+        this.currentQuestionIndex++;
+        this.showQuestion();
+    }
+
+    // 上一题目
+    prevQuestion() {
+        this.currentQuestionIndex--;
+        this.showQuestion();
+    }
+
+    /**
+     * 显示隐藏控制器
+     * @param {array} hiddenControllers 需要隐藏的DOM
+     * @param {array} showControllers 需要显示的DOM
+     */
+    showHideController(hiddenControllers, showControllers) {
+        hiddenControllers.forEach(controller => {
+            controller.style.display = 'none';
+        });
+        showControllers.forEach(controller => {
+            controller.style.display = 'flex';
+        });
+    }
+
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     const qaContainer = document.querySelector('.qa-container');
-    const startContent = document.querySelector('.start-content');
-    const qaBox = document.querySelector(".qa-box")
-    const fragmentBox = document.querySelector(".fragment-box")
-    const backpackBox = document.querySelector(".backpack-box")
-    const initInfo = document.querySelector(".init-info")
-    const levelInfo = document.querySelector(".level-info")
     // 初始化鼠标控制器
     new Mouse({
         defaultCursor: '../assets/images/common/MouseDefault.svg',
@@ -165,12 +246,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // 初始化QA控制器
-    // new QAController(data);
-
-    // 开发调试
-    startContent.style.display = 'none'
-    qaBox.style.display = 'none'
-    fragmentBox.style.display = 'none'
-    backpackBox.style.display = 'none'
-    initInfo.style.display = 'none'
+    new QAController(data, 6);
 });
