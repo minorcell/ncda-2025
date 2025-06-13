@@ -163,11 +163,12 @@ body {
   font-size: 2.4rem;
   font-family: fys, sans-serif;
   color: rgba(255, 255, 255, 1);
-
+  z-index: 1000;
 }
 
 .card:nth-child(odd) .detail-btn {
   align-self: flex-end;
+  z-index: 1000;
 }
 
 .card:nth-child(even) .detail-btn {
@@ -177,10 +178,12 @@ body {
 .card .left .detail-btn svg {
   width: 3.2rem;
   height: 3.2rem;
+  z-index: 1000;
 }
 
 .card:nth-child(even) .detail-btn svg {
   transform: rotate(180deg);
+  z-index: 1000;
 }
 
 .card .left .detail-btn.visible {

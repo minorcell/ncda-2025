@@ -6,16 +6,16 @@ const data = [
         questions: [
             {
                 id: '1-1',
-                title: "载人航天的基本步骤是什么？",
+                title: "中国载人航天工程“三步走”战略中，第一步核心任务是？",
                 isCompleted: false,
                 options: [
                     {
                         id: '1-1-1',
-                        content: "设计和建造航天器",
+                        content: "建成空间站",
                     },
                     {
                         id: '1-1-2',
-                        content: "进行载人飞行测试",
+                        content: "实现载人飞船天地往返",
                     }
                 ],
                 answer: '1-1-1',
@@ -23,19 +23,40 @@ const data = [
             },
             {
                 id: '1-2',
-                title: "载人航天的主要目标是什么？",
+                title: "空间站建造阶段，需通过多次任务完成舱段组装，其中首次实现两个20吨级舱段对接的是？",
                 isCompleted: false,
                 options: [
                     {
                         id: '1-2-1',
-                        content: "探索太空",
+                        content: "天和核心舱发射",
                     },
                     {
                         id: '1-2-2',
-                        content: "建立太空站",
+                        content: "问天实验舱与天和核心舱对接",
                     }
                 ],
-                answer: '1-2-1',
+                answer: '1-2-2',
+                analysis: "载人航天的主要目标是探索太空和建立太空站。载人航天的主要任务是探索太空，寻找未知的世界。"
+            },
+            {
+                id: '1-3',
+                title: "载人航天基建中，为空间站长期驻留提供物资保障的核心航天器是?",
+                isCompleted: false,
+                options: [
+                    {
+                        id: '1-3-1',
+                        content: "载人飞船",
+                    },
+                    {
+                        id: '1-3-2',
+                        content: "货运飞船",
+                    },
+                    {
+                        id: '1-3-3',
+                        content: "核心舱"
+                    }
+                ],
+                answer: "1-3-2",
                 analysis: "载人航天的主要目标是探索太空和建立太空站。载人航天的主要任务是探索太空，寻找未知的世界。"
             }
         ],
@@ -48,37 +69,62 @@ const data = [
         questions: [
             {
                 id: '2-1',
-                title: "神舟系列载人飞船的主要任务是什么？",
+                title: "神舟系列飞船的返回舱采用的特殊结构，主要是为了?",
                 isCompleted: false,
                 options: [
                     {
                         id: '2-1-1',
-                        content: "进行载人飞行测试",
+                        content: "便于安装设备",
                     },
                     {
                         id: '2-1-2',
-                        content: "建立太空站",
+                        content: "安全返回地球，承受再入大气层的高温和冲击",
                     }
                 ],
                 answer: '2-1-1',
-                analysis: "神舟系列载人飞船的主要任务是进行载人飞行测试。它们是中国载人航天工程的重要组成部分。"
+                analysis: "神舟系列飞船的返回舱采用的特殊结构，主要是为了安全返回地球，承受再入大气层的高温和冲击。"
             },
             {
                 id: '2-2',
-                title: "神舟系列载人飞船的设计特点是什么？",
+                title: "神舟七号载人飞船实现了中国航天员首次？",
                 isCompleted: false,
                 options: [
                     {
                         id: '2-2-1',
-                        content: "具有高度的可靠性和安全性",
+                        content: "太空授课",
                     },
                     {
                         id: '2-2-2',
-                        content: "可以在太空中长时间停留",
+                        content: "多人多天飞行",
+                    },
+                    {
+                        id: '2-2-3',
+                        content: "出舱活动",
                     }
                 ],
-                answer: '2-2-1',
-                analysis: "神舟系列载人飞船的设计特点是具有高度的可靠性和安全性。它们能够在太空中进行多次任务。"
+                answer: '2-2-3',
+                analysis: "2008 年，神舟七号航天员翟志刚实现了中国首次太空出舱行走。"
+            },
+            {
+                id: '2-3',
+                title: "神舟十二号载人飞船将航天员送入了中国的",
+                isCompleted: false,
+                options: [
+                    {
+                        id: '2-3-1',
+                        content: "天宫一号"
+                    },
+                    {
+                        id: '2-3-2',
+                        content: "天宫二号"
+                    },
+                    {
+                        id: '2-3-3',
+                        content: "天和核心舱"
+                    }
+                ],
+                answer: '2-3-3',
+                analysis: "神舟十二号是空间站关键技术验证阶段第四次飞行任务，航天员入驻天和核心舱。"
             }
         ],
         reward: "../../assets/images/WenTianPavilion/back04.svg",
@@ -90,20 +136,66 @@ const data = [
         questions: [
             {
                 id: '3-1',
-                title: "空间站的主要任务是什么？",
+                title: "中国空间站的核心舱是？",
                 isCompleted: false,
                 options: [
                     {
                         id: '3-1-1',
-                        content: "进行载人飞行测试",
+                        content: "问天实验舱",
                     },
                     {
                         id: '3-1-2',
-                        content: "进行科学实验和技术试验",
+                        content: "梦天实验舱",
+                    },
+                    {
+                        id: '3-1-3',
+                        content: "天和核心舱"
                     }
                 ],
-                answer: '3-1-2',
-                analysis: "空间站的主要任务是进行科学实验和技术试验。它们是中国载人航天工程的重要组成部分。"
+                answer: '3-1-3',
+                analysis: "天和核心舱是中国空间站的管理和控制中心，是空间站建造的首个舱段。"
+            },
+            {
+                id: '3-2',
+                title: "空间站在太空中运行时，主要依靠（  ）提供能源？",
+                isCompleted: false,
+                options: [
+                    {
+                        id: '3-2-1',
+                        content: "核能",
+                    },
+                    {
+                        id: '3-2-2',
+                        content: "太阳能电池翼",
+                    },
+                    {
+                        id: '3-2-3',
+                        content: "化学燃料"
+                    }
+                ],
+                answer: '3-2-2',
+                analysis: "空间站通过大面积的太阳能电池翼将太阳能转化为电能。"
+            },
+            {
+                id: '3-3',
+                title: "空间站的再生生保系统可以实现（  ）?",
+                isCompleted: false,
+                options: [
+                    {
+                        id: "3-3-1",
+                        content: "制造食物"
+                    },
+                    {
+                        id: "3-3-2",
+                        content: "将尿液等废水净化为可饮用的水"
+                    },
+                    {
+                        id: "3-3-3",
+                        content: "产生重力环境"
+                    }
+                ],
+                answer: '3-3-2',
+                analysis: "空间站的再生生保系统可以实现将尿液等废水净化为可饮用的水。"
             }
         ],
         reward: "../../assets/images/WenTianPavilion/back02.svg",
@@ -115,27 +207,72 @@ const data = [
         questions: [
             {
                 id: '4-1',
-                title: "人造卫星的主要任务是什么？",
+                title: "通信卫星主要用于？",
                 isCompleted: false,
                 options: [
                     {
                         id: '4-1-1',
-                        content: "探索太空",
+                        content: "观测地球表面",
                     },
                     {
                         id: '4-1-2',
-                        content: "建立太空站",
+                        content: "天气预报",
+                    },
+                    {
+                        id: "4-1-3",
+                        content: "传输电话、电视、数据等通信信号"
                     }
                 ],
-                answer: '4-1-1',
-                analysis: "人造卫星的主要任务是探索太空。它们是中国载人航天工程的重要组成部分。"
+                answer: '4-1-3',
+                analysis: "通信卫星通过转发无线电信号，实现地球不同地区之间的通信。"
+            },
+            {
+                id: '4-2',
+                title: "以下哪种卫星可以用来监测农作物的生长状况（  ）",
+                isCompleted: false,
+                options: [
+                    {
+                        id: '4-2-1',
+                        content: "导航卫星",
+                    },
+                    {
+                        id: '4-2-2',
+                        content: "气象卫星",
+                    },
+                    {
+                        id: "4-2-3",
+                        content: "遥感卫星"
+                    }
+                ],
+                answer: "4-2-3",
+                analysis: "遥感卫星可以通过拍摄地球表面图像，分析农作物的生长、病虫害等状况"
+            },
+            {
+                id: '4-3',
+                title: "人造卫星围绕地球运行的轨道中，离地面高度最低的是（  ）",
+                isCompleted: false,
+                options: [
+                    {
+                        id: "4-3-1",
+                        content: "地球同步轨道"
+                    },
+                    {
+                        id: "4-3-2",
+                        content: "极地轨道"
+                    },
+                    {
+                        id: "4-3-3",
+                        content: "低地球轨道"
+                    }
+                ],
+                answer: "4-3-3",
+                analysis: "低地球轨道一般距离地面200 - 2000千米，是高度最低的常见轨道"
             }
         ],
         reward: "../../assets/images/WenTianPavilion/back03.svg",
     },
 ]
 
-// 答题控制器
 // 答题控制器
 class QAController {
     constructor(data) {
