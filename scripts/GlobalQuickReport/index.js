@@ -43,88 +43,60 @@ const news = [
 
 const htkjyymfw = [
     {
-        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW01.jpg",
-        vodeo: "../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/hf01.jpg",
+        vodeo: "../assets/videos/GlobalQuickReport/hf01.mp4",
     },
     {
-        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW02.png",
-        vodeo: "../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/hf02.jpg",
+        vodeo: "../assets/videos/GlobalQuickReport/hf02.mp4",
     },
     {
-        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW03.png",
-        vodeo: "../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/hf03.jpg",
+        vodeo: "../assets/videos/GlobalQuickReport/hf03.mp4",
     },
     {
-        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW05.jpg",
-        vodeo: "../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/hf04.jpg",
+        vodeo: "../assets/videos/GlobalQuickReport/hf04.mp4",
     },
     {
-        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW06.webp",
-        vodeo: "../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/hf05.jpg",
+        vodeo: "../assets/videos/GlobalQuickReport/hf05.mp4",
     },
     {
-        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW01.jpg",
-        vodeo: "../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/hf06.jpg",
+        vodeo: "../assets/videos/GlobalQuickReport/hf06.mp4",
     },
     {
-        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW02.png",
-        vodeo: "../assets/videos/launch.mp4",
-    },
-    {
-        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW03.png",
-        vodeo: "../assets/videos/launch.mp4",
-    },
-    {
-        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW05.jpg",
-        vodeo: "../assets/videos/launch.mp4",
-    },
-    {
-        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW06.webp",
-        vodeo: "../assets/videos/launch.mp4",
-    },
+        img: "../assets/images/GlobalQuickReport/hf07.jpg",
+        vodeo: "../assets/videos/GlobalQuickReport/hf07.mp4",
+    }
 ]
 
 const gkhz = [
     {
-        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW01.jpg",
-        vodeo: "../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/gj01.jpg",
+        vodeo: "../assets/videos/GlobalQuickReport/gj01.mp4",
     },
     {
-        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW02.png",
-        vodeo: "../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/gj02.jpg",
+        vodeo: "../assets/videos/GlobalQuickReport/gj02.mp4",
     },
     {
-        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW03.png",
-        vodeo: "../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/gj03.jpg",
+        vodeo: "../assets/videos/GlobalQuickReport/gj03.mp4",
     },
     {
-        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW05.jpg",
-        vodeo: "../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/gj04.jpg",
+        vodeo: "../assets/videos/GlobalQuickReport/gj04.mp4",
     },
     {
-        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW06.webp",
-        vodeo: "../assets/videos/launch.mp4",
+        img: "../assets/images/GlobalQuickReport/gj05.jpg",
+        vodeo: "../assets/videos/GlobalQuickReport/gj05.mp4",
     },
     {
-        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW01.jpg",
-        vodeo: "../assets/videos/launch.mp4",
-    },
-    {
-        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW02.png",
-        vodeo: "../assets/videos/launch.mp4",
-    },
-    {
-        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW03.png",
-        vodeo: "../assets/videos/launch.mp4",
-    },
-    {
-        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW05.jpg",
-        vodeo: "../assets/videos/launch.mp4",
-    },
-    {
-        img: "../assets/images/GlobalQuickReport/HTKJYYYMSFW06.webp",
-        vodeo: "../assets/videos/launch.mp4",
-    },
+        img: "../assets/images/GlobalQuickReport/gj06.jpg",
+        vodeo: "../assets/videos/GlobalQuickReport/gj06.mp4",
+    }
 ]
 
 function createNewsItem(news = []) {
