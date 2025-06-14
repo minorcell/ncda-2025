@@ -171,14 +171,14 @@
   }
 
   to {
-    transform: translateY(-100%) rotateX(45deg);
+    transform: translateY(-100%);
     opacity: 0;
   }
 }
 
 @keyframes slide-in-down-rotate {
   from {
-    transform: translateY(-100%) rotateX(45deg);
+    transform: translateY(-100%);
     opacity: 0;
   }
 
@@ -195,14 +195,14 @@
   }
 
   to {
-    transform: translateY(100%) rotateX(-45deg);
+    transform: translateY(100%);
     opacity: 0;
   }
 }
 
 @keyframes slide-in-up-rotate {
   from {
-    transform: translateY(100%) rotateX(-45deg);
+    transform: translateY(100%);
     opacity: 0;
   }
 
