@@ -16,7 +16,7 @@ const news = [
     },
     {
         title: '神舟二十号载人飞行任务航天员乘组出征仪式在酒泉卫星发射中心举行',
-        content: '北京时间2025年4月24日14时25分，神舟二十号载人飞行任务航天员乘组出征仪式在酒泉卫星发射中心问天阁圆梦园广场举行。14时26分，中国载人航天工程总指挥、空间站应用与发展阶段飞行任务总指挥部总指挥长许学强下达“出发”命令，陈冬、陈中瑞、王杰3名航天员在第十个“中国航天日”当天领命出征。目前，神舟十九号航天员乘组进驻空间站近六个月，正在积极准备迎接即将到来的神舟二十号航天员乘组。55年前的今天，中国第一颗人造地球卫星“东方红一号”在酒泉卫星发射中心成功发射，吹响了中国人进军太空的号角。22年前，中国首位飞天航天员杨利伟从这里出征太空，实现了中华民族千年飞天梦想。如今，空间站已经建成，登月梦正在从蓝图走向现实，一代代后来者接过“接力棒”、踏着前人的足迹接力出征，“一张蓝图绘到底”的中国航天未来可期！',
+        content: '北京时间2025年4月24日14时25分，神舟二十号载人飞行任务航天员乘组出征仪式在酒泉卫星发射中心问天阁圆梦园广场举行。14时26分，中国载人航天工程总指挥、空间站应用与发展阶段飞行任务总指挥部总指挥长许学强下达"出发"命令，陈冬、陈中瑞、王杰3名航天员在第十个"中国航天日"当天领命出征。目前，神舟十九号航天员乘组进驻空间站近六个月，正在积极准备迎接即将到来的神舟二十号航天员乘组。55年前的今天，中国第一颗人造地球卫星"东方红一号"在酒泉卫星发射中心成功发射，吹响了中国人进军太空的号角。22年前，中国首位飞天航天员杨利伟从这里出征太空，实现了中华民族千年飞天梦想。如今，空间站已经建成，登月梦正在从蓝图走向现实，一代代后来者接过"接力棒"、踏着前人的足迹接力出征，"一张蓝图绘到底"的中国航天未来可期！',
         date: '2025-04-24',
     },
     {
@@ -26,18 +26,13 @@ const news = [
     },
     {
         title: '神舟十九号航天员乘组圆满完成第三次出舱活动',
-        content: '北京时间2025年3月21日20时50分，经过约7小时的出舱活动，神舟十九号乘组航天员蔡旭哲、宋令东、王浩泽密切协同，在空间站机械臂和地面科研人员的配合支持下，完成了空间站空间碎片防护装置及舱外辅助设施安装、舱外设备设施巡检等任务。出舱航天员蔡旭哲、宋令东已安全返回问天实验舱，出舱活动取得圆满成功。航天员蔡旭哲已完成5次出舱活动，成为目前在舱外执行任务次数最多的中国航天员。神舟十九号航天员乘组的“太空出差之旅”已近5个月，各项空间科学实（试）验任务进展顺利。按计划，乘组将于1个多月后返回地球家园。',
+        content: '北京时间2025年3月21日20时50分，经过约7小时的出舱活动，神舟十九号乘组航天员蔡旭哲、宋令东、王浩泽密切协同，在空间站机械臂和地面科研人员的配合支持下，完成了空间站空间碎片防护装置及舱外辅助设施安装、舱外设备设施巡检等任务。出舱航天员蔡旭哲、宋令东已安全返回问天实验舱，出舱活动取得圆满成功。航天员蔡旭哲已完成5次出舱活动，成为目前在舱外执行任务次数最多的中国航天员。神舟十九号航天员乘组的"太空出差之旅"已近5个月，各项空间科学实（试）验任务进展顺利。按计划，乘组将于1个多月后返回地球家园。',
         date: '2025-03-21',
     },
     {
         title: '2025年中国载人航天工程将扎实推进空间站应用与发展和载人月球探测两大任务',
         content: '2025年，中国载人航天工程将扎实推进空间站应用与发展和载人月球探测两大任务，为推动科技强国、航天强国建设作出更大贡献。目前，中国空间站在轨运行稳定、效益发挥良好，载人月球探测工程登月阶段任务各项研制建设工作按计划稳步推进。空间站建成以来，工程全线密切协同，先后组织完成4次载人飞行、3次货运补给、4次飞船返回任务，5个航天员乘组、15人次在轨长期驻留，累计进行了11次航天员出舱和多次应用载荷出舱，开展多次舱外维修任务，刷新航天员单次出舱活动时长的世界纪录，完成包括2名港澳载荷专家的第四批预备航天员选拔、低成本货物运输系统择优并启动研制、《中国空间站科学研究与应用进展报告》（2024年）发布等工作。与此同时，瞄准2030年前实现中国人首次登陆月球的目标，载人月球探测工程登月阶段任务各项研制建设工作按计划稳步推进。',
         date: '2025-03-03',
-    },
-    {
-        title: '中国与巴基斯坦签署选拔训练航天员合作协议 中国空间站将迎来首位外籍航天员造访',
-        content: '北京时间2025年2月28日，中国载人航天工程办公室与巴基斯坦太空与高层大气研究委员会在巴基斯坦首都伊斯兰堡，正式签署《关于选拔、训练巴基斯坦航天员并参与中国空间站飞行任务的合作协议》，开启了中巴两国在载人航天领域深化合作的新篇章，迈出了中国选拔训练外籍航天员参与中国空间站飞行任务的第一步。北京时间当日13时45分，签字仪式在巴基斯坦总理府举行，在巴基斯坦总理夏巴兹·谢里夫见证下，中国载人航天工程办公室副主任林西强与巴基斯坦太空与高层大气研究委员会主席穆罕默德·优素福·汗签署协议。此次协议的签署，标志着中国政府将首次为外国选拔训练航天员，中国空间站将迎来首位外籍航天员造访。',
-        date: '2025-02-28',
     },
 ]
 
@@ -105,14 +100,6 @@ function createNewsItem(news = []) {
         `<div class="new-item" data-index="${index}">
             <div class="title">${item.title}</div>
             <div class="date">${item.date}</div>
-            <div class="new-content-box">
-                <div class="close-btn"></div>
-                <div class="children">
-                    <div class="new-box-title">${item.title}</div>
-                    <div class="line"></div>
-                    <p class="new-content">${item.content}</p>
-                </div>
-            </div>
         </div>`
     ).join('');
 
@@ -120,18 +107,46 @@ function createNewsItem(news = []) {
         const target = event.target.closest('.new-item');
         if (target) {
             const index = target.getAttribute('data-index');
-            const box = document.querySelector(`.new-item[data-index="${index}"] .new-content-box`);
-            document.querySelectorAll('.new-content-box').forEach(item => {
-                item.style.display = 'none';
-            });
-            box.style.opacity = '1';
-            box.style.transition = 'opacity 0.3s ease-in-out';
-            box.style.display = 'block';
+            const newsItem = news[index];
 
-            const closeBtn = box.querySelector('.close-btn');
+            // 移除已存在的弹窗
+            const existingModal = document.querySelector('.news-modal-overlay');
+            if (existingModal) {
+                existingModal.remove();
+            }
+
+            // 创建新的弹窗并添加到body
+            const modalOverlay = document.createElement('div');
+            modalOverlay.className = 'news-modal-overlay';
+            modalOverlay.innerHTML = `
+                <div class="new-content-box">
+                    <div class="close-btn"></div>
+                    <div class="children">
+                        <div class="new-box-title">${newsItem.title}</div>
+                        <div class="line"></div>
+                        <p class="new-content">${newsItem.content}</p>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(modalOverlay);
+
+            // 显示弹窗
+            setTimeout(() => {
+                modalOverlay.style.opacity = '1';
+            }, 10);
+
+            const closeBtn = modalOverlay.querySelector('.close-btn');
             closeBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                box.style.display = 'none';
+                modalOverlay.remove();
+            });
+
+            // 点击背景关闭弹窗
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) {
+                    modalOverlay.remove();
+                }
             });
         }
     });
