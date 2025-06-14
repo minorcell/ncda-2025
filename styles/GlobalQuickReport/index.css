@@ -67,7 +67,6 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    overflow-y: scroll;
 }
 
 .page:nth-child(1) .news .new-item {

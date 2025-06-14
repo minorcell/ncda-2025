@@ -289,6 +289,7 @@ body {
     left: 37vw;
     bottom: 80.5vh;
     background-image: url("../../assets/images/TwelveOrderStars/2_4.png");
+    background-size: 50%;
 }
 
 .page:nth-child(2) .parts .part:nth-child(4) .stage-info {
@@ -341,6 +342,7 @@ body {
     left: 50vw;
     bottom: 87vh;
     background-image: url("../../assets/images/TwelveOrderStars/2_5.png");
+    background-size: 30%;
 }
 
 .page:nth-child(2) .parts .part:nth-child(5) .stage-info {
