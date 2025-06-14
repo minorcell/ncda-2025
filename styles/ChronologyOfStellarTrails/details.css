@@ -131,6 +131,7 @@ body {
   justify-content: center;
   align-items: center;
   gap: 3rem;
+  transform: translateY(15%);
 }
 
 .info .intro .left .logo {
