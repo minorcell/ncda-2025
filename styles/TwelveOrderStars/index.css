@@ -170,13 +170,20 @@ body {
     color: rgba(255, 255, 255, 1);
 }
 
-.page:nth-child(2) .parts .part:nth-child(1) .stage-info .live-img {
+.page:nth-child(2) .parts .part:nth-child(1) .stage-info .live-video {
     width: 100%;
     height: 20rem;
-    background-image: url("../../assets/images/TwelveOrderStars/process_1_bg.png");
-    background-size: contain;
-    background-position: left;
-    background-repeat: no-repeat;
+    object-fit: cover;
+    border-radius: 0.8rem;
+    border: 0.2rem solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 1rem rgba(146, 70, 167, 0.3);
+    transition: all 0.3s ease;
+}
+
+.page:nth-child(2) .parts .part:nth-child(1) .stage-info .live-video:hover {
+    border-color: rgba(146, 70, 167, 0.8);
+    box-shadow: 0 0 2rem rgba(146, 70, 167, 0.6);
+    transform: scale(1.02);
 }
 
 .page:nth-child(2) .parts .part:nth-child(2) {
@@ -222,13 +229,20 @@ body {
     color: rgba(255, 255, 255, 1);
 }
 
-.page:nth-child(2) .parts .part:nth-child(2) .stage-info .live-img {
+.page:nth-child(2) .parts .part:nth-child(2) .stage-info .live-video {
     width: 100%;
     height: 20rem;
-    background-image: url("../../assets/images/TwelveOrderStars/process_1_bg.png");
-    background-size: contain;
-    background-position: left;
-    background-repeat: no-repeat;
+    object-fit: cover;
+    border-radius: 0.8rem;
+    border: 0.2rem solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 1rem rgba(146, 70, 167, 0.3);
+    transition: all 0.3s ease;
+}
+
+.page:nth-child(2) .parts .part:nth-child(2) .stage-info .live-video:hover {
+    border-color: rgba(146, 70, 167, 0.8);
+    box-shadow: 0 0 2rem rgba(146, 70, 167, 0.6);
+    transform: scale(1.02);
 }
 
 .page:nth-child(2) .parts .part:nth-child(3) {
@@ -274,13 +288,20 @@ body {
     color: rgba(255, 255, 255, 1);
 }
 
-.page:nth-child(2) .parts .part:nth-child(3) .stage-info .live-img {
+.page:nth-child(2) .parts .part:nth-child(3) .stage-info .live-video {
     width: 100%;
     height: 20rem;
-    background-image: url("../../assets/images/TwelveOrderStars/process_1_bg.png");
-    background-size: contain;
-    background-position: left;
-    background-repeat: no-repeat;
+    object-fit: cover;
+    border-radius: 0.8rem;
+    border: 0.2rem solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 1rem rgba(146, 70, 167, 0.3);
+    transition: all 0.3s ease;
+}
+
+.page:nth-child(2) .parts .part:nth-child(3) .stage-info .live-video:hover {
+    border-color: rgba(146, 70, 167, 0.8);
+    box-shadow: 0 0 2rem rgba(146, 70, 167, 0.6);
+    transform: scale(1.02);
 }
 
 .page:nth-child(2) .parts .part:nth-child(4) {
@@ -327,13 +348,20 @@ body {
     color: rgba(255, 255, 255, 1);
 }
 
-.page:nth-child(2) .parts .part:nth-child(4) .stage-info .live-img {
+.page:nth-child(2) .parts .part:nth-child(4) .stage-info .live-video {
     width: 100%;
     height: 20rem;
-    background-image: url("../../assets/images/TwelveOrderStars/process_1_bg.png");
-    background-size: contain;
-    background-position: left;
-    background-repeat: no-repeat;
+    object-fit: cover;
+    border-radius: 0.8rem;
+    border: 0.2rem solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 1rem rgba(146, 70, 167, 0.3);
+    transition: all 0.3s ease;
+}
+
+.page:nth-child(2) .parts .part:nth-child(4) .stage-info .live-video:hover {
+    border-color: rgba(146, 70, 167, 0.8);
+    box-shadow: 0 0 2rem rgba(146, 70, 167, 0.6);
+    transform: scale(1.02);
 }
 
 .page:nth-child(2) .parts .part:nth-child(5) {
@@ -380,57 +408,23 @@ body {
     color: rgba(255, 255, 255, 1);
 }
 
-.page:nth-child(2) .parts .part:nth-child(5) .stage-info .live-img {
+.page:nth-child(2) .parts .part:nth-child(5) .stage-info .live-video {
     width: 100%;
     height: 20rem;
-    background-image: url("../../assets/images/TwelveOrderStars/process_1_bg.png");
-    background-size: contain;
-    background-position: left;
-    background-repeat: no-repeat;
+    object-fit: cover;
+    border-radius: 0.8rem;
+    border: 0.2rem solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 1rem rgba(146, 70, 167, 0.3);
+    transition: all 0.3s ease;
 }
 
-.page:nth-child(2) .parts .part:nth-child(6) {
-    width: 6vw;
-    height: 9vh;
-    left: 63vw;
-    bottom: 88vh;
-    background-image: url("../../assets/images/TwelveOrderStars/2_6.png");
+.page:nth-child(2) .parts .part:nth-child(5) .stage-info .live-video:hover {
+    border-color: rgba(146, 70, 167, 0.8);
+    box-shadow: 0 0 2rem rgba(146, 70, 167, 0.6);
+    transform: scale(1.02);
 }
 
-.page:nth-child(2) .parts .part:nth-child(6) .stage-info {
-    position: absolute;
-    left: 0vw;
-    top: 100%;
-    display: flex;
-    width: 25vw;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: start;
-    gap: 1rem;
-}
 
-.page:nth-child(2) .parts .part:nth-child(6) .stage-info .name {
-    font-size: 2.4rem;
-    font-weight: 200;
-    font-family: 'fys', sans-serif;
-    color: rgba(255, 255, 255, 1);
-}
-
-.page:nth-child(2) .parts .part:nth-child(6) .stage-info .intro {
-    font-size: 2rem;
-    font-weight: 200;
-    font-family: 'fys', sans-serif;
-    color: rgba(255, 255, 255, 1);
-}
-
-.page:nth-child(2) .parts .part:nth-child(6) .stage-info .live-img {
-    width: 100%;
-    height: 20rem;
-    background-image: url("../../assets/images/TwelveOrderStars/process_1_bg.png");
-    background-size: contain;
-    background-position: left;
-    background-repeat: no-repeat;
-}
 
 .page:nth-child(2) .process {
     width: 7rem;

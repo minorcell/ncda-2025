@@ -455,8 +455,6 @@ document.addEventListener("DOMContentLoaded", function () {
         maxMeteors: 20,
     });
 
-    setupVideoPlayer();
-
     setupMouseEvents();
 
     // 初始化鼠标控制器
