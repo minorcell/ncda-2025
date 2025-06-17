@@ -490,8 +490,8 @@ class QAController {
         if (this.optionsContainer) {
             Array.from(this.optionsContainer.children).forEach(child => {
                 if (child.dataset.id === question.answer) {
+                    // 正确答案
                     child.style.backgroundColor = '#e0ffe0';
-                    // 添加正确图标
                     const rightIcon = document.createElement('img');
                     rightIcon.src = '../assets/images/WenTianPavilion/right.svg';
                     rightIcon.alt = 'correct';
@@ -500,9 +500,9 @@ class QAController {
                     rightIcon.style.marginLeft = '1rem';
                     rightIcon.style.verticalAlign = 'middle';
                     child.appendChild(rightIcon);
-                } else if (child.classList.contains('selected') && !correct) {
+                } else if (child.classList.contains('selected')) {
+                    // 用户选择的错误答案
                     child.style.backgroundColor = '#ffe0e0';
-                    // 添加错误图标
                     const errorIcon = document.createElement('img');
                     errorIcon.src = '../assets/images/WenTianPavilion/error.svg';
                     errorIcon.alt = 'error';
@@ -511,6 +511,10 @@ class QAController {
                     errorIcon.style.marginLeft = '1rem';
                     errorIcon.style.verticalAlign = 'middle';
                     child.appendChild(errorIcon);
+                } else {
+                    // 其他未选择的选项，设置为灰色背景表示未选择
+                    child.style.backgroundColor = 'rgba(128, 128, 128, 0.2)';
+                    child.style.opacity = '0.6';
                 }
             });
         }
@@ -656,8 +660,16 @@ class QAController {
             piece.classList.add('puzzle-piece');
             piece.setAttribute('draggable', 'true');
             piece.dataset.index = originalIndex; // 使用原始索引作为正确位置
-            piece.style.width = '8rem';
-            piece.style.height = '8rem';
+            piece.style.cssText = `
+                width: 8rem;
+                height: 8rem;
+                object-fit: cover;
+                border-radius: 0.5rem;
+                border: 0.2rem solid rgba(122, 147, 255, 0.3);
+                cursor: move;
+                transition: all 0.3s ease;
+                background-color: rgba(0, 0, 0, 0.2);
+            `;
             piece.title = `碎片 ${originalIndex + 1}`;
             piecesContainer.appendChild(piece);
 
@@ -670,11 +682,22 @@ class QAController {
             const target = document.createElement('div');
             target.classList.add('puzzle-target');
             target.dataset.index = index;
-            target.style.width = '8rem';
-            target.style.height = '8rem';
+            target.style.cssText = `
+                width: 8rem;
+                height: 8rem;
+                border: 0.2rem dashed rgba(122, 147, 255, 0.3);
+                border-radius: 0.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: rgba(122, 147, 255, 0.05);
+                transition: all 0.3s ease;
+                position: relative;
+                font-size: 1.4rem;
+                color: rgba(122, 147, 255, 0.7);
+                font-family: 'fys', sans-serif;
+            `;
             target.textContent = `位置 ${index + 1}`;
-            target.style.fontSize = '1.4rem';
-            target.style.color = 'rgba(122, 147, 255, 0.7)';
             targetsContainer.appendChild(target);
 
             // 添加拖拽事件
@@ -688,6 +711,7 @@ class QAController {
     handleDragStart(e) {
         e.dataTransfer.setData('text/plain', e.target.dataset.index);
         e.target.style.opacity = '0.5';
+        e.target.style.transform = 'scale(0.95)';
     }
 
     handleDragOver(e) {
@@ -713,8 +737,9 @@ class QAController {
 
         if (!piece) return;
 
-        // 恢复透明度
+        // 恢复透明度和缩放
         piece.style.opacity = '1';
+        piece.style.transform = 'scale(1)';
 
         // 检查是否已有碎片在目标位置
         const existingPiece = e.target.querySelector('.puzzle-piece');
@@ -726,16 +751,30 @@ class QAController {
 
         if (pieceIndex === targetIndex) {
             // 正确放置
+            e.target.innerHTML = ''; // 清空内容
             e.target.appendChild(piece);
-            e.target.textContent = ''; // 清除位置提示文字
             e.target.classList.add('puzzle-completed');
+
+            // 调整碎片在目标位置的样式
+            piece.style.width = '100%';
+            piece.style.height = '100%';
+            piece.style.objectFit = 'cover';
+            piece.style.borderRadius = '0.5rem';
+
             this.checkPuzzleCompletion();
         } else {
-            // 错误放置，直接移回碎片容器
+            // 错误放置，显示错误动画后移回碎片容器
+            e.target.innerHTML = ''; // 清空内容
             e.target.appendChild(piece);
-            e.target.textContent = ''; // 清除位置提示文字
+
+            // 错误动画
+            piece.style.filter = 'sepia(1) hue-rotate(-50deg) saturate(2)';
             setTimeout(() => {
                 const piecesContainer = document.querySelector('.puzzle-pieces');
+                piece.style.width = '8rem';
+                piece.style.height = '8rem';
+                piece.style.objectFit = 'cover';
+                piece.style.filter = 'none';
                 piecesContainer.appendChild(piece);
                 e.target.textContent = `位置 ${parseInt(targetIndex) + 1}`;
                 e.target.classList.remove('puzzle-completed');
@@ -763,7 +802,7 @@ class QAController {
         if (correctCount === totalCount) {
             // 拼图完成
             setTimeout(() => {
-                alert('🎉 恭喜！拼图完成！\n\n你已经成功解开了宇宙的奥秘，收集了所有的知识碎片！');
+                this.showCompletionModal();
                 // 可以添加完成后的效果
                 const puzzleContainer = document.querySelector('.puzzle-targets');
                 if (puzzleContainer) {
@@ -787,6 +826,178 @@ class QAController {
             this.backEntry.style.display = 'none';
             this.backEntry.style.opacity = '0';
         }
+    }
+
+    showCompletionModal() {
+        // 创建弹窗覆盖层
+        const modalOverlay = document.createElement('div');
+        modalOverlay.className = 'completion-modal-overlay';
+        modalOverlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            backdrop-filter: blur(1rem);
+        `;
+
+        // 创建弹窗内容
+        const modalContent = document.createElement('div');
+        modalContent.className = 'completion-modal-content';
+        modalContent.style.cssText = `
+            background: linear-gradient(135deg, rgba(30, 0, 50, 0.95), rgba(70, 20, 100, 0.95));
+            border-radius: 2rem;
+            padding: 4rem;
+            text-align: center;
+            max-width: 60rem;
+            position: relative;
+            transform: scale(0.8);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 2rem 4rem rgba(122, 147, 255, 0.3);
+        `;
+
+        // 创建标题
+        const title = document.createElement('h2');
+        title.textContent = '恭喜！拼图完成！';
+        title.style.cssText = `
+            font-size: 4rem;
+            font-family: 'fys', sans-serif;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(191, 151, 202, 1), rgba(127, 48, 150, 1));
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 2rem;
+        `;
+
+        // 创建图片容器
+        const imageContainer = document.createElement('div');
+        imageContainer.style.cssText = `
+            margin: 3rem 0;
+            perspective: 150rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        `;
+
+        // 创建奖杯图片
+        const trophyImage = document.createElement('img');
+        trophyImage.src = '../assets/images/WenTianPavilion/all.webp';
+        trophyImage.alt = 'completion trophy';
+        trophyImage.style.cssText = `
+            width: 20rem;
+            height: 20rem;
+            object-fit: contain;
+            transition: transform 0.2s ease-out;
+            transform-style: preserve-3d;
+            cursor: pointer;
+            filter: drop-shadow(0 1rem 2rem rgba(122, 147, 255, 0.4));
+        `;
+
+        // 添加3D旋转交互
+        imageContainer.addEventListener('mousemove', (e) => {
+            const rect = imageContainer.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            // 计算鼠标相对于容器中心的位置（-1到1之间）
+            const mouseX = (e.clientX - centerX) / (rect.width / 2);
+            const mouseY = (e.clientY - centerY) / (rect.height / 2);
+
+            // 计算旋转角度，限制在合理范围内
+            const rotateY = mouseX * 15; // 左右旋转最大15度
+            const rotateX = -mouseY * 10; // 上下旋转最大10度
+
+            trophyImage.style.transform = `
+                perspective(150rem) 
+                rotateX(${rotateX}deg) 
+                rotateY(${rotateY}deg) 
+                scale(1.05)
+                translateZ(2rem)
+            `;
+        });
+
+        imageContainer.addEventListener('mouseleave', () => {
+            trophyImage.style.transform = `
+                perspective(150rem) 
+                rotateX(0deg) 
+                rotateY(0deg) 
+                scale(1)
+                translateZ(0rem)
+            `;
+        });
+
+        // 创建描述文字
+        const description = document.createElement('p');
+        description.textContent = '你已经成功解开了宇宙的奥秘，收集了所有的知识碎片！';
+        description.style.cssText = `
+            font-size: 2.4rem;
+            font-family: 'fys', sans-serif;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 2rem 0;
+            line-height: 1.5;
+        `;
+
+        // 创建关闭按钮
+        const closeButton = document.createElement('button');
+        closeButton.textContent = '完成';
+        closeButton.style.cssText = `
+            background: linear-gradient(135deg, rgba(122, 147, 255, 1), rgba(127, 48, 150, 1));
+            border: none;
+            border-radius: 1rem;
+            color: white;
+            font-size: 2.4rem;
+            font-family: 'fys', sans-serif;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        `;
+
+        closeButton.addEventListener('mouseover', () => {
+            closeButton.style.transform = 'scale(1.05)';
+            closeButton.style.boxShadow = '0 1rem 2rem rgba(122, 147, 255, 0.4)';
+        });
+
+        closeButton.addEventListener('mouseout', () => {
+            closeButton.style.transform = 'scale(1)';
+            closeButton.style.boxShadow = 'none';
+        });
+
+        closeButton.addEventListener('click', () => {
+            modalOverlay.style.opacity = '0';
+            modalContent.style.transform = 'scale(0.8)';
+            setTimeout(() => {
+                document.body.removeChild(modalOverlay);
+            }, 300);
+        });
+
+        // 组装弹窗
+        imageContainer.appendChild(trophyImage);
+        modalContent.appendChild(title);
+        modalContent.appendChild(imageContainer);
+        modalContent.appendChild(description);
+        modalContent.appendChild(closeButton);
+        modalOverlay.appendChild(modalContent);
+
+        // 添加到页面并显示动画
+        document.body.appendChild(modalOverlay);
+
+        // 触发进入动画
+        setTimeout(() => {
+            modalOverlay.style.opacity = '1';
+            modalContent.style.transform = 'scale(1)';
+        }, 50);
+
+        // 点击背景关闭弹窗
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                closeButton.click();
+            }
+        });
     }
 
     showHideController(hiddenControllers, showControllers) {
