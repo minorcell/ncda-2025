@@ -491,8 +491,26 @@ class QAController {
             Array.from(this.optionsContainer.children).forEach(child => {
                 if (child.dataset.id === question.answer) {
                     child.style.backgroundColor = '#e0ffe0';
+                    // 添加正确图标
+                    const rightIcon = document.createElement('img');
+                    rightIcon.src = '../assets/images/WenTianPavilion/right.svg';
+                    rightIcon.alt = 'correct';
+                    rightIcon.style.width = '2rem';
+                    rightIcon.style.height = '2rem';
+                    rightIcon.style.marginLeft = '1rem';
+                    rightIcon.style.verticalAlign = 'middle';
+                    child.appendChild(rightIcon);
                 } else if (child.classList.contains('selected') && !correct) {
                     child.style.backgroundColor = '#ffe0e0';
+                    // 添加错误图标
+                    const errorIcon = document.createElement('img');
+                    errorIcon.src = '../assets/images/WenTianPavilion/error.svg';
+                    errorIcon.alt = 'error';
+                    errorIcon.style.width = '2rem';
+                    errorIcon.style.height = '2rem';
+                    errorIcon.style.marginLeft = '1rem';
+                    errorIcon.style.verticalAlign = 'middle';
+                    child.appendChild(errorIcon);
                 }
             });
         }
