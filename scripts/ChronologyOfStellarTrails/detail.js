@@ -547,12 +547,60 @@ function handleNavigation() {
   });
 }
 
+/**
+ * 根据localStorage中的ID初始化当前任务索引
+ */
+function initCurrentMissionIndex() {
+  const selectedCardId = localStorage.getItem('selectedCardId');
+
+  if (selectedCardId) {
+    // 根据ID查找对应的任务索引
+    const missionIndex = missionData.findIndex(mission => mission.id == selectedCardId);
+
+    if (missionIndex !== -1) {
+      currentMissionIndex = missionIndex;
+    } else {
+      // 如果找不到对应的ID，默认显示第一个
+      currentMissionIndex = 0;
+    }
+
+    // 清除localStorage中的数据，避免下次进入时还是这个ID
+    localStorage.removeItem('selectedCardId');
+  } else {
+    // 如果没有存储的ID，默认显示第一个
+    currentMissionIndex = 0;
+  }
+}
+
+/**
+ * 处理返回按钮点击
+ */
+function handleBackButton() {
+  const backButton = document.querySelector('.arrow');
+  if (backButton) {
+    backButton.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      // 保存当前任务的ID到localStorage，用于返回时滚动定位
+      const currentMission = missionData[currentMissionIndex];
+      if (currentMission) {
+        localStorage.setItem('scrollToCardId', currentMission.id);
+      }
+
+      // 跳转回列表页
+      window.location.href = 'ChronologyOfStellarTrails.html';
+    });
+  }
+}
+
 // 初始化页面
 document.addEventListener("DOMContentLoaded", function () {
+  initCurrentMissionIndex(); // 根据localStorage初始化任务索引
   StartBackground(); // 初始化星空背景和流星效果
   initOrbitAnimation(); // 初始化轨道动画
-  updateMissionContent(currentMissionIndex, 'initial'); // 初始加载第一条任务数据
+  updateMissionContent(currentMissionIndex, 'initial'); // 初始加载对应的任务数据
   handleNavigation(); // 设置导航按钮的点击事件监听
+  handleBackButton(); // 设置返回按钮的点击事件监听
   // 初始化鼠标控制器
   new Mouse({
     defaultCursor: '../assets/images/common/MouseDefault.svg',

@@ -67,6 +67,7 @@ body {
   padding: 2rem 0;
   display: flex;
   flex-direction: column;
+  overflow: visible;
 }
 
 /* 中轴线 */
@@ -86,9 +87,11 @@ body {
 .card {
   position: relative;
   width: 100%;
-  height: 64.7rem;
+  min-height: 64.7rem;
   opacity: 0;
   transition: opacity 0.8s ease, transform 0.8s ease;
+  z-index: 10;
+  overflow: visible;
 }
 
 .card.visible {
@@ -98,12 +101,14 @@ body {
 
 .card .left {
   width: 65.067rem;
+  position: relative;
 }
 
 /* 奇数卡片在左侧 */
 .card:nth-child(odd) .left {
   align-self: flex-start;
   margin-right: auto;
+  z-index: 100;
 }
 
 /* 偶数卡片在右侧 */
@@ -128,6 +133,8 @@ body {
   color: white;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: visible;
 }
 
 .card .left .card-year {
@@ -163,16 +170,33 @@ body {
   font-size: 2.4rem;
   font-family: fys, sans-serif;
   color: rgba(255, 255, 255, 1);
+  position: relative;
   z-index: 1000;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: transparent;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.card .left .detail-btn:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
 }
 
 .card:nth-child(odd) .detail-btn {
   align-self: flex-end;
-  z-index: 1000;
+  z-index: 999999;
+  margin-right: 0;
+  position: relative;
 }
 
 .card:nth-child(even) .detail-btn {
   align-self: flex-start;
+  z-index: 1000;
+  margin-left: 0;
+  position: relative;
 }
 
 .card .left .detail-btn svg {
@@ -224,7 +248,8 @@ body {
   transform: translateY(-50%);
   transition: opacity 0.5s ease, transform 0.5s ease;
   white-space: nowrap;
-  z-index: 2;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .card:nth-child(odd) .card-title {

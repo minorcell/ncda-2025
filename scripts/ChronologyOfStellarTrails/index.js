@@ -129,16 +129,16 @@ function renderCards(container, cardsData) {
 
     let btn = '';
     if (index % 2 === 0) {
-      btn = `<a href="ChronologyOfStellarTrailsDetails.html" class="detail-btn">
+      btn = `<button class="detail-btn" data-id="${card.id}">
             查看详情
             <svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 2rem;" width="128" height="128" viewBox="0 0 24 24"><path fill="#ffffff" d="M16.175 13H4v-2h12.175l-5.6-5.6L12 4l8 8l-8 8l-1.425-1.4z"/></svg>
-          </a>`
+          </button>`
 
     } else {
-      btn = `<a href="ChronologyOfStellarTrailsDetails.html" class="detail-btn">
+      btn = `<button class="detail-btn" data-id="${card.id}">
             <svg xmlns="http://www.w3.org/2000/svg" style="margin-right: 2rem;" width="128" height="128" viewBox="0 0 24 24"><path fill="#ffffff" d="M16.175 13H4v-2h12.175l-5.6-5.6L12 4l8 8l-8 8l-1.425-1.4z"/></svg>
             查看详情
-          </a>`
+          </button>`
     }
 
 
@@ -160,6 +160,29 @@ function renderCards(container, cardsData) {
     `;
 
     container.appendChild(cardElement);
+  });
+
+  // 添加详情按钮点击事件监听
+  addDetailButtonListeners();
+}
+
+/**
+ * 为详情按钮添加点击事件监听
+ */
+function addDetailButtonListeners() {
+  const detailButtons = document.querySelectorAll('.detail-btn');
+
+  detailButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      const cardId = button.getAttribute('data-id');
+
+      // 将选中的卡片ID存储到localStorage
+      localStorage.setItem('selectedCardId', cardId);
+
+      // 跳转到详情页
+      window.location.href = 'ChronologyOfStellarTrailsDetails.html';
+    });
   });
 }
 
@@ -202,6 +225,41 @@ function observeTitles() {
   });
 }
 
+/**
+ * 滚动到指定ID的卡片
+ */
+function scrollToCard() {
+  const scrollToCardId = localStorage.getItem('scrollToCardId');
+
+  if (scrollToCardId) {
+    // 清除localStorage中的数据
+    localStorage.removeItem('scrollToCardId');
+
+    // 等待页面渲染完成后再滚动
+    setTimeout(() => {
+      const targetCard = document.querySelector(`[data-id="${scrollToCardId}"]`);
+
+      if (targetCard) {
+        // 滚动到目标卡片，并居中显示
+        targetCard.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+          inline: 'nearest'
+        });
+
+        // 添加高亮效果
+        targetCard.style.transition = 'all 0.5s ease';
+        targetCard.style.transform = 'scale(1.02)';
+
+        // 3秒后移除高亮效果
+        setTimeout(() => {
+          targetCard.style.transform = '';
+        }, 2000);
+      }
+    }, 200); // 等待500ms确保页面渲染完成
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector('.header');
   const starContainer = document.querySelector('.star-bg');
@@ -238,6 +296,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 监听标题可见性
   observeTitles();
+
+  // 检查是否需要滚动到特定卡片
+  scrollToCard();
 
   // 初始化鼠标控制器
   new Mouse({
