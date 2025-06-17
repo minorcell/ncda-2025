@@ -36,7 +36,18 @@
     font-family: "fys", sans-serif;
     font-weight: 400;
     font-size: 2rem;
+    width: 100%;
+    height: 7.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.active-link {
+    background: url("../assets/images/common/activityBg.svg") no-repeat center top;
+    background-size: 100% 200%;
+}
+
 
 /* stylelint-disable-next-line selector-max-id */
 #logo {

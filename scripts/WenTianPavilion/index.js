@@ -60,7 +60,7 @@ const data = [
                 analysis: "载人航天的主要目标是探索太空和建立太空站。载人航天的主要任务是探索太空，寻找未知的世界。"
             }
         ],
-        reward: "../../assets/images/WenTianPavilion/back01.svg",
+        reward: "../assets/images/WenTianPavilion/back01.webp",
     },
     {
         id: '2',
@@ -127,7 +127,7 @@ const data = [
                 analysis: "神舟十二号是空间站关键技术验证阶段第四次飞行任务，航天员入驻天和核心舱。"
             }
         ],
-        reward: "../../assets/images/WenTianPavilion/back04.svg",
+        reward: "../assets/images/WenTianPavilion/back04.webp",
     },
     {
         id: '3',
@@ -198,7 +198,7 @@ const data = [
                 analysis: "空间站的再生生保系统可以实现将尿液等废水净化为可饮用的水。"
             }
         ],
-        reward: "../../assets/images/WenTianPavilion/back02.svg",
+        reward: "../assets/images/WenTianPavilion/back02.webp",
     },
     {
         id: '4',
@@ -269,7 +269,7 @@ const data = [
                 analysis: "低地球轨道一般距离地面200 - 2000千米，是高度最低的常见轨道"
             }
         ],
-        reward: "../../assets/images/WenTianPavilion/back03.svg",
+        reward: "../assets/images/WenTianPavilion/back03.webp",
     },
 ]
 
@@ -450,6 +450,7 @@ class QAController {
                 div.textContent = opt.content;
                 div.style.cursor = 'pointer';
                 div.style.border = '1px solid transparent';
+                div.style.padding = '0.5rem 1rem';
                 div.addEventListener('click', () => this.selectOption(div));
                 this.optionsContainer.appendChild(div);
             });
@@ -469,8 +470,7 @@ class QAController {
             });
         }
         div.classList.add('selected');
-        div.style.borderBottom = '2px solid rgba(127, 48, 150, 1)';
-        div.style.borderRadius = '10px';
+        div.style.border = '2px solid rgba(127, 48, 150, 1)';
         this.selectedOptionId = div.dataset.id;
     }
 
@@ -739,7 +739,7 @@ class QAController {
 
         // 更新进度显示
         if (this.puzzleInfoElem) {
-            this.puzzleInfoElem.textContent = `拼图进度：${correctCount}/${totalCount} - ${correctCount === totalCount ? '完成！' : '继续拖拽碎片到正确位置'}`;
+            this.puzzleInfoElem.textContent = "继续拖拽碎片到正确位置";
         }
 
         if (correctCount === totalCount) {
