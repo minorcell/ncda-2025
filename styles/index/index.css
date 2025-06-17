@@ -308,6 +308,23 @@ body {
     transform: scale(1.25) translate(0, -3.2rem);
 }
 
+.milestone .rocket-launch .content a {
+    width: 22.4rem;
+    height: 5.6rem;
+    border: none;
+    background: url('../../assets/images/index/BottomRight.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: absolute;
+    bottom: 0%;
+    right: -38%;
+}
+
+.milestone .rocket-launch .content a:hover {
+    transform: scale(1.05);
+}
+
 /* 将 .content 选择器移到前面 */
 .page:nth-child(4) .content {
     position: relative;
@@ -342,7 +359,6 @@ body {
 
 .milestone .rocket-launch .content:hover {
     opacity: 0.9;
-    transform: translate(0.8rem, 0.8rem);
 }
 
 .milestone .rocket-launch .content h2 {
