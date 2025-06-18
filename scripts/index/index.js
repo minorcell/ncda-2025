@@ -293,6 +293,9 @@ function makeGradientFollowMouse() {
     let increasing = true;
     let lastTime = 0;
     let autoAnimId = null;
+    let isThrottled = false;
+    let pendingUpdate = false;
+    let targetDegree = 0;
 
     function calcDegree(x) {
         const w = window.innerWidth;
@@ -309,6 +312,12 @@ function makeGradientFollowMouse() {
         )
       `;
     }
+
+    // 平滑插值函数
+    function lerp(start, end, factor) {
+        return start + (end - start) * factor;
+    }
+
     function startAutoAnimation() {
         lastTime = performance.now();
         function animate(time) {
@@ -331,12 +340,63 @@ function makeGradientFollowMouse() {
         }
     }
 
-
     function stopAutoAnimation() {
         if (autoAnimId !== null) {
             cancelAnimationFrame(autoAnimId);
             autoAnimId = null;
         }
+    }
+
+    // 节流的背景更新函数
+    function throttledUpdate() {
+        if (isThrottled) {
+            pendingUpdate = true;
+            return;
+        }
+
+        isThrottled = true;
+
+        // 使用平滑插值让过渡更自然
+        const smoothStep = () => {
+            const diff = targetDegree - degree;
+
+            // 处理角度循环（0-360度）
+            let shortestDiff = diff;
+            if (Math.abs(diff) > 180) {
+                if (diff > 0) {
+                    shortestDiff = diff - 360;
+                } else {
+                    shortestDiff = diff + 360;
+                }
+            }
+
+            // 使用缓动插值
+            degree += shortestDiff * 0.3;
+
+            // 确保角度在0-360范围内
+            if (degree < 0) degree += 360;
+            if (degree >= 360) degree -= 360;
+
+            updateBackground(degree);
+
+            // 如果还没到达目标角度，继续动画
+            if (Math.abs(shortestDiff) > 0.1) {
+                requestAnimationFrame(smoothStep);
+            } else {
+                degree = targetDegree;
+                updateBackground(degree);
+            }
+        };
+
+        requestAnimationFrame(smoothStep);
+
+        setTimeout(() => {
+            isThrottled = false;
+            if (pendingUpdate) {
+                pendingUpdate = false;
+                throttledUpdate();
+            }
+        }, 16); // 约60fps的节流
     }
 
     intro.addEventListener('mouseenter', () => {
@@ -346,8 +406,8 @@ function makeGradientFollowMouse() {
     intro.addEventListener('mousemove', e => {
         const newDeg = calcDegree(e.clientX);
         increasing = newDeg >= degree;
-        degree = newDeg;
-        updateBackground(degree);
+        targetDegree = newDeg;
+        throttledUpdate();
     });
 
     intro.addEventListener('mouseleave', () => {
@@ -396,7 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pages = document.querySelectorAll('.page');
     const starsBgOfPageFive = document.querySelector('.stars-bg')
     // 导航栏控制
-    new HeaderController(header);
+    new HeaderController(header, { container });
     // 背景音乐控制
     new BackgroundMusic();
     // 第二页背景图控制
