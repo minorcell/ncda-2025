@@ -396,7 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pages = document.querySelectorAll('.page');
     const starsBgOfPageFive = document.querySelector('.stars-bg')
     // 导航栏控制
-    new HeaderController(header, { container });
+    new HeaderController(header);
     // 背景音乐控制
     new BackgroundMusic();
     // 第二页背景图控制
