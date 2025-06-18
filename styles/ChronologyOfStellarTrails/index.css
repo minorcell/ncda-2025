@@ -137,6 +137,8 @@ body {
   overflow: visible;
   font-family: fys, sans-serif;
   transform: translateY(-10%);
+  /* 首航缩进 */
+  text-indent: 2em;
 }
 
 .card .left .card-year {
