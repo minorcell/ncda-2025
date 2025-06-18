@@ -593,6 +593,11 @@ function handleBackButton() {
   }
 }
 
+// resize
+window.addEventListener('resize', () => {
+  initOrbitAnimation();
+});
+
 // 初始化页面
 document.addEventListener("DOMContentLoaded", function () {
   initCurrentMissionIndex(); // 根据localStorage初始化任务索引
