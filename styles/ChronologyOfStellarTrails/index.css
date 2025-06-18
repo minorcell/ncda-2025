@@ -135,6 +135,8 @@ body {
   flex-direction: column;
   position: relative;
   overflow: visible;
+  font-family: fys, sans-serif;
+  transform: translateY(-10%);
 }
 
 .card .left .card-year {
@@ -148,7 +150,7 @@ body {
 
 .card .left .card-year.visible {
   opacity: 1;
-  transform: translateX(5rem) translateY(-6rem) scale(1.2);
+  transform: translateX(5rem) translateY(-2rem) scale(1.2);
 }
 
 .card .left .card-description {
