@@ -76,7 +76,7 @@ const cards = [
     imgSrc: "../assets/images/ChronologyOfStellarTrails/11.jpg",
     year: "2023",
     description: "神舟十六号（Shenzhou XVI 或 Shenzhou-16，简称：神十六），是中国载人航天工程神舟系列载人飞船的第十六艘飞船。中国空间站应用与发展阶段的首艘载人飞船。",
-    title: "中国空间站应用与发展阶段的首艘载人飞船。"
+    title: "中国空间站应用与发展阶段的首艘载人飞船"
   },
   {
     id: 12,
@@ -90,21 +90,21 @@ const cards = [
     imgSrc: "../assets/images/ChronologyOfStellarTrails/13.jpg",
     year: "2024",
     description: "中国于1980年成功神舟十八号（Shenzhou XVIII ,简称神十八），是中国自行研制的用于天地往返运输人员和物资的载人航天器，飞船由轨道舱、返回舱和推进舱构成，是中国可靠性、安全性要求最严苛的航天器。发射了第一颗实用气象卫星风云一号，标志着中国掌握了气象卫星技术。",
-    title: "中国可靠性、安全性要求最严苛的航天器。"
+    title: "中国可靠性、安全性要求最严苛的航天器"
   },
   {
     id: 14,
     imgSrc: "../assets/images/ChronologyOfStellarTrails/14.jpg",
     year: "2024",
     description: "神舟十九号（Shenzhou XIX，简称：神十九），是由中国航天科技集团五院抓总研制，为中国载人航天工程的第十九艘神舟载人飞船。",
-    title: "中国载人航天工程的第十九艘神舟载人飞船。"
+    title: "中国载人航天工程的第十九艘神舟载人飞船"
   },
   {
     id: 15,
     imgSrc: "../assets/images/ChronologyOfStellarTrails/15.jpg",
     year: "2025",
     description: "神舟二十号（Shenzhou20，Shenzhou XX，简称：神二十），是由航天科技集团五院抓总研制的用于天地往返运输人员和物资的载人航天器，是中国载人航天工程的第二十艘神舟系列载人飞船，中国载人航天进入中国空间站应用与发展阶段的第五艘飞船。",
-    title: "中国载人航天进入中国空间站应用与发展阶段的第五艘飞船"
+    title: "中国空间站应用与发展阶段的第五艘飞船"
   },
 ]
 
