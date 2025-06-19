@@ -439,7 +439,7 @@ function StartBackground() {
 
   // 创建流星效果
   new MeteorEffect(container, {
-    maxMeteors: 20,
+    maxMeteors: 5,
     zIndex: 1,
   });
 }

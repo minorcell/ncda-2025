@@ -452,7 +452,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     new MeteorEffect(bgContainer, {
-        maxMeteors: 20,
+        maxMeteors: 5,
     });
 
     setupMouseEvents();

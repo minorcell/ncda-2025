@@ -46,7 +46,7 @@ class MeteorEffect {
 
         // 流星参数
         this.meteors = [];
-        this.maxMeteors = options.maxMeteors || 10;
+        this.maxMeteors = options.maxMeteors || 5;
 
         // 流星参数配置
         this.meteorConfig = {

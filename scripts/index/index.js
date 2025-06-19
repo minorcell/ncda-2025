@@ -472,7 +472,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 在第二页添加流星效果
         if (i == 1) {
             new MeteorEffect(pages[i], {
-                maxMeteors: 15,
+                maxMeteors: 5,
                 zIndex: 1,
                 meteor: {
                     startXMin: 50,
